@@ -325,3 +325,8 @@ html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; } /* no mobile fo
 .fit-over .fit-status { color: var(--warn-on-light); }
 .fit-over th, .fit-over td { background: rgba(228, 55, 0, 0.08); }
 .fit-sources { display: flex; flex-wrap: wrap; gap: var(--space-1); }
+
+/* WhatsApp share (Rotations) */
+.share-btn { width: 100%; }
+.share-preview summary { cursor: pointer; min-height: 44px; display: flex; align-items: center; font-weight: 700; }
+.share-preview pre { white-space: pre-wrap; overflow-wrap: anywhere; font-family: var(--font-body); font-size: 0.875rem; margin: 0; }

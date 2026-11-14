@@ -462,5 +462,23 @@
     "limitVolume": "Limitation: we do not know how much water your canal turn brings (flow and hours vary), so we assume each turn refills the root zone. If a turn does not fill the field, the safe interval is shorter.",
     "limitRain": "Rain is not counted, so monsoon months may be easier than shown.",
     "sources": "From FAO-56 Table 19 (soil water), Table 22 (root depth and p, smaller depth as advised for irrigation scheduling, p adjusted for crop water use) and crop water use = FAO-56 Kc × NASA POWER ET0."
+  },
+  "share": {
+    "button": "Share on WhatsApp",
+    "hint": "Sends the top rotation, its water use and main risk, and a link to Orbisol. Your field location is not included.",
+    "preview": "See the message",
+    "blocked": "The browser blocked the new window. Allow pop-ups for Orbisol and try again.",
+    "head": "Orbisol crop rotation check (NASA data + FAO-56):",
+    "top": "Best fit for my priorities: {{crops}}",
+    "topExisting": "Best fit for my priorities: my current rotation ({{crops}})",
+    "waterLess": "Water: about {{pct}}% less than my current rotation",
+    "waterMore": "Water: about {{pct}}% more than my current rotation",
+    "waterSame": "Water: about the same as my current rotation",
+    "waterExisting": "Water: this is my current rotation",
+    "risk": "Main risk: {{risk}}",
+    "riskCanal": "canal turn every {{days}} days is too long for the crop in {{months}}",
+    "noRisk": "Main risk: none found on these measures",
+    "check": "Estimates only; check with local farmers and experts.",
+    "link": "Try it: {{url}}"
   }
 }

@@ -7,6 +7,7 @@ import { JudgmentFlag } from '@/views/components/JudgmentFlag';
 import { NeedPin } from '@/views/components/NeedPin';
 import { PriorityPicker } from '@/views/components/PriorityPicker';
 import { RotationCard } from '@/views/components/RotationCard';
+import { ShareButton } from '@/views/components/ShareButton';
 
 export function RotationsScreen() {
   const { t } = useTranslation();
@@ -45,6 +46,7 @@ export function RotationsScreen() {
           <RotationCard key={s.plan.id} s={s} weights={r.weights} climate={r.provenance} />
         ))}
       </div>
+      {r.strategies.length > 0 && <ShareButton strategies={r.strategies} />}
     </section>
   );
 }
