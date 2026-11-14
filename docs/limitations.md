@@ -70,6 +70,13 @@
   published months after the fact, so it is not "this season") with the same months in 2000-2024. The 1991-2020 WMO
   normal is not available for IMERG, so the reference is the IMERG record from 2000 and the card says so. One 0.1 deg
   cell; monthly total = mean rate (mm/hr) x hours in the month. Satellite and model rain can differ.
+- **Why the newest IMERG month is September 2025 (checked 15 Nov 2026, 15-minute cap).** On GES DISC the V07 Final
+  run ends at 2025-09 for both monthly (GPM_3IMERGM.07: no 2026 folder, HTTP 404) and daily (GPM_3IMERGDF.07); the
+  daily Late run (GPM_3IMERGDL.07) is current to Nov 2026. The V08 collections that replace V07 (GPM_3IMERGM.08,
+  GPM_3IMERGDF.08) are listed but return HTTP 403, so they are not open yet; a GES DISC forum reply links the gap to
+  the V08 transition (https://forum.earthdata.nasa.gov/viewtopic.php?p=25931). The usual ~3-4 month Final-run lag does
+  not apply during this transition. Re-run `pipeline/scripts/imerg_monthly.py` (switching COLL to the V08 monthly
+  collection) once V08 opens.
 - **Satellite rain, daily (GPM IMERG V07 daily: still future work).** `pipeline/scripts/imerg.py` works (Earthdata login, OPeNDAP one pixel per day,
   Final run with Late run for recent days, cell 25.45 N 68.45 E) but a full 1998-2026 daily series is ~10,500
   requests. On 14 Nov 2026 the run reached 2004 (about 2,400 days, ~4 days/s), then the GES DISC `gpm1` server began

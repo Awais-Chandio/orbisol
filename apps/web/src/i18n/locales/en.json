@@ -198,7 +198,7 @@
     "rangeAria": "This season {{value}}; normal {{normal}}; usual range {{lo}} to {{hi}}.",
     "imergM": {
       "title": "Satellite rain vs normal",
-      "window": "Latest months in NASA's monthly satellite rain record: {{from}} to {{to}} (not this season; the monthly product is published months later).",
+      "window": "Latest months in NASA's monthly satellite rain record: {{from}} to {{to}}. Not this season: the research-quality (Final) IMERG record stops at September 2025 while NASA moves IMERG to version 08, which was not yet open to download when checked on 15 Nov 2026.",
       "reference": "Normal = the same months in {{from}}–{{to}} ({{n}} years): the full IMERG record from 2000, because the 1991–2020 normal is not available for this satellite product.",
       "method": "Measured from space by NASA GPM IMERG (V07 monthly, Final run) for one 10 km cell; monthly totals = mean rain rate × hours in the month. Satellite rain and the model rain above can differ.",
       "now": "these months"

@@ -220,3 +220,9 @@
   POWER"), 3 Overview cards (14 hot days with bare soil, May-July; best option saves about 1 in 7 canal turns), no
   Hyderabad-only cards, the case-study note on all four screens, 0 JS errors. Hyderabad demo: badges on the NDVI,
   slope, 2050 and satellite-rain cards, no note.
+
+## 2026-11-15 PKT - IMERG newest month check (15-minute cap)
+
+- GPM_3IMERGM.07 has no 2026 folder (404); V07 Final daily also ends 2025-09; daily Late run reaches 2026-11.
+  GPM_3IMERGM.08 / GPM_3IMERGDF.08 exist but return 403 (not open). No newer months to fetch: JSON kept, the card
+  now states the real reason (V07 Final stops at Sep 2025 during the move to V08). Stopped at 13 minutes.
