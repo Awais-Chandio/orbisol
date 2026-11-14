@@ -59,11 +59,13 @@ export interface MonthClimate {
   et0Mm: number;
   frostDaysPerYear: number;
   heavyRainDaysPerYear: number;
+  /** Mean wind speed at 2 m, m/s. */
+  windMean: number;
 }
 
 /** Month-by-month normals (1991-2020) from the daily series. */
 export function monthlyClimate(s: DailyClimate, from = WMO_NORMAL.from, to = WMO_NORMAL.to): MonthClimate[] {
-  const acc = Array.from({ length: 12 }, () => ({ tmax: [] as number[], rain: 0, et0: 0, frost: 0, heavy: 0, rainN: 0, et0N: 0 }));
+  const acc = Array.from({ length: 12 }, () => ({ tmax: [] as number[], wind: [] as number[], rain: 0, et0: 0, frost: 0, heavy: 0, rainN: 0, et0N: 0 }));
   const years = new Set<number>();
   for (let i = 0; i < s.values.tmax.length; i++) {
     const date = addDays(s.start, i);
@@ -76,6 +78,8 @@ export function monthlyClimate(s: DailyClimate, from = WMO_NORMAL.from, to = WMO
     const r = s.values.rain[i]!;
     const e = s.values.et0[i]!;
     if (Number.isFinite(tx)) a.tmax.push(tx);
+    const w = s.values.wind2m[i]!;
+    if (Number.isFinite(w)) a.wind.push(w);
     if (Number.isFinite(tn) && tn < FROST_TMIN_C) a.frost++;
     if (Number.isFinite(r)) {
       a.rain += r;
@@ -95,6 +99,7 @@ export function monthlyClimate(s: DailyClimate, from = WMO_NORMAL.from, to = WMO
     et0Mm: a.et0N ? a.et0 / ny : Number.NaN,
     frostDaysPerYear: a.frost / ny,
     heavyRainDaysPerYear: a.heavy / ny,
+    windMean: mean(a.wind),
   }));
 }
 
@@ -124,4 +129,14 @@ export function hazardMonths(mc: readonly MonthClimate[]): HazardMonths {
     frost: mc.filter((m) => m.frostDaysPerYear >= HAZARD_DAYS_PER_YEAR).map((m) => m.month),
     heavyRain: mc.filter((m) => m.heavyRainDaysPerYear >= HAZARD_DAYS_PER_YEAR).map((m) => m.month),
   };
+}
+
+/** The `n` windiest months (highest mean 2 m wind), ascending by month number. */
+export function windiestMonths(mc: readonly MonthClimate[], n = 3): number[] {
+  return [...mc]
+    .filter((m) => Number.isFinite(m.windMean))
+    .sort((a, b) => b.windMean - a.windMean)
+    .slice(0, n)
+    .map((m) => m.month)
+    .sort((a, b) => a - b);
 }

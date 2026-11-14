@@ -6,6 +6,7 @@ import { useRotationComparison } from '@/controllers/useRotationComparison';
 import { JudgmentFlag } from '@/views/components/JudgmentFlag';
 import { NeedPin } from '@/views/components/NeedPin';
 import { SourceTag } from '@/views/components/SourceTag';
+import { TerrainCard } from '@/views/components/TerrainCard';
 import { formatMonthDay, monthName } from '@/views/format';
 
 const HZ: Record<'hot' | 'frost' | 'heavyRain', Icon> = { hot: ThermometerHot, frost: Snowflake, heavyRain: CloudRain };
@@ -83,8 +84,11 @@ export function CalendarScreen() {
             ))}
           </ol>
           <p className="small">{t('calendar.climateSource')} {climateProv && <SourceTag provenance={climateProv} />}</p>
-          {r.hazards && r.hazards.frost.length === 0 && r.hazards.heavyRain.length <= 1 && <p className="small">{t('calendar.noHazards')}</p>}
+          {r.hazards && r.hazards.frost.length === 0 && (
+            <p className="small">{t(r.hazards.heavyRain.length === 0 ? 'calendar.noHazards' : 'calendar.noFrost')}</p>
+          )}
           <p className="small"><JudgmentFlag reason={t('calendar.judgment')} /></p>
+          <TerrainCard />
         </>
       )}
     </section>

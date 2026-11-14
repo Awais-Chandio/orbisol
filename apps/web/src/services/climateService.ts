@@ -2,8 +2,8 @@
  * Orbisol web - daily climate for a pin: live NASA POWER -> device cache -> built-in data/ JSON.
  * AI-assisted: drafted with Claude (Anthropic). See docs/ai-usage.md.
  */
-import type { DailyClimate } from '@orbisol/core';
-import { CLIMATE_FRESH_MS, POWER, STATIC_CLIMATE } from '@/config/sources';
+import { samePowerCell, type DailyClimate } from '@orbisol/core';
+import { CLIMATE_FRESH_MS, STATIC_CLIMATE } from '@/config/sources';
 import { ClimateFileSchema, fileToSeries, seriesToFile } from '@/models/climate';
 import { db, type ClimateCacheRow } from './db';
 import { fetchPowerDaily } from './powerService';
@@ -39,9 +39,8 @@ async function readCache(key: string): Promise<ClimateCacheRow | undefined> {
 }
 
 async function loadStatic(lat: number, lon: number, signal?: AbortSignal): Promise<ClimateResult | null> {
-  const hit = STATIC_CLIMATE.find(
-    (s) => Math.abs(s.lat - lat) <= POWER.cellHalf.lat && Math.abs(s.lon - lon) <= POWER.cellHalf.lon,
-  );
+  // Same NASA POWER grid cell -> identical values, so the precomputed file is valid for this pin
+  const hit = STATIC_CLIMATE.find((s) => samePowerCell(s, { lat, lon }));
   if (!hit) return null;
   const res = await fetch(hit.path, { signal });
   if (!res.ok) return null;

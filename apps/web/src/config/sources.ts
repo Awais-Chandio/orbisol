@@ -18,8 +18,6 @@ export const POWER = {
     WS2M: 'wind2m',
     ALLSKY_SFC_SW_DWN: 'solar',
   },
-  /** Approximate MERRA-2 grid cell half-size (0.5° lat x 0.625° lon). */
-  cellHalf: { lat: 0.25, lon: 0.3125 },
   timeoutMs: 25_000,
 } as const;
 
@@ -27,7 +25,7 @@ export const POWER = {
 export const CLIMATE_FRESH_MS = 12 * 60 * 60 * 1000;
 
 /** Precomputed files in data/ (copied to /data at build time). */
-export const STATIC_CLIMATE = [{ lat: 25.4, lon: 68.37, path: '/data/hyderabad/power_daily.json' }] as const;
+export const STATIC_CLIMATE = [{ lat: 25.48, lon: 68.41, path: '/data/hyderabad/power_daily.json' }] as const;
 
 /** Offline place search (GeoNames, CC BY 4.0), prefix-sharded by pipeline/scripts/places.py. */
 export const PLACES = {
@@ -35,3 +33,10 @@ export const PLACES = {
   shard: (key: string) => `/data/places/idx/${key.replace('~', '_')}.json`,
   home: 'https://www.geonames.org/',
 } as const;
+
+/** Precomputed cropland NDVI (MODIS MOD13Q1 via ORNL TESViS), valid for pins inside the sampled window. */
+export const STATIC_NDVI = [{ lat: 25.48, lon: 68.41, windowKm: 3, path: '/data/hyderabad/ndvi.json' }] as const;
+
+/** Precomputed satellite rainfall (GPM IMERG V07, one 0.1 deg cell) and SRTM slope for the demo farm. */
+export const STATIC_RAIN = [{ lat: 25.48, lon: 68.41, cellDeg: 0.1, path: '/data/hyderabad/imerg_daily.json' }] as const;
+export const STATIC_SLOPE = [{ lat: 25.48, lon: 68.41, radiusKm: 1, path: '/data/hyderabad/slope.json' }] as const;

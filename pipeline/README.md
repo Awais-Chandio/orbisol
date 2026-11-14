@@ -12,20 +12,23 @@ AI-assisted: scripts drafted with Claude (Anthropic); see `../docs/ai-usage.md`.
 cd pipeline
 python3 -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
-# Earthdata login (GPM IMERG, SMAP, SRTM) - stored in ~/.netrc, never committed
+# Earthdata login (GPM IMERG, SRTM) - set up ~/.netrc yourself (chmod 600), never committed
 ```
 
 ## Scripts
 
-`power.py` is done (Phase 3). The others are added in Phase 6.
+| Script | Dataset | Output | Login | Status |
+|---|---|---|---|---|
+| `scripts/power.py` | NASA POWER daily (ag), 1990 to now | `data/hyderabad/power_daily.json` (`orbisol.daily.v2`) | No | Shipped |
+| `scripts/ndvi.py` | MODIS Terra MOD13Q1 NDVI + MCD12Q1 cropland mask via ORNL DAAC TESViS | `data/hyderabad/ndvi.json` (`orbisol.ndvi.v1`) | No | See below |
+| `scripts/srtm.py` | SRTM SRTMGL1 v003 (earthaccess) -> Horn slope at 30/90/270 m + plane fit | `data/hyderabad/slope.json` (`orbisol.slope.v1`) | Yes | Shipped |
+| `scripts/imerg.py` | GPM IMERG V07 daily, one OPeNDAP pixel per day (Final, then Late) | `data/hyderabad/imerg_daily.json` (`orbisol.rain.v1`) | Yes | Not shipped (run incomplete, see limitations) |
+| `scripts/places.py` | GeoNames (CC BY 4.0): PK populated places + world cities >= 15k | `data/places/index.json` + `data/places/idx/*.json` (max 1500 rows per shard) | No | Shipped |
 
-| Script | Dataset | Output |
-|---|---|---|
-| `scripts/power.py` | NASA POWER daily (ag), 1990 to now | `data/hyderabad/power_daily.json` (format `orbisol.daily.v2`) |
-| `scripts/imerg.py` | GPM IMERG | `data/hyderabad/rain_extremes.json` |
-| `scripts/ndvi.py` | MODIS + VIIRS NOAA-20 (VJ113A1) via ORNL DAAC TESViS | `data/hyderabad/ndvi.json` |
-| `scripts/smap.py` | SMAP soil moisture | `data/hyderabad/soil_moisture.json` |
-| `scripts/srtm.py` | SRTM elevation -> slope | `data/hyderabad/slope.json` |
-| `scripts/places.py` | GeoNames (CC BY 4.0): PK populated places + world cities >= 15k | `data/places/index.json` + `data/places/idx/*.json` (prefix shards, max 1500 rows) |
+Run from `pipeline/scripts` with `../.venv/bin/python <script>.py`. Raw downloads and resumable caches go to
+`pipeline/raw/` (git-ignored). TESViS throttles (HTTP 502/503, empty bodies): `ndvi.py` uses 2 workers with backoff.
+GES DISC refuses connections when hit too hard: `imerg.py` defaults to 4 workers (`IMERG_WORKERS`) and resumes from
+`raw/imerg/*.jsonl`; `--from-cache` rebuilds the JSON without fetching. SMAP is future work (no data on TESViS for
+the demo farm; see `../docs/limitations.md`).
 
 Every output record carries `source`, `kind` and `date` (see `../data/README.md`).

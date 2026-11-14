@@ -8,7 +8,7 @@ import { SourceTag } from './SourceTag';
 
 const TERCILE: Record<Tercile, Icon> = { above: ArrowUp, near: Equals, below: ArrowDown };
 
-type Unit = 'days' | 'mm' | 'pct';
+type Unit = 'days' | 'mm' | 'pct' | 'ndvi';
 const UNIT: Record<IndicatorView['key'], Unit> = {
   hotDays: 'days',
   heavyRainDays: 'days',
@@ -18,18 +18,19 @@ const UNIT: Record<IndicatorView['key'], Unit> = {
   waterBalance: 'mm',
   soilWetness: 'pct',
   tmaxMean: 'days',
-  greenness: 'pct',
+  greenness: 'ndvi',
 };
 
 export function formatIndicator(key: IndicatorView['key'], x: number): string {
   if (!Number.isFinite(x)) return '–';
   const unit = UNIT[key];
   if (unit === 'pct') return String(Math.round(x * 100));
+  if (unit === 'ndvi') return x.toFixed(2);
   if (unit === 'days') return Number.isInteger(x) ? String(x) : x.toFixed(1);
   return Math.abs(x) < 10 ? x.toFixed(1) : String(Math.round(x));
 }
 
-export function IndicatorCard({ v, children }: { v: IndicatorView; children?: ReactNode }) {
+export function IndicatorCard({ v, children, titleKey }: { v: IndicatorView; children?: ReactNode; titleKey?: string }) {
   const { t } = useTranslation();
   const fmt = (x: number) => {
     const shown = formatIndicator(v.key, x);
@@ -39,7 +40,7 @@ export function IndicatorCard({ v, children }: { v: IndicatorView; children?: Re
   return (
     <article className="card light indicator">
       <header className="indicator-head">
-        <h3>{t(`season.ind.${v.key}.name`)}</h3>
+        <h3>{t(titleKey ?? `season.ind.${v.key}.name`)}</h3>
         <span className={'tercile tercile-' + (v.tercile ?? 'none')}>
           <TI size={16} weight="bold" aria-hidden />
           {t('season.tercile.' + (v.tercile ?? 'none'))}

@@ -7,6 +7,7 @@ import {
   doyToMd,
   evaluatePlan,
   hazardMonths,
+  windiestMonths,
   kcOnDay,
   mdToDoy,
   overlapDays,
@@ -100,8 +101,10 @@ describe('rotation/water', () => {
       et0Mm: 0,
       frostDaysPerYear: i === 0 ? 0.6 : 0,
       heavyRainDaysPerYear: i === 7 ? 0.7 : 0.1,
+      windMean: [2, 2.2, 2.6, 3.5, 4.8, 5.3, 5.1, 4.4, 3.6, 2.2, 1.9, 2][i]!,
     }));
     expect(hazardMonths(mc)).toEqual({ hot: [4, 5, 6], frost: [1], heavyRain: [8] });
+    expect(windiestMonths(mc)).toEqual([5, 6, 7]);
   });
 });
 

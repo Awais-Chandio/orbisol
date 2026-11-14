@@ -6,3 +6,5 @@ export * from './dates';
 export * from './series';
 export * from './indicators';
 export * from './et0';
+export * from './grid';
+export * from './rain';

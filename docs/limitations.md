@@ -3,7 +3,8 @@
 - Orbisol supports, not replaces, farmer judgment and local expertise. Every suggestion needs local review.
 - NASA POWER is a gridded model product (~0.5 degree), not a field-level ground measurement.
 - Satellite greenness (NDVI) mixes neighbouring fields at 250-500 m resolution.
-- SMAP soil moisture is coarse (~9-36 km) and covers only the top few centimetres.
+- Soil moisture is NASA POWER top-soil wetness (GWETTOP), a **model** value (tagged as model, not satellite). It is
+  coarse (~50 km), covers only the top ~5 cm and does not see canal irrigation.
 - The precomputed fallback covers the Hyderabad (Sindh) region only; other pins rely on live NASA POWER.
 - Map imagery is VIIRS NOAA-20 true color (native ~375 m, served to zoom 9 and slightly over-zoomed). It is good for finding the area, not for drawing individual field boundaries; GPS or typed coordinates are more precise.
 - The map has no road or place labels. Re-tested on 14 Nov 2026 with the format and tile matrix set from GIBS
@@ -27,6 +28,44 @@
 - POWER's model ET (EVPTRNS) was tested and rejected: it showed about 2 mm over 90 days for Hyderabad because the model has no irrigation.
 - "Hot days" use a local percentile, not a crop-specific heat-stress threshold (crop thresholds come with the crop rules).
 - Crop rule values come only from cited sources; values without a reliable source are left out and listed below.
+
+## Greenness (NDVI)
+
+- NDVI uses **MODIS Terra (MOD13Q1) only**. Terra's orbit is drifting (later overpass time each year since 2022) and its
+  science data is expected to end around **February 2027**. A future version moves to **VIIRS NOAA-20 (VJ113A1)** via
+  NASA Earthdata / AppEEARS (needs an Earthdata login; VJ113A1 is not offered by the ORNL TESViS service used here).
+  **VIIRS Suomi NPP (VNP13A1) was not used on purpose.**
+- The demo farm (25.48 N, 68.41 E) lies between Hyderabad and Tando Jam, about 10 km from Hyderabad city centre and
+  13 km from Tando Jam town. It was chosen because MODIS land cover (MCD12Q1, 2025) shows 77% cropland within 2 km and
+  because it is in the same NASA POWER grid cell as Hyderabad (cell boundary at 68.4375 E; Tando Jam town itself is in
+  the next cell east). The first demo pin (25.40, 68.37) was in the city: 313 urban vs 25 cropland pixels within 5 km.
+- Greenness is the median of cropland pixels (MCD12Q1 classes 12 and 14, year-matched) within 3 km of the pin,
+  good/marginal quality only, per 16-day composite. It describes nearby farmland, not the exact field.
+- Normal for greenness is 2001-2020 (MODIS starts in 2000), not the WMO 1991-2020 period used for weather.
+- Greenness is precomputed for the demo farm only; other pins show a data gap.
+
+## Terrain (SRTM slope)
+
+- Slope comes from NASA SRTM (1 arc-second, February 2000) within 1 km of the pin. On flat plains SRTM height noise
+  (a few metres) and crop/tree/building heights dominate 30 m slopes: the demo farm's 30 m median slope is 3.15%,
+  although elevations in the whole 2 km window vary by only about +/-2.5 m. Orbisol therefore averages elevation into
+  270 m blocks before Horn's slope (0.35%, FAO class 02 "Level") and also reports a plane fit over the window (0.14%).
+  The 30 m figure is kept in the data file as a note only.
+- Slope is precomputed for the demo farm only; other pins show no terrain card.
+- Erosion risk is described qualitatively (slope class, windiest months, bare days in them); no soil erodibility data is used.
+
+## Future work
+
+- **Satellite rain (GPM IMERG V07).** `pipeline/scripts/imerg.py` works (Earthdata login, OPeNDAP one pixel per day,
+  Final run with Late run for recent days, cell 25.45 N 68.45 E) but a full 1998-2026 daily series is ~10,500
+  requests. On 14 Nov 2026 the run reached 2004 (about 2,400 days, ~4 days/s), then the GES DISC `gpm1` server began
+  refusing connections after too many parallel requests. It was skipped to keep the feature-freeze time. The satellite rain
+  cards are hidden when the file is missing; rain in this version is the NASA POWER model value only. A future run uses
+  4 connections, resumes from the cache, and takes about 45-60 minutes.
+- **SMAP soil moisture.** SMAP SPL3SMP_E (9 km) is listed on ORNL DAAC TESViS but returned no data for the demo farm
+  (14 Nov 2026). Reading it from NSIDC OPeNDAP one day at a time (~4,000 requests plus EASE-Grid 2.0 indexing) was
+  judged too heavy for this build. A future version adds SMAP as a satellite soil-moisture anomaly next to the model value.
+- VIIRS NOAA-20 NDVI (VJ113A1) to replace MODIS Terra (see Greenness above).
 
 ## Missing crop rule values (left out, not guessed)
 

@@ -21,7 +21,7 @@
     "intro": "Satellites already watch every field. Just pin yours: Orbisol fetches NASA data for that spot.",
     "useGps": "Use my location",
     "locating": "Finding you…",
-    "useDemo": "Use demo field (Hyderabad, Sindh)",
+    "useDemo": "Demo farm near Tando Jam, Hyderabad",
     "tapHint": "Tap the map or drag the pin to your field.",
     "manualTitle": "Or type coordinates",
     "lat": "Latitude",
@@ -122,7 +122,8 @@
       "days_one": "day",
       "days_other": "days",
       "mm": "mm",
-      "pct": "%"
+      "pct": "%",
+      "ndvi": "NDVI"
     },
     "hotThreshold": "Hot day here means above {{t}} °C: the hottest 10% of these days in {{bFrom}}–{{bTo}}.",
     "ind": {
@@ -167,7 +168,18 @@
     "sure2": "Normal is the middle value (median) of the same days in {{n}} past years. The usual range covers the middle 80% of those years.",
     "sure3": "Above or below normal means this window was in the top or bottom third of those years.",
     "coverage": "Days with data in this window: {{pct}}%.",
-    "sure4": "Evaporation demand from this model grid may read higher than at a local weather station in canal-irrigated areas, because the model does not see the cooler, more humid air over irrigated fields. Compare it with normal rather than reading it as an exact amount."
+    "sure4": "Evaporation demand from this model grid may read higher than at a local weather station in canal-irrigated areas, because the model does not see the cooler, more humid air over irrigated fields. Compare it with normal rather than reading it as an exact amount.",
+    "green": {
+      "window": "{{from}} to {{to}} ({{n}} satellite composites) vs the same days in 2001–2020.",
+      "method": "Median of cropland pixels within {{km}} km of your pin (NASA MODIS land cover), good-quality pixels only.",
+      "gapOutside": "Data gap: satellite greenness is precomputed only for the demo region in this version.",
+      "scale": "NDVI runs from about 0 (bare soil, buildings) to about 0.9 (dense green crops)."
+    },
+    "imerg": {
+      "rainTotal": "Rain (satellite)",
+      "heavyRainDays": "Extreme rain days (satellite)",
+      "note": "Measured from space by NASA GPM IMERG for a 10 km cell; normal = same days {{from}}–{{to}} ({{n}} years). Model rain above and satellite rain here can differ."
+    }
   },
   "crops": {
     "cotton": "Cotton",
@@ -364,6 +376,7 @@
     "sensitive": "{{crop}} sensitive: {{hazard}}",
     "climateSource": "Hottest months, heavy rain and frost: NASA POWER, 1991–2020 normals at your field.",
     "noHazards": "No frost or frequent heavy-rain months here.",
+    "noFrost": "No frost months here.",
     "judgment": "actual sowing and harvest dates vary year to year"
   },
   "outlook": {
@@ -373,11 +386,13 @@
     "similarity": "difference {{d}}",
     "outcome": {
       "tmaxMean": "Daytime temperature (next {{days}} days)",
-      "rainTotal": "Rain (next {{days}} days)"
+      "rainTotal": "Rain (next {{days}} days)",
+      "greenness": "Crop greenness, NDVI (next {{days}} days)"
     },
     "unit": {
       "tmaxMean": "°C",
-      "rainTotal": "mm"
+      "rainTotal": "mm",
+      "greenness": ""
     },
     "direction": {
       "above": "Twins point to above normal",
@@ -408,5 +423,15 @@
     "trackGood": "Past tests beat guessing ({{hit}}% vs {{base}}%).",
     "trackSmallSkill": "Past tests only slightly beat guessing ({{hit}}% vs {{base}}%).",
     "trackNoSkill": "Past tests did no better than guessing ({{hit}}% vs {{base}}%)."
+  },
+  "terrain": {
+    "title": "Slope and erosion",
+    "slope": "FAO slope class {{code}}: {{name}} (SRTM, about 270 m cells within 1 km).",
+    "waterLow": "On land this flat, rain water runs off slowly: water erosion from slope is low. Levelling and bunds still matter in heavy rain.",
+    "waterHigher": "Sloping land: heavy rain can wash soil away. Cover crops and bunds help.",
+    "noise": "Very local (30 m) satellite slopes are mostly noise on flat plains, so the wider value is used.",
+    "windTitle": "Wind and bare soil",
+    "windy": "Windiest months here: {{months}} (NASA POWER, 1991–2020).",
+    "bareWindy": "Your field is bare about {{days}} days in the windiest months: dry bare soil can blow away. Covering it in that window helps."
   }
 }

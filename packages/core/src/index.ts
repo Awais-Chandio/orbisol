@@ -10,3 +10,5 @@ export * from './rotation';
 export * from './twins';
 export * from './confidence';
 export * from './backtest';
+export * from './greenness';
+export * from './terrain';

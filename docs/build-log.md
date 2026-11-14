@@ -55,3 +55,13 @@
 - Season: Twins 2002, 2014, 2016; next-60-day outlook with Confidence Meter and Track Record (81% vs 73% naive).
 - About: NASA datasets, FAO-56, Sindh Agriculture Dept, Feedipedia, Dawn, ETCCDI/WMO, "Place names: GeoNames, CC BY 4.0".
 - Places index in repo: 1517 files, 9.47 MB raw (about 2.5 MB gzipped).
+
+## 2026-11-14 16:40 PKT - Phase 6 Pipeline JSON
+
+- FLOW: pipeline script -> data/hyderabad/*.json (format-versioned, provenance) -> sync to public/data -> service (fetchStaticJson: missing file = null, not an error) -> Zod -> core (greenness / terrain / rain) -> card with SourceTag
+- Demo pin moved to cropland near Tando Jam (25.48, 68.41): 77% cropland (MCD12Q1 2025, 2 km), same NASA POWER cell (static fallback still matches); button "Demo farm near Tando Jam, Hyderabad".
+- SRTM (Earthdata login): slope 0.35% at 270 m, plane fit 0.14% -> FAO class 02 "Level"; 30 m slope (3.15%) is SRTM noise on flat plains and is kept as a note only. Calendar shows slope + windiest months (May-Jul) + bare days in them.
+- NDVI (MODIS Terra MOD13Q1 + MCD12Q1 cropland mask, TESViS): code and cards done; JSON committed separately when the slow TESViS run finishes. Bug found: TESViS cache was keyed by place name, so a moved pin reused old-pin chunks; cache is now keyed by lat/lon.
+- IMERG: script works (OPeNDAP, one pixel per day) but the full series is ~10,500 requests; the GES DISC server started refusing connections at ~2,400 days. Skipped at the time cap; cards hide when the file is missing. Future work.
+- SMAP: no data on TESViS for the pin; NSIDC route too heavy. Soil moisture stays NASA POWER GWETTOP, tagged as model. Future work.
+- Fixed in browser test: Calendar said "No frost or frequent heavy-rain months" while August showed heavy rain -> now "No frost months here." 63 core tests pass, precache 18 entries / 3,007 KiB, no console errors.

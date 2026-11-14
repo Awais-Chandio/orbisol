@@ -25,7 +25,7 @@ export function SeasonOutlook({ days }: { days: WindowDays }) {
 
       {o.outlooks.map(({ key, outlook, track, confidence }) => {
         const unit = t('outlook.unit.' + key);
-        const fmt = (x: number) => `${x.toFixed(key === 'tmaxMean' ? 1 : 0)} ${unit}`;
+        const fmt = (x: number) => (key === 'greenness' ? x.toFixed(2) : `${x.toFixed(key === 'tmaxMean' ? 1 : 0)} ${unit}`);
         return (
           <div key={key} className="outlook-item">
             <h3>{t('outlook.outcome.' + key, { days: OUTLOOK_DAYS })}</h3>
@@ -66,8 +66,9 @@ export function SeasonOutlook({ days }: { days: WindowDays }) {
           </div>
         );
       })}
-      <p className="small"><Leaf size={16} aria-hidden /> {t('outlook.greenNote')}</p>
+      {!o.greenProvenance && <p className="small"><Leaf size={16} aria-hidden /> {t('outlook.greenNote')}</p>}
       <SourceTag provenance={prov} />
+      {o.greenProvenance && <SourceTag provenance={o.greenProvenance} />}
     </section>
   );
 }

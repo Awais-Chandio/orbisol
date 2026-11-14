@@ -30,11 +30,11 @@ export function CoordinateForm({ initial, onSubmit }: Props) {
     <form className="coord-form" onSubmit={submit} noValidate>
       <label>
         {t('field.lat')}
-        <input inputMode="decimal" value={lat} onChange={(e) => setLat(e.target.value)} placeholder="25.40" aria-invalid={error} />
+        <input inputMode="decimal" value={lat} onChange={(e) => setLat(e.target.value)} placeholder="25.48" aria-invalid={error} />
       </label>
       <label>
         {t('field.lon')}
-        <input inputMode="decimal" value={lon} onChange={(e) => setLon(e.target.value)} placeholder="68.37" aria-invalid={error} />
+        <input inputMode="decimal" value={lon} onChange={(e) => setLon(e.target.value)} placeholder="68.41" aria-invalid={error} />
       </label>
       <button type="submit" className="btn btn-secondary">{t('field.setPin')}</button>
       {error && <ErrorText>{t('field.invalid')}</ErrorText>}

@@ -5,5 +5,8 @@
 export const APP_NAME = 'Orbisol';
 export const TAGLINE = 'From orbit to soil.';
 
-/** Demo case study: Hyderabad, Sindh, Pakistan (canal-irrigated). */
-export const DEMO_FIELD = { lat: 25.4, lon: 68.37, label: 'Hyderabad, Sindh' } as const;
+/**
+ * Demo case study: canal-irrigated cropland between Hyderabad and Tando Jam, Sindh (MODIS land cover 2025:
+ * 77% cropland within 2 km). Same NASA POWER grid cell as Hyderabad city, so the built-in data covers it.
+ */
+export const DEMO_FIELD = { lat: 25.48, lon: 68.41, label: 'Demo farm near Tando Jam, Hyderabad' } as const;

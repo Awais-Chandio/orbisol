@@ -11,8 +11,9 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[2]
 DATA_DIR = ROOT / "data"
 
-# Demo case study: Hyderabad, Sindh, Pakistan (canal-irrigated)
-HYDERABAD = {"lat": 25.40, "lon": 68.37, "label": "Hyderabad, Sindh"}
+# Demo case study: cropland between Hyderabad and Tando Jam, Sindh (canal-irrigated). MODIS MCD12Q1 2025: 77% cropland
+# within 2 km. Same NASA POWER grid cell as Hyderabad city (cell boundary at 68.4375E).
+HYDERABAD = {"lat": 25.48, "lon": 68.41, "label": "Demo farm near Tando Jam, Hyderabad"}
 
 
 def provenance(source: str, kind: str, date: str, date_from: str | None = None, url: str | None = None) -> dict:
