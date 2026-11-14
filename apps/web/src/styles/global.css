@@ -54,15 +54,15 @@ button { font-family: var(--font-body); font-size: 1rem; }
 
 .bottom-nav {
   position: fixed; bottom: 0; left: 0; right: 0; z-index: 10;
-  display: grid; grid-template-columns: repeat(5, minmax(0, 1fr));
+  display: grid; grid-template-columns: repeat(6, minmax(0, 1fr));
   background: var(--c-deep-blue);
   border-top: 1px solid rgba(255, 255, 255, 0.15);
   padding-bottom: env(safe-area-inset-bottom);
 }
 .nav-item {
   display: flex; flex-direction: column; align-items: center; gap: 2px;
-  min-height: 60px; padding: var(--space-2) 2px;
-  color: var(--text); text-decoration: none; font-size: 0.75rem; line-height: 1.2; text-align: center;
+  min-height: 60px; padding: var(--space-2) 1px;
+  color: var(--text); text-decoration: none; font-size: 0.6875rem; line-height: 1.2; text-align: center;
   border-top: 3px solid transparent;
 }
 .nav-item.active { color: var(--accent); border-top-color: var(--accent); font-weight: 700; }
@@ -341,3 +341,18 @@ html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; } /* no mobile fo
 .trend-dot { fill: var(--c-electric-blue); stroke: var(--c-white); stroke-width: 1; }
 .trend-card h4 { margin: var(--space-4) 0 var(--space-1); }
 .indicator-value.heat-change { font-size: 1.5rem; }
+
+/* Overview: "Your field at a glance" (each card is a link to its detail screen) */
+.insight-grid { display: grid; gap: var(--space-3); margin: var(--space-4) 0; }
+.insight-grid .card { margin: 0; }
+.insight-card { display: flex; flex-direction: column; gap: var(--space-2); text-decoration: none; border: 2px solid transparent; }
+.card.light.insight-card { color: var(--text-on-light); }
+.insight-card:hover { border-color: var(--c-electric-blue); }
+.insight-label { display: flex; align-items: center; gap: var(--space-2); font-weight: 700; font-size: 0.875rem; text-transform: uppercase; letter-spacing: 0.04em; }
+.insight-label svg { flex: none; color: var(--c-electric-blue); }
+.insight-value { font-family: var(--font-head); font-weight: 900; font-size: 1.5rem; line-height: 1.15; color: var(--c-electric-blue); }
+.insight-text { font-size: 0.95rem; }
+.insight-more { display: inline-flex; align-items: center; gap: var(--space-1); margin-top: auto; font-weight: 700; color: var(--c-electric-blue); text-decoration: underline; text-underline-offset: 3px; }
+.confidence-card .confidence { margin: 0; }
+.overview-judgment { display: flex; align-items: center; gap: var(--space-2); font-weight: 700; font-size: 1.05rem; margin: var(--space-4) 0; }
+.overview-judgment svg { flex: none; color: var(--accent); }

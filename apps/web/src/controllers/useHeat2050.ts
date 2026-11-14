@@ -6,14 +6,23 @@ import { useQuery } from '@tanstack/react-query';
 import { getHeat2050 } from '@/services/heat2050Service';
 import { useFieldStore } from '@/stores/fieldStore';
 
-export function useHeat2050() {
+function useHeat2050Query() {
   const pin = useFieldStore((s) => s.pin);
-  const q = useQuery({
+  return useQuery({
     queryKey: ['heat2050', pin ? `${pin.lat.toFixed(3)},${pin.lon.toFixed(3)}` : 'none'],
     queryFn: ({ signal }) => getHeat2050(pin!.lat, pin!.lon, signal),
     enabled: pin !== null,
     staleTime: Infinity,
     retry: 1,
   });
-  return q.data ?? null;
+}
+
+export function useHeat2050() {
+  return useHeat2050Query().data ?? null;
+}
+
+/** Data plus whether it is still loading (null data after loading = no projection file for this pin). */
+export function useHeat2050State() {
+  const q = useHeat2050Query();
+  return { data: q.data ?? null, isLoading: q.isLoading };
 }

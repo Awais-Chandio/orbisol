@@ -6,6 +6,7 @@
   "nav": {
     "field": "Field",
     "farm": "My farm",
+    "overview": "Overview",
     "season": "Season",
     "rotations": "Rotations",
     "calendar": "Calendar",
@@ -551,5 +552,53 @@
     "model": "Model",
     "bias": "these models run cooler than the NASA POWER grid here (about 36 hot days a year observed in 1995–2014), so trust the change more than the counts",
     "scenarios": "Change = 2041–2060 average minus the same model's 1995–2014 average. SSP2-4.5 and SSP5-8.5 are IPCC emissions paths; the real path is not known."
+  },
+  "overview": {
+    "title": "Your field at a glance",
+    "intro": "Four things NASA data says about your field. Tap a card for the details.",
+    "loading": "Getting NASA data for your field…",
+    "details": "See details",
+    "judgment": "Supports, not replaces, your judgment.",
+    "bare": {
+      "label": "Bare field in the hottest months",
+      "value_one": "{{count}} bare day",
+      "value_other": "{{count}} bare days",
+      "text": "Your current rotation leaves the field bare in the hottest months ({{months}}). {{total}} bare days a year in all.",
+      "covered": "A crop covers your field through the hottest months ({{months}})."
+    },
+    "best": {
+      "label": "Best option for your priorities",
+      "text": "{{crops}}, compared with your current rotation.",
+      "existingFirst": "Your current rotation still ranks first for your priorities."
+    },
+    "season": {
+      "label": "This season vs normal (last {{days}} days)",
+      "headline": "{{hot}}, {{rain}}",
+      "hot": {
+        "above": "More hot days than normal",
+        "near": "Usual number of hot days",
+        "below": "Fewer hot days than normal",
+        "none": "Hot days: not enough data"
+      },
+      "rain": {
+        "above": "more rain than normal",
+        "near": "usual rain",
+        "below": "less rain than normal",
+        "none": "rain: not enough data"
+      },
+      "text": "Compared with the same days in {{bFrom}}–{{bTo}} (NASA POWER)."
+    },
+    "heat": {
+      "label": "Hot days around {{from}}–{{to}}",
+      "labelPlain": "Hot days around 2050",
+      "value": "+{{v}} hot days a year",
+      "text": "Middle emissions path, range across NASA climate models. A projection, not a forecast.",
+      "high": "High emissions path: +{{v}}.",
+      "none": "The 2050 heat outlook is precomputed only for the demo region in this version."
+    },
+    "twins": {
+      "label": "Season Twins: next {{days}} days",
+      "why": "Why this confidence"
+    }
   }
 }

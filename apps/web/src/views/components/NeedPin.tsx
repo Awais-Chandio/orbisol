@@ -8,7 +8,7 @@ export function NeedPin() {
   return (
     <div className="card light">
       <p>{t('placeholder.needPin')}</p>
-      <Link to="/" className="btn btn-primary">
+      <Link to="/field" className="btn btn-primary">
         <MapPin size={24} aria-hidden /> {t('placeholder.goToField')}
       </Link>
     </div>

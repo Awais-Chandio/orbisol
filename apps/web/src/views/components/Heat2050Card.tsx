@@ -14,7 +14,7 @@ export function Heat2050Card({ h }: { h: Heat2050 }) {
   const { t } = useTranslation();
   const scen = (['ssp245', 'ssp585'] as const).filter((s) => h.range[s]?.change);
   return (
-    <article className="card light trend-card">
+    <article className="card light trend-card" id="heat-2050">
       <header className="indicator-head">
         <h3>{t('heat2050.title', { from: h.future.from, to: h.future.to })}</h3>
         <span className="tercile tercile-none">

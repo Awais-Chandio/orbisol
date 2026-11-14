@@ -1,8 +1,9 @@
 /* AI-assisted: drafted with Claude (Anthropic). See docs/ai-usage.md. */
-import { Gauge, Leaf, ClockCounterClockwise } from '@phosphor-icons/react';
+import { Leaf, ClockCounterClockwise } from '@phosphor-icons/react';
 import { useTranslation } from 'react-i18next';
 import { OUTLOOK_DAYS, useSeasonOutlook } from '@/controllers/useSeasonOutlook';
 import type { WindowDays } from '@/controllers/useSeasonVsNormal';
+import { ConfidenceMeter } from './ConfidenceMeter';
 import { SourceTag } from './SourceTag';
 
 /** Season Twins + Confidence Meter + Track Record. */
@@ -37,24 +38,7 @@ export function SeasonOutlook({ days }: { days: WindowDays }) {
                 <p className="small">
                   {t('outlook.values', { values: outlook.values.map((v) => `${v.year}: ${fmt(v.value)}`).join(', '), normal: fmt(outlook.normal) })}
                 </p>
-                {confidence && (
-                  <div className={'confidence confidence-' + confidence.level}>
-                    <p className="confidence-head">
-                      <Gauge size={24} aria-hidden />
-                      {t('outlook.confidence')}: <strong>{t('outlook.levels.' + confidence.level)}</strong>
-                      <span className="meter" aria-hidden>
-                        {[1, 2, 3].map((i) => (
-                          <span key={i} className={i <= (confidence.level === 'high' ? 3 : confidence.level === 'medium' ? 2 : 1) ? 'on' : ''} />
-                        ))}
-                      </span>
-                    </p>
-                    <ul className="small factor-list">
-                      {confidence.factors.map((f) => (
-                        <li key={f.key}>{t(f.key, f.params ?? {})}</li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
+                {confidence && <ConfidenceMeter confidence={confidence} />}
                 {track.n > 0 && (
                   <p className="small track">
                     <ClockCounterClockwise size={16} aria-hidden />{' '}
