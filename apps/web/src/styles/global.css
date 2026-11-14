@@ -475,3 +475,21 @@ html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; } /* no mobile fo
 .preset-row { border: 0; padding: 0; margin: 0 0 var(--space-3); display: flex; flex-wrap: wrap; gap: var(--space-2); }
 .preset-row legend { font-weight: 700; margin-bottom: var(--space-2); }
 .preset-row .small { flex-basis: 100%; margin: 0; }
+
+/* Disclosures: a flex <summary> loses the browser's marker, so every toggle gets a chevron (closed = down, open = up). */
+.manual > summary, .note-section > summary, .how-sure > summary, .what-means > summary, .share-preview > summary, .disclosure > summary { gap: var(--space-2); list-style: none; }
+.manual > summary::-webkit-details-marker, .note-section > summary::-webkit-details-marker, .how-sure > summary::-webkit-details-marker,
+.what-means > summary::-webkit-details-marker, .share-preview > summary::-webkit-details-marker, .disclosure > summary::-webkit-details-marker { display: none; }
+.manual > summary::after, .note-section > summary::after, .how-sure > summary::after, .what-means > summary::after, .share-preview > summary::after, .disclosure > summary::after {
+  content: ''; flex: none; width: 8px; height: 8px; margin: -4px 4px 0;
+  border-right: 2.5px solid currentColor; border-bottom: 2.5px solid currentColor; transform: rotate(45deg);
+}
+.manual[open] > summary::after, .note-section[open] > summary::after, .how-sure[open] > summary::after, .what-means[open] > summary::after,
+.share-preview[open] > summary::after, .disclosure[open] > summary::after { transform: rotate(-135deg); margin-top: 4px; }
+
+/* "Or type coordinates": a visible toggle button, form underneath when open */
+.manual { margin: var(--space-3) 0; }
+.manual > summary {
+  display: inline-flex; padding: 0 var(--space-4); border: 2px solid var(--c-white); border-radius: 999px; min-height: 48px;
+}
+.manual[open] > summary { margin-bottom: var(--space-3); }
