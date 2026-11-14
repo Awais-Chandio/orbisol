@@ -810,5 +810,20 @@
       "fodder": "Green fodder has buyers: Karachi's dairy farms rely on fodder trucked in from Sindh and Balochistan, and a 2005 study around Hyderabad found green fodder gave a better net return than the other crops in the study area.",
       "prices": "fodder prices and buyers change from year to year; check current local prices before switching"
     }
+  },
+  "salt": {
+    "title": "Salty soil",
+    "sensitive": "{{crop}} is {{rating}} to salt: its yield starts to fall when soil salt is above {{ece}} dS/m.",
+    "sensitiveNoValue": "{{crop}} is {{rating}} to salt (FAO gives no threshold value).",
+    "tolerant": "{{crop}} copes with salt ({{rating}}): its yield starts to fall only above {{ece}} dS/m.",
+    "tolerantNoValue": "{{crop}} copes with salt ({{rating}}).",
+    "unknown": "{{crop}}: no FAO-56 salt value - information gap, check with your local extension officer.",
+    "ece": "dS/m of ECe is a lab measure of how salty the soil water is. Lower numbers mean the crop is hurt by less salt.",
+    "test": "a soil salinity test (ECe) shows how salty your field really is",
+    "overviewSens": "{{sensitive}} can lose yield to salt",
+    "overviewTol": "{{tolerant}} cope better",
+    "overviewTolOnly": "the crops compared ({{tolerant}}) cope with salt",
+    "overviewUnknown": "no FAO salt value for {{unknown}}",
+    "overview": "Your soil is salty: {{parts}}. Each rotation card shows a salt line."
   }
 }

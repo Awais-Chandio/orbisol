@@ -1,6 +1,6 @@
 /* AI-assisted: drafted with Claude (Anthropic). See docs/ai-usage.md. */
 import type { ReactNode } from 'react';
-import { ArrowRight, CloudSun, Drop, Handshake, Sun, ThermometerHot, type Icon } from '@phosphor-icons/react';
+import { ArrowRight, CloudSun, Drop, Handshake, Sun, ThermometerHot, Warning, type Icon } from '@phosphor-icons/react';
 import { Link } from 'react-router-dom';
 import { Trans, useTranslation } from 'react-i18next';
 import { CountUp } from '@/views/components/CountUp';
@@ -13,7 +13,8 @@ import { useSeasonVsNormal } from '@/controllers/useSeasonVsNormal';
 import { ConfidenceMeter } from '@/views/components/ConfidenceMeter';
 import { TimelineSwitcher } from '@/views/components/TimelineSwitcher';
 import { NeedPin } from '@/views/components/NeedPin';
-import { Science, ScienceToggle } from '@/views/components/Science';
+import { PlainLine, Science, ScienceToggle } from '@/views/components/Science';
+import { saltOverview } from '@/views/components/SaltNote';
 import { monthName } from '@/views/format';
 import { barePlain, heatPlain, seasonPlain, span, waterPlain } from '@/views/plain';
 
@@ -160,6 +161,12 @@ export function OverviewScreen() {
           }
         />
       </div>
+
+      {r.farm.soil.salty === true && r.strategies.length > 0 && (
+        <Link to="/rotations" className="salt-overview">
+          <PlainLine icon={Warning}>{saltOverview(t, r.strategies.flatMap((x) => x.plan.slots.map((y) => y.crop)))}</PlainLine>
+        </Link>
+      )}
 
       <Science className="overview-lower">
         {ex && (

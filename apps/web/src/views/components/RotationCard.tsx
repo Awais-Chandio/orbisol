@@ -6,6 +6,7 @@ import type { StrategyView } from '@/controllers/useRotationComparison';
 import { formatInt } from '@/views/format';
 import { NoteList } from './NoteList';
 import { CitedNotes } from './CitedNotes';
+import { SaltNote } from './SaltNote';
 import { PlainLine, Science } from './Science';
 import { barePlain, waterPlain } from '@/views/plain';
 import { SourceTag } from './SourceTag';
@@ -19,6 +20,8 @@ interface Props {
   hazards?: HazardMonths;
   /** All rotations shown (existing + options), to say where this one stands on each priority. */
   peers: StrategyView[];
+  /** Farmer said the soil is salty (My farm). */
+  salty?: boolean | null;
 }
 
 function WaterHeadline({ s }: { s: StrategyView }) {
@@ -48,7 +51,7 @@ function standing(v: number, all: number[]): 'same' | 'best' | 'jointBest' | 'lo
   return 'middle';
 }
 
-export function RotationCard({ s, weights, climate, hazards, peers }: Props) {
+export function RotationCard({ s, weights, climate, hazards, peers, salty }: Props) {
   const { t } = useTranslation();
   const existing = s.plan.kind === 'existing';
   const title = s.plan.slots.map((x) => t('crops.' + x.crop));
@@ -127,6 +130,8 @@ export function RotationCard({ s, weights, climate, hazards, peers }: Props) {
           </span>
         </p>
       )}
+
+      {salty === true && <SaltNote crops={s.plan.slots.map((x) => x.crop)} />}
 
       <WaterFitDetail fit={s.fit} climate={climate} />
 

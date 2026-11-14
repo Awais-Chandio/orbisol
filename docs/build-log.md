@@ -185,3 +185,12 @@
   UC IPM; whitefly host range: Saeed et al. CottonGen poster; infiltration: FAO Soils Bulletin 80; fodder income:
   ARY News 2026, Dawn 2005). No reliable source for non-cotton pest carry-over or the legume effect on infiltration:
   shown as "information gap - check with your local extension officer". Sources added to About.
+
+## 2026-11-15 PKT - Salinity made visible
+
+- Before: "salty: yes" only added a risk line for S/MS crops (berseem) inside the collapsed "Risks to check locally";
+  cotton -> wheat showed nothing, crops without an FAO value (mung bean) showed nothing, Overview showed nothing.
+- After: each rotation card shows a "Salty soil" box with every crop's FAO-56 Table 23 (FAO-29) rating in plain words
+  (warning icon for sensitive, check icon for tolerant, question mark + information gap for no value), a one-line ECe
+  explanation, a soil-test "Check locally" flag and the FAO-56 source; Overview shows one sentence linking to it.
+  Read from the cited crop rules; scoring unchanged (ranks and water identical with salty yes/no).

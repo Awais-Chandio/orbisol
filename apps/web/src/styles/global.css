@@ -611,3 +611,16 @@ html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; } /* no mobile fo
 .cited-line { display: flex; gap: var(--space-1); align-items: flex-start; }
 .cited-line svg { flex: none; margin-top: 4px; color: var(--c-electric-blue); }
 .cited-notes .note-list li { gap: var(--space-1); }
+
+/* Salty soil (FAO-56 Table 23 in plain words): icon + word per crop, never colour alone */
+.salt-note { border: 2px solid var(--c-deep-blue); border-radius: 8px; padding: var(--space-2) var(--space-3); margin: var(--space-3) 0; }
+.salt-note.is-risk { border-color: var(--c-martian-red); border-left-width: 6px; }
+.salt-note .small-head { margin-top: 0; }
+.salt-note ul { list-style: none; padding: 0; margin: 0 0 var(--space-2); display: grid; gap: var(--space-2); }
+.salt-note li { display: flex; gap: var(--space-2); align-items: flex-start; font-weight: 600; }
+.salt-note li svg { flex: none; margin-top: 2px; }
+.salt-sensitive svg { color: var(--c-martian-red); }
+.salt-tolerant svg { color: var(--c-electric-blue); }
+.salt-overview { display: block; text-decoration: none; color: var(--c-deep-blue); background: var(--c-white); border-radius: var(--radius); border-left: 6px solid var(--c-martian-red); padding: var(--space-2) var(--space-3); margin: var(--space-3) 0; }
+.salt-overview .plain-line { margin: 0; }
+.salt-overview svg { color: var(--c-martian-red) !important; }
