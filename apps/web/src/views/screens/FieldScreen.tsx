@@ -1,5 +1,9 @@
 /* AI-assisted: drafted with Claude (Anthropic). See docs/ai-usage.md. */
-import { lazy, Suspense } from 'react';
+import { lazy, Suspense, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
+import { latestCompleteYear, midMonthCompositeDate } from '@/config/map';
+import { NdviLegend } from '@/views/components/NdviLegend';
+import type { MapLayer } from '@/views/components/FieldMap';
 import { CheckCircle, Crosshair, Farm, Flask, MapPin, Scales } from '@phosphor-icons/react';
 import { useTranslation } from 'react-i18next';
 import { useFieldPicker } from '@/controllers/useFieldPicker';
@@ -12,6 +16,21 @@ const FieldMap = lazy(() => import('@/views/components/FieldMap'));
 export function FieldScreen() {
   const { t } = useTranslation();
   const { pin, status, gpsError, locate, pickOnMap, enterManually, useDemoField, useDemoPunjab } = useFieldPicker();
+  // Map layer and month live in the URL, so other screens can link straight to the greenness map.
+  const [params, setParams] = useSearchParams();
+  const layer: MapLayer = params.get('layer') === 'ndvi' ? 'ndvi' : 'true';
+  const monthParam = Number(params.get('month'));
+  const month = monthParam >= 1 && monthParam <= 12 ? monthParam : new Date().getUTCMonth() + 1;
+  const year = latestCompleteYear();
+  const [ndviFailed, setNdviFailed] = useState(false);
+  const showNdvi = layer === 'ndvi' && !ndviFailed;
+  const setLayer = (l: MapLayer) => {
+    if (l === 'ndvi') setNdviFailed(false);
+    const next = new URLSearchParams(params);
+    if (l === 'ndvi') next.set('layer', 'ndvi');
+    else next.delete('layer');
+    setParams(next, { replace: true });
+  };
 
   return (
     <section className="screen">
@@ -51,9 +70,18 @@ export function FieldScreen() {
       </div>
 
       <div className="field-map-wrap">
+        <div className="segmented map-switch" role="group" aria-label={t('map.layerLabel')}>
+          {(['true', 'ndvi'] as const).map((l) => (
+            <button key={l} type="button" aria-pressed={(l === 'ndvi') === showNdvi} onClick={() => setLayer(l)}>
+              {t('map.layer.' + l)}
+            </button>
+          ))}
+        </div>
         <Suspense fallback={<div className="field-map map-loading">{t('field.mapLoading')}</div>}>
-          <FieldMap pin={pin} onPick={pickOnMap} />
+          <FieldMap pin={pin} onPick={pickOnMap} layer={showNdvi ? 'ndvi' : 'true'} ndviDate={midMonthCompositeDate(year, month)} onNdviError={() => setNdviFailed(true)} />
         </Suspense>
+        {ndviFailed && layer === 'ndvi' && <p className="small form-error" role="status">{t('map.ndviFailed')}</p>}
+        {showNdvi && <NdviLegend />}
         <p className="hint">{t('field.tapHint')}</p>
       </div>
 

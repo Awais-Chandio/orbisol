@@ -844,5 +844,21 @@
   "caseStudy": {
     "badge": "Hyderabad case study",
     "note": "Detailed satellite layers (greenness, slope, 2050 heat, satellite rain) are prepared for the Hyderabad case study. For this field Orbisol uses live NASA POWER data. Sowing windows come from the Sindh calendar, so check local sowing dates."
+  },
+  "map": {
+    "layerLabel": "Map layer",
+    "layer": {
+      "true": "True colour",
+      "ndvi": "Greenness (NDVI)"
+    },
+    "legendAria": "Greenness colour scale, NDVI 0 to 0.8 and above",
+    "legend": {
+      "bare": "bare soil, sand",
+      "sparse": "thin or dry plants",
+      "growing": "growing crops",
+      "dense": "dense green crops"
+    },
+    "legendCaption": "NASA MODIS Terra NDVI, 16-day composite. Brown and pale = little growth; green = growing crops.",
+    "ndviFailed": "Greenness tiles could not load (offline or NASA server busy). Showing true colour."
   }
 }
