@@ -632,5 +632,29 @@
     "ndviUsual": "usual, 2001–2020",
     "ndviAria": "Usual greenness by month: {{values}}",
     "ndviGap": "Satellite greenness is precomputed only for the demo region in this version."
+  },
+  "glossary": {
+    "what": "What is {{term}}?",
+    "close": "Close",
+    "ndvi": {
+      "term": "NDVI (greenness)",
+      "plain": "A number satellites get from how much red and near-infrared light plants reflect. About 0 means bare soil or water, 0.2 to 0.3 thin or dry plants, 0.6 and above dense green crops. It rises as a crop grows and drops after harvest."
+    },
+    "et0": {
+      "term": "Evaporation demand (ET0)",
+      "plain": "How thirsty the air is: the water a short, well-watered grass field would lose to the air, in mm. Heat, sun, wind and dry air raise it. A crop's water need is about ET0 times a crop factor (FAO-56)."
+    },
+    "waterBalance": {
+      "term": "Water balance",
+      "plain": "Rain minus evaporation demand over the same days. A number below zero is the gap that canal water or water stored in the soil had to fill. Here it is below zero for most of the year."
+    },
+    "soilAnomaly": {
+      "term": "Soil moisture anomaly",
+      "plain": "How much wetter or drier the top soil is than normal for these days of the year: this season's value against the usual range. The NASA model behind it does not see canal water, so irrigated fields are wetter than shown."
+    },
+    "frost": {
+      "term": "Frost risk",
+      "plain": "Frost is when the air near the ground falls to 0 °C or below; it can burn leaves and flowers. A month is marked as frost risk when, in 1991 to 2020, it had a frost night at least once every two years on average."
+    }
   }
 }

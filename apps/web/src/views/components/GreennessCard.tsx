@@ -2,6 +2,7 @@
 import { Leaf } from '@phosphor-icons/react';
 import { useTranslation } from 'react-i18next';
 import { useGreenness } from '@/controllers/useGreenness';
+import { GlossaryTip } from './GlossaryTip';
 import { IndicatorCard } from './IndicatorCard';
 
 function fmtDate(iso: string) {
@@ -16,7 +17,9 @@ export function GreennessCard({ days }: { days: number }) {
     return (
       <article className="card light indicator">
         <header className="indicator-head">
-          <h3>{t('season.ind.greenness.name')}</h3>
+          <h3>
+            {t('season.ind.greenness.name')} <GlossaryTip term="ndvi" />
+          </h3>
           <Leaf size={24} aria-hidden />
         </header>
         <p className="small">{t('season.ind.greenness.what')}</p>

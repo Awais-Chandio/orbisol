@@ -4,6 +4,7 @@ import { CloudRain, Planet, Snowflake, ThermometerHot } from '@phosphor-icons/re
 import { CROPS, YEAR_DAYS, doyToMd, type CropSlot, type HazardMonths, type MonthlyGreenness, type Provenance, type Span } from '@orbisol/core';
 import { useTranslation } from 'react-i18next';
 import { formatMonthDay, monthName } from '@/views/format';
+import { GlossaryTip } from './GlossaryTip';
 import { SourceTag } from './SourceTag';
 
 /** First day of each month (day of year, non-leap) and the day after the year ends. */
@@ -191,7 +192,7 @@ export function CropYearTimeline({ slots, bare, hazards, ndvi, ndviProvenance, n
       {showNdvi && (
         <>
           <p className="tl-ndvi-title">
-            <Planet size={20} aria-hidden /> {t('timeline.ndviCaption')}
+            <Planet size={20} aria-hidden /> {t('timeline.ndviCaption')} <GlossaryTip term="ndvi" />
           </p>
           <p className="small">{t('timeline.ndviHint')}</p>
           {width > 0 && (
@@ -254,7 +255,7 @@ export function CropYearTimeline({ slots, bare, hazards, ndvi, ndviProvenance, n
           )}
           {hazards && hazards.frost.length > 0 && (
             <li>
-              <Snowflake size={16} aria-hidden /> {t('hazards.frost')}
+              <Snowflake size={16} aria-hidden /> {t('hazards.frost')} {!compact && <GlossaryTip term="frost" />}
             </li>
           )}
           {showNdvi && (

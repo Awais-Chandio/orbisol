@@ -4,7 +4,16 @@ import type { Tercile } from '@orbisol/core';
 import type { ReactNode } from 'react';
 import { useTranslation } from 'react-i18next';
 import type { IndicatorView } from '@/controllers/useSeasonVsNormal';
+import { GlossaryTip, type GlossaryTerm } from './GlossaryTip';
 import { SourceTag } from './SourceTag';
+
+const TERM: Partial<Record<IndicatorView['key'], GlossaryTerm>> = {
+  greenness: 'ndvi',
+  et0Total: 'et0',
+  waterBalance: 'waterBalance',
+  soilWetness: 'soilAnomaly',
+  frostDays: 'frost',
+};
 
 const TERCILE: Record<Tercile, Icon> = { above: ArrowUp, near: Equals, below: ArrowDown };
 
@@ -73,7 +82,10 @@ export function IndicatorCard({ v, children, titleKey, explain }: { v: Indicator
   return (
     <article className="card light indicator">
       <header className="indicator-head">
-        <h3>{t(titleKey ?? `season.ind.${v.key}.name`)}</h3>
+        <h3>
+          {t(titleKey ?? `season.ind.${v.key}.name`)}
+          {TERM[v.key] && <GlossaryTip term={TERM[v.key]!} />}
+        </h3>
         <span className={'tercile tercile-' + (v.tercile ?? 'none')}>
           <TI size={16} weight="bold" aria-hidden />
           {t('season.tercile.' + (v.tercile ?? 'none'))}
