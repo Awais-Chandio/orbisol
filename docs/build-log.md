@@ -65,3 +65,13 @@
 - IMERG: script works (OPeNDAP, one pixel per day) but the full series is ~10,500 requests; the GES DISC server started refusing connections at ~2,400 days. Skipped at the time cap; cards hide when the file is missing. Future work.
 - SMAP: no data on TESViS for the pin; NSIDC route too heavy. Soil moisture stays NASA POWER GWETTOP, tagged as model. Future work.
 - Fixed in browser test: Calendar said "No frost or frequent heavy-rain months" while August showed heavy rain -> now "No frost months here." 63 core tests pass, precache 18 entries / 3,007 KiB, no console errors.
+
+## 2026-11-14 16:55 PKT - Fix: desktop-like render on Android
+
+- Viewport meta was present in index.html, dist and on Vercel. Cause: on the Field screen the coordinate form grid used
+  `1fr 1fr`, so the inputs' intrinsic width pushed the layout to 480 px at a 360 px phone; Android Chrome then zooms
+  the whole page out (narrow column, tiny text).
+- Fix: `minmax(0, 1fr)` in all grids, inputs `width: 100%`, global guard (controls/media never wider than their column),
+  `text-size-adjust: 100%`.
+- Verified with headless Chrome DevTools mobile emulation (360x800, DPR 3, mobile viewport): every screen 360 px wide,
+  scale 1, no element past the right edge (old deployed build: Field 480 px).

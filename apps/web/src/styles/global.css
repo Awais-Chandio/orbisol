@@ -54,7 +54,7 @@ button { font-family: var(--font-body); font-size: 1rem; }
 
 .bottom-nav {
   position: fixed; bottom: 0; left: 0; right: 0; z-index: 10;
-  display: grid; grid-template-columns: repeat(5, 1fr);
+  display: grid; grid-template-columns: repeat(5, minmax(0, 1fr));
   background: var(--c-deep-blue);
   border-top: 1px solid rgba(255, 255, 255, 0.15);
   padding-bottom: env(safe-area-inset-bottom);
@@ -141,10 +141,10 @@ button { font-family: var(--font-body); font-size: 1rem; }
 .map-loading { display: flex; align-items: center; justify-content: center; }
 .pin-card .pin-status { display: flex; align-items: center; gap: var(--space-2); flex-wrap: wrap; }
 .manual summary { cursor: pointer; font-weight: 700; min-height: 44px; display: flex; align-items: center; }
-.coord-form { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-3); align-items: end; }
+.coord-form { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--space-3); align-items: end; }
 .coord-form label { display: flex; flex-direction: column; gap: var(--space-1); font-size: 0.875rem; }
 .coord-form input {
-  min-height: 44px; padding: var(--space-2); border-radius: 8px; border: 2px solid var(--c-white);
+  width: 100%; min-height: 44px; padding: var(--space-2); border-radius: 8px; border: 2px solid var(--c-white);
   background: var(--c-white); color: var(--c-deep-blue); font-family: var(--font-code); font-size: 1rem;
 }
 .coord-form input[aria-invalid='true'] { border-color: var(--c-martian-red); }
@@ -215,9 +215,9 @@ button { font-family: var(--font-body); font-size: 1rem; }
   min-height: 44px; padding: var(--space-2); border-radius: 8px; border: 2px solid var(--c-deep-blue);
   background: var(--c-white); color: var(--c-deep-blue); font-family: var(--font-body); font-size: 1rem;
 }
-.date-pick { border: 0; padding: 0; margin: 0; display: grid; grid-template-columns: 1fr 2fr; gap: var(--space-2); }
+.date-pick { border: 0; padding: 0; margin: 0; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); gap: var(--space-2); }
 .date-pick legend { font-size: 0.875rem; font-weight: 600; margin-bottom: var(--space-1); }
-.canal-row { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-3); }
+.canal-row { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--space-3); }
 .radio-row { border: 0; padding: 0; margin: 0 0 var(--space-3); display: flex; flex-wrap: wrap; gap: var(--space-3); }
 .radio-row legend { font-weight: 600; margin-bottom: var(--space-2); }
 .radio, .check { display: inline-flex; align-items: center; gap: var(--space-2); min-height: 44px; }
@@ -259,7 +259,7 @@ button { font-family: var(--font-body); font-size: 1rem; }
 .tradeoff svg { flex: none; }
 .small-head { font-size: 0.95rem; margin: var(--space-3) 0 var(--space-2); }
 .score-list { list-style: none; padding: 0; margin: 0 0 var(--space-3); display: grid; gap: var(--space-2); }
-.score-list li { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-2); align-items: center; font-size: 0.875rem; }
+.score-list li { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--space-2); align-items: center; font-size: 0.875rem; }
 .score-bar { position: relative; height: 20px; border: 1.5px solid var(--c-deep-blue); border-radius: 4px; overflow: hidden; }
 .score-bar > span { position: absolute; inset: 0 auto 0 0; background: var(--c-electric-blue); }
 .score-bar em { position: absolute; right: 4px; top: 0; font-style: normal; font-size: 0.75rem; font-weight: 700; color: var(--c-deep-blue); background: var(--c-white); padding: 0 2px; line-height: 17px; }
@@ -270,7 +270,7 @@ button { font-family: var(--font-body); font-size: 1rem; }
 .note-list li { display: flex; flex-direction: column; gap: 2px; align-items: flex-start; }
 
 /* year strip: crops labelled in text; bare = dashed outline */
-.year-strip { display: grid; grid-template-columns: repeat(12, 1fr); gap: 2px; margin: var(--space-3) 0; }
+.year-strip { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 2px; margin: var(--space-3) 0; }
 .ys-cell { display: flex; flex-direction: column; align-items: center; gap: 1px; padding: 2px 0; border-radius: 4px; background: var(--c-electric-blue); color: var(--c-white); min-width: 0; }
 .ys-cell.ys-bare { background: var(--c-white); color: var(--c-deep-blue); border: 1.5px dashed var(--c-deep-blue); }
 .ys-month { font-size: 0.7rem; font-weight: 700; }
@@ -283,7 +283,7 @@ button { font-family: var(--font-body); font-size: 1rem; }
 .month-list .warn-line { background: var(--c-white); padding: 2px var(--space-2); border-radius: 6px; }
 .warn-line svg { flex: none; margin-top: 2px; }
 .month-list { list-style: none; padding: 0; margin: var(--space-3) 0; display: grid; gap: var(--space-2); }
-.month-row { display: grid; grid-template-columns: 88px 1fr; gap: var(--space-2); background: var(--c-white); color: var(--c-deep-blue); border-radius: var(--radius); padding: var(--space-2) var(--space-3); }
+.month-row { display: grid; grid-template-columns: 88px minmax(0, 1fr); gap: var(--space-2); background: var(--c-white); color: var(--c-deep-blue); border-radius: var(--radius); padding: var(--space-2) var(--space-3); }
 .month-row.is-bare { border: 2px dashed var(--c-deep-blue); }
 .month-name { font-family: var(--font-head); font-weight: 700; }
 .month-body p { margin: 0 0 2px; }
@@ -307,3 +307,10 @@ button { font-family: var(--font-body); font-size: 1rem; }
 .factor-list { margin: var(--space-1) 0 0; padding-left: var(--space-4); }
 .track { display: flex; gap: var(--space-1); align-items: flex-start; }
 .geonames-credit { font-weight: 700; }
+
+/* Phone-width guard: no control or media may be wider than its column (a wider element makes Android Chrome
+   zoom the whole page out to fit it, which looks like a desktop page with tiny text). */
+input, select, textarea, button { max-width: 100%; min-width: 0; }
+img, svg, canvas, video { max-width: 100%; }
+body { overflow-wrap: break-word; }
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; } /* no mobile font boosting */
