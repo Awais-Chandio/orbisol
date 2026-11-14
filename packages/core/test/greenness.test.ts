@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { addDays, compareGreenness, compositeMean, greennessAfter, type Composite } from '../src';
+import { addDays, compareGreenness, compositeMean, greennessAfter, monthlyGreennessNormal, type Composite } from '../src';
 
 /** Synthetic 16-day composites 2000-2026: green in Jan-Mar (0.6), dry otherwise (0.2); 2026 greener (0.7). */
 function series(): Composite[] {
@@ -43,5 +43,16 @@ describe('greenness', () => {
     expect(after.get(2010)).toBeCloseTo(0.3, 6);
     expect(after.has(2026)).toBe(false);
     expect(after.size).toBeGreaterThan(20);
+  });
+
+  it('gives a 12-month greenness normal from 2001-2020 composites only', () => {
+    const m = monthlyGreennessNormal({ points: series(), provenance: prov });
+    expect(m).toHaveLength(12);
+    expect(m[0]!.value).toBeCloseTo(0.6, 6); // Jan green
+    expect(m[5]!.value).toBeCloseTo(0.2, 6); // Jun dry
+    expect(m[8]!.value).toBeCloseTo(0.2, 6); // Sep: 2026 greener values are outside the normal period
+    expect(m.every((x) => x.n > 0)).toBe(true);
+    const empty = monthlyGreennessNormal({ points: [{ date: '2021-01-01', value: 0.5 }], provenance: prov });
+    expect(Number.isNaN(empty[0]!.value)).toBe(true);
   });
 });

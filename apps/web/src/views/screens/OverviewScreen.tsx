@@ -3,11 +3,13 @@ import type { ReactNode } from 'react';
 import { ArrowRight, CloudSun, Drop, Handshake, Sun, ThermometerHot, type Icon } from '@phosphor-icons/react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { useGreennessMonthly } from '@/controllers/useGreenness';
 import { useHeat2050State } from '@/controllers/useHeat2050';
 import { useRotationComparison } from '@/controllers/useRotationComparison';
 import { OUTLOOK_DAYS, useSeasonOutlook } from '@/controllers/useSeasonOutlook';
 import { useSeasonVsNormal } from '@/controllers/useSeasonVsNormal';
 import { ConfidenceMeter } from '@/views/components/ConfidenceMeter';
+import { CropYearTimeline } from '@/views/components/CropYearTimeline';
 import { NeedPin } from '@/views/components/NeedPin';
 import { monthName } from '@/views/format';
 
@@ -38,6 +40,7 @@ export function OverviewScreen() {
   const s = useSeasonVsNormal(SEASON_DAYS);
   const o = useSeasonOutlook(SEASON_DAYS);
   const { data: heat, isLoading: heatLoading } = useHeat2050State();
+  const g = useGreennessMonthly();
 
   if (!r.pin)
     return (
@@ -130,6 +133,17 @@ export function OverviewScreen() {
           )}
         </InsightCard>
       </div>
+
+      {ex && (
+        <div className="card light overview-timeline">
+          <h2>{t('timeline.title')}</h2>
+          <p className="small">{ex.plan.slots.map((x) => t('crops.' + x.crop)).join(' → ')}</p>
+          <CropYearTimeline slots={ex.plan.slots} bare={ex.metrics.bare} hazards={r.hazards} ndvi={g.monthly} ndviProvenance={g.provenance} ndviGap={!g.isLoading} />
+          <Link to="/calendar" className="insight-more">
+            {t('overview.calendarLink')} <ArrowRight size={16} aria-hidden />
+          </Link>
+        </div>
+      )}
 
       {tw && tw.confidence && (
         <Link to="/season#twins-h" className="card light insight-card confidence-card">

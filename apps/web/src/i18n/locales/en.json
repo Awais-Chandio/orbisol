@@ -599,6 +599,20 @@
     "twins": {
       "label": "Season Twins: next {{days}} days",
       "why": "Why this confidence"
-    }
+    },
+    "calendarLink": "See it month by month"
+  },
+  "timeline": {
+    "title": "Your crop year",
+    "bare": "Bare field",
+    "hot": "Hottest months",
+    "bareSpan": "Bare {{from}} to {{to}} ({{days}} days)",
+    "hotSummary": "Hottest months: {{months}}",
+    "ndviCaption": "What NASA's MODIS satellite sees on your field",
+    "ndviHint": "Greenness (NDVI) in a usual year, 2001–2020: median of cropland within 3 km of your pin. Higher = greener, leafier crops; low = bare soil or harvest.",
+    "ndviLegend": "Greenness seen by MODIS (usual year)",
+    "ndviUsual": "usual, 2001–2020",
+    "ndviAria": "Usual greenness by month: {{values}}",
+    "ndviGap": "Satellite greenness is precomputed only for the demo region in this version."
   }
 }

@@ -4,7 +4,7 @@
  */
 import { useMemo } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { compareGreenness } from '@orbisol/core';
+import { compareGreenness, monthlyGreennessNormal } from '@orbisol/core';
 import { getGreenness } from '@/services/ndviService';
 import { useFieldStore } from '@/stores/fieldStore';
 
@@ -23,4 +23,12 @@ export function useGreenness(lengthDays: number) {
   const q = useGreennessData();
   const cmp = useMemo(() => (q.data ? compareGreenness(q.data.series, lengthDays) : null), [q.data, lengthDays]);
   return { isLoading: q.isLoading, isError: q.isError, available: !!q.data, data: q.data, comparison: cmp };
+}
+
+/** MODIS monthly greenness normal (2001-2020) for the crop-year timeline; null when no file for this pin. */
+export function useGreennessMonthly() {
+  const q = useGreennessData();
+  const monthly = useMemo(() => (q.data ? monthlyGreennessNormal(q.data.series) : null), [q.data]);
+  const provenance = q.data ? { ...q.data.series.provenance, dateFrom: '2001-01-01', date: '2020-12-31' } : undefined;
+  return { monthly, provenance, isLoading: q.isLoading };
 }

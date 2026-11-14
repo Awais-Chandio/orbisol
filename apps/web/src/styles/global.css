@@ -122,7 +122,7 @@ button { font-family: var(--font-body); font-size: 1rem; }
 /* ---------- data credits: kind shown by icon + label + border style, never colour alone ---------- */
 .source-tag {
   display: inline-flex; align-items: center; gap: var(--space-1);
-  padding: 1px var(--space-2); border-radius: 999px;
+  padding: 1px var(--space-2); border-radius: 12px;
   font-size: 0.75rem; line-height: 1.6; border: 1.5px solid currentColor;
 }
 .source-tag a { color: inherit; }
@@ -269,14 +269,6 @@ button { font-family: var(--font-body); font-size: 1rem; }
 .note-list { margin: 0; padding-left: var(--space-4); display: grid; gap: var(--space-2); }
 .note-list li { display: flex; flex-direction: column; gap: 2px; align-items: flex-start; }
 
-/* year strip: crops labelled in text; bare = dashed outline */
-.year-strip { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 2px; margin: var(--space-3) 0; }
-.ys-cell { display: flex; flex-direction: column; align-items: center; gap: 1px; padding: 2px 0; border-radius: 4px; background: var(--c-electric-blue); color: var(--c-white); min-width: 0; }
-.ys-cell.ys-bare { background: var(--c-white); color: var(--c-deep-blue); border: 1.5px dashed var(--c-deep-blue); }
-.ys-month { font-size: 0.7rem; font-weight: 700; }
-.ys-crop { font-size: 0.65rem; line-height: 1.1; overflow: hidden; max-width: 100%; }
-.ys-hz { min-height: 12px; display: flex; }
-
 /* ---------- calendar ---------- */
 .bare-span { margin-bottom: var(--space-1); }
 .warn-line { display: flex; gap: var(--space-2); align-items: flex-start; color: var(--c-martian-red); font-weight: 700; }
@@ -287,7 +279,7 @@ button { font-family: var(--font-body); font-size: 1rem; }
 .month-row.is-bare { border: 2px dashed var(--c-deep-blue); }
 .month-name { font-family: var(--font-head); font-weight: 700; }
 .month-body p { margin: 0 0 2px; }
-.month-crop { display: flex; gap: var(--space-1); align-items: center; flex-wrap: wrap; }
+.month-crop svg { vertical-align: -2px; }
 .month-bare { font-weight: 700; }
 .month-hz { display: flex; flex-wrap: wrap; gap: var(--space-1); }
 .hz-chip { display: inline-flex; gap: 4px; align-items: center; font-size: 0.8rem; border: 1.5px solid var(--c-deep-blue); border-radius: 999px; padding: 0 var(--space-2); }
@@ -356,3 +348,21 @@ html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; } /* no mobile fo
 .confidence-card .confidence { margin: 0; }
 .overview-judgment { display: flex; align-items: center; gap: var(--space-2); font-weight: 700; font-size: 1.05rem; margin: var(--space-4) 0; }
 .overview-judgment svg { flex: none; color: var(--accent); }
+
+/* Crop-year timeline (Calendar, Overview, rotation cards): crops labelled in text, bare = hatched, hot = icon + band */
+.timeline { margin: var(--space-3) 0; }
+.timeline-plot { width: 100%; min-height: 1px; }
+.timeline svg { display: block; overflow: visible; }
+.tl-hot { fill: rgba(228, 55, 0, 0.12); }
+.tl-icon { color: var(--c-martian-red); }
+.tl-grid { stroke: rgba(7, 23, 63, 0.15); stroke-width: 1; }
+.tl-crop { fill: var(--c-white); font-family: var(--font-body); font-weight: 700; pointer-events: none; }
+.tl-month { fill: var(--c-deep-blue); font-family: var(--font-body); font-weight: 600; }
+.tl-axis { stroke: rgba(7, 23, 63, 0.25); stroke-width: 1; }
+.tl-tick { fill: var(--c-deep-blue); font-family: var(--font-body); }
+.tl-ndvi { fill: none; stroke: var(--c-electric-blue); stroke-width: 2; stroke-linejoin: round; }
+.tl-ndvi-dot { fill: var(--c-electric-blue); stroke: var(--c-white); stroke-width: 2; }
+.tl-ndvi-title { display: flex; align-items: center; gap: var(--space-2); font-weight: 700; margin: var(--space-4) 0 var(--space-1); }
+.tl-legend { list-style: none; padding: 0; margin: var(--space-2) 0 0; display: flex; flex-wrap: wrap; gap: var(--space-1) var(--space-3); font-size: 0.8rem; }
+.tl-legend li { display: inline-flex; align-items: center; gap: var(--space-1); }
+.timeline-compact .tl-legend { font-size: 0.75rem; }

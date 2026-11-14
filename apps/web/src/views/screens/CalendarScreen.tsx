@@ -2,7 +2,9 @@
 import { CloudRain, Plant, Snowflake, ThermometerHot, Warning, type Icon } from '@phosphor-icons/react';
 import { doyToMd } from '@orbisol/core';
 import { useTranslation } from 'react-i18next';
+import { useGreennessMonthly } from '@/controllers/useGreenness';
 import { useRotationComparison } from '@/controllers/useRotationComparison';
+import { CropYearTimeline } from '@/views/components/CropYearTimeline';
 import { JudgmentFlag } from '@/views/components/JudgmentFlag';
 import { NeedPin } from '@/views/components/NeedPin';
 import { SourceTag } from '@/views/components/SourceTag';
@@ -14,6 +16,7 @@ const HZ: Record<'hot' | 'frost' | 'heavyRain', Icon> = { hot: ThermometerHot, f
 export function CalendarScreen() {
   const { t } = useTranslation();
   const r = useRotationComparison();
+  const g = useGreennessMonthly();
   if (!r.pin)
     return (
       <section className="screen">
@@ -46,6 +49,11 @@ export function CalendarScreen() {
               </p>
             )}
             <p><SourceTag provenance={farmerProv} /></p>
+          </div>
+
+          <div className="card light">
+            <h2>{t('timeline.title')}</h2>
+            <CropYearTimeline slots={ex.plan.slots} bare={ex.metrics.bare} hazards={r.hazards} ndvi={g.monthly} ndviProvenance={g.provenance} ndviGap={!g.isLoading} />
           </div>
 
           <ol className="month-list">

@@ -5,7 +5,7 @@
  * AI-assisted: drafted with Claude (Anthropic). See docs/ai-usage.md.
  */
 import type { Provenance } from '../types';
-import { finite, mean } from '../stats';
+import { finite, mean, percentile } from '../stats';
 import { addDays, daysBetween, yearOf } from '../season/dates';
 import { compareToBaseline, type IndicatorComparison } from '../season/indicators';
 import { windowEndingOn, windowInYear, type DateWindow } from '../season/series';
@@ -80,4 +80,26 @@ export function greennessAfter(s: CompositeSeries, climateWindow: DateWindow, ho
     if (Number.isFinite(v)) out.set(y, v);
   }
   return out;
+}
+
+export interface MonthlyGreenness {
+  month: number;
+  /** Median NDVI of the month's composites over the normal period; NaN when none. */
+  value: number;
+  /** Composites used. */
+  n: number;
+}
+
+/**
+ * Monthly greenness normal (12 values): median of all valid composites whose start date falls in that month,
+ * over 2001-2020 by default. Describes the usual crop calendar seen from space.
+ */
+export function monthlyGreennessNormal(s: CompositeSeries, base: { from: number; to: number } = NDVI_NORMAL): MonthlyGreenness[] {
+  const byMonth: number[][] = Array.from({ length: 12 }, () => []);
+  for (const p of s.points) {
+    const y = yearOf(p.date);
+    if (y < base.from || y > base.to || !Number.isFinite(p.value)) continue;
+    byMonth[Number(p.date.slice(5, 7)) - 1]!.push(p.value);
+  }
+  return byMonth.map((xs, i) => ({ month: i + 1, value: percentile(xs, 50), n: xs.length }));
 }

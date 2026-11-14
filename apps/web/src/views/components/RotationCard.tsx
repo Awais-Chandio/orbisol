@@ -1,18 +1,19 @@
 /* AI-assisted: drafted with Claude (Anthropic). See docs/ai-usage.md. */
 import { ArrowDown, ArrowRight, ArrowUp, Drop, Equals, Scales, type Icon } from '@phosphor-icons/react';
-import { CROPS, SCORED_PRIORITIES, type Priority, type Provenance } from '@orbisol/core';
+import { CROPS, SCORED_PRIORITIES, type HazardMonths, type Priority, type Provenance } from '@orbisol/core';
 import { useTranslation } from 'react-i18next';
 import type { StrategyView } from '@/controllers/useRotationComparison';
 import { formatInt } from '@/views/format';
 import { NoteList } from './NoteList';
 import { SourceTag } from './SourceTag';
 import { WaterFitDetail } from './WaterFitDetail';
-import { YearStrip } from './YearStrip';
+import { CropYearTimeline } from './CropYearTimeline';
 
 interface Props {
   s: StrategyView;
   weights: { priority: Priority; weight: number }[];
   climate?: Provenance;
+  hazards?: HazardMonths;
 }
 
 function WaterHeadline({ s }: { s: StrategyView }) {
@@ -31,7 +32,7 @@ function WaterHeadline({ s }: { s: StrategyView }) {
   );
 }
 
-export function RotationCard({ s, weights, climate }: Props) {
+export function RotationCard({ s, weights, climate, hazards }: Props) {
   const { t } = useTranslation();
   const existing = s.plan.kind === 'existing';
   const title = s.plan.slots.map((x) => t('crops.' + x.crop));
@@ -103,7 +104,8 @@ export function RotationCard({ s, weights, climate }: Props) {
         </p>
       )}
 
-      <YearStrip months={s.months} />
+      <h3 className="small-head">{t('rotations.yearStrip')}</h3>
+      <CropYearTimeline slots={s.plan.slots} bare={s.metrics.bare} hazards={hazards} compact />
 
       <WaterFitDetail fit={s.fit} climate={climate} />
 
