@@ -1,5 +1,8 @@
 /**
- * Orbisol core - season module (implemented in Phase 4).
+ * Orbisol core - season module: daily series, windows, indicators, comparison with normal.
  * AI-assisted: drafted with Claude (Anthropic). See docs/ai-usage.md.
  */
-export {};
+export * from './dates';
+export * from './series';
+export * from './indicators';
+export * from './et0';

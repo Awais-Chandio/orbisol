@@ -15,11 +15,13 @@ pip install -r requirements.txt
 # Earthdata login (GPM IMERG, SMAP, SRTM) - stored in ~/.netrc, never committed
 ```
 
-## Scripts (added in Phase 6)
+## Scripts
+
+`power.py` is done (Phase 3). The others are added in Phase 6.
 
 | Script | Dataset | Output |
 |---|---|---|
-| `scripts/power.py` | NASA POWER daily (ag) | `data/hyderabad/power_daily.json` |
+| `scripts/power.py` | NASA POWER daily (ag), 1990 to now | `data/hyderabad/power_daily.json` (format `orbisol.daily.v2`) |
 | `scripts/imerg.py` | GPM IMERG | `data/hyderabad/rain_extremes.json` |
 | `scripts/ndvi.py` | MODIS + VIIRS NOAA-20 (VJ113A1) via ORNL DAAC TESViS | `data/hyderabad/ndvi.json` |
 | `scripts/smap.py` | SMAP soil moisture | `data/hyderabad/soil_moisture.json` |

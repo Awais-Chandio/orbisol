@@ -1,5 +1,8 @@
 {
-  "app": { "name": "Orbisol", "tagline": "From orbit to soil." },
+  "app": {
+    "name": "Orbisol",
+    "tagline": "From orbit to soil."
+  },
   "nav": {
     "field": "Field",
     "farm": "My farm",
@@ -50,10 +53,22 @@
     "coming": "This screen is being built."
   },
   "screens": {
-    "farm": { "title": "My farm", "intro": "Your current rotation, canal turn, soil and top priorities." },
-    "season": { "title": "This season vs normal", "intro": "Heat, rain, frost, soil moisture and greenness compared with past years." },
-    "rotations": { "title": "Compare rotations", "intro": "Your existing rotation and two alternatives, with evidence, gaps and risks." },
-    "calendar": { "title": "Seasonal calendar", "intro": "When your field is bare and which months look vulnerable." }
+    "farm": {
+      "title": "My farm",
+      "intro": "Your current rotation, canal turn, soil and top priorities."
+    },
+    "season": {
+      "title": "This season vs normal",
+      "intro": "Heat, rain, frost, soil moisture and greenness compared with past years."
+    },
+    "rotations": {
+      "title": "Compare rotations",
+      "intro": "Your existing rotation and two alternatives, with evidence, gaps and risks."
+    },
+    "calendar": {
+      "title": "Seasonal calendar",
+      "intro": "When your field is bare and which months look vulnerable."
+    }
   },
   "about": {
     "title": "About Orbisol",
@@ -68,5 +83,77 @@
     "ai": "Built with AI assistance (Claude by Anthropic) for code and documentation drafts. The idea and decisions are the author's.",
     "event": "NASA Space Apps Challenge 2026 · Field Shift: Adapting Farms with NASA Data",
     "noLogos": "Data credited in text only."
+  },
+  "season": {
+    "window": "{{from}} to {{to}} ({{days}} days), compared with the same days in {{bFrom}}–{{bTo}} ({{n}} years).",
+    "last30": "Last 30 days",
+    "last90": "Last 90 days",
+    "windowLabel": "Time window",
+    "loading": "Getting NASA data for your field… (first time about 1 MB, then saved on this phone)",
+    "error": "Could not get NASA data for this field right now. Check your internet and try again.",
+    "retry": "Try again",
+    "origin": {
+      "live": "Live from NASA POWER",
+      "cache": "Saved copy from {{when}}",
+      "static": "Built-in data for the demo region"
+    },
+    "normal": "Normal: {{v}}",
+    "range": "Usual range: {{lo}} to {{hi}}",
+    "tercile": {
+      "above": "Above normal",
+      "near": "Near normal",
+      "below": "Below normal",
+      "none": "Not enough data"
+    },
+    "unit": {
+      "days_one": "day",
+      "days_other": "days",
+      "mm": "mm",
+      "pct": "%"
+    },
+    "hotThreshold": "Hot day here means above {{t}} °C: the hottest 10% of these days in {{bFrom}}–{{bTo}}.",
+    "ind": {
+      "hotDays": {
+        "name": "Hot days",
+        "what": "Days hotter than usual for this time of year. Many hot days can stress crops and raise water use."
+      },
+      "rainTotal": {
+        "name": "Rain",
+        "what": "Total rain that fell in this window."
+      },
+      "heavyRainDays": {
+        "name": "Extreme rain days",
+        "what": "Days with 20 mm of rain or more. These can flood fields, wash away soil and damage crops."
+      },
+      "frostDays": {
+        "name": "Frost days",
+        "what": "Nights when the air 2 m above ground fell below 0 °C."
+      },
+      "soilWetness": {
+        "name": "Soil moisture (top layer)",
+        "what": "How much of the space in the top few centimetres of soil holds water: 0% is bone dry, 100% is soaked. From a NASA model that does not include canal irrigation, so irrigated fields are wetter than shown."
+      },
+      "waterBalance": {
+        "name": "Water balance",
+        "what": "Rain minus evaporation demand. Below zero means the air took more water than rain gave; canal water or stored soil water had to fill the gap."
+      },
+      "greenness": {
+        "name": "Greenness (NDVI)",
+        "what": "How green and leafy plants look from space. Low greenness can mean stress, bare soil or harvest."
+      },
+      "et0Total": {
+        "name": "Evaporation demand (ET0)",
+        "what": "How much water a healthy, well-watered grass field would lose to the air (reference evapotranspiration, FAO-56). Hot, dry, windy, sunny days raise it. Most crops need about this much water or more."
+      }
+    },
+    "gap": "Data gap: satellite greenness is not loaded yet for this field.",
+    "frostFlag": "ground frost can happen even when the air stays just above 0 °C",
+    "rainFlag": "canal water is not in these numbers; your canal turn matters more than rain here",
+    "howSure": "How sure is this?",
+    "sure1": "Weather numbers come from NASA POWER, a model on a grid of about 50 km. They describe your area, not your exact field, and they do not include canal irrigation.",
+    "sure2": "Normal is the middle value (median) of the same days in {{n}} past years. The usual range covers the middle 80% of those years.",
+    "sure3": "Above or below normal means this window was in the top or bottom third of those years.",
+    "coverage": "Days with data in this window: {{pct}}%.",
+    "sure4": "Evaporation demand from this model grid may read higher than at a local weather station in canal-irrigated areas, because the model does not see the cooler, more humid air over irrigated fields. Compare it with normal rather than reading it as an exact amount."
   }
 }

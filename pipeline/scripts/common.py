@@ -30,5 +30,5 @@ def write_json(rel_path: str, payload: dict) -> Path:
     out = DATA_DIR / rel_path
     out.parent.mkdir(parents=True, exist_ok=True)
     payload = {"generatedAt": datetime.now(timezone.utc).isoformat(timespec="seconds"), **payload}
-    out.write_text(json.dumps(payload, indent=1, ensure_ascii=False) + "\n", encoding="utf-8")
+    out.write_text(json.dumps(payload, separators=(",", ":"), ensure_ascii=False) + "\n", encoding="utf-8")
     return out

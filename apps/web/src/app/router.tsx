@@ -4,6 +4,7 @@ import { AppLayout } from './AppLayout';
 import { FieldScreen } from '@/views/screens/FieldScreen';
 import { PlaceholderScreen } from '@/views/screens/PlaceholderScreen';
 import { AboutScreen } from '@/views/screens/AboutScreen';
+import { SeasonScreen } from '@/views/screens/SeasonScreen';
 
 export const router = createBrowserRouter([
   {
@@ -12,7 +13,7 @@ export const router = createBrowserRouter([
     children: [
       { index: true, element: <FieldScreen /> },
       { path: 'farm', element: <PlaceholderScreen screen="farm" /> },
-      { path: 'season', element: <PlaceholderScreen screen="season" /> },
+      { path: 'season', element: <SeasonScreen /> },
       { path: 'rotations', element: <PlaceholderScreen screen="rotations" /> },
       { path: 'calendar', element: <PlaceholderScreen screen="calendar" /> },
       { path: 'about', element: <AboutScreen /> },
