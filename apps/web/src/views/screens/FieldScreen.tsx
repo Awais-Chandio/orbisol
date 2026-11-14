@@ -1,7 +1,6 @@
 /* AI-assisted: drafted with Claude (Anthropic). See docs/ai-usage.md. */
 import { lazy, Suspense } from 'react';
-import { ArrowRight, CheckCircle, Crosshair, Flask } from '@phosphor-icons/react';
-import { Link } from 'react-router-dom';
+import { CheckCircle, Crosshair, Flask } from '@phosphor-icons/react';
 import { useTranslation } from 'react-i18next';
 import { useFieldPicker } from '@/controllers/useFieldPicker';
 import { CoordinateForm } from '@/views/components/CoordinateForm';
@@ -57,9 +56,6 @@ export function FieldScreen() {
               {pin.label ? ' · ' + pin.label : ''}
             </p>
             {pin.accuracyM !== undefined && <p className="small">{t('field.accuracy', { m: pin.accuracyM })}</p>}
-            <Link to="/farm" className="btn btn-primary">
-              {t('field.next')} <ArrowRight size={24} aria-hidden />
-            </Link>
           </>
         ) : (
           <p>{t('field.noPin')}</p>

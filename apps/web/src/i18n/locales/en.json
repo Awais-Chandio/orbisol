@@ -32,7 +32,6 @@
     "pinned": "Field pinned",
     "noPin": "No field pinned yet.",
     "accuracy": "GPS accuracy about {{m}} m",
-    "next": "Next: my farm",
     "mapLoading": "Loading map…",
     "mapError": "Map could not load. You can still type coordinates or use GPS.",
     "source": {
@@ -325,7 +324,6 @@
     "no": "No",
     "unknown": "Don't know",
     "reset": "Reset to demo farm",
-    "next": "See rotation options",
     "saved": "Saved on this phone",
     "judgment": "you know your field's history, pests and buyers better than any satellite"
   },
@@ -656,5 +654,10 @@
       "term": "Frost risk",
       "plain": "Frost is when the air near the ground falls to 0 °C or below; it can burn leaves and flowers. A month is marked as frost risk when, in 1991 to 2020, it had a frost night at least once every two years on average."
     }
+  },
+  "next": {
+    "aria": "Next step",
+    "label": "Next step: {{screen}}",
+    "back": "Back to the overview"
   }
 }

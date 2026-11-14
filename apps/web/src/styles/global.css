@@ -465,3 +465,8 @@ html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; } /* no mobile fo
 .glossary-pop::backdrop { background: rgba(7, 23, 63, 0.35); }
 .glossary-term { display: block; font-family: var(--font-head); font-weight: 700; font-size: 1.1rem; margin-bottom: var(--space-2); }
 @media (min-width: 1024px) { .glossary-pop { bottom: var(--space-8); } }
+
+/* Next step (story order) */
+.next-step { display: flex; justify-content: flex-end; margin: var(--space-6) 0 var(--space-2); }
+.next-step .btn { width: 100%; }
+@media (min-width: 600px) { .next-step .btn { width: auto; } }

@@ -1,8 +1,7 @@
 /* AI-assisted: drafted with Claude (Anthropic). See docs/ai-usage.md. */
 import { useId } from 'react';
-import { ArrowCounterClockwise, ArrowRight, Plus, Trash } from '@phosphor-icons/react';
+import { ArrowCounterClockwise, Plus, Trash } from '@phosphor-icons/react';
 import { CROP_IDS, type CropId } from '@orbisol/core';
-import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useFarmProfile } from '@/controllers/useFarmProfile';
 import { PARTS, type MonthPart } from '@/models/farm';
@@ -143,9 +142,6 @@ export function FarmScreen() {
       </div>
 
       <div className="btn-row">
-        <Link to="/rotations" className="btn btn-primary">
-          {t('farm.next')} <ArrowRight size={24} aria-hidden />
-        </Link>
         <button type="button" className="btn btn-secondary" onClick={f.reset}>
           <ArrowCounterClockwise size={24} aria-hidden /> {t('farm.reset')}
         </button>
