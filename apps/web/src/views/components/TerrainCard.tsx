@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { useTerrain } from '@/controllers/useSatellitePoint';
 import { monthName } from '@/views/format';
 import { SourceTag } from './SourceTag';
+import { CaseStudyBadge } from './CaseStudy';
 
 /** Erosion picture: SRTM slope (water erosion) + windiest months and bare days (wind erosion). */
 export function TerrainCard() {
@@ -16,6 +17,7 @@ export function TerrainCard() {
   return (
     <section className="card light">
       <h2><Mountains size={24} aria-hidden /> {t('terrain.title')}</h2>
+      <CaseStudyBadge />
       <p className="indicator-value">{s.slopePct.primary.toFixed(2)}%</p>
       <p>{t('terrain.slope', { name: s.faoClass.name, code: s.faoClass.code })}</p>
       <p className="small">{t(flat ? 'terrain.waterLow' : 'terrain.waterHigher')}</p>

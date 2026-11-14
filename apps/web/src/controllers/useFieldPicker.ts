@@ -3,7 +3,7 @@
  * AI-assisted: drafted with Claude (Anthropic). See docs/ai-usage.md.
  */
 import { useCallback, useState } from 'react';
-import { DEMO_FIELD } from '@/config/env';
+import { DEMO_FIELD, DEMO_PUNJAB } from '@/config/env';
 import { LatLonSchema, roundCoord, type PinSource } from '@/models/field';
 import { getCurrentPosition, GpsError, type GpsErrorCode } from '@/services/geolocation';
 import { useFieldStore } from '@/stores/fieldStore';
@@ -52,5 +52,10 @@ export function useFieldPicker() {
     [place],
   );
 
-  return { pin, status, gpsError, locate, pickOnMap, enterManually, useDemoField };
+  const useDemoPunjab = useCallback(
+    () => place(DEMO_PUNJAB.lat, DEMO_PUNJAB.lon, 'demo', { label: DEMO_PUNJAB.label }),
+    [place],
+  );
+
+  return { pin, status, gpsError, locate, pickOnMap, enterManually, useDemoField, useDemoPunjab };
 }

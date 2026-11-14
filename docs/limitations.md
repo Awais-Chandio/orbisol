@@ -54,6 +54,14 @@
 - Slope is precomputed for the demo farm only; other pins show no terrain card.
 - Erosion risk is described qualitatively (slope class, windiest months, bare days in them); no soil erodibility data is used.
 
+## Second demo pin (Faisalabad district, Punjab)
+
+- The Field screen has a second quick demo at 31.25 N, 73.05 E, labelled by district (MODIS land-cover check at the
+  exact point could not be run: the ORNL TESViS API timed out on 15 Nov 2026). It runs on live NASA POWER only.
+- The Hyderabad-only layers (MODIS NDVI, SRTM slope, NEX-GDDP-CMIP6 2050 heat, GPM IMERG monthly rain) carry a
+  "Hyderabad case study" badge and are hidden for other pins, with one note saying so. Crop sowing windows come from
+  the Sindh calendar, which the note also flags for pins outside the case study.
+
 ## Future work
 
 - **Satellite rain, monthly (GPM IMERG V07 monthly, shipped 15 Nov 2026).** `pipeline/scripts/imerg_monthly.py` reads

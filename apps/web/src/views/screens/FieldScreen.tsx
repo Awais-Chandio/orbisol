@@ -11,7 +11,7 @@ const FieldMap = lazy(() => import('@/views/components/FieldMap'));
 
 export function FieldScreen() {
   const { t } = useTranslation();
-  const { pin, status, gpsError, locate, pickOnMap, enterManually, useDemoField } = useFieldPicker();
+  const { pin, status, gpsError, locate, pickOnMap, enterManually, useDemoField, useDemoPunjab } = useFieldPicker();
 
   return (
     <section className="screen">
@@ -36,6 +36,10 @@ export function FieldScreen() {
         <button className="btn btn-secondary" onClick={useDemoField}>
           <Flask size={24} aria-hidden />
           {t('field.useDemo')}
+        </button>
+        <button className="btn btn-secondary btn-demo2" onClick={useDemoPunjab}>
+          <Flask size={24} aria-hidden />
+          {t('field.useDemo2')}
         </button>
       </div>
       {gpsError && (

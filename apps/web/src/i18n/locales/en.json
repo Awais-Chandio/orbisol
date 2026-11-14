@@ -61,7 +61,8 @@
       "0": "Pin your field",
       "1": "Tell us how you farm",
       "2": "See your options"
-    }
+    },
+    "useDemo2": "Demo: Faisalabad, Punjab (live NASA data)"
   },
   "placeholder": {
     "needPin": "Pin your field first.",
@@ -602,7 +603,7 @@
   },
   "overview": {
     "title": "Your field at a glance",
-    "intro": "Four things NASA data says about your field. Tap a card for the details.",
+    "intro": "What NASA data says about your field. Tap a card for the details.",
     "loading": "Getting NASA data for your field…",
     "details": "See details",
     "judgment": "Supports, not replaces, your judgment.",
@@ -691,7 +692,7 @@
     },
     "waterBalance": {
       "term": "Water balance",
-      "plain": "Rain minus evaporation demand over the same days. A number below zero is the gap that canal water or water stored in the soil had to fill. Here it is below zero for most of the year."
+      "plain": "Rain minus evaporation demand over the same days. A number below zero is the gap that canal water or water stored in the soil had to fill. In hot, dry places such as Sindh it is below zero for most of the year."
     },
     "soilAnomaly": {
       "term": "Soil moisture anomaly",
@@ -839,5 +840,9 @@
     "overviewTolOnly": "the crops compared ({{tolerant}}) cope with salt",
     "overviewUnknown": "no FAO salt value for {{unknown}}",
     "overview": "Your soil is salty: {{parts}}. Each rotation card shows a salt line."
+  },
+  "caseStudy": {
+    "badge": "Hyderabad case study",
+    "note": "Detailed satellite layers (greenness, slope, 2050 heat, satellite rain) are prepared for the Hyderabad case study. For this field Orbisol uses live NASA POWER data. Sowing windows come from the Sindh calendar, so check local sowing dates."
   }
 }

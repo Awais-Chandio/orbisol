@@ -212,3 +212,11 @@
   same months 2000-2024 (25 years; normal 145 mm, usual range 31-391 mm, above normal). Says it is not this season and
   that the reference is the IMERG record from 2000 because 1991-2020 is not available for IMERG.
 - core: compareLatestMonths (reuses compareToBaseline) + 2 tests. IMERG daily stays future work.
+
+## 2026-11-15 PKT - Second quick demo (Punjab) and case-study labels
+
+- Field: "Demo: Faisalabad, Punjab (live NASA data)" chip (31.25 N, 73.05 E). Verified end to end in headless Chrome
+  from an empty profile: chip -> Overview / Rotations / Calendar / Season load from live NASA POWER ("Live from NASA
+  POWER"), 3 Overview cards (14 hot days with bare soil, May-July; best option saves about 1 in 7 canal turns), no
+  Hyderabad-only cards, the case-study note on all four screens, 0 JS errors. Hyderabad demo: badges on the NDVI,
+  slope, 2050 and satellite-rain cards, no note.

@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import type { Heat2050 } from '@/models/heat2050';
 import { JudgmentFlag } from './JudgmentFlag';
 import { SourceTag } from './SourceTag';
+import { CaseStudyBadge } from './CaseStudy';
 
 const r = (x: number) => String(Math.round(x));
 const span = (v: [number, number] | null) => (v ? (r(v[0]) === r(v[1]) ? r(v[0]) : `${r(v[0])}–${r(v[1])}`) : '–');
@@ -22,6 +23,7 @@ export function Heat2050Card({ h }: { h: Heat2050 }) {
           {t('heat2050.badge')}
         </span>
       </header>
+      <CaseStudyBadge />
       <p className="gap-note small">{t('heat2050.notForecast')}</p>
       <p className="small">{t('heat2050.what', { t: h.hotTmaxC.toFixed(1), n: h.models.length })}</p>
       {scen.map((s) => (

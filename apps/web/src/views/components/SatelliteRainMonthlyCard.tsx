@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { useSatelliteRainMonthly } from '@/controllers/useSatellitePoint';
 import { monthName } from '@/views/format';
 import { IndicatorCard } from './IndicatorCard';
+import { CaseStudyBadge } from './CaseStudy';
 
 const label = (ym: string) => `${monthName(Number(ym.slice(5, 7)), 'long')} ${ym.slice(0, 4)}`;
 
@@ -37,6 +38,7 @@ export function SatelliteRainMonthlyCard() {
       }}
       explain={<p className="small">{t('season.imergM.method')}</p>}
     >
+      <CaseStudyBadge />
       <p className="small gap-note">{t('season.imergM.window', { from: label(first), to: label(last) })}</p>
       <p className="small">{t('season.imergM.reference', { from: y0, to: y1, n: c.years.length })}</p>
     </IndicatorCard>

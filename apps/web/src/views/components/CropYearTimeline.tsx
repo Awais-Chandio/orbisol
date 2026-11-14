@@ -5,6 +5,7 @@ import { CROPS, YEAR_DAYS, doyToMd, type CropSlot, type HazardMonths, type Month
 import { useTranslation } from 'react-i18next';
 import { formatMonthDay, monthName } from '@/views/format';
 import { GlossaryTip } from './GlossaryTip';
+import { CaseStudyBadge } from './CaseStudy';
 import { SourceTag } from './SourceTag';
 
 /** First day of each month (day of year, non-leap) and the day after the year ends. */
@@ -225,6 +226,7 @@ export function CropYearTimeline({ slots, bare, hazards, ndvi, ndviProvenance, n
           <p className="tl-ndvi-title">
             <Planet size={20} aria-hidden /> {t('timeline.ndviCaption')} <GlossaryTip term="ndvi" />
           </p>
+          <CaseStudyBadge />
           <p className="small">{t('timeline.ndviHint')}</p>
           {width > 0 && (
             <svg width={W} height={H2} viewBox={`0 0 ${W} ${H2}`} role="img" aria-label={t('timeline.ndviAria', { values: ndviPts.map((p) => `${monthName(p.month)} ${p.value.toFixed(2)}`).join(', ') }) + (annotate ? `. ${monthName(dip!.month, 'long')}: ${annotText}` : '')}>

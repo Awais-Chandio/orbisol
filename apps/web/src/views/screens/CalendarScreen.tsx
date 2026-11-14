@@ -4,6 +4,8 @@ import { doyToMd } from '@orbisol/core';
 import { useTranslation } from 'react-i18next';
 import { useGreennessMonthly } from '@/controllers/useGreenness';
 import { useRotationComparison } from '@/controllers/useRotationComparison';
+import { inCaseStudy } from '@/config/caseStudy';
+import { CaseStudyNote } from '@/views/components/CaseStudy';
 import { TimelineSwitcher } from '@/views/components/TimelineSwitcher';
 import { JudgmentFlag } from '@/views/components/JudgmentFlag';
 import { NeedPin } from '@/views/components/NeedPin';
@@ -40,6 +42,7 @@ export function CalendarScreen() {
       <div className="screen-tools">
         <ScienceToggle />
       </div>
+      <CaseStudyNote />
       {r.isLoading && <p className="card light" role="status">{t('rotations.loading')}</p>}
       {ex && (
         <>
@@ -62,7 +65,7 @@ export function CalendarScreen() {
 
           <Science className="card light">
             <h2>{t('timeline.title')}</h2>
-            <TimelineSwitcher strategies={r.strategies} hazards={r.hazards} ndvi={g.monthly} ndviProvenance={g.provenance} ndviGap={!g.isLoading} />
+            <TimelineSwitcher strategies={r.strategies} hazards={r.hazards} ndvi={g.monthly} ndviProvenance={g.provenance} ndviGap={!g.isLoading && inCaseStudy(r.pin)} />
           </Science>
           </div>
 

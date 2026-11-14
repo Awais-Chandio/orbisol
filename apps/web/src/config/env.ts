@@ -10,3 +10,9 @@ export const TAGLINE = 'From orbit to soil.';
  * 77% cropland within 2 km). Same NASA POWER grid cell as Hyderabad city, so the built-in data covers it.
  */
 export const DEMO_FIELD = { lat: 25.48, lon: 68.41, label: 'Demo farm near Tando Jam, Hyderabad' } as const;
+
+/**
+ * Second quick demo: Faisalabad district, Punjab (canal-irrigated cotton-wheat zone). Live NASA POWER only: none of the
+ * precomputed satellite layers (NDVI, slope, 2050 heat, satellite rain) cover it.
+ */
+export const DEMO_PUNJAB = { lat: 31.25, lon: 73.05, label: 'Demo: Faisalabad district, Punjab (live NASA data)' } as const;

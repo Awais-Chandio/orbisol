@@ -8,6 +8,8 @@ import { ListenButton } from '@/views/components/ListenButton';
 import { useGreennessMonthly } from '@/controllers/useGreenness';
 import { useHeat2050State } from '@/controllers/useHeat2050';
 import { useRotationComparison } from '@/controllers/useRotationComparison';
+import { inCaseStudy } from '@/config/caseStudy';
+import { CaseStudyBadge, CaseStudyNote } from '@/views/components/CaseStudy';
 import { OUTLOOK_DAYS, useSeasonOutlook } from '@/controllers/useSeasonOutlook';
 import { useSeasonVsNormal } from '@/controllers/useSeasonVsNormal';
 import { ConfidenceMeter } from '@/views/components/ConfidenceMeter';
@@ -24,11 +26,12 @@ const SEASON_DAYS = 90;
  * Farmer layer: icon + one plain sentence, with the exact number beside it.
  * Science layer (under "Show the science"): how the number was worked out.
  */
-function InsightCard({ to, icon: I, label, plain, exact, science }: { to: string; icon: Icon; label: string; plain: ReactNode; exact?: ReactNode; science?: ReactNode }) {
+function InsightCard({ to, icon: I, label, plain, exact, science, badge }: { to: string; icon: Icon; label: string; plain: ReactNode; exact?: ReactNode; science?: ReactNode; badge?: ReactNode }) {
   const { t } = useTranslation();
   return (
     <Link to={to} className="card light insight-card">
       <span className="insight-label">{label}</span>
+      {badge}
       <span className="insight-plain">
         <I size={32} weight="duotone" aria-hidden />
         <span>{plain}</span>
@@ -54,6 +57,7 @@ export function OverviewScreen() {
   const o = useSeasonOutlook(SEASON_DAYS);
   const { data: heat, isLoading: heatLoading } = useHeat2050State();
   const g = useGreennessMonthly();
+  const here = inCaseStudy(r.pin);
 
   if (!r.pin)
     return (
@@ -81,7 +85,7 @@ export function OverviewScreen() {
   const plainBare = ex ? barePlain(t, ex.metrics.bareHotDays) : null;
   const plainBest = best && ex ? (ex.rank === 1 ? t('plain.existingFirst') : waterPlain(t, best.waterPct, bestCrops)) : null;
   const plainSeason = s.comparison ? seasonPlain(t, hot?.tercile ?? null, rain?.tercile ?? null) : null;
-  const plainHeat = heat && h245 ? heatPlain(t, heat) : null;
+  const plainHeat = here && heat && h245 ? heatPlain(t, heat) : null;
   const sentences = [plainBare, plainBest, plainSeason, plainHeat].filter((x): x is string => !!x);
 
   return (
@@ -137,8 +141,10 @@ export function OverviewScreen() {
           science={s.comparison && t('overview.season.text', { bFrom: s.comparison.baseline.from, bTo: s.comparison.baseline.to })}
         />
 
+        {here && (
         <InsightCard
           to="/season#heat-2050"
+          badge={<CaseStudyBadge />}
           icon={ThermometerHot}
           label={heat ? t('overview.heat.label', { from: heat.future.from, to: heat.future.to }) : t('overview.heat.labelPlain')}
           plain={plainHeat ?? (heatLoading ? loading : t('overview.heat.none'))}
@@ -160,7 +166,9 @@ export function OverviewScreen() {
             )
           }
         />
+        )}
       </div>
+      <CaseStudyNote />
 
       {r.farm.soil.salty === true && r.strategies.length > 0 && (
         <Link to="/rotations" className="salt-overview">
@@ -172,7 +180,7 @@ export function OverviewScreen() {
         {ex && (
           <div className="card light overview-timeline">
             <h2>{t('timeline.title')}</h2>
-            <TimelineSwitcher strategies={r.strategies} hazards={r.hazards} ndvi={g.monthly} ndviProvenance={g.provenance} ndviGap={!g.isLoading} />
+            <TimelineSwitcher strategies={r.strategies} hazards={r.hazards} ndvi={g.monthly} ndviProvenance={g.provenance} ndviGap={!g.isLoading && inCaseStudy(r.pin)} />
             <Link to="/calendar" className="insight-more">
               {t('overview.calendarLink')} <ArrowRight size={16} aria-hidden />
             </Link>

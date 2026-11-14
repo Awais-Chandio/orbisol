@@ -17,6 +17,7 @@ import { useHeat2050 } from '@/controllers/useHeat2050';
 import { useObservedTrend } from '@/controllers/useObservedTrend';
 import { useSeasonOutlook } from '@/controllers/useSeasonOutlook';
 import { PlainLine, Science, ScienceToggle } from '@/views/components/Science';
+import { CaseStudyNote } from '@/views/components/CaseStudy';
 import { heatPlain, seasonPlain } from '@/views/plain';
 import { ChartLineUp, ClockCounterClockwise, CloudSun, ThermometerHot } from '@phosphor-icons/react';
 import type { LinearTrend } from '@orbisol/core';
@@ -65,6 +66,7 @@ export function SeasonScreen() {
       <div className="screen-tools">
         <ScienceToggle />
       </div>
+      <CaseStudyNote />
 
       <div className="segmented" role="group" aria-label={t('season.windowLabel')}>
         {([30, 90] as const).map((d) => (

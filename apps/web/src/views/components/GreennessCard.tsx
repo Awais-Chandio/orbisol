@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { useGreenness } from '@/controllers/useGreenness';
 import { GlossaryTip } from './GlossaryTip';
 import { IndicatorCard } from './IndicatorCard';
+import { CaseStudyBadge, useInCaseStudy } from './CaseStudy';
 import { Science } from './Science';
 
 function fmtDate(iso: string) {
@@ -14,6 +15,8 @@ function fmtDate(iso: string) {
 export function GreennessCard({ days }: { days: number }) {
   const { t } = useTranslation();
   const g = useGreenness(days);
+  const here = useInCaseStudy();
+  if (!here) return null; // Hyderabad-only layer: the screen shows one case-study note instead
   if (!g.available || !g.comparison || !g.data) {
     return (
       <article className="card light indicator">
@@ -49,6 +52,7 @@ export function GreennessCard({ days }: { days: number }) {
         </>
       }
     >
+      <CaseStudyBadge />
       <Science>
         <p className="small">
           {t('season.green.window', { from: fmtDate(g.comparison.window.start), to: fmtDate(g.comparison.window.end), n: g.comparison.composites })}
