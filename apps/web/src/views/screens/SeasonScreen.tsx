@@ -10,6 +10,8 @@ import { NeedPin } from '@/views/components/NeedPin';
 import { SeasonOutlook } from '@/views/components/SeasonOutlook';
 import { GreennessCard } from '@/views/components/GreennessCard';
 import { SatelliteRainCards } from '@/views/components/SatelliteRainCards';
+import { TrendCard } from '@/views/components/TrendCard';
+import { useObservedTrend } from '@/controllers/useObservedTrend';
 
 function fmtDate(iso: string) {
   return new Date(iso + 'T00:00:00Z').toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric', timeZone: 'UTC' });
@@ -19,6 +21,7 @@ export function SeasonScreen() {
   const { t } = useTranslation();
   const [days, setDays] = useState<WindowDays>(90);
   const s = useSeasonVsNormal(days);
+  const trend = useObservedTrend();
 
   if (!s.pin) {
     return (
@@ -90,6 +93,8 @@ export function SeasonScreen() {
           </div>
 
           <SeasonOutlook days={days} />
+
+          {trend.trend && <TrendCard tr={trend.trend} climate={trend.provenance} />}
 
           <details className="card how-sure">
             <summary>{t('season.howSure')}</summary>

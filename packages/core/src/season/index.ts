@@ -8,3 +8,4 @@ export * from './indicators';
 export * from './et0';
 export * from './grid';
 export * from './rain';
+export * from './trend';

@@ -480,5 +480,40 @@
     "noRisk": "Main risk: none found on these measures",
     "check": "Estimates only; check with local farmers and experts.",
     "link": "Try it: {{url}}"
+  },
+  "trend": {
+    "title": "Long-term trend, {{from}}–{{to}}",
+    "badge": "observed",
+    "notForecast": "Observed trend, not a forecast. It shows how past years changed, not what next year will bring.",
+    "perDecade": "{{v}} {{unit}} per decade",
+    "daysUnit": "days",
+    "interval": "(95% range {{lo}} to {{hi}})",
+    "tooShort": "Not enough complete years for a trend.",
+    "hotDays": {
+      "name": "Hot days per year",
+      "short": "Hot days",
+      "what": "Days with a maximum above {{t}} °C (the hottest 10% of days in 1991–2020 here).",
+      "decades": "First 10 years: about {{a}} hot days a year. Last 10 years: about {{b}}.",
+      "chart": "Hot days per year, one point per year, with the trend line",
+      "up": "Hot days have become more common.",
+      "down": "Hot days have become less common here.",
+      "unclear": "No clear change: the year-to-year swing is bigger than the trend."
+    },
+    "waterBalance": {
+      "name": "Rain minus evaporation demand (ET0) per year",
+      "what": "Below zero means the air took more water than rain gave; canal water had to fill the gap.",
+      "decades": "First 10 years: about {{a}} mm a year. Last 10 years: about {{b}} mm.",
+      "chart": "Yearly rain minus ET0 in mm, one point per year, with the trend line",
+      "up": "The yearly gap has become smaller (wetter balance): more rain and lower evaporation demand.",
+      "down": "The yearly gap has grown (drier balance).",
+      "unclear": "No clear change: the year-to-year swing is bigger than the trend."
+    },
+    "legend": "Solid line: each year. Dashed line: straight-line trend.",
+    "table": "See the numbers by year",
+    "year": "Year",
+    "rain": "Rain",
+    "balance": "Rain − ET0",
+    "caveat": "from a NASA model grid (about 50 km), not a local station; model trends can shift when the satellite and station data fed into it change, and this has not been checked against a local station",
+    "method": "Complete calendar years only. Change per decade = least-squares straight line × 10 years; the 95% range shows how sure that is. If the range crosses zero, the change is called unclear."
   }
 }

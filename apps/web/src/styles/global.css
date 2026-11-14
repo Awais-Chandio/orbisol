@@ -330,3 +330,13 @@ html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; } /* no mobile fo
 .share-btn { width: 100%; }
 .share-preview summary { cursor: pointer; min-height: 44px; display: flex; align-items: center; font-weight: 700; }
 .share-preview pre { white-space: pre-wrap; overflow-wrap: anywhere; font-family: var(--font-body); font-size: 0.875rem; margin: 0; }
+
+/* Observed long-term trend (Season) */
+.trend-value { margin-bottom: var(--space-1); }
+.trend-chart { width: 100%; height: auto; display: block; margin: var(--space-2) 0; }
+.trend-axis { stroke: rgba(7, 23, 63, 0.35); stroke-width: 1; }
+.trend-tick { font-size: 10px; fill: var(--c-deep-blue); font-family: var(--font-body); }
+.trend-line { fill: none; stroke: var(--c-electric-blue); stroke-width: 2; stroke-linejoin: round; }
+.trend-fit { stroke: var(--c-deep-blue); stroke-width: 2; stroke-dasharray: 5 4; }
+.trend-dot { fill: var(--c-electric-blue); stroke: var(--c-white); stroke-width: 1; }
+.trend-card h4 { margin: var(--space-4) 0 var(--space-1); }
