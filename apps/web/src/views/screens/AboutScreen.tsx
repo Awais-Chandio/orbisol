@@ -14,13 +14,14 @@ const NASA: Credit[] = [
   { name: 'NASA POWER (daily, agroclimatology)', use: 'Heat, frost, rain, dew point, wind, sunlight, top-soil wetness; ET0 inputs', url: 'https://power.larc.nasa.gov/' },
   { name: 'NASA GIBS: VIIRS NOAA-20 true color, Coastlines', use: 'Map imagery', url: 'https://www.earthdata.nasa.gov/engage/open-data-services-software/earthdata-developer-portal/gibs-api' },
   { name: 'MODIS Terra MOD13Q1 NDVI and MCD12Q1 land cover (ORNL DAAC)', use: 'Cropland greenness (NDVI) (pipeline)', url: 'https://modis.ornl.gov/' },
+  { name: 'NASA GPM IMERG V07 monthly (GPM_3IMERGM.07, Final run) via GES DISC', use: 'Satellite rain vs normal: latest 3 months vs the same months 2000-2024 (pipeline)', url: 'https://disc.gsfc.nasa.gov/datasets/GPM_3IMERGM_07/summary' },
   { name: 'NASA SRTM (SRTMGL1 v003)', use: 'Slope class and erosion context (pipeline)', url: 'https://www.earthdata.nasa.gov/data/instruments/srtm' },
   { name: 'NASA NEX-GDDP-CMIP6 via NASA Center for Climate Simulation (NCCS) THREDDS', use: '2050 hot-day projection: ACCESS-CM2, MPI-ESM1-2-HR, MRI-ESM2-0; SSP2-4.5 and SSP5-8.5 (pipeline)', url: 'https://www.nccs.nasa.gov/services/data-collections/land-based-products/nex-gddp-cmip6' },
 ];
 
 /** Listed so nobody reads them as used: none of these feeds a number in this version. */
 const PLANNED: Credit[] = [
-  { name: 'NASA GPM IMERG V07 (satellite rain)', use: 'Satellite rain next to model rain. The download reached about 3,000 of 10,500 days before the server limit; not shipped.', url: 'https://gpm.nasa.gov/data/imerg' },
+  { name: 'NASA GPM IMERG V07 daily (satellite rain by day)', use: 'Daily satellite rain and extreme-rain days. The download reached about 3,000 of 10,500 days before the server limit; not shipped (the monthly product is used instead).', url: 'https://gpm.nasa.gov/data/imerg' },
   { name: 'NASA SMAP soil moisture (SPL3SMP_E)', use: 'Satellite soil-moisture anomaly. No data was returned for the demo farm; the NASA POWER model value is used instead.', url: 'https://smap.jpl.nasa.gov/' },
   { name: 'VIIRS NOAA-20 NDVI (VJ113A1)', use: 'Replacement for MODIS Terra greenness when Terra science data ends (expected around February 2027).', url: 'https://www.earthdata.nasa.gov/data/instruments/viirs' },
 ];

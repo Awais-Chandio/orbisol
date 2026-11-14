@@ -52,9 +52,9 @@ npm run build      # production build -> apps/web/dist
 
 ## Data credits
 
-NASA POWER, MODIS Terra NDVI and land cover (ORNL DAAC), SRTM, NEX-GDDP-CMIP6 (NCCS THREDDS),
-NASA GIBS VIIRS NOAA-20 imagery, and FAO GAEZ / FAO-56 for crop references. Planned, not in this
-version: GPM IMERG satellite rain, SMAP soil moisture, VIIRS NOAA-20 NDVI. Full list: [docs/data-sources.md](docs/data-sources.md).
+NASA POWER, MODIS Terra NDVI and land cover (ORNL DAAC), GPM IMERG V07 monthly satellite rain (GES DISC), SRTM,
+NEX-GDDP-CMIP6 (NCCS THREDDS), NASA GIBS VIIRS NOAA-20 imagery, and FAO GAEZ / FAO-56 for crop references. Planned,
+not in this version: GPM IMERG daily rain, SMAP soil moisture, VIIRS NOAA-20 NDVI. Full list: [docs/data-sources.md](docs/data-sources.md).
 Data is credited in text only; Orbisol uses no NASA or Space Apps logos.
 
 ## AI usage

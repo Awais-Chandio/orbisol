@@ -9,3 +9,4 @@ export * from './et0';
 export * from './grid';
 export * from './rain';
 export * from './trend';
+export * from './monthlyRain';

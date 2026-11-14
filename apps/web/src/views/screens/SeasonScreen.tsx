@@ -10,6 +10,7 @@ import { NeedPin } from '@/views/components/NeedPin';
 import { SeasonOutlook } from '@/views/components/SeasonOutlook';
 import { GreennessCard } from '@/views/components/GreennessCard';
 import { SatelliteRainCards } from '@/views/components/SatelliteRainCards';
+import { SatelliteRainMonthlyCard } from '@/views/components/SatelliteRainMonthlyCard';
 import { TrendCard } from '@/views/components/TrendCard';
 import { Heat2050Card } from '@/views/components/Heat2050Card';
 import { useHeat2050 } from '@/controllers/useHeat2050';
@@ -122,6 +123,7 @@ export function SeasonScreen() {
               </IndicatorCard>
             ))}
             <SatelliteRainCards days={days} />
+            <SatelliteRainMonthlyCard />
             <GreennessCard days={days} />
           </div>
 

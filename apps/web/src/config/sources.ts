@@ -39,6 +39,8 @@ export const STATIC_NDVI = [{ lat: 25.48, lon: 68.41, windowKm: 3, path: '/data/
 
 /** Precomputed satellite rainfall (GPM IMERG V07, one 0.1 deg cell) and SRTM slope for the demo farm. */
 export const STATIC_RAIN = [{ lat: 25.48, lon: 68.41, cellDeg: 0.1, path: '/data/hyderabad/imerg_daily.json' }] as const;
+/** GPM IMERG V07 monthly (GPM_3IMERGM.07, Final run), one 0.1 deg cell. */
+export const STATIC_RAIN_MONTHLY = [{ lat: 25.48, lon: 68.41, cellDeg: 0.1, path: '/data/hyderabad/imerg_monthly.json' }] as const;
 export const STATIC_SLOPE = [{ lat: 25.48, lon: 68.41, radiusKm: 1, path: '/data/hyderabad/slope.json' }] as const;
 
 /** Precomputed 2050 heat outlook (NASA NEX-GDDP-CMIP6, one 0.25 deg cell centred on gridLat/gridLon). */

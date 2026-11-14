@@ -8,6 +8,7 @@ All data credited in text only. No NASA or Space Apps logos are used anywhere.
 | Dataset | Provider | Used for | Kind | Access |
 |---|---|---|---|---|
 | POWER daily point API (community=ag) | NASA LaRC | T2M_MAX, T2M_MIN, PRECTOTCORR, GWETTOP, T2MDEW, WS2M, ALLSKY_SFC_SW_DWN, cell elevation -> heat, frost, rain, top-soil wetness, FAO-56 ET0 | Model/reanalysis | Live for any pin (1990 to ~3 days ago); `data/hyderabad/power_daily.json` fallback |
+| GPM IMERG V07 monthly (Final, GPM_3IMERGM.07) | NASA GES DISC (OPeNDAP point read, Earthdata login) | "Satellite rain vs normal": latest 3 months vs the same months 2000-2024 | Satellite | `pipeline/scripts/imerg_monthly.py` -> `data/hyderabad/imerg_monthly.json` (2000-01 to 2025-09) |
 | GPM IMERG V07 daily (Final GPM_3IMERGDF.07, Late GPM_3IMERGDL.07) | NASA GES DISC (OPeNDAP point read, Earthdata login) | Satellite rain and extreme-rain days next to model rain | Satellite | `pipeline/scripts/imerg.py` -> `data/hyderabad/imerg_daily.json`; **not shipped in this build** (run incomplete, see limitations.md) |
 | MODIS Terra MOD13Q1 (250 m, 16-day) | NASA / ORNL DAAC TESViS (no login) | Cropland NDVI 2000-now: this window vs 2001-2020, and greenness after twin years | Satellite | `pipeline/scripts/ndvi.py` -> `data/hyderabad/ndvi.json` |
 | MODIS MCD12Q1 LC_Type1 (500 m, yearly) | NASA / ORNL DAAC TESViS | Cropland mask for NDVI (classes 12, 14) | Satellite | Pipeline |
@@ -53,6 +54,7 @@ Full table with every value and its source: [crop-rules.md](crop-rules.md).
 |---|---|---|
 | MOD13Q1, MCD12Q1 | ORNL DAAC TESViS REST API (10 dates per request, ~15 s each) | No |
 | SMAP SPL3SMP_E (9 km daily) | ORNL DAAC TESViS (listed; returned "No SPL3SMP_E data available" for the demo farm on 14 Nov 2026) | No |
+| GPM IMERG monthly (GPM_3IMERGM.07) | GES DISC OPeNDAP (`.ascii?precipitation[0:0][i:i][j:j]`, dims time, lon, lat; mm/hr); ~1.7 s per read | **Yes (Earthdata, ~/.netrc)** |
 | GPM IMERG daily (GPM_3IMERGDF.07 / DL.07) | GES DISC OPeNDAP (`.ascii?precipitation[0:0][i:i][j:j]`); data files redirect to urs.earthdata.nasa.gov; keep to ~4 parallel connections | **Yes (Earthdata, ~/.netrc)** |
 | VIIRS NOAA-20 VJ113A1 | LP DAAC / AppEEARS | **Yes** |
 | SRTM SRTMGL1 v003 | LP DAAC (cloud); redirects to urs.earthdata.nasa.gov | **Yes** |

@@ -3,9 +3,9 @@
  * AI-assisted: drafted with Claude (Anthropic). See docs/ai-usage.md.
  */
 import { distanceKm, type DailyRain } from '@orbisol/core';
-import { STATIC_RAIN, STATIC_SLOPE } from '@/config/sources';
+import { STATIC_RAIN, STATIC_RAIN_MONTHLY, STATIC_SLOPE } from '@/config/sources';
 import { fetchStaticJson } from './staticJson';
-import { RainFileSchema, rainToSeries, SlopeFileSchema, type SlopeFile } from '@/models/pointData';
+import { RainFileSchema, RainMonthlyFileSchema, rainToSeries, SlopeFileSchema, type RainMonthlyFile, type SlopeFile } from '@/models/pointData';
 
 /** Same 0.1 deg IMERG cell (cell edges at whole tenths of a degree). */
 function sameImergCell(a: { lat: number; lon: number }, b: { lat: number; lon: number }): boolean {
@@ -24,4 +24,12 @@ export async function getSlope(lat: number, lon: number, signal?: AbortSignal): 
   if (!hit) return null;
   const json = await fetchStaticJson(hit.path, signal);
   return json === null ? null : SlopeFileSchema.parse(json);
+}
+
+/** Monthly satellite rain for the pin's IMERG cell, when the pipeline sampled it. */
+export async function getSatelliteRainMonthly(lat: number, lon: number, signal?: AbortSignal): Promise<RainMonthlyFile | null> {
+  const hit = STATIC_RAIN_MONTHLY.find((s) => sameImergCell(s, { lat, lon }));
+  if (!hit) return null;
+  const json = await fetchStaticJson(hit.path, signal);
+  return json === null ? null : RainMonthlyFileSchema.parse(json);
 }

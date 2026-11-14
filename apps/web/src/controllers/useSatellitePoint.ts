@@ -4,8 +4,8 @@
  */
 import { useMemo } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { compareRain, windiestMonths } from '@orbisol/core';
-import { getSatelliteRain, getSlope } from '@/services/pointDataService';
+import { compareLatestMonths, compareRain, windiestMonths } from '@orbisol/core';
+import { getSatelliteRain, getSatelliteRainMonthly, getSlope } from '@/services/pointDataService';
 import { useFieldStore } from '@/stores/fieldStore';
 import { useRotationComparison } from './useRotationComparison';
 
@@ -47,4 +47,18 @@ export function useTerrain() {
   const existing = r.strategies[0];
   const bareWindyDays = existing ? existing.months.filter((m) => windy.includes(m.month)).reduce((a, m) => a + m.bareDays, 0) : 0;
   return { slope: q.data ?? null, windy, bareWindyDays, climate: r.provenance };
+}
+
+/** GPM IMERG monthly: the latest 3 months on record vs the same months in every other year of the record (from 2000). */
+export function useSatelliteRainMonthly() {
+  const { pin, key } = usePinKey();
+  const q = useQuery({
+    queryKey: ['imerg-monthly', key],
+    queryFn: ({ signal }) => getSatelliteRainMonthly(pin!.lat, pin!.lon, signal),
+    enabled: pin !== null,
+    staleTime: Infinity,
+    retry: 1,
+  });
+  const cmp = useMemo(() => (q.data ? compareLatestMonths(q.data.months, 3) : null), [q.data]);
+  return { data: q.data ?? null, comparison: cmp };
 }

@@ -54,7 +54,7 @@ export function formatIndicator(key: IndicatorView['key'], x: number): string {
 }
 
 /** Usual range (band), normal (tick) and this season (dot) on one line: three different shapes, never colour alone. */
-function RangeBar({ v, fmt }: { v: IndicatorView; fmt: (x: number) => string }) {
+function RangeBar({ v, fmt, nowLabel }: { v: IndicatorView; fmt: (x: number) => string; nowLabel?: string }) {
   const { t } = useTranslation();
   const xs = [v.p10, v.p90, v.normal, v.value].filter(Number.isFinite);
   if (xs.length < 4) return null;
@@ -78,7 +78,7 @@ function RangeBar({ v, fmt }: { v: IndicatorView; fmt: (x: number) => string }) 
         <span className="rb-dot" style={{ left: pos(v.value) }} />
       </div>
       <p className="rb-legend" aria-hidden>
-        <span><i className="rb-key-dot" /> {t('season.legend.now')}</span>
+        <span><i className="rb-key-dot" /> {nowLabel ?? t('season.legend.now')}</span>
         <span><i className="rb-key-normal" /> {t('season.legend.normal')}</span>
         <span><i className="rb-key-band" /> {t('season.legend.range')}</span>
       </p>
@@ -86,7 +86,7 @@ function RangeBar({ v, fmt }: { v: IndicatorView; fmt: (x: number) => string }) 
   );
 }
 
-export function IndicatorCard({ v, children, titleKey, explain }: { v: IndicatorView; children?: ReactNode; titleKey?: string; explain?: ReactNode }) {
+export function IndicatorCard({ v, children, titleKey, explain, nowLabel }: { v: IndicatorView; children?: ReactNode; titleKey?: string; explain?: ReactNode; nowLabel?: string }) {
   const { t } = useTranslation();
   const fmt = (x: number) => {
     const shown = formatIndicator(v.key, x);
@@ -111,7 +111,7 @@ export function IndicatorCard({ v, children, titleKey, explain }: { v: Indicator
       <Science>
         {v.available && (
           <>
-            <RangeBar v={v} fmt={fmt} />
+            <RangeBar v={v} fmt={fmt} nowLabel={nowLabel} />
             <p className="small">
               {t('season.normal', { v: fmt(v.normal) })} · {t('season.range', { lo: fmt(v.p10), hi: fmt(v.p90) })}
             </p>

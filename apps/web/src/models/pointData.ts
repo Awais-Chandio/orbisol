@@ -31,3 +31,14 @@ export const SlopeFileSchema = z.object({
   faoClass: z.object({ code: z.string(), name: z.string() }),
 });
 export type SlopeFile = z.infer<typeof SlopeFileSchema>;
+
+/** Monthly satellite rain (pipeline/scripts/imerg_monthly.py, "orbisol.rainm.v1"). */
+export const RainMonthlyFileSchema = z.object({
+  format: z.literal('orbisol.rainm.v1'),
+  location: z.object({ lat: z.number(), lon: z.number() }).passthrough(),
+  provenance: ProvenanceSchema,
+  units: z.literal('mm/month'),
+  reference: z.string(),
+  months: z.array(z.object({ month: z.string().regex(/^\d{4}-\d{2}$/), mm: z.number().nonnegative().nullable() })),
+});
+export type RainMonthlyFile = z.infer<typeof RainMonthlyFileSchema>;

@@ -31,7 +31,7 @@ Paths are under `apps/web/src/views/`.
 | NASA POWER | Heat, frost, rain, dew point, wind, sunlight, top-soil wetness, ET0 inputs (Season, Rotations, Calendar, trend) | Covered |
 | MODIS | MOD13Q1 NDVI greenness (Season card, Calendar curve, Season Twins outcome) and MCD12Q1 cropland mask | Covered (demo region only; elsewhere shown as a data gap) |
 | SRTM | Slope class and erosion context (`components/TerrainCard`) | Covered |
-| GPM (IMERG) | Reader built, run incomplete, not shipped (About -> "Planned, not in this version") | Gap |
+| GPM (IMERG) | Monthly product (GPM_3IMERGM.07): Season -> "Satellite rain vs normal" (`components/SatelliteRainMonthlyCard`), reference = IMERG record from 2000; daily product not shipped | Partial: monthly only, latest months lag by months |
 | SMAP | Probed, no data for the demo farm; NASA POWER model soil wetness used instead | Gap |
 | GRACE / GRACE-FO | Not used | Gap: no groundwater / water-storage trend |
 | ECOSTRESS, Landsat, GEDI | Not used | Gap |
@@ -42,7 +42,7 @@ Paths are under `apps/web/src/views/`.
 | Condition | Where | Status |
 |---|---|---|
 | Temperature, heat stress | Season -> hot days card, `components/TrendCard` (hot days, warm nights, hottest day), `Heat2050Card` | Covered |
-| Rainfall, extreme precipitation | Season -> rain and extreme rain days (NASA POWER model rain) | Covered (satellite rain is a gap, see GPM) |
+| Rainfall, extreme precipitation | Season -> rain and extreme rain days (NASA POWER model rain); satellite rain vs normal (GPM IMERG monthly) | Covered (satellite extreme-rain days need the daily product) |
 | Soil moisture | Season -> top-layer soil moisture vs normal (NASA POWER GWETTOP, model) | Partial: model value, does not see canal irrigation (stated on screen) |
 | Evaporation | Season -> evaporation demand (ET0, FAO-56) | Covered |
 | Frost risk | Season -> frost days; Calendar frost months | Covered |
@@ -84,7 +84,7 @@ Paths are under `apps/web/src/views/`.
 
 - Pest cycles beyond cotton; legume effect on infiltration (shown in the app as "information gap - check with your local extension officer").
 - Income and market: no prices; fodder note is context only.
-- Satellite rain (GPM IMERG), SMAP soil moisture, GRACE water storage, ECOSTRESS, Landsat, GEDI.
+- Daily satellite rain (GPM IMERG daily), SMAP soil moisture, GRACE water storage, ECOSTRESS, Landsat, GEDI.
 - Field-level vulnerability maps and scenario sliders.
 - Equipment constraints and market preferences as inputs.
 - Ground-station data combined with satellite and model data.

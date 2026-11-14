@@ -56,7 +56,13 @@
 
 ## Future work
 
-- **Satellite rain (GPM IMERG V07).** `pipeline/scripts/imerg.py` works (Earthdata login, OPeNDAP one pixel per day,
+- **Satellite rain, monthly (GPM IMERG V07 monthly, shipped 15 Nov 2026).** `pipeline/scripts/imerg_monthly.py` reads
+  one pixel per month from GPM_3IMERGM.07 (Final run; ~310 reads instead of ~10,500). The Season card "Satellite rain vs
+  normal" compares the latest three months the monthly product has (July to September 2025 at build time: it is
+  published months after the fact, so it is not "this season") with the same months in 2000-2024. The 1991-2020 WMO
+  normal is not available for IMERG, so the reference is the IMERG record from 2000 and the card says so. One 0.1 deg
+  cell; monthly total = mean rate (mm/hr) x hours in the month. Satellite and model rain can differ.
+- **Satellite rain, daily (GPM IMERG V07 daily: still future work).** `pipeline/scripts/imerg.py` works (Earthdata login, OPeNDAP one pixel per day,
   Final run with Late run for recent days, cell 25.45 N 68.45 E) but a full 1998-2026 daily series is ~10,500
   requests. On 14 Nov 2026 the run reached 2004 (about 2,400 days, ~4 days/s), then the GES DISC `gpm1` server began
   refusing connections after too many parallel requests. It was skipped to keep the feature-freeze time. The satellite rain

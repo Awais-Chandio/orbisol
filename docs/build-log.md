@@ -202,3 +202,13 @@
   south-eastern and coastal zone, 1991-2019); hot days "differs from" (TX90p increased there), with the method
   difference stated. Wording is picked from the trend direction on screen, so it stays true if the data changes.
 - PMD's 2026 45-year report: no public document found (press only), not cited; PMD-25/2012 Sindh report link is dead.
+
+## 2026-11-15 PKT - GPM IMERG monthly retry (30-minute cap): shipped
+
+- GPM_3IMERGM.07 (V07 monthly, Final run) via GES DISC OPeNDAP, one 0.1 deg pixel per month (cell 25.45 N 68.45 E),
+  ~1.7 s per read, 4 + 2 connections (a second run fetched July-September first so the card could not be blocked by a
+  slow tail). 309 months 2000-01..2025-09, none missing, in 16 minutes.
+- Season card "Satellite rain vs normal" (tagged satellite): latest 3 months on record (Jul-Sep 2025: 277 mm) vs the
+  same months 2000-2024 (25 years; normal 145 mm, usual range 31-391 mm, above normal). Says it is not this season and
+  that the reference is the IMERG record from 2000 because 1991-2020 is not available for IMERG.
+- core: compareLatestMonths (reuses compareToBaseline) + 2 tests. IMERG daily stays future work.
