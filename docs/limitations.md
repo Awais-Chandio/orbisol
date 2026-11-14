@@ -62,6 +62,19 @@
   "Hyderabad case study" badge and are hidden for other pins, with one note saying so. Crop sowing windows come from
   the Sindh calendar, which the note also flags for pins outside the case study.
 
+## Greenness map layer (NASA GIBS, any pin)
+
+- Field map layer "Greenness (NDVI)": GIBS WMTS `MODIS_Terra_L3_NDVI_16Day` (EPSG:3857, TileMatrixSet
+  `GoogleMapsCompatible_Level9`, PNG, max zoom 9, time segment `/default/{date}/` required). Checked in
+  GetCapabilities on 15 Nov 2026; the month slider shows the latest complete year (2025), using the 16-day composite
+  that covers the 15th of each month.
+- Black/empty tile check (15 Nov 2026, in the browser, pixel level): all 12 months of 2025 at Hyderabad, Faisalabad
+  and the Nile Delta returned HTTP 200 with 0% black pixels and 98-100% coverage over land (the Nile Delta tile is 69%
+  because the Mediterranean is transparent, as expected). Nothing had to be dropped.
+- If greenness tiles fail at run time (offline, server error), the map falls back to true colour and says so; the
+  map may be blank offline, but nothing breaks. 16-day composites at ~250 m (shown at up to zoom 9, ~300 m) show the
+  area, not a single field; cloud gaps are filled by the composite but can leave patches.
+
 ## Future work
 
 - **Satellite rain, monthly (GPM IMERG V07 monthly, shipped 15 Nov 2026).** `pipeline/scripts/imerg_monthly.py` reads

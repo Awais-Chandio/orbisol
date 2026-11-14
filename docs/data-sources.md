@@ -16,6 +16,7 @@ All data credited in text only. No NASA or Space Apps logos are used anywhere.
 | SMAP soil moisture | NASA NSIDC | Future work (not used in this build; POWER GWETTOP model value is used instead) | Satellite | Not yet used |
 | SRTM SRTMGL1 v003 (1 arc-second) | NASA / USGS, LP DAAC | Slope -> FAO slope class, erosion context | Satellite (radar) | `pipeline/scripts/srtm.py` -> `data/hyderabad/slope.json` |
 | GIBS VIIRS_NOAA20_CorrectedReflectance_TrueColor | NASA GIBS | Map imagery | Satellite | Live tiles |
+| GIBS MODIS_Terra_L3_NDVI_16Day | NASA GIBS (WMTS, EPSG:3857, GoogleMapsCompatible_Level9) | Field map greenness layer with a month slider, any pin | Satellite | Live tiles |
 | Coastlines_15m (GIBS reference layer) | NASA GIBS (© OpenStreetMap contributors) | Coastline overlay on the map | Reference | Live tiles |
 | GeoNames gazetteer (CC BY 4.0) | GeoNames | Offline town/village search (PK populated places + world cities >= 15k) | Reference | `data/places/` via `pipeline/scripts/places.py` |
 | GAEZ v4, FAO-56 | FAO | Crop requirements and water needs (cited crop rules) | Reference | Static table |
