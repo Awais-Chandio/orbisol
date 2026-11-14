@@ -92,7 +92,10 @@
     "kindsTitle": "How data is marked",
     "ai": "Built with AI assistance (Claude by Anthropic) for code and documentation drafts. The idea and decisions are the author's.",
     "event": "NASA Space Apps Challenge 2026 · Field Shift: Adapting Farms with NASA Data",
-    "noLogos": "Data credited in text only."
+    "noLogos": "Data credited in text only.",
+    "nasaData": "NASA Earth observations",
+    "references": "Crop and method references",
+    "osm": "Coastline overlay: NASA GIBS reference layer, © OpenStreetMap contributors."
   },
   "season": {
     "window": "{{from}} to {{to}} ({{days}} days), compared with the same days in {{bFrom}}–{{bTo}} ({{n}} years).",
@@ -165,5 +168,245 @@
     "sure3": "Above or below normal means this window was in the top or bottom third of those years.",
     "coverage": "Days with data in this window: {{pct}}%.",
     "sure4": "Evaporation demand from this model grid may read higher than at a local weather station in canal-irrigated areas, because the model does not see the cooler, more humid air over irrigated fields. Compare it with normal rather than reading it as an exact amount."
+  },
+  "crops": {
+    "cotton": "Cotton",
+    "wheat": "Wheat",
+    "rice": "Rice",
+    "sugarcane": "Sugarcane",
+    "berseem": "Berseem",
+    "mungbean": "Mung bean",
+    "sorghum_fodder": "Sorghum (fodder)",
+    "sunflower": "Sunflower",
+    "chickpea": "Chickpea (gram)"
+  },
+  "priorities": {
+    "water_use": {
+      "name": "Save water",
+      "short": "water"
+    },
+    "forage_value": {
+      "name": "Fodder for animals",
+      "short": "fodder"
+    },
+    "nitrogen_fixing": {
+      "name": "Add nitrogen (legumes)",
+      "short": "nitrogen"
+    },
+    "erosion_reduction": {
+      "name": "Less bare soil / erosion",
+      "short": "erosion"
+    },
+    "organic_matter": {
+      "name": "Build soil organic matter",
+      "short": "organic matter"
+    },
+    "market_suitability": {
+      "name": "Market / selling",
+      "short": "market"
+    }
+  },
+  "stages": {
+    "initial": "sowing / establishing",
+    "development": "growing",
+    "mid": "flowering / yield forming",
+    "late": "ripening / harvest"
+  },
+  "hazards": {
+    "hot": "Hottest months",
+    "frost": "Frost risk",
+    "heavyRain": "Heavy rain likely"
+  },
+  "notes": {
+    "why": {
+      "existing": "This is your current rotation: the baseline the others are compared with.",
+      "betterFor": "Scores better than your current rotation on \"{{priority}}\", one of your priorities.",
+      "balanced": "A balanced option for your priorities; it does not beat your current rotation on any single one."
+    },
+    "evidence": {
+      "waterNeed": "{{crop}} needs about {{mm}} mm of water over its season (range {{low}}–{{high}} mm): FAO-56 crop coefficient × evaporation demand at your field.",
+      "et0Source": "Evaporation demand (ET0) is the 1991–2020 daily average from NASA POWER weather data at your field.",
+      "bareDays": "Field bare about {{days}} days a year, {{hot}} of them in the hottest months.",
+      "legume": "{{crop}} is a nitrogen-fixing legume.",
+      "fodder": "{{crop}} is grown as green fodder.",
+      "sowWindow": "{{crop}} sowing window used: {{from}} to {{to}}."
+    },
+    "benefit": {
+      "lessWater": "About {{pct}}% less crop water need than your current rotation.",
+      "moreCover": "Field covered about {{days}} more days a year: less bare soil for wind and water to erode.",
+      "lessBareInHeat": "{{days}} fewer bare days in the hottest months.",
+      "nitrogen": "{{crop}} adds nitrogen to the soil (legume), which can help the next crop.",
+      "fodder": "{{crop}} gives green fodder for livestock.",
+      "pestBreak": "Brings in a new plant family ({{families}}). A different host can interrupt pests and diseases that live on one family.",
+      "twoFamilies": "Already alternates two plant families ({{families}})."
+    },
+    "gap": {
+      "market": "Market prices and demand are not in Orbisol. Check local buyers before switching.",
+      "varieties": "Variety choice and seed availability are not modelled.",
+      "proxyStages": "{{crop}} growth stages borrow a similar crop's FAO-56 values.",
+      "salt": "No reliable salt-tolerance value for {{crop}}.",
+      "forage": "Fodder value of {{crop}} residues is not counted (no source found).",
+      "sowingSource": "{{crop}} sowing dates come from a general source; check with your local agriculture office.",
+      "irrigationModel": "Weather data comes from a NASA model that does not see canal irrigation."
+    },
+    "risk": {
+      "saltSensitive": "{{crop}} is salt-sensitive ({{rating}}; yield starts to fall above ECe {{ece}} dS/m). You said your soil is salty.",
+      "vulnerable": {
+        "hot": "{{crop}} is in a sensitive stage during the hottest months ({{months}}).",
+        "frost": "{{crop}} is in a sensitive stage in frost-prone months ({{months}}).",
+        "heavyRain": "{{crop}} is in a sensitive stage when heavy rain is most frequent ({{months}})."
+      },
+      "overlap": "Crops overlap by {{days}} days: the next crop must be sown into the last one (relay sowing) or later than shown.",
+      "moreWater": "Needs about {{pct}}% more water than your current rotation.",
+      "moreBare": "Field is bare {{days}} more days a year ({{hot}} bare days in the hottest months): more erosion and weeds.",
+      "newCrop": "{{crop}} is new to this rotation: seed, skills, machinery and buyers need checking.",
+      "tightTurnaround": "Less than a week between the previous harvest and sowing {{crop}}.",
+      "cropNote": "{{crop}}: {{text}}"
+    }
+  },
+  "sources": {
+    "computed": "Orbisol calculation",
+    "farmer": "Your input"
+  },
+  "farm": {
+    "title": "My farm",
+    "intro": "Tell Orbisol how you farm now. Everything is saved on this phone.",
+    "rotationTitle": "Current rotation",
+    "rotationHint": "Crops in the order you grow them in one year.",
+    "crop": "Crop",
+    "sow": "Sown",
+    "harvest": "Harvested",
+    "month": "Month",
+    "part": "Part of month",
+    "parts": {
+      "early": "early",
+      "mid": "mid",
+      "late": "late"
+    },
+    "addCrop": "Add a crop",
+    "removeCrop": "Remove",
+    "prioritiesTitle": "Top priorities",
+    "prioritiesHint": "Tap up to 3, most important first.",
+    "canalTitle": "Canal turn (warabandi)",
+    "canalEvery": "Water every (days)",
+    "canalHours": "Hours per turn",
+    "canalNone": "I don't know / no canal",
+    "soilTitle": "Soil",
+    "texture": "Soil type",
+    "textures": {
+      "sandy": "Sandy",
+      "loam": "Loam",
+      "clay": "Clay"
+    },
+    "salty": "Is the soil salty?",
+    "yes": "Yes",
+    "no": "No",
+    "unknown": "Don't know",
+    "reset": "Reset to demo farm",
+    "next": "See rotation options",
+    "saved": "Saved on this phone",
+    "judgment": "you know your field's history, pests and buyers better than any satellite"
+  },
+  "rotations": {
+    "title": "Compare rotations",
+    "intro": "Your current rotation and the two options that fit your priorities best.",
+    "weightsTitle": "Your priorities set the ranking",
+    "weightsHint": "1st counts 3×, 2nd 2×, 3rd 1×. Tap to change; the ranking updates at once.",
+    "marketNote": "Market suitability is never scored (no price data). It always needs local review.",
+    "noPriorities": "No priorities chosen: all scored priorities count equally.",
+    "existing": "Your current rotation",
+    "alternative": "Option",
+    "rank": "#{{rank}} for your priorities",
+    "baseline": "Baseline",
+    "lessWater": "{{pct}}% less water",
+    "moreWater": "{{pct}}% more water",
+    "sameWater": "About the same water",
+    "waterVs": "vs your current rotation",
+    "mmEstimate": "Crop water need ≈ {{mm}} mm a year (range {{low}}–{{high}}): estimate, likely high (see limitations).",
+    "bareMore": "{{days}} more bare days",
+    "bareLess": "{{days}} fewer bare days",
+    "bareSame": "Same bare days",
+    "bareDays": "{{days}} bare days a year",
+    "legumeMore": "{{days}} more legume days",
+    "legumeLess": "{{days}} fewer legume days",
+    "tradeoff": "Trade-off: {{gains}}, but {{losses}}.",
+    "tradeoffNone": "No trade-off found on these measures.",
+    "gains": {
+      "water": "less water",
+      "bare": "less bare soil",
+      "legume": "more legume time"
+    },
+    "losses": {
+      "water": "more water",
+      "bare": "{{days}} more bare days",
+      "legume": "less legume time"
+    },
+    "scoresTitle": "How it scores on your priorities",
+    "notScored": "not scored",
+    "why": "Why it was suggested",
+    "evidence": "Evidence",
+    "benefits": "Possible benefits",
+    "gaps": "Information gaps",
+    "risks": "Risks to check locally",
+    "yearStrip": "Year at a glance",
+    "bare": "bare",
+    "loading": "Building rotation options…",
+    "needFarm": "Set up your farm first.",
+    "goFarm": "Go to My farm",
+    "scoresHint": "100% = the best of all rotations Orbisol checked for this field."
+  },
+  "calendar": {
+    "title": "Seasonal calendar",
+    "intro": "Your current rotation month by month: when the field is bare and when crops look vulnerable.",
+    "bareSpan": "Bare {{from}} to {{to}} ({{days}} days)",
+    "bareHot": "{{days}} of the bare days fall in the hottest months.",
+    "bareMonth": "Bare field ({{days}} days)",
+    "sensitive": "{{crop}} sensitive: {{hazard}}",
+    "climateSource": "Hottest months, heavy rain and frost: NASA POWER, 1991–2020 normals at your field.",
+    "noHazards": "No frost or frequent heavy-rain months here.",
+    "judgment": "actual sowing and harvest dates vary year to year"
+  },
+  "outlook": {
+    "title": "Season Twins",
+    "intro": "Past years whose same days looked most like this season, and what happened in the {{days}} days after.",
+    "twinsList": "Twins: {{years}}",
+    "similarity": "difference {{d}}",
+    "outcome": {
+      "tmaxMean": "Daytime temperature (next {{days}} days)",
+      "rainTotal": "Rain (next {{days}} days)"
+    },
+    "unit": {
+      "tmaxMean": "°C",
+      "rainTotal": "mm"
+    },
+    "direction": {
+      "above": "Twins point to above normal",
+      "below": "Twins point to below normal",
+      "mixed": "Twins disagree"
+    },
+    "values": "In twin years: {{values}} (normal {{normal}})",
+    "notInformative": "Not informative here: this outcome hardly changes from year to year.",
+    "confidence": "Confidence",
+    "levels": {
+      "high": "High",
+      "medium": "Medium",
+      "low": "Low"
+    },
+    "track": "Track record: tested on {{n}} past years using only earlier years, right {{hits}} times ({{rate}}%). Always guessing the usual answer: {{base}}%.",
+    "greenNote": "Greenness in twin years arrives with the satellite (MODIS / VIIRS) data."
+  },
+  "confidence": {
+    "noTwins": "No similar past years were found.",
+    "twinsClose": "Twin years are very similar to this season (difference {{d}}).",
+    "twinsFairlyClose": "Twin years are fairly similar (difference {{d}}).",
+    "twinsFar": "Twin years are not very similar (difference {{d}}).",
+    "twinsAgree": "Twins agree ({{pct}}%).",
+    "twinsMostlyAgree": "Twins mostly agree ({{pct}}%).",
+    "twinsDisagree": "Twins disagree ({{pct}}%).",
+    "dataComplete": "Data complete ({{pct}}% of days).",
+    "dataGaps": "Some days missing ({{pct}}% complete).",
+    "trackGood": "Past tests beat guessing ({{hit}}% vs {{base}}%).",
+    "trackSmallSkill": "Past tests only slightly beat guessing ({{hit}}% vs {{base}}%).",
+    "trackNoSkill": "Past tests did no better than guessing ({{hit}}% vs {{base}}%)."
   }
 }

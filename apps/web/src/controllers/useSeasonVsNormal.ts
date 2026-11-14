@@ -3,10 +3,9 @@
  * AI-assisted: drafted with Claude (Anthropic). See docs/ai-usage.md.
  */
 import { useMemo } from 'react';
-import { useQuery } from '@tanstack/react-query';
 import { compareSeason, type IndicatorKey, type Provenance, type SeasonComparison, type Tercile } from '@orbisol/core';
-import { climateKey, getDailyClimate, type ClimateOrigin } from '@/services/climateService';
-import { useFieldStore } from '@/stores/fieldStore';
+import type { ClimateOrigin } from '@/services/climateService';
+import { useClimate } from './useClimate';
 
 export type WindowDays = 30 | 90;
 
@@ -44,14 +43,7 @@ export function toIndicatorViews(cmp: SeasonComparison, base: Provenance): Indic
 }
 
 export function useSeasonVsNormal(lengthDays: WindowDays) {
-  const pin = useFieldStore((s) => s.pin);
-  const query = useQuery({
-    queryKey: ['climate', pin ? climateKey(pin.lat, pin.lon) : 'none'],
-    queryFn: ({ signal }) => getDailyClimate(pin!.lat, pin!.lon, signal),
-    enabled: pin !== null,
-    staleTime: 6 * 60 * 60 * 1000,
-    retry: 0,
-  });
+  const { pin, query } = useClimate();
 
   const result = useMemo(() => {
     if (!query.data) return null;

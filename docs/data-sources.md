@@ -2,6 +2,9 @@
 
 All data credited in text only. No NASA or Space Apps logos are used anywhere.
 
+**Place names: [GeoNames](https://www.geonames.org/), [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)**
+(also shown on the app's About screen and beside search results).
+
 | Dataset | Provider | Used for | Kind | Access |
 |---|---|---|---|---|
 | POWER daily point API (community=ag) | NASA LaRC | T2M_MAX, T2M_MIN, PRECTOTCORR, GWETTOP, T2MDEW, WS2M, ALLSKY_SFC_SW_DWN, cell elevation -> heat, frost, rain, top-soil wetness, FAO-56 ET0 | Model/reanalysis | Live for any pin (1990 to ~3 days ago); `data/hyderabad/power_daily.json` fallback |
@@ -29,3 +32,14 @@ GIBS Reference_Labels_15m / Reference_Features_15m (no content returned, see lim
 | Hot days | Tmax above the 90th percentile of the same window in 1991-2020 | Adapted from ETCCDI TX90p |
 | Evaporation demand | Daily FAO-56 Penman-Monteith reference ET (ET0), summed | Allen et al. 1998, FAO Irrigation and Drainage Paper 56, eq. 6 (tested against Example 18) |
 | Water balance | Rain minus ET0 | Climatic water balance |
+
+## Crop rule references
+
+Full table with every value and its source: [crop-rules.md](crop-rules.md).
+
+| Reference | Used for |
+|---|---|
+| FAO-56 (Allen et al. 1998) Tables 11, 12, 22, 23 | Stage lengths, crop coefficients Kc, rooting depth, salt tolerance (Table 23 compiled from FAO-29) |
+| Sindh Agriculture, Supply & Prices Department, sowing periods page | Sowing/harvest windows for Hyderabad / South Sindh (cotton, wheat, rice, sugarcane, sunflower, gram) |
+| Feedipedia (INRAE, CIRAD, AFZ, FAO) | Plant families, N-fixing legumes, fodder and residue use, berseem cutting schedule, sorghum fodder practice and HCN risk |
+| Dawn, 16 Apr 2007, "Mungbean: a rich source of protein" | Mung bean sowing months and 75-77 day season (newspaper; check locally) |

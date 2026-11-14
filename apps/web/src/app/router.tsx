@@ -2,9 +2,11 @@
 import { createBrowserRouter } from 'react-router-dom';
 import { AppLayout } from './AppLayout';
 import { FieldScreen } from '@/views/screens/FieldScreen';
-import { PlaceholderScreen } from '@/views/screens/PlaceholderScreen';
 import { AboutScreen } from '@/views/screens/AboutScreen';
 import { SeasonScreen } from '@/views/screens/SeasonScreen';
+import { FarmScreen } from '@/views/screens/FarmScreen';
+import { RotationsScreen } from '@/views/screens/RotationsScreen';
+import { CalendarScreen } from '@/views/screens/CalendarScreen';
 
 export const router = createBrowserRouter([
   {
@@ -12,10 +14,10 @@ export const router = createBrowserRouter([
     element: <AppLayout />,
     children: [
       { index: true, element: <FieldScreen /> },
-      { path: 'farm', element: <PlaceholderScreen screen="farm" /> },
+      { path: 'farm', element: <FarmScreen /> },
       { path: 'season', element: <SeasonScreen /> },
-      { path: 'rotations', element: <PlaceholderScreen screen="rotations" /> },
-      { path: 'calendar', element: <PlaceholderScreen screen="calendar" /> },
+      { path: 'rotations', element: <RotationsScreen /> },
+      { path: 'calendar', element: <CalendarScreen /> },
       { path: 'about', element: <AboutScreen /> },
       { path: '*', element: <FieldScreen /> },
     ],

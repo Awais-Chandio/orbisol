@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { compareRotations, compareSeason, et0Climatology, hazardMonths, monthlyClimate, SOURCES } from '../src';
+import { compareRotations, compareSeason, monthTimeline, et0Climatology, hazardMonths, monthlyClimate, SOURCES } from '../src';
 import { hyderabadSeries } from './fixture';
 
 // Integration test on real NASA POWER data for the Hyderabad case study.
@@ -40,6 +40,16 @@ describe('Hyderabad case study (real NASA POWER data)', () => {
         expect(n.source === 'nasa_power' || n.source === 'computed' || n.source === 'farmer' || (n.source && n.source in SOURCES)).toBe(true);
       }
     }
+  });
+
+  it('calendar shows April-May bare and hot for the existing rotation, wheat ripening in April', () => {
+    const ex = reports[0]!;
+    const cal = monthTimeline(ex.plan, ex.metrics, hz);
+    expect(cal).toHaveLength(12);
+    expect(cal[4]!.bareDays).toBeGreaterThan(10); // May
+    expect(cal[4]!.hazards).toContain('hot');
+    expect(cal[3]!.crops.find((c) => c.crop === 'wheat')?.stage).toBe('late'); // April
+    expect(cal[3]!.vulnerable).toContainEqual({ crop: 'wheat', hazard: 'hot' });
   });
 
   it('season comparison has 30 baseline years and complete recent data', () => {

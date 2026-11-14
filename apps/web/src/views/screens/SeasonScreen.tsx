@@ -7,6 +7,7 @@ import { ErrorText } from '@/views/components/ErrorText';
 import { IndicatorCard } from '@/views/components/IndicatorCard';
 import { JudgmentFlag } from '@/views/components/JudgmentFlag';
 import { NeedPin } from '@/views/components/NeedPin';
+import { SeasonOutlook } from '@/views/components/SeasonOutlook';
 
 function fmtDate(iso: string) {
   return new Date(iso + 'T00:00:00Z').toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric', timeZone: 'UTC' });
@@ -91,6 +92,8 @@ export function SeasonScreen() {
               <p className="gap-note">{t('season.gap')}</p>
             </article>
           </div>
+
+          <SeasonOutlook days={days} />
 
           <details className="card how-sure">
             <summary>{t('season.howSure')}</summary>

@@ -1,0 +1,54 @@
+/**
+ * Orbisol web - farmer inputs (Zod): current rotation, priorities, canal turn, soil.
+ * AI-assisted: drafted with Claude (Anthropic). See docs/ai-usage.md.
+ */
+import { z } from 'zod';
+import { CROP_IDS, PRIORITIES, type CropId, type Priority } from '@orbisol/core';
+
+const MonthDay = z.string().regex(/^(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$/);
+
+export const FarmerSlotSchema = z.object({
+  crop: z.enum(CROP_IDS as [CropId, ...CropId[]]),
+  sow: MonthDay,
+  harvest: MonthDay,
+});
+export type FarmerSlot = z.infer<typeof FarmerSlotSchema>;
+
+export const FarmProfileSchema = z.object({
+  rotation: z.array(FarmerSlotSchema).min(1).max(3),
+  priorities: z
+    .array(z.enum(PRIORITIES as unknown as [Priority, ...Priority[]]))
+    .max(3)
+    .refine((p) => new Set(p).size === p.length, 'Priorities must be unique'),
+  canal: z.object({ intervalDays: z.number().int().min(1).max(60), hours: z.number().min(0.25).max(72) }).nullable(),
+  soil: z.object({
+    texture: z.enum(['sandy', 'loam', 'clay']).nullable(),
+    salty: z.boolean().nullable(),
+  }),
+});
+export type FarmProfileInput = z.infer<typeof FarmProfileSchema>;
+
+/** Demo farmer (Hyderabad case study): cotton sown mid-May, picked late Oct; wheat sown early Nov, harvested mid-Apr. */
+export const DEMO_FARM: FarmProfileInput = {
+  rotation: [
+    { crop: 'cotton', sow: '05-15', harvest: '10-25' },
+    { crop: 'wheat', sow: '11-05', harvest: '04-15' },
+  ],
+  priorities: ['water_use', 'forage_value'],
+  canal: null,
+  soil: { texture: null, salty: null },
+};
+
+/** Farmers think in months and early/mid/late; stored as MM-DD (5th / 15th / 25th). */
+export const PARTS = { early: '05', mid: '15', late: '25' } as const;
+export type MonthPart = keyof typeof PARTS;
+
+export function toMonthDay(month: number, part: MonthPart): string {
+  return `${String(month).padStart(2, '0')}-${PARTS[part]}`;
+}
+
+export function fromMonthDay(md: string): { month: number; part: MonthPart } {
+  const month = Number(md.slice(0, 2));
+  const day = Number(md.slice(3, 5));
+  return { month, part: day <= 10 ? 'early' : day <= 20 ? 'mid' : 'late' };
+}

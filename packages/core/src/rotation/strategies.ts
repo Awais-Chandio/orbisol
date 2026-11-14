@@ -17,11 +17,13 @@ import {
   slotDayIndex,
   slotEnd,
   stageMonths,
+  stageOnDay,
   typicalSeasonDays,
   wrapDoy,
   YEAR_DAYS,
   type CropSlot,
   type Span,
+  type Stage,
 } from './calendar';
 import { CROPS, type CropId, type Family } from './crops';
 import type { SourceId } from './sources';
@@ -387,4 +389,33 @@ export function compareRotations(farm: FarmProfile, env: Environment, nAlternati
     if (!sameShape) picked.push(a);
   }
   return [base, ...picked].map((r) => ({ ...r, ...explain(r, base, farm, env) }));
+}
+
+export interface MonthCell {
+  month: number;
+  /** Crops on the field on the 15th, with their FAO-56 stage. */
+  crops: { crop: CropId; stage: Stage }[];
+  bareDays: number;
+  hazards: ('hot' | 'frost' | 'heavyRain')[];
+  /** Crops in a sensitive stage during a hazard this month. */
+  vulnerable: { crop: CropId; hazard: 'hot' | 'frost' | 'heavyRain' }[];
+}
+
+const MONTH_START = [1, 32, 60, 91, 121, 152, 182, 213, 244, 274, 305, 335, 366];
+
+/** Month-by-month view of a plan for the seasonal calendar. */
+export function monthTimeline(plan: RotationPlan, metrics: PlanMetrics, hazards: HazardMonths): MonthCell[] {
+  return Array.from({ length: 12 }, (_, i) => {
+    const month = i + 1;
+    const mid = MONTH_START[i]! + 14;
+    const crops = plan.slots
+      .map((s) => ({ s, idx: slotDayIndex(s, mid) }))
+      .filter((x) => x.idx >= 0)
+      .map((x) => ({ crop: x.s.crop, stage: stageOnDay(x.s, x.idx) }));
+    let bareDays = 0;
+    for (let d = MONTH_START[i]!; d < MONTH_START[i + 1]!; d++) if (!plan.slots.some((s) => slotDayIndex(s, d) >= 0)) bareDays++;
+    const hz = (['hot', 'frost', 'heavyRain'] as const).filter((h) => hazards[h].includes(month));
+    const vulnerable = metrics.vulnerable.filter((v) => v.months.includes(month)).map((v) => ({ crop: v.crop, hazard: v.hazard }));
+    return { month, crops, bareDays, hazards: hz, vulnerable };
+  });
 }
