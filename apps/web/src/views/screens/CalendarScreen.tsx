@@ -58,6 +58,8 @@ export function CalendarScreen() {
           </div>
           </div>
 
+          <details className="disclosure month-details">
+          <summary>{t('calendar.monthDetails')}</summary>
           <ol className="month-list">
             {r.calendar.map((m) => (
               <li key={m.month} className={'month-row' + (m.bareDays >= 15 ? ' is-bare' : '')}>
@@ -93,6 +95,7 @@ export function CalendarScreen() {
               </li>
             ))}
           </ol>
+          </details>
           <p className="small">{t('calendar.climateSource')} {climateProv && <SourceTag provenance={climateProv} />}</p>
           {r.hazards && r.hazards.frost.length === 0 && (
             <p className="small">{t(r.hazards.heavyRain.length === 0 ? 'calendar.noHazards' : 'calendar.noFrost')}</p>

@@ -398,7 +398,8 @@
     "climateSource": "Hottest months, heavy rain and frost: NASA POWER, 1991–2020 normals at your field.",
     "noHazards": "No frost or frequent heavy-rain months here.",
     "noFrost": "No frost months here.",
-    "judgment": "actual sowing and harvest dates vary year to year"
+    "judgment": "actual sowing and harvest dates vary year to year",
+    "monthDetails": "Month-by-month details"
   },
   "outlook": {
     "title": "Season Twins",
