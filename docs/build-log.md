@@ -139,3 +139,19 @@
 - Full-length captures (whole page, 2x, viewport grown to page height so the header and nav sit in place) of Overview,
   Rotations and Calendar at 360 and 1440 wide: docs/screenshots/*-full@2x.png. Viewport screenshots retaken with the
   new demo numbers.
+
+## 2026-11-15 PKT - Screenshot review fixes (presentation only)
+
+- Field: "Or type coordinates" is a visible toggle (flex summaries had lost their marker; every disclosure now has a
+  chevron); value line + 3-step strip (Pin your field, Tell us how you farm, See your options). Value line says
+  "25 years of NASA satellite data and 30 years of NASA climate records" (MODIS 2001-2025; rotation numbers use NASA
+  POWER 1991-2020, a model, so "satellite" alone would overclaim).
+- My farm desktop: right column stacks on its own (no stretched gaps). Rotations: priorities collapse to one
+  "Ranked for: ... Change" row (first card visible on the first phone screen), full width on desktop.
+- Calendar: NDVI chart annotates its lowest month "Bare soil: the satellite sees it too" with a pointer (only when the
+  farmer's plan has >= 10 bare days that month); month list under "Month-by-month details". Timeline: narrow crop
+  pieces get the legend number.
+- Plain words: nitrogen-adding crop (legume), similar past years (Season Twins) with the outcome named, starting point,
+  emissions paths, salt rating in words, model squares; glossary popovers kept.
+- Verified: nav 6 x 60x60 px at 360, labels on one line; fresh start shows the cotton -> wheat preset selected.
+  Screenshots recaptured (top of screen for all 7 screens + full-length 2x for Overview, Rotations, Calendar).
