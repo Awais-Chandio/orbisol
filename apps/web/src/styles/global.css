@@ -340,3 +340,4 @@ html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; } /* no mobile fo
 .trend-fit { stroke: var(--c-deep-blue); stroke-width: 2; stroke-dasharray: 5 4; }
 .trend-dot { fill: var(--c-electric-blue); stroke: var(--c-white); stroke-width: 1; }
 .trend-card h4 { margin: var(--space-4) 0 var(--space-1); }
+.indicator-value.heat-change { font-size: 1.5rem; }

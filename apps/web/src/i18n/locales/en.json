@@ -515,5 +515,19 @@
     "balance": "Rain − ET0",
     "caveat": "from a NASA model grid (about 50 km), not a local station; model trends can shift when the satellite and station data fed into it change, and this has not been checked against a local station",
     "method": "Complete calendar years only. Change per decade = least-squares straight line × 10 years; the 95% range shows how sure that is. If the range crosses zero, the change is called unclear."
+  },
+  "heat2050": {
+    "title": "Hot days around {{from}}–{{to}}",
+    "badge": "projection",
+    "notForecast": "Climate model projection, not a forecast. It shows what climate models give for a 20-year period under an emissions path, not the weather in any year.",
+    "what": "Days a year with a maximum above {{t}} °C (the same line as the observed trend), from {{n}} climate models for this 25 km cell. Shown as a range across models.",
+    "ssp245": "Middle emissions path (SSP2-4.5)",
+    "ssp585": "High emissions path (SSP5-8.5)",
+    "change": "{{v}} hot days a year",
+    "counts": "Models give {{base}} hot days a year in {{bFrom}}–{{bTo}} and {{fut}} around 2050.",
+    "byModel": "See each model",
+    "model": "Model",
+    "bias": "these models run cooler than the NASA POWER grid here (about 36 hot days a year observed in 1995–2014), so trust the change more than the counts",
+    "scenarios": "Change = 2041–2060 average minus the same model's 1995–2014 average. SSP2-4.5 and SSP5-8.5 are IPCC emissions paths; the real path is not known."
   }
 }

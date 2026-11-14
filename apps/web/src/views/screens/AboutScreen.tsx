@@ -16,6 +16,7 @@ const NASA: Credit[] = [
   { name: 'NASA GPM IMERG', use: 'Rainfall and extreme-rain days (pipeline)', url: 'https://gpm.nasa.gov/data/imerg' },
   { name: 'MODIS Terra MOD13Q1 NDVI and MCD12Q1 land cover (ORNL DAAC)', use: 'Cropland greenness (NDVI) (pipeline)', url: 'https://modis.ornl.gov/' },
   { name: 'NASA SRTM (SRTMGL1 v003)', use: 'Slope class and erosion context (pipeline)', url: 'https://www.earthdata.nasa.gov/data/instruments/srtm' },
+  { name: 'NASA NEX-GDDP-CMIP6 via NASA Center for Climate Simulation (NCCS) THREDDS', use: '2050 hot-day projection: ACCESS-CM2, MPI-ESM1-2-HR, MRI-ESM2-0; SSP2-4.5 and SSP5-8.5 (pipeline)', url: 'https://www.nccs.nasa.gov/services/data-collections/land-based-products/nex-gddp-cmip6' },
 ];
 
 const REFERENCE: Credit[] = [

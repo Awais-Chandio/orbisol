@@ -11,6 +11,8 @@ import { SeasonOutlook } from '@/views/components/SeasonOutlook';
 import { GreennessCard } from '@/views/components/GreennessCard';
 import { SatelliteRainCards } from '@/views/components/SatelliteRainCards';
 import { TrendCard } from '@/views/components/TrendCard';
+import { Heat2050Card } from '@/views/components/Heat2050Card';
+import { useHeat2050 } from '@/controllers/useHeat2050';
 import { useObservedTrend } from '@/controllers/useObservedTrend';
 
 function fmtDate(iso: string) {
@@ -22,6 +24,7 @@ export function SeasonScreen() {
   const [days, setDays] = useState<WindowDays>(90);
   const s = useSeasonVsNormal(days);
   const trend = useObservedTrend();
+  const heat2050 = useHeat2050();
 
   if (!s.pin) {
     return (
@@ -95,6 +98,7 @@ export function SeasonScreen() {
           <SeasonOutlook days={days} />
 
           {trend.trend && <TrendCard tr={trend.trend} climate={trend.provenance} />}
+          {heat2050 && <Heat2050Card h={heat2050} />}
 
           <details className="card how-sure">
             <summary>{t('season.howSure')}</summary>

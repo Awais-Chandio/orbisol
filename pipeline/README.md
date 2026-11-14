@@ -23,6 +23,7 @@ pip install -r requirements.txt
 | `scripts/ndvi.py` | MODIS Terra MOD13Q1 NDVI + MCD12Q1 cropland mask via ORNL DAAC TESViS | `data/hyderabad/ndvi.json` (`orbisol.ndvi.v1`) | No | See below |
 | `scripts/srtm.py` | SRTM SRTMGL1 v003 (earthaccess) -> Horn slope at 30/90/270 m + plane fit | `data/hyderabad/slope.json` (`orbisol.slope.v1`) | Yes | Shipped |
 | `scripts/imerg.py` | GPM IMERG V07 daily, one OPeNDAP pixel per day (Final, then Late) | `data/hyderabad/imerg_daily.json` (`orbisol.rain.v1`) | Yes | Not shipped (run incomplete, see limitations) |
+| `scripts/cmip6_heat.py` | NASA NEX-GDDP-CMIP6 tasmax via NCCS THREDDS NCSS point subset (3 models, SSP2-4.5/5-8.5) | `data/hyderabad/heat2050.json` (`orbisol.heat2050.v1`) | No | Shipped |
 | `scripts/places.py` | GeoNames (CC BY 4.0): PK populated places + world cities >= 15k | `data/places/index.json` + `data/places/idx/*.json` (max 1500 rows per shard) | No | Shipped |
 
 Run from `pipeline/scripts` with `../.venv/bin/python <script>.py`. Raw downloads and resumable caches go to

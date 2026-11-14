@@ -125,15 +125,18 @@ Full table with sources: `docs/crop-rules.md`.
   reanalysis trend (MERRA-2 / GEOS-IT), which can shift when the observing system changes, and it has not been
   checked against a local station (for example PMD Hyderabad). Shown as observed, with that caveat on screen.
 
-## 2050 heat outlook (NASA NEX-GDDP-CMIP6) - skipped at the 45-minute cap
+## 2050 heat outlook (NASA NEX-GDDP-CMIP6)
 
-- Route tested: Microsoft Planetary Computer STAC (`nasa-nex-gddp-cmip6`, no login) -> signed blob URLs. Item
-  search, signing, and the collection's Kerchunk reference files all work, and reading one chunk by HTTP range +
-  zlib + byte-shuffle decode gave plausible daily Tmax for the demo pixel (ACCESS-CM2, January 1995: 19-25 °C).
-- Blocker: `tasmax` is chunked as whole global daily grids (1 x 600 x 1440, about 674 KB compressed), so one pixel
-  needs the whole chunk: about 246 MB per pixel-year. The plan (3 models; 1995-2014 historical, 2041-2060 SSP2-4.5
-  and SSP5-8.5) is about 180 pixel-years, roughly 44 GB. Measured throughput from the build machine: 0.5 MB/s with
-  16 parallel range requests. Not feasible here; no projection card is shown.
-- Future work: run the extraction next to the data (an Azure VM in the same region, or a Planetary Computer Hub
-  session), or use a point-friendly copy (for example NASA's per-variable CMIP6 point services if available), then
-  write `data/hyderabad/heat2050.json` with source and URL and apply the same hot-day threshold as the observed trend.
+- Labelled "climate model projection, not a forecast". Data: NEX-GDDP-CMIP6 daily tasmax (0.25 deg, bias-corrected
+  and downscaled) read one cell at a time with the NCCS THREDDS NetCDF Subset Service (`pipeline/scripts/cmip6_heat.py`).
+- 3 models (ACCESS-CM2, MPI-ESM1-2-HR, MRI-ESM2-0, chosen as widely used models available for both scenarios; not a
+  skill-based selection), SSP2-4.5 and SSP5-8.5, 1995-2014 vs 2041-2060. Three models is a small sample of the
+  35-model ensemble; the range shown is the spread of these three only.
+- Hot day = Tmax > 42.5 °C, the same fixed threshold as the observed trend. The models give only 6-9 such days a year
+  in 1995-2014 at this cell, against about 36 in NASA POWER: the bias-correction reference runs cooler here than POWER.
+  The card therefore leads with the change (+11 to +27 days a year under SSP2-4.5, +16 to +33 under SSP5-8.5) and says
+  the counts are not comparable with the observed card.
+- The projected rise runs against the observed POWER trend (fewer hot days since 1990, see above). Both are shown,
+  each with its label; neither has been checked against a local station.
+- First attempt via the Microsoft Planetary Computer was not feasible (global daily chunks, about 246 MB per
+  pixel-year at 0.5 MB/s measured).
