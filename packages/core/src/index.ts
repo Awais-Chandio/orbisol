@@ -1,0 +1,6 @@
+/**
+ * Orbisol core - public API. Pure TypeScript: no network, no DOM, no React.
+ * AI-assisted: drafted with Claude (Anthropic); design decisions by the Orbisol team. See docs/ai-usage.md.
+ */
+export * from './types';
+export * from './stats';

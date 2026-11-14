@@ -1,0 +1,17 @@
+{
+  "name": "orbisol",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Orbisol - From orbit to soil. Crop rotation decision support with NASA Earth observations. NASA Space Apps Challenge 2026 (Field Shift). Built with AI assistance - see docs/ai-usage.md.",
+  "license": "MIT",
+  "workspaces": ["apps/*", "packages/*"],
+  "engines": { "node": ">=20" },
+  "scripts": {
+    "dev": "npm run dev -w @orbisol/web",
+    "build": "npm run build -w @orbisol/web",
+    "preview": "npm run preview -w @orbisol/web",
+    "test": "npm run test -w @orbisol/core",
+    "typecheck": "npm run typecheck --workspaces --if-present",
+    "check": "npm run typecheck && npm test"
+  }
+}

@@ -1,0 +1,45 @@
+/*
+ * Orbisol design tokens - Space Apps 2026 brand palette.
+ * Rules: text backgrounds only deep-blue / electric-blue / white; neon-yellow = accent only;
+ * red = warnings only, always with text or icon. Contrast >= 4.5:1.
+ * AI-assisted: drafted with Claude (Anthropic). See docs/ai-usage.md.
+ */
+:root {
+  --c-deep-blue: #07173f;
+  --c-electric-blue: #0042a6;
+  --c-neon-blue: #0960e1;
+  --c-blue-yonder: #2e96f5;
+  --c-rocket-red: #e43700;
+  --c-martian-red: #8e1100;
+  --c-neon-yellow: #eafe07;
+  --c-white: #ffffff;
+
+  /* semantic */
+  --bg: var(--c-deep-blue);
+  --bg-raised: var(--c-electric-blue);
+  --surface-light: var(--c-white);
+  --text: var(--c-white);
+  --text-on-light: var(--c-deep-blue);
+  --accent: var(--c-neon-yellow);
+  --info: var(--c-blue-yonder);
+  --warn-on-light: var(--c-martian-red);
+  --warn-on-dark: var(--c-rocket-red); /* large text / icons only on deep-blue */
+
+  --font-head: 'Fira Sans', system-ui, sans-serif;
+  --font-body: 'Overpass', system-ui, sans-serif;
+  --font-code: 'Fira Code', ui-monospace, monospace;
+  --font-urdu: 'Noto Nastaliq Urdu', 'Noto Naskh Arabic', serif;
+
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --radius: 12px;
+  --icon-sm: 16px;
+  --icon-md: 24px;
+  --icon-lg: 32px;
+
+  --gradient: linear-gradient(135deg, var(--c-electric-blue) 0%, var(--c-deep-blue) 100%);
+}

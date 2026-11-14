@@ -1,0 +1,5 @@
+# Orbisol pipeline - precomputes NASA data into data/*.json for the static demo.
+requests>=2.32
+pandas>=2.2
+xarray>=2024.10
+earthaccess>=0.12

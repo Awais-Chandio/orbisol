@@ -1,0 +1,19 @@
+node_modules/
+dist/
+dev-dist/
+coverage/
+.vite/
+.vercel/
+*.log
+.DS_Store
+.env
+.env.*
+!.env.example
+# python
+.venv/
+__pycache__/
+*.pyc
+pipeline/cache/
+pipeline/raw/
+# netrc / earthdata creds never committed
+.netrc
