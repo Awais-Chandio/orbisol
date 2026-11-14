@@ -176,3 +176,12 @@
   (unicode-bidi: plaintext); numbers, ranges and units isolated left-to-right; dates stay English while Urdu is partial.
   English remains the default; the choice is remembered on the device.
 - Screenshots recaptured (docs/screenshots/), plus two Urdu draft phone shots (08-*-ur-draft-360x800.png).
+
+## 2026-11-15 PKT - Objective coverage pass
+
+- docs/objectives.md: each objective, NASA dataset, condition, farmer priority and consideration in the official
+  Field Shift statement -> screen and component, with Covered / Partial / Gap.
+- Rotation cards: "Pests, soil and income" cited notes (pink bollworm carry-over and cotton-free break: Dawn 2013,
+  UC IPM; whitefly host range: Saeed et al. CottonGen poster; infiltration: FAO Soils Bulletin 80; fodder income:
+  ARY News 2026, Dawn 2005). No reliable source for non-cotton pest carry-over or the legume effect on infiltration:
+  shown as "information gap - check with your local extension officer". Sources added to About.
