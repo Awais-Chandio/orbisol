@@ -107,6 +107,10 @@ Full table with sources: `docs/crop-rules.md`.
   irrigation scheduling), p adjusted for the ETc rate (p + 0.04 (5 - ETc), 0.1-0.8), ETc = Table 12 Kc x NASA POWER ET0.
 - **Canal flow volume per turn is unknown** (flow rate, hours and field size are not measured), so the check assumes
   each turn refills the root zone. If a turn does not fill the field, the real safe interval is shorter.
+- Demo farm soil defaults to loam. No cited texture for the demo pin was found: a Tandojam tillage study
+  (Vistro & Talpur 2022, Pakistan Journal of Agricultural Research) used sites of three different textures, one of
+  them clay loam, so texture varies field to field. Table 19 has no clay-loam row. Sandy and clay remain the
+  farmer's choice in My farm.
 - Rain is not counted (conservative; monsoon months may be easier than shown).
 - Table 22 depths are for a grown crop and FAO-56 gives no root-growth rule there. In months when a crop is mostly
   in its initial or development stage the safe interval is an upper bound: too-long turns are flagged, fits are shown

@@ -36,7 +36,9 @@ export const DEMO_FARM: FarmProfileInput = {
   ],
   priorities: ['water_use', 'forage_value'],
   canal: null,
-  soil: { texture: null, salty: null },
+  // Loam: FAO-56 Table 19 middle class for the alluvial plain. No cited texture for the demo pin was found (Tandojam
+  // field studies report several textures, e.g. clay loam at one site); sandy or clay stay a farmer's choice.
+  soil: { texture: 'loam', salty: null },
 };
 
 /** Farmers think in months and early/mid/late; stored as MM-DD (5th / 15th / 25th). */
