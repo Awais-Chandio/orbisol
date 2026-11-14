@@ -91,6 +91,7 @@ export function FarmScreen() {
         <p><SourceTag provenance={farmerProv} /></p>
       </div>
 
+      <div className="farm-side">
       <div className="card light">
         <h2>{t('farm.prioritiesTitle')}</h2>
         <p className="small">{t('farm.prioritiesHint')}</p>
@@ -150,6 +151,7 @@ export function FarmScreen() {
           ))}
         </fieldset>
         <p className="small"><JudgmentFlag reason={t('farm.judgment')} /></p>
+      </div>
       </div>
       </div>
 
