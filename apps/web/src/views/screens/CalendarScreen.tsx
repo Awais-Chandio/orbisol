@@ -1,5 +1,6 @@
 /* AI-assisted: drafted with Claude (Anthropic). See docs/ai-usage.md. */
-import { CloudRain, Plant, Snowflake, Sun, ThermometerHot, Warning, type Icon } from '@phosphor-icons/react';
+import { CloudRain, MapTrifold, Plant, Snowflake, Sun, ThermometerHot, Warning, type Icon } from '@phosphor-icons/react';
+import { Link } from 'react-router-dom';
 import { doyToMd } from '@orbisol/core';
 import { useTranslation } from 'react-i18next';
 import { useGreennessMonthly } from '@/controllers/useGreenness';
@@ -28,6 +29,9 @@ export function CalendarScreen() {
       </section>
     );
   const ex = r.strategies[0];
+  // First month that is bare for at least half its days (else the barest month): where the satellite map opens.
+  const bareMonth =
+    r.calendar.find((m) => m.bareDays >= 15)?.month ?? [...r.calendar].sort((a, b) => b.bareDays - a.bareDays)[0]?.month ?? 1;
   const farmerProv = { source: t('sources.farmer'), kind: 'farmer' as const, date: new Date().toISOString().slice(0, 10) };
   const climateProv = r.provenance ? { ...r.provenance, dateFrom: '1991-01-01', date: '2020-12-31' } : null;
 
@@ -61,6 +65,9 @@ export function CalendarScreen() {
               </p>
             )}
             <p><SourceTag provenance={farmerProv} /></p>
+            <Link to={`/field?layer=ndvi&month=${bareMonth}`} className="btn btn-secondary btn-small map-link">
+              <MapTrifold size={20} aria-hidden /> {t('calendar.mapLink', { month: monthName(bareMonth, 'long') })}
+            </Link>
           </div>
 
           <Science className="card light">

@@ -413,7 +413,8 @@
     "noHazards": "No frost or frequent heavy-rain months here.",
     "noFrost": "No frost months here.",
     "judgment": "actual sowing and harvest dates vary year to year",
-    "monthDetails": "Month-by-month details"
+    "monthDetails": "Month-by-month details",
+    "mapLink": "See this on the satellite map ({{month}})"
   },
   "outlook": {
     "title": "Season Twins: similar past years",
