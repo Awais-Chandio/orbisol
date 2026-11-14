@@ -17,3 +17,4 @@ pipeline/cache/
 pipeline/raw/
 # netrc / earthdata creds never committed
 .netrc
+*.tsbuildinfo
