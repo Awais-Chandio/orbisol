@@ -96,7 +96,9 @@
     "noLogos": "Data credited in text only.",
     "nasaData": "NASA Earth observations",
     "references": "Crop and method references",
-    "osm": "Coastline overlay: NASA GIBS reference layer, © OpenStreetMap contributors."
+    "osm": "Coastline overlay: NASA GIBS reference layer, © OpenStreetMap contributors.",
+    "planned": "Planned, not in this version",
+    "plannedHint": "These NASA datasets were tried or planned but no number in Orbisol comes from them yet."
   },
   "season": {
     "window": "{{from}} to {{to}} ({{days}} days), compared with the same days in {{bFrom}}–{{bTo}} ({{n}} years).",

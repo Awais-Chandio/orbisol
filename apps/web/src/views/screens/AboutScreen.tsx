@@ -13,10 +13,16 @@ interface Credit {
 const NASA: Credit[] = [
   { name: 'NASA POWER (daily, agroclimatology)', use: 'Heat, frost, rain, dew point, wind, sunlight, top-soil wetness; ET0 inputs', url: 'https://power.larc.nasa.gov/' },
   { name: 'NASA GIBS: VIIRS NOAA-20 true color, Coastlines', use: 'Map imagery', url: 'https://www.earthdata.nasa.gov/engage/open-data-services-software/earthdata-developer-portal/gibs-api' },
-  { name: 'NASA GPM IMERG', use: 'Rainfall and extreme-rain days (pipeline)', url: 'https://gpm.nasa.gov/data/imerg' },
   { name: 'MODIS Terra MOD13Q1 NDVI and MCD12Q1 land cover (ORNL DAAC)', use: 'Cropland greenness (NDVI) (pipeline)', url: 'https://modis.ornl.gov/' },
   { name: 'NASA SRTM (SRTMGL1 v003)', use: 'Slope class and erosion context (pipeline)', url: 'https://www.earthdata.nasa.gov/data/instruments/srtm' },
   { name: 'NASA NEX-GDDP-CMIP6 via NASA Center for Climate Simulation (NCCS) THREDDS', use: '2050 hot-day projection: ACCESS-CM2, MPI-ESM1-2-HR, MRI-ESM2-0; SSP2-4.5 and SSP5-8.5 (pipeline)', url: 'https://www.nccs.nasa.gov/services/data-collections/land-based-products/nex-gddp-cmip6' },
+];
+
+/** Listed so nobody reads them as used: none of these feeds a number in this version. */
+const PLANNED: Credit[] = [
+  { name: 'NASA GPM IMERG V07 (satellite rain)', use: 'Satellite rain next to model rain. The download reached about 3,000 of 10,500 days before the server limit; not shipped.', url: 'https://gpm.nasa.gov/data/imerg' },
+  { name: 'NASA SMAP soil moisture (SPL3SMP_E)', use: 'Satellite soil-moisture anomaly. No data was returned for the demo farm; the NASA POWER model value is used instead.', url: 'https://smap.jpl.nasa.gov/' },
+  { name: 'VIIRS NOAA-20 NDVI (VJ113A1)', use: 'Replacement for MODIS Terra greenness when Terra science data ends (expected around February 2027).', url: 'https://www.earthdata.nasa.gov/data/instruments/viirs' },
 ];
 
 const REFERENCE: Credit[] = [
@@ -51,7 +57,7 @@ export function AboutScreen() {
 
       <h2>{t('about.kindsTitle')}</h2>
       <ul className="plain-list">
-        <li><SourceTag provenance={{ source: 'NASA GPM IMERG', kind: 'satellite', date: '2026-11-10' }} /></li>
+        <li><SourceTag provenance={{ source: 'NASA MODIS Terra NDVI', kind: 'satellite', date: '2026-10-16' }} /></li>
         <li><SourceTag provenance={{ source: 'NASA POWER', kind: 'model', date: '2026-11-10' }} /></li>
         <li><SourceTag provenance={{ source: 'FAO-56', kind: 'reference', date: '1998' }} /></li>
         <li><SourceTag provenance={{ source: 'Your canal turn', kind: 'farmer', date: '2026-11-14' }} /></li>
@@ -63,6 +69,9 @@ export function AboutScreen() {
       <CreditList items={NASA} />
       <h3>{t('about.references')}</h3>
       <CreditList items={REFERENCE} />
+      <h3>{t('about.planned')}</h3>
+      <p className="small">{t('about.plannedHint')}</p>
+      <CreditList items={PLANNED} />
       <p className="geonames-credit">
         Place names:{' '}
         <a href="https://www.geonames.org/" target="_blank" rel="noreferrer">GeoNames</a>,{' '}
