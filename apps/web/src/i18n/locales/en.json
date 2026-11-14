@@ -598,15 +598,17 @@
       "value_other": "{{count}} bare days",
       "text": "Your current rotation leaves the field bare in the hottest months ({{months}}). {{total}} bare days a year in all.",
       "covered": "A crop covers your field through the hottest months ({{months}}).",
-      "exact_one": "{{count}} bare day in {{months}} · {{total}} bare days a year",
-      "exact_other": "{{count}} bare days in {{months}} · {{total}} bare days a year"
+      "exact_one": "<n>{{count}}</n> bare day in {{months}} · <n>{{total}}</n> bare days a year",
+      "exact_other": "<n>{{count}}</n> bare days in {{months}} · <n>{{total}}</n> bare days a year"
     },
     "best": {
       "label": "Best option for your priorities",
       "text": "{{crops}}, compared with your current rotation.",
       "existingFirst": "Your current rotation still ranks first for your priorities.",
-      "exact": "{{crops}}: {{water}} than your current rotation",
-      "science": "Crop water need = FAO-56 crop factor × evaporation demand (NASA POWER, 1991–2020), compared over a full year."
+      "science": "Crop water need = FAO-56 crop factor × evaporation demand (NASA POWER, 1991–2020), compared over a full year.",
+      "exactLess": "{{crops}}: <n>{{pct}}</n>% less water than your current rotation",
+      "exactMore": "{{crops}}: <n>{{pct}}</n>% more water than your current rotation",
+      "exactSame": "{{crops}}: about the same water as your current rotation"
     },
     "season": {
       "label": "This season vs normal (last {{days}} days)",
@@ -624,7 +626,7 @@
         "none": "rain: not enough data"
       },
       "text": "Compared with the same days in {{bFrom}}–{{bTo}} (NASA POWER).",
-      "exact": "Hot days {{hot}} (normal {{hotN}}) · rain {{rain}} mm (normal {{rainN}} mm)"
+      "exact": "Hot days <n>{{hot}}</n> (normal {{hotN}}) · rain <n>{{rain}}</n> mm (normal {{rainN}} mm)"
     },
     "heat": {
       "label": "Hot days around {{from}}–{{to}}",
@@ -632,7 +634,9 @@
       "value": "+{{v}} hot days a year",
       "text": "If world emissions follow a middle path; range across NASA climate models. A projection, not a forecast.",
       "high": "If emissions stay high: +{{v}}.",
-      "none": "The 2050 heat outlook is precomputed only for the demo region in this version."
+      "none": "The 2050 heat outlook is precomputed only for the demo region in this version.",
+      "valueOne": "+<n>{{v}}</n> hot days a year",
+      "valueRange": "+<n>{{lo}}</n>–<n>{{hi}}</n> hot days a year"
     },
     "twins": {
       "label": "Similar past years (Season Twins): next {{days}} days",

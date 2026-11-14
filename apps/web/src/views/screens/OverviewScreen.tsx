@@ -2,7 +2,8 @@
 import type { ReactNode } from 'react';
 import { ArrowRight, CloudSun, Drop, Handshake, Sun, ThermometerHot, type Icon } from '@phosphor-icons/react';
 import { Link } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
+import { Trans, useTranslation } from 'react-i18next';
+import { CountUp } from '@/views/components/CountUp';
 import { useGreennessMonthly } from '@/controllers/useGreenness';
 import { useHeat2050State } from '@/controllers/useHeat2050';
 import { useRotationComparison } from '@/controllers/useRotationComparison';
@@ -89,7 +90,7 @@ export function OverviewScreen() {
           icon={Sun}
           label={t('overview.bare.label')}
           plain={ex ? barePlain(t, ex.metrics.bareHotDays) : loading}
-          exact={ex && t('overview.bare.exact', { count: ex.metrics.bareHotDays, months: hotMonths, total: ex.metrics.bareDays })}
+          exact={ex && <Trans i18nKey="overview.bare.exact" count={ex.metrics.bareHotDays} values={{ months: hotMonths, total: ex.metrics.bareDays }} components={{ n: <CountUp /> }} />}
         />
 
         <InsightCard
@@ -98,11 +99,13 @@ export function OverviewScreen() {
           label={t('overview.best.label')}
           plain={best && ex ? (ex.rank === 1 ? t('plain.existingFirst') : waterPlain(t, best.waterPct, bestCrops)) : loading}
           exact={
-            best &&
-            t('overview.best.exact', {
-              crops: bestCrops,
-              water: best.waterPct <= -3 ? t('rotations.lessWater', { pct: -best.waterPct }) : best.waterPct >= 3 ? t('rotations.moreWater', { pct: best.waterPct }) : t('rotations.sameWater'),
-            })
+            best && (
+              <Trans
+                i18nKey={best.waterPct <= -3 ? 'overview.best.exactLess' : best.waterPct >= 3 ? 'overview.best.exactMore' : 'overview.best.exactSame'}
+                values={{ crops: bestCrops, pct: Math.abs(best.waterPct) }}
+                components={{ n: <CountUp /> }}
+              />
+            )
           }
           science={t('overview.best.science')}
         />
@@ -112,7 +115,15 @@ export function OverviewScreen() {
           icon={CloudSun}
           label={t('overview.season.label', { days: SEASON_DAYS })}
           plain={s.comparison ? seasonPlain(t, hot?.tercile ?? null, rain?.tercile ?? null) : s.isError ? t('season.error') : loading}
-          exact={s.comparison && t('overview.season.exact', { hot: fmt0(hot?.value), hotN: fmt0(hot?.normal), rain: fmt0(rain?.value), rainN: fmt0(rain?.normal) })}
+          exact={
+            s.comparison && (
+              <Trans
+                i18nKey="overview.season.exact"
+                values={{ hot: fmt0(hot?.value), hotN: fmt0(hot?.normal), rain: fmt0(rain?.value), rainN: fmt0(rain?.normal) }}
+                components={{ n: <CountUp /> }}
+              />
+            )
+          }
           science={s.comparison && t('overview.season.text', { bFrom: s.comparison.baseline.from, bTo: s.comparison.baseline.to })}
         />
 
@@ -121,7 +132,14 @@ export function OverviewScreen() {
           icon={ThermometerHot}
           label={heat ? t('overview.heat.label', { from: heat.future.from, to: heat.future.to }) : t('overview.heat.labelPlain')}
           plain={heat && h245 ? heatPlain(t, heat) : heatLoading ? loading : t('overview.heat.none')}
-          exact={h245 && t('overview.heat.value', { v: span(h245) })}
+          exact={
+            h245 &&
+            (Math.round(h245[0]) === Math.round(h245[1]) ? (
+              <Trans i18nKey="overview.heat.valueOne" values={{ v: Math.round(h245[0]) }} components={{ n: <CountUp /> }} />
+            ) : (
+              <Trans i18nKey="overview.heat.valueRange" values={{ lo: Math.round(h245[0]), hi: Math.round(h245[1]) }} components={{ n: <CountUp /> }} />
+            ))
+          }
           science={
             heat &&
             h245 && (

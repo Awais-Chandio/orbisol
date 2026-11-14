@@ -242,7 +242,7 @@ export function CropYearTimeline({ slots, bare, hazards, ndvi, ndviProvenance, n
                   </text>
                 </g>
               ))}
-              <path className="tl-ndvi" d={ndviPts.map((p, i) => `${i ? 'L' : 'M'}${mid(p.month).toFixed(1)},${ny(p.value).toFixed(1)}`).join('')} />
+              <path className="tl-ndvi draw-in" pathLength={1} d={ndviPts.map((p, i) => `${i ? 'L' : 'M'}${mid(p.month).toFixed(1)},${ny(p.value).toFixed(1)}`).join('')} />
               {ndviPts.map((p) => (
                 <circle key={p.month} className="tl-ndvi-dot" cx={mid(p.month)} cy={ny(p.value)} r={4}>
                   <title>{`${monthName(p.month, 'long')}: NDVI ${p.value.toFixed(2)} (${t('timeline.ndviUsual')})`}</title>

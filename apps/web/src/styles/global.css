@@ -565,3 +565,19 @@ html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; } /* no mobile fo
 .tl-plan span { font-weight: 600; }
 .tl-move { transition: x 350ms ease, y 350ms ease, width 350ms ease, height 350ms ease, transform 350ms ease; }
 @media (prefers-reduced-motion: reduce) { .tl-move { transition: none; } }
+
+/* ---------- light motion (< 400 ms), only when the viewer has not asked for reduced motion ---------- */
+@property --n { syntax: '<integer>'; inherits: false; initial-value: 0; }
+.count-up-v { --n: var(--to); counter-reset: n var(--n); }
+.count-up-v::after { content: counter(n); }
+@media (prefers-reduced-motion: no-preference) {
+  .count-up-v { animation: count-up 380ms ease-out; }
+  .score-bar > span, .rb-band { transform-origin: left center; animation: grow-x 380ms ease-out; }
+  .timeline rect.tl-move:not(.tl-bare) { transform-box: fill-box; transform-origin: left center; animation: grow-x 380ms ease-out; }
+  .draw-in { stroke-dasharray: 1; animation: draw-in 380ms ease-out; }
+  .tl-ndvi-dot, .trend-dot { animation: fade-in 380ms ease-out; }
+}
+@keyframes count-up { from { --n: 0; } }
+@keyframes grow-x { from { transform: scaleX(0); } }
+@keyframes draw-in { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
+@keyframes fade-in { from { opacity: 0; } }

@@ -29,7 +29,7 @@ function YearChart({ tr, m, label }: { tr: ObservedTrend; m: Measure; label: str
       <text className="trend-tick" x={PAD.l - 4} y={y(lo) + 4} textAnchor="end">{fmt(lo)}</text>
       <text className="trend-tick" x={PAD.l} y={H - 4}>{tr.fromYear}</text>
       <text className="trend-tick" x={W - PAD.r} y={H - 4} textAnchor="end">{tr.toYear}</text>
-      <path className="trend-line" d={line} />
+      <path className="trend-line draw-in" d={line} pathLength={1} />
       {fit && <line className="trend-fit" x1={x(tr.fromYear)} x2={x(tr.toYear)} y1={y(fit.fitFirst)} y2={y(fit.fitLast)} />}
       {tr.years.map((v) => (
         <circle key={v.year} className="trend-dot" cx={x(v.year)} cy={y(v[m])} r={2.5}>
