@@ -28,6 +28,33 @@
 - "Hot days" use a local percentile, not a crop-specific heat-stress threshold (crop thresholds come with the crop rules).
 - Crop rule values come only from cited sources; values without a reliable source are left out and listed below.
 
-## Missing crop rule values
+## Missing crop rule values (left out, not guessed)
 
-(Filled in Phase 4.)
+Full table with sources: `docs/crop-rules.md`.
+
+- Wheat forage use (wheat straw / bhusa as fodder): no source page was retrieved in this build, so it is not scored.
+- Salt tolerance threshold: mung bean and chickpea are not in FAO-56 Table 23; sunflower has a rating (MS) but no threshold.
+- Berseem: no FAO-56 Table 11 row, so initial/development/late stage lengths borrow the Alfalfa 1st cutting cycle (proxy);
+  sowing "early autumn" (Feedipedia) is read as October for Sindh.
+- Chickpea: no FAO-56 Table 11 row; stage split borrows lentil (Oct/Nov planting, arid region) as a proxy.
+- Mung bean sowing window and season length come from a 2007 newspaper article (Dawn), the best source found; check locally.
+- The Sindh department gives wheat harvest in South Sindh as March; the demo farmer harvests in April. The farmer's dates are used for the existing rotation.
+
+## Design choices in the engine (transparent, not data)
+
+- Alternatives are two-crop annual rotations (one kharif + one rabi crop) from the crop table, sown at the start of the
+  cited window or right after the previous harvest. Sugarcane and rice are not proposed as alternatives (multi-season or
+  water-heavy) but can be entered as the existing rotation. Land preparation time between crops is not modelled.
+- Priority scores are relative to the best candidate (0-1). The farmer's 1st/2nd/3rd priorities weigh 3/2/1.
+  Forage counts fodder crops as 1 and crop residues as 0.5 per day. Organic matter has no soil data: it is a proxy
+  (half living cover, half legume time). Market suitability is never scored and is always shown as a gap.
+- Hazard months: the 3 hottest months by mean Tmax; frost or heavy-rain months where such days happen at least once
+  every two years on average (1991-2020). Heat is checked at mid and late crop stages, frost and heavy rain at mid-season.
+- Season Twins: root-mean-square difference of z-scores of mean Tmax, rain, ET0, top-soil wetness and hot days for the
+  same window in 2001-last year; 3 twins.
+- Track Record: for each past year only earlier years are used (no peeking); a naive baseline always predicts the more
+  common direction. Outcomes that never vary (e.g. hot days in winter) are flagged as not informative.
+- Confidence Meter points: twins close (+2/+1), twins agree (+2/+1), complete data (+1), track record (+1 / 0 / -1).
+  High >= 5, medium >= 3, else low.
+- Crop water need is FAO-56 Kc x ET0 (no effective rainfall or irrigation efficiency); ET0 from NASA POWER likely reads
+  high in irrigated Sindh, so absolute mm are shown with that caveat and comparisons between rotations matter more.

@@ -6,3 +6,7 @@ export * from './types';
 export * from './stats';
 export * from './season';
 export * from './places';
+export * from './rotation';
+export * from './twins';
+export * from './confidence';
+export * from './backtest';
