@@ -99,9 +99,16 @@ def main() -> None:
                 out.setdefault(iso, (run, f"{coll}/{ym}/{name}"))
         return out
 
+    # listing is ~350 directory pages: cache it and re-list only the last 3 months (new / Final replacing Late)
+    list_cache = CACHE / f"{a.place}_files.json"
+    if list_cache.exists():
+        files.update({k: tuple(v) for k, v in json.loads(list_cache.read_text()).items()})
+        months = months[-3:]
     with ThreadPoolExecutor(WORKERS) as ex:
         for res in ex.map(list_month, months):
             files.update(res)
+    CACHE.mkdir(parents=True, exist_ok=True)
+    list_cache.write_text(json.dumps(files))
     print(f"{len(files)} daily files found ({sum(1 for r, _ in files.values() if r == 'final')} final)")
 
     # 2) read one pixel per file (cached, resumable)

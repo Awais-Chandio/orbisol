@@ -60,10 +60,12 @@
   Final run with Late run for recent days, cell 25.45 N 68.45 E) but a full 1998-2026 daily series is ~10,500
   requests. On 14 Nov 2026 the run reached 2004 (about 2,400 days, ~4 days/s), then the GES DISC `gpm1` server began
   refusing connections after too many parallel requests. It was skipped to keep the feature-freeze time. The satellite rain
-  cards are hidden when the file is missing; rain in this version is the NASA POWER model value only. A future run uses
-  4 connections, resumes from the cache, and takes about 45-60 minutes.
+  cards are hidden when the file is missing; rain in this version is the NASA POWER model value only. A second try the same
+  evening (4 connections, 15-minute cap) was not blocked but only reached ~3,000 of 10,544 days. The cache and the
+  month listing are kept (`pipeline/raw/imerg/`), so a future run resumes directly; ~7,500 days at ~1.7 days/s is
+  about 75 minutes.
 - **SMAP soil moisture.** SMAP SPL3SMP_E (9 km) is listed on ORNL DAAC TESViS but returned no data for the demo farm
-  (14 Nov 2026). Reading it from NSIDC OPeNDAP one day at a time (~4,000 requests plus EASE-Grid 2.0 indexing) was
+  (14 Nov 2026; a re-probe the same evening got HTTP 503). Reading it from NSIDC OPeNDAP one day at a time (~4,000 requests plus EASE-Grid 2.0 indexing) was
   judged too heavy for this build. A future version adds SMAP as a satellite soil-moisture anomaly next to the model value.
 - VIIRS NOAA-20 NDVI (VJ113A1) to replace MODIS Terra (see Greenness above).
 

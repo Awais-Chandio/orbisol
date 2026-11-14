@@ -81,3 +81,8 @@
 - `data/hyderabad/ndvi.json`: MOD13Q1 2000-02-18 .. 2026-10-16, 614 composites (611 with values), cropland pixels 122-385 per year (MCD12Q1, 3 km).
 - Sanity check (2001-2020 monthly medians): rabi peak Jan-Feb 0.49, bare/harvest Apr-May 0.24, kharif Aug-Sep 0.46: matches the cotton -> wheat calendar.
 - Season screen: greenness 0.46 vs normal 0.44 (Aug 3 - Oct 31, 2026); twins greenness outlook works; no console errors.
+
+## 2026-11-14 20:15 PKT - Phase 6 close-out
+
+- IMERG retry (15-minute cap, 4 connections): not blocked, but listing + fetch reached only ~3,000 of 10,544 days; left as future work. Month listing is now cached so the next run resumes straight into fetching.
+- SMAP re-probe on TESViS: HTTP 503. Soil moisture stays NASA POWER GWETTOP (model); SMAP is future work.
