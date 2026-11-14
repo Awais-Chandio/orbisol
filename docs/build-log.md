@@ -107,3 +107,23 @@
   plain line on irrigation cooling and the ~50 km grid.
 - Demo farm soil: loam (no cited texture for the pin; Tandojam studies report several textures).
 - Verified at 360x800: Season screen with both cards, no element past the right edge, no console errors; 71 tests pass.
+
+## 2026-11-14 23:59 PKT - UI polish pass for judges (presentation only) - commits 4cc06fb .. fb4ce14
+
+- Overview "Your field at a glance" is the landing screen once a field is pinned (`/` -> `/overview`, else `/field`);
+  4 insight cards (bare days in the hottest months, best option water %, season vs normal, 2050 hot-day range),
+  Confidence Meter, "Supports, not replaces, your judgment". Bottom nav: Field, My farm, Overview, Rotations, Calendar, Season.
+- Crop-year timeline (Calendar, Overview; compact on rotation cards, replacing the "Whe/Cot" strip): crop bars named in
+  text (number + legend when a name does not fit), hatched bare gaps, hottest-months band + icons, MODIS NDVI monthly
+  normal underneath ("What NASA's MODIS satellite sees on your field"). The NDVI curve is not drawn for alternatives
+  (it describes the field as farmed, not a rotation that was never grown). New core function `monthlyGreennessNormal`
+  (median of 2001-2020 composites by month) + test; no existing calculation changed.
+- Desktop (>= 1024 px): nav in the header, field map left / controls right, rotations 3 across, 2-column grids
+  for Overview, Season, Calendar and My farm. Phone layout unchanged.
+- Fixes: score bars say "best / middle / lowest of 3" (no bare 0%); Water fit without a canal turn shows a visible
+  empty state + "Add canal turn" button; About no longer credits IMERG as used (moved with SMAP and VIIRS NDVI to
+  "Planned, not in this version", README matches); season cards get a range bar (usual range, normal, this season) with
+  the explanation under "What does this mean?"; glossary popovers (NDVI, ET0, water balance, soil moisture anomaly,
+  frost risk; native Popover API); "Next step" button in story order; one-tap Sindh rotation presets in My farm.
+- No new dependencies. Screenshots: docs/screenshots/ (7 screens x 360x800 @2x and 1440x900). Checked: no horizontal
+  overflow at 360, 1024 or 1440; 72 core tests pass; typecheck and production build pass.

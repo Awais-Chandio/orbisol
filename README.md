@@ -22,6 +22,14 @@ own priorities.
 4. **Season Twins** (past years most like this one), **Confidence Meter**, **seasonal calendar**
    (bare-field and vulnerable months), **Track Record** and **Water Fit**.
 
+## Screenshots
+
+| Phone (360 x 800) | Desktop (1440 x 900) |
+|---|---|
+| <img src="docs/screenshots/03-overview-360x800.png" width="240" alt="Overview on a phone: four insight cards"> | <img src="docs/screenshots/03-overview-1440x900.png" width="560" alt="Overview on desktop"> |
+
+All screens, in story order: [docs/screenshots/](docs/screenshots/).
+
 ## Repo layout
 
 ```
