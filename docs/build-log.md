@@ -86,3 +86,13 @@
 
 - IMERG retry (15-minute cap, 4 connections): not blocked, but listing + fetch reached only ~3,000 of 10,544 days; left as future work. Month listing is now cached so the next run resumes straight into fetching.
 - SMAP re-probe on TESViS: HTTP 503. Soil moisture stays NASA POWER GWETTOP (model); SMAP is future work.
+
+## 2026-11-14 20:50 PKT - Phase 7 Water fit, share, observed trend - commits e2a9f06, 3073d41, f06a693, 217588b
+
+- FLOW (water fit): My farm canal turn + soil -> core waterFit(plan, ET0 normal) -> per month: ETc = Kc x ET0, TAW = 1000 (thetaFC - thetaWP) Zr, RAW = p TAW (p adjusted for ETc), safe days = RAW / ETc -> Rotations card table (fits / too long / young crop)
+- Sources: FAO-56 Table 19 (Ch. 7, soil water), Table 22 (Ch. 8, root depth + p, smaller depth per footnote 1), p + 0.04 (5 - ETc). p added to the cited crop rules (rice: none, flooded crop).
+- Demo (sandy soil, 7-day turn): cotton -> wheat too long in Mar, Jul, Aug, Sep; sorghum fodder -> berseem in 6 months. Canal flow volume unknown: shown on screen as a limitation (each turn assumed to refill the root zone).
+- Share: Web Share API, wa.me fallback; text = top-ranked rotation, water % vs current, main risk (canal turn first), app root link. No coordinates anywhere in the URL (tested both paths with stubs).
+- Observed trend (Season): NASA POWER 1990-2025, OLS change per decade + 95% range. Hyderabad: hot days (> 42.5 °C) -4.5/decade, rain - ET0 +185 mm/decade (rain up, ET0 down; more humid, less wind). Labelled "observed trend, not a forecast", with a reanalysis caveat.
+- Stretch (NEX-GDDP-CMIP6 2050 heat): skipped. Planetary Computer access works, but global daily chunks make a pixel-year ~246 MB (~44 GB for the plan) at a measured 0.5 MB/s.
+- Verified at 360x800 (same-origin 360 px iframe): all 6 screens, no element past the right edge, no console errors. 71 core tests pass; build precache 19 entries / 3,065 KiB.
