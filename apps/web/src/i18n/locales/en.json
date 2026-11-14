@@ -634,7 +634,8 @@
     "ndviLegend": "Greenness seen by MODIS (usual year)",
     "ndviUsual": "usual, 2001–2020",
     "ndviAria": "Usual greenness by month: {{values}}",
-    "ndviGap": "Satellite greenness is precomputed only for the demo region in this version."
+    "ndviGap": "Satellite greenness is precomputed only for the demo region in this version.",
+    "dipNote": "Bare soil: the satellite sees it too"
   },
   "glossary": {
     "what": "What is {{term}}?",

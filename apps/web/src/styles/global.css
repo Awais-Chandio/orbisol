@@ -503,3 +503,8 @@ html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; } /* no mobile fo
 .weights-change { flex: none; font-weight: 700; text-decoration: underline; text-underline-offset: 3px; color: var(--accent); }
 .weights-card[open] > summary { margin-bottom: var(--space-2); }
 .weights-card[open] .weights-change { display: none; }
+
+/* NDVI dip annotation (key demo moment): bold text with a white halo, pointer line, ring on the low point */
+.tl-annot text { fill: var(--c-deep-blue); font-family: var(--font-body); font-weight: 700; paint-order: stroke; stroke: var(--c-white); stroke-width: 4px; stroke-linejoin: round; }
+.tl-annot line, .tl-annot path { stroke: var(--c-deep-blue); stroke-width: 2; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+.tl-annot-ring { fill: none; stroke: var(--c-deep-blue); stroke-width: 2; }

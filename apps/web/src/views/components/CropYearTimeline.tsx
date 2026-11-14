@@ -85,9 +85,7 @@ export function CropYearTimeline({ slots, bare, hazards, ndvi, ndviProvenance, n
   const barsBottom = barsTop + nLanes * laneH;
   const monthsY = barsBottom + font + 4;
   const H = monthsY + 4;
-  const ndviTop = 8;
   const ndviH = 84;
-  const H2 = ndviTop + ndviH + font + 8;
   const longMonths = plotW / 12 >= 34;
 
   const mName = (m: number) => (longMonths ? monthName(m) : monthName(m).slice(0, 1));
@@ -104,11 +102,24 @@ export function CropYearTimeline({ slots, bare, hazards, ndvi, ndviProvenance, n
     .filter(Boolean)
     .join('. ');
 
+  // Bare days per month in the farmer's plan (to tie the greenness dip to the bare field).
+  const bareInMonth = Array.from({ length: 12 }, (_, i) => {
+    let n = 0;
+    for (const b of bare) for (const [a, z] of pieces(b.start, b.days)) n += Math.max(0, Math.min(z, MONTH_START[i + 1]! - 1) - Math.max(a, MONTH_START[i]!) + 1);
+    return n;
+  });
+  const ndviValid = showNdvi ? ndvi!.filter((m) => Number.isFinite(m.value)) : [];
+  // The key demo moment: the usual greenness low falls in a month the field is bare.
+  const dip = ndviValid.length ? ndviValid.reduce((a, b) => (b.value < a.value ? b : a)) : null;
+  const annotate = !!dip && bareInMonth[dip.month - 1]! >= 10;
+  const annotText = t('timeline.dipNote');
+  const ndviTop = annotate ? 34 : 8;
+  const H2 = ndviTop + ndviH + font + 8;
   // NDVI scale: 0 to the next 0.2 above the highest month (one axis, its own panel).
   const nMax = showNdvi ? Math.max(0.4, Math.ceil(Math.max(...ndvi!.filter((m) => Number.isFinite(m.value)).map((m) => m.value)) * 5) / 5) : 1;
   const ny = (v: number) => ndviTop + ndviH - (v / nMax) * ndviH;
   const mid = (m: number) => x((MONTH_START[m - 1]! + MONTH_START[m]!) / 2);
-  const ndviPts = showNdvi ? ndvi!.filter((m) => Number.isFinite(m.value)) : [];
+  const ndviPts = ndviValid;
   const usesNumbers = new Set<number>();
 
   return (
@@ -155,11 +166,10 @@ export function CropYearTimeline({ slots, bare, hazards, ndvi, ndviProvenance, n
               const ps = pieces(s.sow, s.days);
               const y = barsTop + lane[i]! * laneH;
               const name = cropName(s);
-              const fits = ps.map(([a, z]) => textW(name, font) <= x(z + 1) - x(a) - 8);
-              // name on every piece where it fits; if it fits nowhere, a number keyed in the legend
-              const numbered = !fits.some(Boolean);
-              if (numbered) usesNumbers.add(i);
-              const longest = ps.reduce((a, b) => (b[1] - b[0] > a[1] - a[0] ? b : a));
+              const room = ps.map(([a, z]) => x(z + 1) - x(a) - 8);
+              // name on every piece where it fits; a narrower piece gets the number keyed in the legend
+              const show = room.map((r) => (textW(name, font) <= r ? name : r >= font * 0.6 ? String(i + 1) : null));
+              if (show.some((v) => v === String(i + 1))) usesNumbers.add(i);
               return (
                 <g key={s.crop + i}>
                   {ps.map(([a, z]) => (
@@ -168,9 +178,9 @@ export function CropYearTimeline({ slots, bare, hazards, ndvi, ndviProvenance, n
                     </rect>
                   ))}
                   {ps.map(([a, z], k) =>
-                    fits[k] || (numbered && ps[k] === longest) ? (
+                    show[k] ? (
                       <text key={'t' + a} className="tl-crop" x={(x(a) + x(z + 1)) / 2} y={y + laneH / 2 + font * 0.35 - 1} textAnchor="middle" fontSize={font}>
-                        {numbered ? String(i + 1) : name}
+                        {show[k]}
                       </text>
                     ) : null,
                   )}
@@ -196,7 +206,7 @@ export function CropYearTimeline({ slots, bare, hazards, ndvi, ndviProvenance, n
           </p>
           <p className="small">{t('timeline.ndviHint')}</p>
           {width > 0 && (
-            <svg width={W} height={H2} viewBox={`0 0 ${W} ${H2}`} role="img" aria-label={t('timeline.ndviAria', { values: ndviPts.map((p) => `${monthName(p.month)} ${p.value.toFixed(2)}`).join(', ') })}>
+            <svg width={W} height={H2} viewBox={`0 0 ${W} ${H2}`} role="img" aria-label={t('timeline.ndviAria', { values: ndviPts.map((p) => `${monthName(p.month)} ${p.value.toFixed(2)}`).join(', ') }) + (annotate ? `. ${monthName(dip!.month, 'long')}: ${annotText}` : '')}>
               {hot.map((m) => (
                 <rect key={'hot' + m} className="tl-hot" x={x(MONTH_START[m - 1]!)} y={0} width={x(MONTH_START[m]!) - x(MONTH_START[m - 1]!)} height={ndviTop + ndviH} />
               ))}
@@ -217,6 +227,23 @@ export function CropYearTimeline({ slots, bare, hazards, ndvi, ndviProvenance, n
                   <title>{`${monthName(p.month, 'long')}: NDVI ${p.value.toFixed(2)} (${t('timeline.ndviUsual')})`}</title>
                 </circle>
               ))}
+              {annotate &&
+                (() => {
+                  const dx = mid(dip!.month);
+                  const dy = ny(dip!.value);
+                  const half = textW(annotText, font) / 2 + 2;
+                  const tx = Math.min(Math.max(dx, padL + half), W - padR - half);
+                  return (
+                    <g className="tl-annot" aria-hidden>
+                      <circle className="tl-annot-ring" cx={dx} cy={dy} r={9} />
+                      <text x={tx} y={14} textAnchor="middle" fontSize={font}>
+                        {annotText}
+                      </text>
+                      <line x1={dx} x2={dx} y1={20} y2={dy - 12} />
+                      <path d={`M${dx - 4},${dy - 17} L${dx},${dy - 11} L${dx + 4},${dy - 17}`} />
+                    </g>
+                  );
+                })()}
               {Array.from({ length: 12 }, (_, i) => i + 1).map((m) => (
                 <text key={'mb' + m} className="tl-month" x={mid(m)} y={ndviTop + ndviH + font + 4} textAnchor="middle" fontSize={font - 1}>
                   {mName(m)}
