@@ -652,7 +652,13 @@
     "ndviUsual": "usual, 2001–2020",
     "ndviAria": "Usual greenness by month: {{values}}",
     "ndviGap": "Satellite greenness is precomputed only for the demo region in this version.",
-    "dipNote": "Bare soil: the satellite sees it too"
+    "dipNote": "Bare soil: the satellite sees it too",
+    "switchLabel": "Show the crop year for",
+    "current": "Current",
+    "option": "Option {{n}}",
+    "bareHotLine_one": "{{count}} bare day in the hottest months",
+    "bareHotLine_other": "{{count}} bare days in the hottest months",
+    "ndviCurrentOnly": "The satellite greenness curve shows your field as farmed now, so it appears with Current only."
   },
   "glossary": {
     "what": "What is {{term}}?",

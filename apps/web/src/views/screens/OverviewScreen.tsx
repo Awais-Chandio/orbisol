@@ -9,7 +9,7 @@ import { useRotationComparison } from '@/controllers/useRotationComparison';
 import { OUTLOOK_DAYS, useSeasonOutlook } from '@/controllers/useSeasonOutlook';
 import { useSeasonVsNormal } from '@/controllers/useSeasonVsNormal';
 import { ConfidenceMeter } from '@/views/components/ConfidenceMeter';
-import { CropYearTimeline } from '@/views/components/CropYearTimeline';
+import { TimelineSwitcher } from '@/views/components/TimelineSwitcher';
 import { NeedPin } from '@/views/components/NeedPin';
 import { Science, ScienceToggle } from '@/views/components/Science';
 import { monthName } from '@/views/format';
@@ -138,8 +138,7 @@ export function OverviewScreen() {
         {ex && (
           <div className="card light overview-timeline">
             <h2>{t('timeline.title')}</h2>
-            <p className="small">{ex.plan.slots.map((x) => t('crops.' + x.crop)).join(' → ')}</p>
-            <CropYearTimeline slots={ex.plan.slots} bare={ex.metrics.bare} hazards={r.hazards} ndvi={g.monthly} ndviProvenance={g.provenance} ndviGap={!g.isLoading} />
+            <TimelineSwitcher strategies={r.strategies} hazards={r.hazards} ndvi={g.monthly} ndviProvenance={g.provenance} ndviGap={!g.isLoading} />
             <Link to="/calendar" className="insight-more">
               {t('overview.calendarLink')} <ArrowRight size={16} aria-hidden />
             </Link>

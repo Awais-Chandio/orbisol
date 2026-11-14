@@ -4,7 +4,7 @@ import { doyToMd } from '@orbisol/core';
 import { useTranslation } from 'react-i18next';
 import { useGreennessMonthly } from '@/controllers/useGreenness';
 import { useRotationComparison } from '@/controllers/useRotationComparison';
-import { CropYearTimeline } from '@/views/components/CropYearTimeline';
+import { TimelineSwitcher } from '@/views/components/TimelineSwitcher';
 import { JudgmentFlag } from '@/views/components/JudgmentFlag';
 import { NeedPin } from '@/views/components/NeedPin';
 import { SourceTag } from '@/views/components/SourceTag';
@@ -62,7 +62,7 @@ export function CalendarScreen() {
 
           <Science className="card light">
             <h2>{t('timeline.title')}</h2>
-            <CropYearTimeline slots={ex.plan.slots} bare={ex.metrics.bare} hazards={r.hazards} ndvi={g.monthly} ndviProvenance={g.provenance} ndviGap={!g.isLoading} />
+            <TimelineSwitcher strategies={r.strategies} hazards={r.hazards} ndvi={g.monthly} ndviProvenance={g.provenance} ndviGap={!g.isLoading} />
           </Science>
           </div>
 

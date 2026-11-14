@@ -1,5 +1,5 @@
 /* AI-assisted: drafted with Claude (Anthropic). See docs/ai-usage.md. */
-import { useEffect, useId, useRef, useState } from 'react';
+import { useEffect, useId, useRef, useState, type CSSProperties } from 'react';
 import { CloudRain, Planet, Snowflake, ThermometerHot } from '@phosphor-icons/react';
 import { CROPS, YEAR_DAYS, doyToMd, type CropSlot, type HazardMonths, type MonthlyGreenness, type Provenance, type Span } from '@orbisol/core';
 import { useTranslation } from 'react-i18next';
@@ -23,6 +23,8 @@ interface Props {
   ndviProvenance?: Provenance;
   /** Shown instead of the curve when there is no greenness file for this field. */
   ndviGap?: boolean;
+  /** Shown in place of the greenness curve (e.g. for an option that was never grown here). */
+  ndviNote?: string;
   compact?: boolean;
 }
 
@@ -61,10 +63,18 @@ function lanes(slots: CropSlot[]): number[] {
 const textW = (s: string, px: number) => s.length * px * 0.56;
 
 /**
+ * Rect geometry as both attributes (fallback) and CSS properties, so switching plans can animate the bars with a
+ * CSS transition where the browser supports SVG geometry properties.
+ */
+function geo(x: number, y: number, width: number, height: number) {
+  return { x, y, width, height, style: { x: `${x}px`, y: `${y}px`, width: `${width}px`, height: `${height}px` } as CSSProperties };
+}
+
+/**
  * 12-month crop-year timeline: crop bars, hatched bare-field gaps, the hottest-months band, and (full version)
  * the MODIS monthly greenness normal underneath on the same months. Identity is in text, never colour alone.
  */
-export function CropYearTimeline({ slots, bare, hazards, ndvi, ndviProvenance, ndviGap, compact = false }: Props) {
+export function CropYearTimeline({ slots, bare, hazards, ndvi, ndviProvenance, ndviGap, ndviNote, compact = false }: Props) {
   const { t } = useTranslation();
   const uid = useId().replace(/:/g, '');
   const [ref, width] = useWidth<HTMLDivElement>();
@@ -153,9 +163,14 @@ export function CropYearTimeline({ slots, bare, hazards, ndvi, ndviProvenance, n
             ))}
 
             {/* bare field: hatched, across all lanes */}
-            {bare.flatMap((b) =>
-              pieces(b.start, b.days).map(([a, z]) => (
-                <rect key={`bare${b.start}-${a}`} x={x(a)} y={barsTop} width={Math.max(1, x(z + 1) - x(a))} height={barsBottom - barsTop - 2} fill={`url(#hatch-${uid})`} className="tl-bare">
+            {bare.flatMap((b, j) =>
+              pieces(b.start, b.days).map(([a, z], k) => (
+                <rect
+                  key={`bare-${j}-${k}`}
+                  {...geo(x(a), barsTop, Math.max(1, x(z + 1) - x(a)), barsBottom - barsTop - 2)}
+                  fill={`url(#hatch-${uid})`}
+                  className="tl-bare tl-move"
+                >
                   <title>{t('timeline.bareSpan', { from: formatMonthDay(doyToMd(b.start)), to: formatMonthDay(doyToMd(b.end)), days: b.days })}</title>
                 </rect>
               )),
@@ -171,15 +186,21 @@ export function CropYearTimeline({ slots, bare, hazards, ndvi, ndviProvenance, n
               const show = room.map((r) => (textW(name, font) <= r ? name : r >= font * 0.6 ? String(i + 1) : null));
               if (show.some((v) => v === String(i + 1))) usesNumbers.add(i);
               return (
-                <g key={s.crop + i}>
-                  {ps.map(([a, z]) => (
-                    <rect key={a} x={x(a) + 1} y={y + 1} width={Math.max(2, x(z + 1) - x(a) - 2)} height={laneH - 4} rx={4} fill={fillOf(s)}>
+                <g key={'slot-' + i}>
+                  {ps.map(([a, z], k) => (
+                    <rect key={'piece-' + k} className="tl-move" {...geo(x(a) + 1, y + 1, Math.max(2, x(z + 1) - x(a) - 2), laneH - 4)} rx={4} fill={fillOf(s)}>
                       <title>{label(s)}</title>
                     </rect>
                   ))}
                   {ps.map(([a, z], k) =>
                     show[k] ? (
-                      <text key={'t' + a} className="tl-crop" x={(x(a) + x(z + 1)) / 2} y={y + laneH / 2 + font * 0.35 - 1} textAnchor="middle" fontSize={font}>
+                      <text
+                        key={'t' + k}
+                        className="tl-crop tl-move"
+                        style={{ transform: `translate(${(x(a) + x(z + 1)) / 2}px, ${y + laneH / 2 + font * 0.35 - 1}px)` }}
+                        textAnchor="middle"
+                        fontSize={font}
+                      >
                         {show[k]}
                       </text>
                     ) : null,
@@ -255,6 +276,7 @@ export function CropYearTimeline({ slots, bare, hazards, ndvi, ndviProvenance, n
         </>
       )}
       {!compact && !showNdvi && ndviGap && <p className="small gap-note">{t('timeline.ndviGap')}</p>}
+      {!compact && !showNdvi && ndviNote && <p className="small gap-note">{ndviNote}</p>}
 
       <figcaption>
         <ul className="tl-legend">

@@ -556,3 +556,12 @@ html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; } /* no mobile fo
 .ahead-card h2 { margin-top: 0; }
 .ahead-card .plain-line { font-size: 1rem; }
 .science > :first-child { margin-top: 0; }
+
+/* Crop-year switcher: Current | Option 1 | Option 2; bars and bare gaps glide to the chosen plan */
+.segmented-light { border-color: var(--c-electric-blue); margin-top: 0; }
+.segmented-light button { color: var(--c-electric-blue); }
+.segmented-light button[aria-pressed='true'] { background: var(--c-electric-blue); color: var(--c-white); }
+.tl-plan { display: flex; flex-wrap: wrap; gap: 2px var(--space-3); align-items: baseline; margin: var(--space-2) 0 0; }
+.tl-plan span { font-weight: 600; }
+.tl-move { transition: x 350ms ease, y 350ms ease, width 350ms ease, height 350ms ease, transform 350ms ease; }
+@media (prefers-reduced-motion: reduce) { .tl-move { transition: none; } }
