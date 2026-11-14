@@ -96,3 +96,14 @@
 - Observed trend (Season): NASA POWER 1990-2025, OLS change per decade + 95% range. Hyderabad: hot days (> 42.5 °C) -4.5/decade, rain - ET0 +185 mm/decade (rain up, ET0 down; more humid, less wind). Labelled "observed trend, not a forecast", with a reanalysis caveat.
 - Stretch (NEX-GDDP-CMIP6 2050 heat): skipped. Planetary Computer access works, but global daily chunks make a pixel-year ~246 MB (~44 GB for the plan) at a measured 0.5 MB/s.
 - Verified at 360x800 (same-origin 360 px iframe): all 6 screens, no element past the right edge, no console errors. 71 core tests pass; build precache 19 entries / 3,065 KiB.
+
+## 2026-11-14 21:05 PKT - Phase 7 follow-ups - commits 14bbe95, 233046d, and the demo-soil commit
+
+- 2050 heat (NEX-GDDP-CMIP6 via NCCS THREDDS NCSS point subset, ~1.3 s per point-year, 180 point-years in ~8 min):
+  ACCESS-CM2, MPI-ESM1-2-HR, MRI-ESM2-0; hot days > 42.5 °C rise by +11 to +27 a year (SSP2-4.5) and +16 to +33
+  (SSP5-8.5), 2041-2060 vs 1995-2014. Model baseline is 6-9 days vs ~36 in POWER, so the card leads with the change.
+  Labelled "climate model projection, not a forecast"; credit on About.
+- Trend card: warm nights (TN90p, > 27.8 °C) +5.7/decade (clear); hottest day of the year -0.25 °C/decade (unclear);
+  plain line on irrigation cooling and the ~50 km grid.
+- Demo farm soil: loam (no cited texture for the pin; Tandojam studies report several textures).
+- Verified at 360x800: Season screen with both cards, no element past the right edge, no console errors; 71 tests pass.
