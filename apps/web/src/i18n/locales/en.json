@@ -1,0 +1,72 @@
+{
+  "app": { "name": "Orbisol", "tagline": "From orbit to soil." },
+  "nav": {
+    "field": "Field",
+    "farm": "My farm",
+    "season": "Season",
+    "rotations": "Rotations",
+    "calendar": "Calendar",
+    "about": "About and data credits"
+  },
+  "notice": {
+    "judgment": "Orbisol supports, not replaces, your judgment and local expertise.",
+    "checkLocally": "Check locally",
+    "offline": "You are offline. Showing saved data."
+  },
+  "field": {
+    "title": "Pin your field",
+    "intro": "Satellites already watch every field. Just pin yours: Orbisol fetches NASA data for that spot.",
+    "useGps": "Use my location",
+    "locating": "Finding you…",
+    "useDemo": "Use demo field (Hyderabad, Sindh)",
+    "tapHint": "Tap the map or drag the pin to your field.",
+    "manualTitle": "Or type coordinates",
+    "lat": "Latitude",
+    "lon": "Longitude",
+    "setPin": "Set pin",
+    "invalid": "Enter a latitude from -90 to 90 and a longitude from -180 to 180.",
+    "pinned": "Field pinned",
+    "noPin": "No field pinned yet.",
+    "accuracy": "GPS accuracy about {{m}} m",
+    "next": "Next: my farm",
+    "mapLoading": "Loading map…",
+    "mapError": "Map could not load. You can still type coordinates or use GPS.",
+    "source": {
+      "gps": "from GPS",
+      "map": "picked on map",
+      "manual": "typed in",
+      "demo": "demo field"
+    },
+    "gpsError": {
+      "unsupported": "This device has no GPS access. Tap the map instead.",
+      "denied": "Location permission was denied. Tap the map or type coordinates.",
+      "unavailable": "Could not get your location. Tap the map instead.",
+      "timeout": "GPS took too long. Try again outdoors, or tap the map."
+    }
+  },
+  "placeholder": {
+    "needPin": "Pin your field first.",
+    "goToField": "Go to field picker",
+    "coming": "This screen is being built."
+  },
+  "screens": {
+    "farm": { "title": "My farm", "intro": "Your current rotation, canal turn, soil and top priorities." },
+    "season": { "title": "This season vs normal", "intro": "Heat, rain, frost, soil moisture and greenness compared with past years." },
+    "rotations": { "title": "Compare rotations", "intro": "Your existing rotation and two alternatives, with evidence, gaps and risks." },
+    "calendar": { "title": "Seasonal calendar", "intro": "When your field is bare and which months look vulnerable." }
+  },
+  "about": {
+    "title": "About Orbisol",
+    "what": "Orbisol helps farmers explore crop rotation strategies using NASA Earth observations, local soil information, crop characteristics and their own priorities.",
+    "credits": "Data credits",
+    "satellite": "Satellite",
+    "model": "Model / reanalysis",
+    "ground": "Ground",
+    "reference": "Reference",
+    "farmer": "Your input",
+    "kindsTitle": "How data is marked",
+    "ai": "Built with AI assistance (Claude by Anthropic) for code and documentation drafts. The idea and decisions are the author's.",
+    "event": "NASA Space Apps Challenge 2026 · Field Shift: Adapting Farms with NASA Data",
+    "noLogos": "Data credited in text only."
+  }
+}

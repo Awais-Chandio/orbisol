@@ -2,10 +2,10 @@
 @import './tokens.css';
 
 *, *::before, *::after { box-sizing: border-box; }
-html, body, #root { height: 100%; }
+html, body, #root { min-height: 100%; }
 body {
   margin: 0;
-  background: var(--bg);
+  background-color: var(--c-deep-blue);
   background-image: var(--gradient);
   background-attachment: fixed;
   color: var(--text);
@@ -13,21 +13,147 @@ body {
   font-size: 16px;
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent;
 }
-h1, h2, h3 { font-family: var(--font-head); line-height: 1.15; margin: 0 0 var(--space-3); }
-h1 { font-weight: 900; text-transform: uppercase; letter-spacing: 0.02em; }
-h2, h3 { font-weight: 700; }
-code, pre { font-family: var(--font-code); }
+h1, h2, h3 { font-family: var(--font-head); line-height: 1.15; margin: var(--space-4) 0 var(--space-3); }
+h1 { font-weight: 900; text-transform: uppercase; letter-spacing: 0.02em; font-size: 1.6rem; }
+h2 { font-weight: 700; font-size: 1.25rem; }
+h3 { font-weight: 700; font-size: 1.05rem; }
+p { margin: 0 0 var(--space-3); }
+code, pre, .mono { font-family: var(--font-code); }
 a { color: var(--accent); }
 button { font-family: var(--font-body); font-size: 1rem; }
 :focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
 [dir='rtl'] body { font-family: var(--font-urdu); }
-
-.container { max-width: 480px; margin: 0 auto; padding: var(--space-4); }
-.notice {
-  background: var(--surface-light);
-  color: var(--text-on-light);
-  border-radius: var(--radius);
-  padding: var(--space-3) var(--space-4);
-  display: flex; gap: var(--space-3); align-items: flex-start;
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
 }
+.small { font-size: 0.875rem; }
+.lead { font-size: 1.05rem; }
+.hint { font-size: 0.875rem; margin-top: var(--space-2); }
+
+/* ---------- shell ---------- */
+.app-shell { min-height: 100dvh; display: flex; flex-direction: column; }
+.app-header {
+  position: sticky; top: 0; z-index: 10;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: var(--space-2) var(--space-4);
+  padding-top: calc(var(--space-2) + env(safe-area-inset-top));
+  background: var(--c-deep-blue);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+}
+.brand { display: flex; align-items: center; gap: var(--space-2); color: var(--text); text-decoration: none; }
+.brand-name { font-family: var(--font-head); font-weight: 900; text-transform: uppercase; letter-spacing: 0.06em; }
+.icon-btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  min-width: 44px; min-height: 44px; color: var(--text); border-radius: 50%;
+}
+.app-main { flex: 1; width: 100%; padding-bottom: calc(88px + env(safe-area-inset-bottom)); }
+.container { max-width: 560px; margin: 0 auto; padding-left: var(--space-4); padding-right: var(--space-4); }
+
+.bottom-nav {
+  position: fixed; bottom: 0; left: 0; right: 0; z-index: 10;
+  display: grid; grid-template-columns: repeat(5, 1fr);
+  background: var(--c-deep-blue);
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  padding-bottom: env(safe-area-inset-bottom);
+}
+.nav-item {
+  display: flex; flex-direction: column; align-items: center; gap: 2px;
+  min-height: 60px; padding: var(--space-2) 2px;
+  color: var(--text); text-decoration: none; font-size: 0.75rem; line-height: 1.2; text-align: center;
+  border-top: 3px solid transparent;
+}
+.nav-item.active { color: var(--accent); border-top-color: var(--accent); font-weight: 700; }
+
+/* ---------- surfaces ---------- */
+.card {
+  border-radius: var(--radius); padding: var(--space-4); margin: var(--space-4) 0;
+  background: var(--c-electric-blue); color: var(--text);
+}
+.card.light { background: var(--surface-light); color: var(--text-on-light); }
+.card.light a:not(.btn) { color: var(--c-electric-blue); }
+.card > :last-child { margin-bottom: 0; }
+
+/* ---------- buttons (neon yellow used only as accent on buttons) ---------- */
+.btn-row { display: flex; flex-wrap: wrap; gap: var(--space-2); margin: var(--space-3) 0; }
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: var(--space-2);
+  min-height: 48px; padding: var(--space-2) var(--space-4);
+  border-radius: 999px; border: 2px solid transparent;
+  font-weight: 700; text-decoration: none; cursor: pointer;
+}
+.btn:disabled { opacity: 0.7; cursor: progress; }
+.btn-primary { background: var(--c-neon-yellow); color: var(--c-deep-blue); }
+.btn-secondary { background: transparent; color: var(--text); border-color: var(--text); }
+.card.light .btn-secondary { color: var(--c-electric-blue); border-color: var(--c-electric-blue); }
+.card.light .btn-primary { background: var(--c-deep-blue); color: var(--c-white); }
+
+/* ---------- notices ---------- */
+.judgment-notice {
+  display: flex; align-items: flex-start; gap: var(--space-2);
+  margin: var(--space-6) 0 var(--space-2); padding: var(--space-3);
+  background: var(--surface-light); color: var(--text-on-light);
+  border-radius: var(--radius); font-size: 0.875rem;
+}
+.judgment-notice svg { flex: none; margin-top: 3px; }
+.judgment-flag {
+  display: inline-flex; flex-wrap: wrap; align-items: center; gap: var(--space-1);
+  padding: 2px var(--space-2); border-radius: 6px;
+  border: 1px solid var(--accent); font-size: 0.875rem;
+}
+.judgment-flag svg { color: var(--accent); }
+.card.light .judgment-flag { border-color: var(--c-electric-blue); }
+.card.light .judgment-flag svg { color: var(--c-electric-blue); }
+.offline-banner {
+  display: flex; align-items: center; justify-content: center; gap: var(--space-2);
+  padding: var(--space-2) var(--space-4); background: var(--c-electric-blue); color: var(--c-white);
+  font-size: 0.875rem;
+}
+.form-error {
+  display: flex; align-items: flex-start; gap: var(--space-2);
+  padding: var(--space-2) var(--space-3); margin: var(--space-2) 0;
+  background: var(--surface-light); color: var(--c-martian-red);
+  border-left: 4px solid var(--c-martian-red); border-radius: 6px; font-weight: 600;
+}
+.form-error svg { flex: none; margin-top: 3px; }
+
+/* ---------- data credits: kind shown by icon + label + border style, never colour alone ---------- */
+.source-tag {
+  display: inline-flex; align-items: center; gap: var(--space-1);
+  padding: 1px var(--space-2); border-radius: 999px;
+  font-size: 0.75rem; line-height: 1.6; border: 1.5px solid currentColor;
+}
+.source-tag a { color: inherit; }
+.source-satellite { border-style: solid; }
+.source-model, .source-reanalysis { border-style: dashed; }
+.source-ground { border-style: double; border-width: 3px; }
+.source-reference { border-style: dotted; }
+.source-farmer { border-color: transparent; text-decoration: underline; text-underline-offset: 3px; }
+
+/* ---------- field picker ---------- */
+.field-map {
+  width: 100%; height: 52vh; min-height: 260px; max-height: 440px;
+  border-radius: var(--radius); overflow: hidden; background: var(--c-deep-blue);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+.map-loading { display: flex; align-items: center; justify-content: center; }
+.pin-card .pin-status { display: flex; align-items: center; gap: var(--space-2); flex-wrap: wrap; }
+.manual summary { cursor: pointer; font-weight: 700; min-height: 44px; display: flex; align-items: center; }
+.coord-form { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-3); align-items: end; }
+.coord-form label { display: flex; flex-direction: column; gap: var(--space-1); font-size: 0.875rem; }
+.coord-form input {
+  min-height: 44px; padding: var(--space-2); border-radius: 8px; border: 2px solid var(--c-white);
+  background: var(--c-white); color: var(--c-deep-blue); font-family: var(--font-code); font-size: 1rem;
+}
+.coord-form input[aria-invalid='true'] { border-color: var(--c-martian-red); }
+.coord-form .btn, .coord-form .form-error { grid-column: 1 / -1; }
+
+/* ---------- lists ---------- */
+.plain-list { list-style: none; padding: 0; display: flex; flex-direction: column; gap: var(--space-2); }
+.credit-list { list-style: none; padding: 0; display: flex; flex-direction: column; gap: var(--space-3); }
+.credit-list li { display: flex; flex-direction: column; }
+
+/* MapLibre attribution readable on imagery */
+.maplibregl-ctrl-attrib { font-size: 11px; }
