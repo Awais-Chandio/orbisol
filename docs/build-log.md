@@ -18,3 +18,12 @@
   (GIBS tiles and fonts cached), PNG icons from our own SVG mark, i18n (English, RTL-ready).
 - Fixes found in browser test: MapLibre v6 worker needs setWorkerUrl with a Vite-bundled worker; GIBS reference
   label/feature overlays return opaque black tiles, so they were removed (logged in limitations.md).
+
+## 2026-11-14 14:10 PKT - Phase 3 Data layer - commit 933a217
+
+- FLOW: pin -> climateService (cache <12h -> live NASA POWER -> cache -> data/ JSON) -> Zod -> core buildDailyClimate (FAO-56 ET0) -> compareSeason (1991-2020 median, terciles) -> SeasonScreen cards with SourceTag
+- Built: POWER client (7 params, 1990 to now, ~1.5 MB once, cached in IndexedDB), static Hyderabad file via pipeline/scripts/power.py,
+  core season module (dates, windows, ETCCDI indicators, WMO normal, terciles) and FAO-56 ET0 (reproduces Example 18: 3.9 mm/day), 22 tests.
+- Found in testing: POWER model ET ignores irrigation (about 2 mm in 90 days at Hyderabad), so it was replaced by FAO-56 ET0; mean-based
+  "normal" contradicted tercile labels, so normal is now the median. ET0 likely reads high in irrigated Sindh (documented).
+- Verified in browser: Hyderabad live, Hyderabad offline -> built-in data, Lahore live, 30/90-day toggle, no console errors.
