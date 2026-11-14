@@ -325,7 +325,9 @@
     "unknown": "Don't know",
     "reset": "Reset to demo farm",
     "saved": "Saved on this phone",
-    "judgment": "you know your field's history, pests and buyers better than any satellite"
+    "judgment": "you know your field's history, pests and buyers better than any satellite",
+    "presets": "Start from a common Sindh rotation",
+    "presetsHint": "One tap fills in typical dates from the Sindh sowing calendar. Then change them to your own dates below."
   },
   "rotations": {
     "title": "Compare rotations",

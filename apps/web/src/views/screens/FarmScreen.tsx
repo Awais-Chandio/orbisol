@@ -4,7 +4,7 @@ import { ArrowCounterClockwise, Plus, Trash } from '@phosphor-icons/react';
 import { CROP_IDS, type CropId } from '@orbisol/core';
 import { useTranslation } from 'react-i18next';
 import { useFarmProfile } from '@/controllers/useFarmProfile';
-import { PARTS, type MonthPart } from '@/models/farm';
+import { PARTS, ROTATION_PRESETS, type MonthPart } from '@/models/farm';
 import { JudgmentFlag } from '@/views/components/JudgmentFlag';
 import { PriorityPicker } from '@/views/components/PriorityPicker';
 import { SourceTag } from '@/views/components/SourceTag';
@@ -50,6 +50,18 @@ export function FarmScreen() {
       <div className="card light farm-rotation">
         <h2>{t('farm.rotationTitle')}</h2>
         <p className="small">{t('farm.rotationHint')}</p>
+        <fieldset className="preset-row">
+          <legend>{t('farm.presets')}</legend>
+          {ROTATION_PRESETS.map((p) => {
+            const on = JSON.stringify(p.rotation) === JSON.stringify(f.farm.rotation);
+            return (
+              <button key={p.id} type="button" className="chip" aria-pressed={on} onClick={() => f.set({ rotation: p.rotation })}>
+                {p.rotation.map((x) => t('crops.' + x.crop)).join(' → ')}
+              </button>
+            );
+          })}
+          <p className="small">{t('farm.presetsHint')}</p>
+        </fieldset>
         <ol className="slot-list">
           {f.farm.rotation.map((s, i) => (
             <li key={i} className="slot">

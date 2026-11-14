@@ -41,6 +41,36 @@ export const DEMO_FARM: FarmProfileInput = {
   soil: { texture: 'loam', salty: null },
 };
 
+/**
+ * One-tap starting points for common Sindh rotations. Dates sit inside the cited windows in core crop rules
+ * (Sindh Agriculture Department sowing calendar; Feedipedia for fodder), snapped to early / mid / late month.
+ * The farmer adjusts them to their own dates afterwards.
+ */
+export const ROTATION_PRESETS: { id: string; rotation: FarmerSlot[] }[] = [
+  {
+    id: 'cotton_wheat',
+    rotation: [
+      { crop: 'cotton', sow: '05-15', harvest: '10-25' },
+      { crop: 'wheat', sow: '11-05', harvest: '03-25' },
+    ],
+  },
+  {
+    id: 'rice_wheat',
+    rotation: [
+      { crop: 'rice', sow: '05-05', harvest: '10-15' },
+      { crop: 'wheat', sow: '11-15', harvest: '03-25' },
+    ],
+  },
+  { id: 'sugarcane', rotation: [{ crop: 'sugarcane', sow: '02-25', harvest: '01-25' }] },
+  {
+    id: 'fodder',
+    rotation: [
+      { crop: 'sorghum_fodder', sow: '05-15', harvest: '08-05' },
+      { crop: 'berseem', sow: '10-15', harvest: '04-25' },
+    ],
+  },
+];
+
 /** Farmers think in months and early/mid/late; stored as MM-DD (5th / 15th / 25th). */
 export const PARTS = { early: '05', mid: '15', late: '25' } as const;
 export type MonthPart = keyof typeof PARTS;
