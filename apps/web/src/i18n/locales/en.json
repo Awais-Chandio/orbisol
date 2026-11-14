@@ -694,16 +694,16 @@
     "hide": "Hide the science"
   },
   "plain": {
-    "bareHot_one": "Your field lies bare for {{count}} day in the hottest months.",
-    "bareHot_other": "Your field lies bare for {{count}} days in the hottest months.",
+    "bareHot_one": "{{count}} hot day with bare soil: sun and wind take the topsoil.",
+    "bareHot_other": "{{count}} hot days with bare soil: sun and wind take the topsoil.",
     "bareCovered": "A crop covers your field through the hottest months.",
-    "waterLess": "{{crops}} needs about {{pct}}% less water than now.",
-    "waterMore": "{{crops}} needs about {{pct}}% more water than now.",
+    "waterLess": "{{crops}} needs a little less water than now ({{pct}}% less).",
+    "waterMore": "{{crops}} needs a little more water than now ({{pct}}% more).",
     "waterSame": "{{crops}} needs about the same water as now.",
     "existingFirst": "Your current rotation already fits your priorities best.",
     "season": "{{period}}: {{hot}}, {{rain}}.",
     "heat2050": "Around {{year}}, expect {{v}} more days above {{t}} °C every year.",
-    "calendar": "Your field lies bare {{total}} days a year, {{hot}} of them in the hottest months.",
+    "calendar": "{{hot}} hot days with bare soil: sun and wind take the topsoil. {{total}} bare days a year in all.",
     "rotationsLead": "Your rotation now and two options, ranked for your priorities.",
     "seasonLead": "How the last weeks compare with past years at your field.",
     "aheadTitle": "Looking back and ahead",
@@ -768,6 +768,8 @@
       "up": "warm nights have become more common",
       "down": "warm nights have become less common",
       "unclear": "no clear change in warm nights"
-    }
+    },
+    "turnsSaved": "{{crops}} saves about 1 in {{n}} canal turns ({{pct}}% less water).",
+    "turnsExtra": "{{crops}} needs about 1 extra canal turn for every {{n}} ({{pct}}% more water)."
   }
 }

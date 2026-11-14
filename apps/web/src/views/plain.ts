@@ -17,8 +17,13 @@ export function barePlain(t: TFunction, bareHotDays: number): string {
   return bareHotDays > 0 ? t('plain.bareHot', { count: bareHotDays }) : t('plain.bareCovered');
 }
 
-/** Water of a rotation vs the current one (pct: + = more water). */
+/**
+ * Water of a rotation vs the current one (pct: + = more water), in canal turns: x% less water = about 1 in
+ * round(100 / x) turns saved; only from 5% (below that the turn count would be noise).
+ */
 export function waterPlain(t: TFunction, pct: number, crops: string): string {
+  if (pct <= -5) return t('plain.turnsSaved', { crops, n: Math.round(100 / -pct), pct: -pct });
+  if (pct >= 5) return t('plain.turnsExtra', { crops, n: Math.round(100 / pct), pct });
   if (pct <= -3) return t('plain.waterLess', { crops, pct: -pct });
   if (pct >= 3) return t('plain.waterMore', { crops, pct });
   return t('plain.waterSame', { crops });
