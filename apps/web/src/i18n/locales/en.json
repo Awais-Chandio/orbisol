@@ -791,5 +791,24 @@
   "lang": {
     "switchTo": "اردو",
     "label": "Language: English. Switch to Urdu (draft)"
+  },
+  "cited": {
+    "title": "Pests, soil and income",
+    "pest": {
+      "cottonCarry": "Pink bollworm larvae survive the winter inside bolls left on cotton sticks after the last picking, carrying the pest over to the next season. Shredding and ploughing in the stalks soon after harvest cuts this carry-over.",
+      "whitefly": "Whitefly, which spreads cotton leaf curl virus, lives on many plants: a survey around Multan found about 50 major host plants, including 17 crops and vegetables. Changing the crop on one field does not remove it.",
+      "cottonBreak": "No cotton in this rotation means no cotton bolls or sticks on this field for pink bollworm to survive the winter in. Pest guides use a cotton-free (host-free) period and a switch to small grains to cut the carry-over.",
+      "neighbours": "cotton fields and stored cotton sticks nearby can still carry pink bollworm; ask your local extension officer",
+      "gap": "Pest carry-over for these crops: information gap - check with your local extension officer."
+    },
+    "soak": {
+      "bare": "Bare soil seals and crusts under raindrops, so more water runs off. Crop residues or a cover on the soil protect it, so more rain and canal water soaks in.",
+      "moreCover": "Fewer bare days: crop cover and residues protect the soil from crusting, so more water soaks in. Channels left by old roots and more organic matter help the soil take in and hold water.",
+      "legumeGap": "Whether the legume itself helps water soak in: information gap - check with your local extension officer."
+    },
+    "income": {
+      "fodder": "Green fodder has buyers: Karachi's dairy farms rely on fodder trucked in from Sindh and Balochistan, and a 2005 study around Hyderabad found green fodder gave a better net return than the other crops in the study area.",
+      "prices": "fodder prices and buyers change from year to year; check current local prices before switching"
+    }
   }
 }

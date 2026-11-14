@@ -32,6 +32,12 @@ const REFERENCE: Credit[] = [
   { name: 'Feedipedia (INRAE, CIRAD, AFZ, FAO)', use: 'Plant families, legumes, fodder use, berseem and sorghum practice', url: 'https://www.feedipedia.org/' },
   { name: 'Dawn (2007), "Mungbean: a rich source of protein"', use: 'Mung bean sowing months and season length (check locally)', url: 'https://www.dawn.com/news/242480/mungbean-a-rich-source-of-protein' },
   { name: 'ETCCDI climate indices (Zhang et al. 2011) and WMO 1991-2020 normals', use: 'Frost days, heavy-rain days, hot days, normals', url: 'https://doi.org/10.1002/wcc.147' },
+  { name: 'Dawn (2013), "Pink bollworm a threat to Sindh cotton"', use: 'Pink bollworm carry-over in bolls left on cotton sticks (Sindh)', url: 'https://www.dawn.com/news/1052279' },
+  { name: 'UC IPM, Pink bollworm: cotton pest management guidelines', use: 'Stalk shredding, plowdown, host-free period, rotation to small grains', url: 'https://ipm.ucanr.edu/agriculture/cotton/pink-bollworm/' },
+  { name: 'Saeed et al., Bemisia tabaci host range, Multan (CottonGen poster)', use: 'Whitefly host plants (about 50 major hosts)', url: 'https://cottongen.org/node/1287558' },
+  { name: 'FAO Soils Bulletin 80 (Bot & Benites 2005), chapter 5', use: 'Soil cover, residues, root channels and organic matter for infiltration', url: 'https://www.fao.org/4/a0100e/a0100e08.htm' },
+  { name: 'ARY News (2026), Karachi dairy sector and fodder supply', use: 'Karachi dairy farms rely on fodder from Sindh and Balochistan', url: 'https://arynews.tv/milk-shortage-likely-in-karachi-22-july-2026' },
+  { name: 'Dawn (2005), "Reaping a rich harvest from maize crop"', use: 'Green fodder net return near Hyderabad (2005 study)', url: 'https://www.dawn.com/news/139366' },
 ];
 
 function CreditList({ items }: { items: Credit[] }) {

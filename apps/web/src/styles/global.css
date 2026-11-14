@@ -606,3 +606,8 @@ html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; } /* no mobile fo
 [dir='rtl'] .nav-item { line-height: 1.5; font-size: 0.75rem; }
 [dir='rtl'] .plain-line, [dir='rtl'] .insight-plain { line-height: 1.9; }
 [dir='rtl'] .mono, [dir='rtl'] .source-tag { font-family: var(--font-code); }
+
+/* Cited notes (pests, infiltration, income) */
+.cited-line { display: flex; gap: var(--space-1); align-items: flex-start; }
+.cited-line svg { flex: none; margin-top: 4px; color: var(--c-electric-blue); }
+.cited-notes .note-list li { gap: var(--space-1); }

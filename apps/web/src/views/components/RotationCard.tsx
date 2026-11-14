@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next';
 import type { StrategyView } from '@/controllers/useRotationComparison';
 import { formatInt } from '@/views/format';
 import { NoteList } from './NoteList';
+import { CitedNotes } from './CitedNotes';
 import { PlainLine, Science } from './Science';
 import { barePlain, waterPlain } from '@/views/plain';
 import { SourceTag } from './SourceTag';
@@ -137,6 +138,8 @@ export function RotationCard({ s, weights, climate, hazards, peers }: Props) {
           <NoteList notes={s.risks} climate={climate} />
         </details>
       )}
+
+      {peers[0] && <CitedNotes s={s} current={peers[0]} />}
 
       <Science>
       <h3 className="small-head">{t('rotations.yearStrip')}</h3>
