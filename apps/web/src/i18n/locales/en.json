@@ -19,7 +19,6 @@
   },
   "field": {
     "title": "Pin your field",
-    "intro": "Satellites already watch every field. Just pin yours: Orbisol fetches NASA data for that spot.",
     "useGps": "Use my location",
     "locating": "Finding you…",
     "useDemo": "Demo farm near Tando Jam, Hyderabad",
@@ -55,7 +54,14 @@
     "searchNone": "No place found. Try another spelling, or tap the map.",
     "searchError": "Place search is not available right now. Tap the map or use GPS.",
     "searchResults": "Places found",
-    "kmAway": "{{km}} km from current pin"
+    "kmAway": "{{km}} km from current pin",
+    "value": "Compare crop rotations for your field using 25 years of NASA satellite data and 30 years of NASA climate records.",
+    "stepsLabel": "How it works",
+    "steps": {
+      "0": "Pin your field",
+      "1": "Tell us how you farm",
+      "2": "See your options"
+    }
   },
   "placeholder": {
     "needPin": "Pin your field first.",

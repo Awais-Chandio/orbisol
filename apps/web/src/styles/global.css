@@ -515,3 +515,22 @@ html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; } /* no mobile fo
   display: flex; align-items: center; min-height: 48px; padding: 0 var(--space-4); cursor: pointer; font-weight: 700;
   border: 2px solid var(--c-white); border-radius: 999px; width: fit-content;
 }
+
+/* Field: value line and 3-step strip */
+.value-line { font-size: 1.1rem; font-weight: 700; line-height: 1.4; }
+.steps { list-style: none; padding: 0; margin: 0 0 var(--space-4); display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-2); }
+.steps li {
+  display: flex; flex-direction: column; align-items: flex-start; gap: var(--space-1); padding: var(--space-2);
+  border: 1.5px solid rgba(255, 255, 255, 0.5); border-radius: 8px; font-size: 0.85rem; font-weight: 600; line-height: 1.25;
+}
+.steps li.is-current { border: 2px solid var(--accent); }
+.step-num {
+  display: inline-flex; align-items: center; justify-content: center; width: 24px; height: 24px; border-radius: 50%;
+  background: var(--c-white); color: var(--c-deep-blue); font-weight: 700; font-size: 0.8rem;
+}
+.steps li.is-current .step-num { background: var(--accent); }
+.steps svg { display: none; }
+@media (min-width: 600px) {
+  .steps li { flex-direction: row; align-items: center; gap: var(--space-2); padding: var(--space-2) var(--space-3); font-size: 0.95rem; }
+  .steps svg { display: inline-block; flex: none; }
+}

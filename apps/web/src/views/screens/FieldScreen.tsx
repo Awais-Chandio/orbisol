@@ -1,6 +1,6 @@
 /* AI-assisted: drafted with Claude (Anthropic). See docs/ai-usage.md. */
 import { lazy, Suspense } from 'react';
-import { CheckCircle, Crosshair, Flask } from '@phosphor-icons/react';
+import { CheckCircle, Crosshair, Farm, Flask, MapPin, Scales } from '@phosphor-icons/react';
 import { useTranslation } from 'react-i18next';
 import { useFieldPicker } from '@/controllers/useFieldPicker';
 import { CoordinateForm } from '@/views/components/CoordinateForm';
@@ -16,7 +16,16 @@ export function FieldScreen() {
   return (
     <section className="screen">
       <h1>{t('field.title')}</h1>
-      <p className="lead">{t('field.intro')}</p>
+      <p className="value-line">{t('field.value')}</p>
+      <ol className="steps" aria-label={t('field.stepsLabel')}>
+        {[MapPin, Farm, Scales].map((I, i) => (
+          <li key={i} className={i === 0 ? 'is-current' : ''} aria-current={i === 0 ? 'step' : undefined}>
+            <span className="step-num">{i + 1}</span>
+            <I size={20} aria-hidden />
+            <span>{t('field.steps.' + i)}</span>
+          </li>
+        ))}
+      </ol>
 
       <div className="field-layout">
       <div className="btn-row field-actions">
