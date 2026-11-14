@@ -3,6 +3,7 @@ import { lazy, Suspense, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { latestCompleteYear, midMonthCompositeDate } from '@/config/map';
 import { NdviLegend } from '@/views/components/NdviLegend';
+import { MonthSlider } from '@/views/components/MonthSlider';
 import type { MapLayer } from '@/views/components/FieldMap';
 import { CheckCircle, Crosshair, Farm, Flask, MapPin, Scales } from '@phosphor-icons/react';
 import { useTranslation } from 'react-i18next';
@@ -31,6 +32,12 @@ export function FieldScreen() {
     else next.delete('layer');
     setParams(next, { replace: true });
   };
+  const setMonth = (m: number) => {
+    const next = new URLSearchParams(params);
+    next.set('month', String(m));
+    setParams(next, { replace: true });
+  };
+  const compositeDate = midMonthCompositeDate(year, month);
 
   return (
     <section className="screen">
@@ -77,11 +84,16 @@ export function FieldScreen() {
             </button>
           ))}
         </div>
-        <Suspense fallback={<div className="field-map map-loading">{t('field.mapLoading')}</div>}>
-          <FieldMap pin={pin} onPick={pickOnMap} layer={showNdvi ? 'ndvi' : 'true'} ndviDate={midMonthCompositeDate(year, month)} onNdviError={() => setNdviFailed(true)} />
-        </Suspense>
+        {showNdvi && (
+          <div className="ndvi-panel">
+            <MonthSlider month={month} year={year} compositeDate={compositeDate} onChange={setMonth} />
+            <NdviLegend />
+          </div>
+        )}
         {ndviFailed && layer === 'ndvi' && <p className="small form-error" role="status">{t('map.ndviFailed')}</p>}
-        {showNdvi && <NdviLegend />}
+        <Suspense fallback={<div className="field-map map-loading">{t('field.mapLoading')}</div>}>
+          <FieldMap pin={pin} onPick={pickOnMap} layer={showNdvi ? 'ndvi' : 'true'} ndviDate={compositeDate} onNdviError={() => setNdviFailed(true)} />
+        </Suspense>
         <p className="hint">{t('field.tapHint')}</p>
       </div>
 

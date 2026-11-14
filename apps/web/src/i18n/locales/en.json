@@ -859,6 +859,8 @@
       "dense": "dense green crops"
     },
     "legendCaption": "NASA MODIS Terra NDVI, 16-day composite. Brown and pale = little growth; green = growing crops.",
-    "ndviFailed": "Greenness tiles could not load (offline or NASA server busy). Showing true colour."
+    "ndviFailed": "Greenness tiles could not load (offline or NASA server busy). Showing true colour.",
+    "sliderLabel": "See your area's greenness month by month - NASA MODIS",
+    "composite": "16-day composite from {{date}}"
   }
 }

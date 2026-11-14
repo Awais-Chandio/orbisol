@@ -640,3 +640,16 @@ html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; } /* no mobile fo
 .ndvi-ticks { list-style: none; padding: 0; margin: var(--space-1) 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--space-1); font-size: 0.75rem; line-height: 1.25; }
 .ndvi-ticks strong { display: block; font-family: var(--font-code); }
 .ndvi-legend figcaption { margin: 0; font-size: 0.75rem; }
+
+/* Greenness month slider */
+.ndvi-panel { background: var(--c-white); color: var(--c-deep-blue); border-radius: var(--radius); padding: var(--space-2) var(--space-3); margin-bottom: var(--space-2); }
+.ndvi-panel .ndvi-legend { padding: var(--space-2) 0 0; margin: 0; border-top: 1px solid rgba(7, 23, 63, 0.15); border-radius: 0; }
+.month-slider-label { display: block; font-weight: 700; }
+.month-slider-value { margin: 2px 0 0; }
+.month-slider input[type='range'] { width: 100%; min-height: 44px; accent-color: var(--c-electric-blue); cursor: pointer; margin: 0; }
+.month-slider-ticks { list-style: none; padding: 0 2px; margin: -8px 0 var(--space-1); display: flex; justify-content: space-between; font-size: 0.7rem; font-weight: 600; }
+.month-slider-ticks li { width: 1.2em; text-align: center; }
+.month-slider-ticks li.is-on { color: var(--c-electric-blue); font-weight: 900; text-decoration: underline; }
+@media (min-width: 1024px) {
+  .ndvi-panel ~ * .field-map, .field-map-wrap:has(.ndvi-panel) .field-map { height: calc(100vh - 470px); min-height: 360px; }
+}
