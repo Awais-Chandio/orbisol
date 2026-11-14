@@ -624,3 +624,6 @@ html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; } /* no mobile fo
 .salt-overview { display: block; text-decoration: none; color: var(--c-deep-blue); background: var(--c-white); border-radius: var(--radius); border-left: 6px solid var(--c-martian-red); padding: var(--space-2) var(--space-3); margin: var(--space-3) 0; }
 .salt-overview .plain-line { margin: 0; }
 .salt-overview svg { color: var(--c-martian-red) !important; }
+
+/* Observed trend vs a published station study */
+.published { border-top: 1px solid rgba(7, 23, 63, 0.2); margin-top: var(--space-3); padding-top: var(--space-2); }

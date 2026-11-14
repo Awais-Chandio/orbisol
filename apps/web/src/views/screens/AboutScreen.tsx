@@ -32,6 +32,7 @@ const REFERENCE: Credit[] = [
   { name: 'Feedipedia (INRAE, CIRAD, AFZ, FAO)', use: 'Plant families, legumes, fodder use, berseem and sorghum practice', url: 'https://www.feedipedia.org/' },
   { name: 'Dawn (2007), "Mungbean: a rich source of protein"', use: 'Mung bean sowing months and season length (check locally)', url: 'https://www.dawn.com/news/242480/mungbean-a-rich-source-of-protein' },
   { name: 'ETCCDI climate indices (Zhang et al. 2011) and WMO 1991-2020 normals', use: 'Frost days, heavy-rain days, hot days, normals', url: 'https://doi.org/10.1002/wcc.147' },
+  { name: 'Khan et al. (2022), PLOS ONE 17(7): e0271626, climate extremes in the climate zones of Pakistan, 1962-2019', use: 'Published station trends compared with the observed trend card (warm nights, warm days)', url: 'https://doi.org/10.1371/journal.pone.0271626' },
   { name: 'Dawn (2013), "Pink bollworm a threat to Sindh cotton"', use: 'Pink bollworm carry-over in bolls left on cotton sticks (Sindh)', url: 'https://www.dawn.com/news/1052279' },
   { name: 'UC IPM, Pink bollworm: cotton pest management guidelines', use: 'Stalk shredding, plowdown, host-free period, rotation to small grains', url: 'https://ipm.ucanr.edu/agriculture/cotton/pink-bollworm/' },
   { name: 'Saeed et al., Bemisia tabaci host range, Multan (CottonGen poster)', use: 'Whitefly host plants (about 50 major hosts)', url: 'https://cottongen.org/node/1287558' },

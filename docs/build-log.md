@@ -194,3 +194,11 @@
   (warning icon for sensitive, check icon for tolerant, question mark + information gap for no value), a one-line ECe
   explanation, a soil-test "Check locally" flag and the FAO-56 source; Overview shows one sentence linking to it.
   Read from the cited crop rules; scoring unchanged (ranks and water identical with salty yes/no).
+
+## 2026-11-15 PKT - Observed trend vs a published study
+
+- Found and cited Khan et al. 2022, PLOS ONE 17(7): e0271626 (peer-reviewed, PMD station data 1962-2019, five climate
+  zones). Under the trend card for pins in Sindh: warm nights "consistent with" (TN90p increased significantly in the
+  south-eastern and coastal zone, 1991-2019); hot days "differs from" (TX90p increased there), with the method
+  difference stated. Wording is picked from the trend direction on screen, so it stays true if the data changes.
+- PMD's 2026 45-year report: no public document found (press only), not cited; PMD-25/2012 Sindh report link is dead.

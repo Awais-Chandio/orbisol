@@ -3,6 +3,7 @@ import { ChartLineUp } from '@phosphor-icons/react';
 import type { LinearTrend, ObservedTrend, Provenance, TrendMeasure } from '@orbisol/core';
 import { useTranslation } from 'react-i18next';
 import { JudgmentFlag } from './JudgmentFlag';
+import { useFieldStore } from '@/stores/fieldStore';
 import { SourceTag } from './SourceTag';
 
 type Measure = TrendMeasure;
@@ -64,6 +65,34 @@ const SECTIONS: { m: Measure; unit: string; digits: number; fmt: (v: number) => 
   { m: 'waterBalance', unit: 'mm', digits: 1, fmt: round },
 ];
 
+/** Khan et al. 2022 (PLOS ONE): PMD stations, five climate zones; zone 4 = south-eastern and coastal Pakistan. */
+const KHAN_2022: Provenance = {
+  source: 'Khan et al. 2022, PLOS ONE 17(7): e0271626',
+  kind: 'reference',
+  date: '2022',
+  url: 'https://doi.org/10.1371/journal.pone.0271626',
+};
+/** Rough Sindh box: the published zone result is only compared for pins in this region. */
+const inSindh = (lat: number, lon: number) => lat >= 23.5 && lat <= 28.6 && lon >= 66.5 && lon <= 71.2;
+const dirOf = (f: LinearTrend | null) => (!f || !f.clear ? 'unclear' : f.perDecade > 0 ? 'up' : 'down');
+
+/** Says whether this grid's trend agrees with a peer-reviewed station study, from the trend direction shown above. */
+function PublishedComparison({ tr }: { tr: ObservedTrend }) {
+  const { t } = useTranslation();
+  const pin = useFieldStore((s) => s.pin);
+  if (!pin || !inSindh(pin.lat, pin.lon)) return null;
+  const nights = dirOf(tr.warmNights);
+  const days = dirOf(tr.hotDays);
+  return (
+    <section className="published">
+      <h4 className="small-head">{t('trend.lit.title')}</h4>
+      <p className="small">{t(nights === 'up' ? 'trend.lit.nightsSame' : 'trend.lit.nightsDiffer')}</p>
+      <p className="small">{t(days === 'up' ? 'trend.lit.daysSame' : 'trend.lit.daysDiffer', { t: tr.hotTmaxC.toFixed(1) })}</p>
+      <SourceTag provenance={KHAN_2022} />
+    </section>
+  );
+}
+
 export function TrendCard({ tr, climate }: { tr: ObservedTrend; climate?: Provenance }) {
   const { t } = useTranslation();
   const prov: Provenance | null = climate ? { ...climate, dateFrom: `${tr.fromYear}-01-01`, date: `${tr.toYear}-12-31` } : null;
@@ -89,6 +118,7 @@ export function TrendCard({ tr, climate }: { tr: ObservedTrend; climate?: Proven
         </section>
       ))}
       <p className="small trend-legend">{t('trend.legend')}</p>
+      <PublishedComparison tr={tr} />
 
       <details className="note-section">
         <summary>{t('trend.table')}</summary>

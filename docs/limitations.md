@@ -132,6 +132,16 @@ Full table with sources: `docs/crop-rules.md`.
   wind and sunshine fell slightly. This runs against the common expectation of a hotter, drier Sindh. It is a
   reanalysis trend (MERRA-2 / GEOS-IT), which can shift when the observing system changes, and it has not been
   checked against a local station (for example PMD Hyderabad). Shown as observed, with that caveat on screen.
+- Published comparison (shown under the trend card for pins in Sindh): Khan et al. 2022, *PLOS ONE* 17(7): e0271626
+  (https://doi.org/10.1371/journal.pone.0271626), PMD station data 1962-2019 in five climate zones. In the south-eastern
+  and coastal zone, warm nights (TN90p) increased significantly in 1991-2019 vs 1962-1990: **consistent** with the
+  POWER warm-night trend. Warm days (TX90p) increased in that zone in 1991-2019: **differs** from the POWER hot-day
+  decrease. The study also reports a falling maximum-temperature trend in that zone over 1962-2019, and TX90p uses
+  calendar-day percentiles while Orbisol uses one fixed threshold, so the two are not like for like. The zone result
+  is not station-specific to Hyderabad.
+- Not cited: PMD's 2026 report "How the Climate of Pakistan has Changed: Evidence from 45-year Data Record" (reported
+  in the press on 8 Sep 2026) was not found as a public document, and the PMD Sindh report PMD-25/2012
+  (pmd.gov.pk/report_rnd.pdf) returned 404 on 15 Nov 2026. Press summaries were not used as a source.
 
 ## 2050 heat outlook (NASA NEX-GDDP-CMIP6)
 

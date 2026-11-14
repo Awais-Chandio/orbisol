@@ -570,7 +570,14 @@
       "down": "The yearly gap has grown (drier balance).",
       "unclear": "No clear change: the year-to-year swing is bigger than the trend."
     },
-    "nightsUnit": "nights"
+    "nightsUnit": "nights",
+    "lit": {
+      "title": "How this compares with a published study",
+      "nightsSame": "Warm nights: consistent with Khan et al. (2022), who found from Pakistan Meteorological Department stations that warm nights (TN90p) increased significantly in 1991–2019 compared with 1962–1990 in Pakistan's south-eastern and coastal climate zone.",
+      "nightsDiffer": "Warm nights: differs from Khan et al. (2022), who found from Pakistan Meteorological Department stations that warm nights (TN90p) increased significantly in 1991–2019 compared with 1962–1990 in Pakistan's south-eastern and coastal climate zone.",
+      "daysSame": "Hot days: consistent with the same study, which found warm days (TX90p) increasing in that zone in 1991–2019.",
+      "daysDiffer": "Hot days: differs from the same study, which found warm days (TX90p) increasing in that zone in 1991–2019. The study also found maximum temperature falling in that zone over 1962–2019, and it counts warm days against each calendar day's own normal, while Orbisol counts days above one fixed line ({{t}} °C), so the two are not measured the same way."
+    }
   },
   "heat2050": {
     "title": "Hot days around {{from}}–{{to}}",
