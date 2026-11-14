@@ -383,7 +383,10 @@
       "middle": "middle of {{n}}",
       "same": "same for all {{n}}"
     },
-    "placeAria": "{{place}} ({{pct}}% of the best)"
+    "placeAria": "{{place}} ({{pct}}% of the best)",
+    "rankedFor": "Ranked for:",
+    "change": "Change",
+    "allEqual": "all priorities equally"
   },
   "calendar": {
     "title": "Seasonal calendar",

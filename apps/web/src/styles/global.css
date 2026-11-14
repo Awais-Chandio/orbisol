@@ -407,7 +407,6 @@ html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; } /* no mobile fo
 
   /* Rotations: the three cards side by side */
   .rotation-list { grid-template-columns: repeat(3, minmax(0, 1fr)); align-items: start; }
-  .weights-card { max-width: 760px; }
 
   /* Season and Calendar: 2-column card grids */
   .indicator-list { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-4); }
@@ -493,3 +492,14 @@ html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; } /* no mobile fo
   display: inline-flex; padding: 0 var(--space-4); border: 2px solid var(--c-white); border-radius: 999px; min-height: 48px;
 }
 .manual[open] > summary { margin-bottom: var(--space-3); }
+
+/* Rotations: priorities collapsed to one line */
+.weights-card { padding: var(--space-2) var(--space-3); }
+.weights-card > summary { display: flex; align-items: center; gap: var(--space-2); min-height: 48px; cursor: pointer; list-style: none; }
+.weights-line { flex: 1; display: flex; flex-wrap: wrap; align-items: center; gap: 2px var(--space-2); font-size: 0.9rem; }
+.weights-label { font-weight: 700; }
+.weights-item { display: inline-flex; align-items: center; gap: 4px; font-weight: 600; }
+.weights-item .chip-rank { background: var(--c-white); color: var(--c-deep-blue); }
+.weights-change { flex: none; font-weight: 700; text-decoration: underline; text-underline-offset: 3px; color: var(--accent); }
+.weights-card[open] > summary { margin-bottom: var(--space-2); }
+.weights-card[open] .weights-change { display: none; }

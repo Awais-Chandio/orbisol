@@ -24,13 +24,28 @@ export function RotationsScreen() {
       <h1>{t('rotations.title')}</h1>
       <p className="lead">{t('rotations.intro')}</p>
 
-      <div className="card weights-card">
-        <h2>{t('rotations.weightsTitle')}</h2>
+      {/* Collapsed to one line so the first rotation card shows on the first phone screen. */}
+      <details className="card weights-card disclosure">
+        <summary>
+          <span className="weights-line">
+            <span className="weights-label">{t('rotations.rankedFor')}</span>{' '}
+            {r.farm.priorities.length ? (
+              r.farm.priorities.map((p, i) => (
+                <span key={p} className="weights-item">
+                  <span className="chip-rank">{i + 1}</span> {t(`priorities.${p}.name`)}
+                </span>
+              ))
+            ) : (
+              <span className="weights-item">{t('rotations.allEqual')}</span>
+            )}
+          </span>
+          <span className="weights-change">{t('rotations.change')}</span>
+        </summary>
         <p className="small">{t('rotations.weightsHint')}</p>
         <PriorityPicker value={r.farm.priorities} onChange={r.setPriorities} />
         {r.farm.priorities.length === 0 && <p className="small">{t('rotations.noPriorities')}</p>}
         <p className="small"><JudgmentFlag reason={t('rotations.marketNote')} /></p>
-      </div>
+      </details>
 
       {r.isLoading && <p className="card light" role="status">{t('rotations.loading')}</p>}
       {r.isError && (
