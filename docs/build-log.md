@@ -127,3 +127,15 @@
   frost risk; native Popover API); "Next step" button in story order; one-tap Sindh rotation presets in My farm.
 - No new dependencies. Screenshots: docs/screenshots/ (7 screens x 360x800 @2x and 1440x900). Checked: no horizontal
   overflow at 360, 1024 or 1440; 72 core tests pass; typecheck and production build pass.
+
+## 2026-11-15 PKT - Polish follow-ups
+
+- Demo farm = cotton -> wheat preset (one `COTTON_WHEAT` definition), inside the cited Sindh windows: cotton mid-May to
+  late Oct, wheat early Nov to late Mar (was mid-April, outside the March harvest window). A device that saved the old
+  demo rotation is moved to the new one on load. Fresh start, old saved demo and tapping the preset all give the same
+  Overview: 44 bare days in the hottest months, best option 12% less water.
+- Bottom nav at 360 px: 6 items of 60 x 60 px (>= 44 px), every label on one line (widest, bold "Rotations", 49 of
+  58 px); also fits at 320 px (53 px items). No change needed.
+- Full-length captures (whole page, 2x, viewport grown to page height so the header and nav sit in place) of Overview,
+  Rotations and Calendar at 360 and 1440 wide: docs/screenshots/*-full@2x.png. Viewport screenshots retaken with the
+  new demo numbers.
