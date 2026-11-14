@@ -155,3 +155,24 @@
   emissions paths, salt rating in words, model squares; glossary popovers kept.
 - Verified: nav 6 x 60x60 px at 360, labels on one line; fresh start shows the cotton -> wheat preset selected.
   Screenshots recaptured (top of screen for all 7 screens + full-length 2x for Overview, Rotations, Calendar).
+
+## 2026-11-15 PKT - Farmer layer + science layer (presentation only) - commits c6d3590 .. 9be79b9
+
+- Basis: GSMA AgriTech UX guidance (insights, not just data; plain local language; icons; voice; less is more) and
+  2024 Space Apps winners that turned NASA data into simple decisions.
+- Two layers on Overview, Rotations, Calendar, Season: one plain sentence + icon per screen and card; charts, ranges,
+  sources and method text under one "Show the science" switch (open by default >= 1024 px, closed on phones). Nothing
+  removed; risks to check locally and the canal-turn empty state stay in the farmer layer.
+- Farmer units: water as "about 1 in N canal turns saved" (N = round(100 / %), only from 5%), bare days as
+  "X hot days with bare soil: sun and wind take the topsoil"; exact numbers beside them.
+- Crop-year chart: Current | Option 1 | Option 2; bars and bare gaps glide (CSS transitions on SVG geometry, stable
+  keys) and the hottest-months bare-day count updates; MODIS curve with Current only.
+- Motion (< 400 ms, off with prefers-reduced-motion, checked by emulation): count-up via CSS @property counter, bars
+  grow in, NDVI and trend lines draw in.
+- Listen: browser speechSynthesis reads the four Overview sentences (arrows and ranges spoken in words); hidden when
+  unsupported. No network, no dependency.
+- Urdu (DRAFT, needs native review; src/i18n/locales/ur.ts): Field screen, Overview plain sentences, nav labels and
+  the buttons on those screens. RTL with Noto Nastaliq Urdu; untranslated English keeps left-to-right
+  (unicode-bidi: plaintext); numbers, ranges and units isolated left-to-right; dates stay English while Urdu is partial.
+  English remains the default; the choice is remembered on the device.
+- Screenshots recaptured (docs/screenshots/), plus two Urdu draft phone shots (08-*-ur-draft-360x800.png).
