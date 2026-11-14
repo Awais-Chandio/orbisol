@@ -14,6 +14,8 @@ interface Props {
   weights: { priority: Priority; weight: number }[];
   climate?: Provenance;
   hazards?: HazardMonths;
+  /** All rotations shown (existing + options), to say where this one stands on each priority. */
+  peers: StrategyView[];
 }
 
 function WaterHeadline({ s }: { s: StrategyView }) {
@@ -32,7 +34,18 @@ function WaterHeadline({ s }: { s: StrategyView }) {
   );
 }
 
-export function RotationCard({ s, weights, climate, hazards }: Props) {
+/** Where a score stands among the rotations shown: never a bare 0%, always a plain-word place. */
+function standing(v: number, all: number[]): 'same' | 'best' | 'jointBest' | 'lowest' | 'middle' {
+  const r = (x: number) => Math.round(x * 1000);
+  const max = Math.max(...all.map(r));
+  const min = Math.min(...all.map(r));
+  if (max === min) return 'same';
+  if (r(v) === max) return all.filter((x) => r(x) === max).length > 1 ? 'jointBest' : 'best';
+  if (r(v) === min) return 'lowest';
+  return 'middle';
+}
+
+export function RotationCard({ s, weights, climate, hazards, peers }: Props) {
   const { t } = useTranslation();
   const existing = s.plan.kind === 'existing';
   const title = s.plan.slots.map((x) => t('crops.' + x.crop));
@@ -110,10 +123,12 @@ export function RotationCard({ s, weights, climate, hazards }: Props) {
       <WaterFitDetail fit={s.fit} climate={climate} />
 
       <h3 className="small-head">{t('rotations.scoresTitle')}</h3>
-      <p className="small">{t('rotations.scoresHint')}</p>
+      <p className="small">{t('rotations.scoresHint', { n: peers.length })}</p>
       <ul className="score-list">
         {(weights.length ? weights : SCORED_PRIORITIES.map((p) => ({ priority: p, weight: 1 }))).map(({ priority, weight }) => {
           const v = s.scores[priority];
+          const all = peers.map((p) => p.scores[priority]).filter((x): x is number => x !== null);
+          const place = v === null ? null : t('rotations.place.' + standing(v, all), { n: all.length });
           return (
             <li key={priority}>
               <span className="score-label">
@@ -122,9 +137,9 @@ export function RotationCard({ s, weights, climate, hazards }: Props) {
               {v === null ? (
                 <span className="small">{t('rotations.notScored')}</span>
               ) : (
-                <span className="score-bar" role="img" aria-label={`${Math.round(v * 100)}%`}>
-                  <span style={{ width: `${Math.round(v * 100)}%` }} />
-                  <em>{Math.round(v * 100)}%</em>
+                <span className="score-bar" role="img" aria-label={t('rotations.placeAria', { place, pct: Math.round(v * 100) })}>
+                  <span style={{ width: `${Math.max(4, Math.round(v * 100))}%` }} />
+                  <em>{place}</em>
                 </span>
               )}
             </li>

@@ -43,7 +43,7 @@ export function RotationsScreen() {
       )}
       <div className="rotation-list" aria-live="polite">
         {r.strategies.map((s) => (
-          <RotationCard key={s.plan.id} s={s} weights={r.weights} climate={r.provenance} hazards={r.hazards} />
+          <RotationCard key={s.plan.id} s={s} weights={r.weights} climate={r.provenance} hazards={r.hazards} peers={r.strategies} />
         ))}
       </div>
       {r.strategies.length > 0 && <ShareButton strategies={r.strategies} />}

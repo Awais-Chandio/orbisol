@@ -366,7 +366,15 @@
     "loading": "Building rotation options…",
     "needFarm": "Set up your farm first.",
     "goFarm": "Go to My farm",
-    "scoresHint": "100% = the best of all rotations Orbisol checked for this field."
+    "scoresHint": "Bars compare the {{n}} rotations on each priority: a full bar is the best of them, a short bar the lowest.",
+    "place": {
+      "best": "best of {{n}}",
+      "jointBest": "joint best of {{n}}",
+      "lowest": "lowest of {{n}}",
+      "middle": "middle of {{n}}",
+      "same": "same for all {{n}}"
+    },
+    "placeAria": "{{place}} ({{pct}}% of the best)"
   },
   "calendar": {
     "title": "Seasonal calendar",
