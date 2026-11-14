@@ -27,3 +27,12 @@
 - Found in testing: POWER model ET ignores irrigation (about 2 mm in 90 days at Hyderabad), so it was replaced by FAO-56 ET0; mean-based
   "normal" contradicted tercile labels, so normal is now the median. ET0 likely reads high in irrigated Sindh (documented).
 - Verified in browser: Hyderabad live, Hyderabad offline -> built-in data, Lahore live, 30/90-day toggle, no console errors.
+
+## 2026-11-14 14:30 PKT - Map labels re-check + place search - commit 54685b1
+
+- FLOW: type name -> core planShards -> fetch one small GeoNames shard (Zod) -> searchPlaceRows (exact > prefix, near pin first, dedupe 10 km) -> pin (source "search") -> map flies there
+- Finding: format/matrix set were already png + GoogleMapsCompatible_Level13. The missing time segment ("default/default") caused
+  opaque black blank tiles and 500s; with it, Labels/Features are transparent but empty everywhere tested (incl. New York, London).
+  Coastlines_15m works and is now an overlay. Labels replaced by offline place search (no OSM/Nominatim).
+- Index: 150k Pakistan places + 34k world cities in 1516 adaptive prefix shards (largest 116 KB, typical query ~25 KB), cached on use.
+- Verified in browser: "tando ja" -> Tando Jam pins at 25.43, 68.53; "goth" asks for more letters; "hyderabad" shows Sindh first with km; coastlines visible near Karachi; no console errors. 30 core tests pass.
