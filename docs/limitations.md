@@ -119,6 +119,10 @@ Full table with sources: `docs/crop-rules.md`.
 - Labelled "observed trend, not a forecast". NASA POWER 1990 to the last complete year; least-squares change per
   decade with a 95% range; "unclear" when the range crosses zero.
 - Hot day (yearly view) = Tmax above the 1991-2020 90th percentile of all daily Tmax at the pin (Hyderabad: 42.5 °C).
+- Warm night = Tmin above the 1991-2020 90th percentile of daily Tmin (TN90p adapted; Hyderabad 27.8 °C); hottest day
+  of the year = yearly max Tmax (TXx). Hyderabad: warm nights +5.7 per decade (+1.4 to +9.9, clear); TXx -0.25 °C per
+  decade (-0.69 to +0.19, unclear). Together with fewer hot days this reads as warmer nights, not hotter days. The card
+  says irrigated areas can cool daytime extremes and that the grid is about 50 km.
 - Hyderabad result: hot days -4.5 per decade (95% range -8.5 to -0.6); rain minus ET0 +185 mm per decade (+100 to
   +270), from rain +94 mm and ET0 -91 mm per decade. In the POWER inputs, dew point rose (+0.7 °C per decade) while
   wind and sunshine fell slightly. This runs against the common expectation of a hotter, drier Sindh. It is a

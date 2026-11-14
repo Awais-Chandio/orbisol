@@ -499,6 +499,34 @@
       "down": "Hot days have become less common here.",
       "unclear": "No clear change: the year-to-year swing is bigger than the trend."
     },
+    "legend": "Solid line: each year. Dashed line: straight-line trend.",
+    "table": "See the numbers by year",
+    "year": "Year",
+    "rain": "Rain",
+    "balance": "Rain − ET0",
+    "caveat": "from a NASA model grid (about 50 km), not a local station; model trends can shift when the satellite and station data fed into it change, and this has not been checked against a local station",
+    "method": "Complete calendar years only. Change per decade = least-squares straight line × 10 years; the 95% range shows how sure that is. If the range crosses zero, the change is called unclear.",
+    "irrigation": "Irrigated areas can cool daytime extremes (watered fields evaporate and cool the air), and this NASA model grid is about 50 km wide, so it mixes your area with its surroundings.",
+    "warmNights": {
+      "name": "Warm nights per year",
+      "short": "Warm nights",
+      "what": "Nights with a minimum above {{t}} °C (the warmest 10% of nights in 1991–2020 here). Warm nights stress crops and animals because they do not cool down.",
+      "decades": "First 10 years: about {{a}} warm nights a year. Last 10 years: about {{b}}.",
+      "chart": "Warm nights per year, one point per year, with the trend line",
+      "up": "Warm nights have become more common.",
+      "down": "Warm nights have become less common here.",
+      "unclear": "No clear change: the year-to-year swing is bigger than the trend."
+    },
+    "txx": {
+      "name": "Hottest day of the year",
+      "short": "Hottest °C",
+      "what": "The highest daily maximum in each year.",
+      "decades": "First 10 years: about {{a}} °C on average. Last 10 years: about {{b}} °C.",
+      "chart": "Hottest day of each year in °C, one point per year, with the trend line",
+      "up": "The hottest day of the year has become hotter.",
+      "down": "The hottest day of the year has become a little cooler here.",
+      "unclear": "No clear change: the year-to-year swing is bigger than the trend."
+    },
     "waterBalance": {
       "name": "Rain minus evaporation demand (ET0) per year",
       "what": "Below zero means the air took more water than rain gave; canal water had to fill the gap.",
@@ -508,13 +536,7 @@
       "down": "The yearly gap has grown (drier balance).",
       "unclear": "No clear change: the year-to-year swing is bigger than the trend."
     },
-    "legend": "Solid line: each year. Dashed line: straight-line trend.",
-    "table": "See the numbers by year",
-    "year": "Year",
-    "rain": "Rain",
-    "balance": "Rain − ET0",
-    "caveat": "from a NASA model grid (about 50 km), not a local station; model trends can shift when the satellite and station data fed into it change, and this has not been checked against a local station",
-    "method": "Complete calendar years only. Change per decade = least-squares straight line × 10 years; the 95% range shows how sure that is. If the range crosses zero, the change is called unclear."
+    "nightsUnit": "nights"
   },
   "heat2050": {
     "title": "Hot days around {{from}}–{{to}}",

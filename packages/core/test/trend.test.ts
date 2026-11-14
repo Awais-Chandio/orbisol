@@ -27,6 +27,14 @@ describe('observed long-term trend', () => {
     expect(meanHot).toBeGreaterThan(30);
     expect(meanHot).toBeLessThan(43);
     for (const y of tr.years) expect(y.waterBalance).toBeLessThan(0); // arid: ET0 far above rain
+    const meanWarm = normal.reduce((a, y) => a + y.warmNights, 0) / normal.length;
+    expect(meanWarm).toBeGreaterThan(30);
+    expect(meanWarm).toBeLessThan(43);
+    for (const y of tr.years) expect(y.txx).toBeGreaterThan(tr.hotTmaxC);
+    console.log(
+      `warm nights > ${tr.warmTminC.toFixed(1)} C: ${tr.warmNights!.perDecade.toFixed(1)}/decade [${tr.warmNights!.low.toFixed(1)}, ${tr.warmNights!.high.toFixed(1)}];`,
+      `TXx ${tr.txx!.perDecade.toFixed(2)} C/decade [${tr.txx!.low.toFixed(2)}, ${tr.txx!.high.toFixed(2)}]; first ${tr.firstDecade.txx.toFixed(1)} last ${tr.lastDecade.txx.toFixed(1)}`,
+    );
     console.log(
       `threshold ${tr.hotTmaxC.toFixed(1)} C; hot days ${tr.hotDays!.perDecade.toFixed(1)}/decade [${tr.hotDays!.low.toFixed(1)}, ${tr.hotDays!.high.toFixed(1)}];`,
       `balance ${tr.waterBalance!.perDecade.toFixed(0)} mm/decade [${tr.waterBalance!.low.toFixed(0)}, ${tr.waterBalance!.high.toFixed(0)}];`,
