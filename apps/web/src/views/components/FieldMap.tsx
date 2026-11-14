@@ -1,11 +1,11 @@
 /* AI-assisted: drafted with Claude (Anthropic). See docs/ai-usage.md. */
 import { useEffect, useRef, useState } from 'react';
-import { Map as MlMap, Marker, NavigationControl, setWorkerUrl, type RasterTileSource } from 'maplibre-gl';
+import { Map as MlMap, Marker, NavigationControl, setWorkerUrl } from 'maplibre-gl';
 // MapLibre v6 looks for its worker next to its own file; after bundling we must point it at Vite's copy.
 import maplibreWorkerUrl from 'maplibre-gl/dist/maplibre-gl-worker.mjs?worker&url';
 import 'maplibre-gl/dist/maplibre-gl.css';
 import { useTranslation } from 'react-i18next';
-import { buildMapStyle, gibsImageryDate, MAP_MAX_ZOOM, ndviTileUrl } from '@/config/map';
+import { buildMapStyle, gibsImageryDate, MAP_MAX_ZOOM, NDVI_MAX_ZOOM, ndviTileUrl } from '@/config/map';
 import { DEMO_FIELD } from '@/config/env';
 
 setWorkerUrl(maplibreWorkerUrl);
@@ -70,6 +70,8 @@ export default function FieldMap({ pin, onPick, layer = 'true', ndviDate = '2025
       }
     });
     map.current = m;
+    // Development only: lets the browser tests ask whether all tiles have loaded.
+    if (import.meta.env.DEV) (window as unknown as { __orbisolMap?: MlMap }).__orbisolMap = m;
     return () => {
       m.remove();
       map.current = null;
@@ -97,17 +99,39 @@ export default function FieldMap({ pin, onPick, layer = 'true', ndviDate = '2025
     if (far || m.getZoom() < 8) m.flyTo({ center: [pin.lon, pin.lat], zoom: Math.max(m.getZoom(), 9), essential: true });
   }, [pin]);
 
-  // Layer switch and month: change visibility and the time segment of the greenness tiles.
+  // Month: replace the greenness source (setTiles alone left earlier months' tiles on screen, tested 15 Nov 2026).
+  const shownDate = useRef(ndviDate);
+  useEffect(() => {
+    const m = map.current;
+    if (!m || !ready || shownDate.current === ndviDate) return;
+    try {
+      const visibility = m.getLayoutProperty('ndvi', 'visibility') ?? 'none';
+      if (m.getLayer('ndvi')) m.removeLayer('ndvi');
+      if (m.getSource('ndvi')) m.removeSource('ndvi');
+      m.addSource('ndvi', {
+        type: 'raster',
+        tiles: [ndviTileUrl(ndviDate)],
+        tileSize: 256,
+        maxzoom: NDVI_MAX_ZOOM,
+        attribution: 'Greenness: NASA GIBS, MODIS Terra NDVI 16-day',
+      });
+      m.addLayer({ id: 'ndvi', type: 'raster', source: 'ndvi', layout: { visibility } }, 'coastlines');
+      shownDate.current = ndviDate;
+    } catch {
+      /* style busy: the next change applies it */
+    }
+  }, [ndviDate, ready]);
+
+  // Layer switch: show or hide the greenness layer.
   useEffect(() => {
     const m = map.current;
     if (!m || !ready) return;
     try {
       m.setLayoutProperty('ndvi', 'visibility', layer === 'ndvi' ? 'visible' : 'none');
-      (m.getSource('ndvi') as RasterTileSource | undefined)?.setTiles([ndviTileUrl(ndviDate)]);
     } catch {
-      /* style not ready: the next render applies it */
+      /* style busy */
     }
-  }, [layer, ndviDate, ready]);
+  }, [layer, ready, ndviDate]);
 
   if (failed) return <p className="card light">{t('field.mapError')}</p>;
   return <div ref={el} className="field-map" role="application" aria-label={t('field.tapHint')} />;

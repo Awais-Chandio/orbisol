@@ -226,3 +226,15 @@
 - GPM_3IMERGM.07 has no 2026 folder (404); V07 Final daily also ends 2025-09; daily Late run reaches 2026-11.
   GPM_3IMERGM.08 / GPM_3IMERGDF.08 exist but return 403 (not open). No newer months to fetch: JSON kept, the card
   now states the real reason (V07 Final stops at Sep 2025 during the move to V08). Stopped at 13 minutes.
+
+## 2026-11-15 PKT - Greenness map for any pin (NASA GIBS)
+
+- Field map layer switch True colour | Greenness (NDVI): GIBS MODIS_Terra_L3_NDVI_16Day (EPSG:3857,
+  GoogleMapsCompatible_Level9, PNG, time segment), legend from the GIBS colour map with words. Month slider (2025,
+  composite covering the 15th), keyboard (real key events) and touch (real touch event) tested; Calendar link opens the
+  first bare month (Hyderabad: April).
+- Tested in headless Chrome for Hyderabad, Faisalabad and the Nile Delta at 360x800 and 1440x900: tiles HTTP 200,
+  0% black pixels once loaded, no horizontal scroll, 0 JS errors. Offline: falls back to true colour with a message,
+  nothing breaks.
+- Bug found and fixed in testing: MapLibre RasterTileSource.setTiles left earlier months' tiles on screen after the
+  slider moved; the greenness source is now removed and re-added per month (April via slider = April loaded directly).
