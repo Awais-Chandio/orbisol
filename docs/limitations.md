@@ -124,3 +124,16 @@ Full table with sources: `docs/crop-rules.md`.
   wind and sunshine fell slightly. This runs against the common expectation of a hotter, drier Sindh. It is a
   reanalysis trend (MERRA-2 / GEOS-IT), which can shift when the observing system changes, and it has not been
   checked against a local station (for example PMD Hyderabad). Shown as observed, with that caveat on screen.
+
+## 2050 heat outlook (NASA NEX-GDDP-CMIP6) - skipped at the 45-minute cap
+
+- Route tested: Microsoft Planetary Computer STAC (`nasa-nex-gddp-cmip6`, no login) -> signed blob URLs. Item
+  search, signing, and the collection's Kerchunk reference files all work, and reading one chunk by HTTP range +
+  zlib + byte-shuffle decode gave plausible daily Tmax for the demo pixel (ACCESS-CM2, January 1995: 19-25 °C).
+- Blocker: `tasmax` is chunked as whole global daily grids (1 x 600 x 1440, about 674 KB compressed), so one pixel
+  needs the whole chunk: about 246 MB per pixel-year. The plan (3 models; 1995-2014 historical, 2041-2060 SSP2-4.5
+  and SSP5-8.5) is about 180 pixel-years, roughly 44 GB. Measured throughput from the build machine: 0.5 MB/s with
+  16 parallel range requests. Not feasible here; no projection card is shown.
+- Future work: run the extraction next to the data (an Azure VM in the same region, or a Planetary Computer Hub
+  session), or use a point-friendly copy (for example NASA's per-variable CMIP6 point services if available), then
+  write `data/hyderabad/heat2050.json` with source and URL and apply the same hot-day threshold as the observed trend.
