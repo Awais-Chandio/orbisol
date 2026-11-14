@@ -44,3 +44,14 @@
 - Hyderabad result (water + forage priorities): existing cotton -> wheat ~1885 mm, 38 bare days (29 in Apr-Jun); sorghum fodder -> berseem 19% less water; mung -> berseem 25% less water but 57 more bare days (flagged as a risk).
 - Track record example (90-day window, next 60 days Tmax): 81% vs naive 73%. Hot-days outcome in winter is flagged as not informative.
 - 53 core tests pass (incl. integration test on real Hyderabad POWER data).
+
+## 2026-11-14 16:30 PKT - Phase 5 Must screens - commit 36cf2ea
+
+- FLOW: My farm (Zod store) + pin -> useClimate (one POWER fetch) -> core compareRotations / monthTimeline / seasonTwins -> Rotations, Calendar, Season screens; priority chips -> store -> instant re-rank
+- Rotations: main number = water relative to the existing rotation ("19% less water"); absolute mm shown as "estimate, likely high";
+  trade-off line (e.g. "less water, more legume time, but 51 more bare days"); score bars per chosen priority with x3/x2/x1 weights;
+  why / evidence / benefits / gaps / risks with a source tag on every line.
+- Calendar: bare Apr 16 - May 14 (29 days, all in the hottest months), wheat heat-sensitive in April, cotton in August heavy rain.
+- Season: Twins 2002, 2014, 2016; next-60-day outlook with Confidence Meter and Track Record (81% vs 73% naive).
+- About: NASA datasets, FAO-56, Sindh Agriculture Dept, Feedipedia, Dawn, ETCCDI/WMO, "Place names: GeoNames, CC BY 4.0".
+- Places index in repo: 1517 files, 9.47 MB raw (about 2.5 MB gzipped).
