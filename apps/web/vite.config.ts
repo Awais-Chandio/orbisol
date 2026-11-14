@@ -36,6 +36,8 @@ export default defineConfig({
       },
       workbox: {
         globPatterns: ['**/*.{js,css,html,svg,png,json,woff2}'],
+        // Place search shards (~1500 small files) are cached on use, not precached.
+        globIgnores: ['**/data/places/**'],
         maximumFileSizeToCacheInBytes: 3 * 1024 * 1024,
         navigateFallback: '/index.html',
         runtimeCaching: [
@@ -47,6 +49,11 @@ export default defineConfig({
               expiration: { maxEntries: 400, maxAgeSeconds: 14 * DAY },
               cacheableResponse: { statuses: [0, 200] },
             },
+          },
+          {
+            urlPattern: ({ url }) => url.pathname.startsWith('/data/places/'),
+            handler: 'CacheFirst',
+            options: { cacheName: 'places', expiration: { maxEntries: 300, maxAgeSeconds: 60 * DAY } },
           },
           {
             urlPattern: ({ url }) => url.hostname === 'fonts.googleapis.com',

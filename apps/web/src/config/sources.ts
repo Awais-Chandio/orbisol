@@ -28,3 +28,10 @@ export const CLIMATE_FRESH_MS = 12 * 60 * 60 * 1000;
 
 /** Precomputed files in data/ (copied to /data at build time). */
 export const STATIC_CLIMATE = [{ lat: 25.4, lon: 68.37, path: '/data/hyderabad/power_daily.json' }] as const;
+
+/** Offline place search (GeoNames, CC BY 4.0), prefix-sharded by pipeline/scripts/places.py. */
+export const PLACES = {
+  index: '/data/places/index.json',
+  shard: (key: string) => `/data/places/idx/${key.replace('~', '_')}.json`,
+  home: 'https://www.geonames.org/',
+} as const;

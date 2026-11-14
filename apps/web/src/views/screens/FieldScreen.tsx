@@ -6,6 +6,7 @@ import { useTranslation } from 'react-i18next';
 import { useFieldPicker } from '@/controllers/useFieldPicker';
 import { CoordinateForm } from '@/views/components/CoordinateForm';
 import { ErrorText } from '@/views/components/ErrorText';
+import { PlaceSearch } from '@/views/components/PlaceSearch';
 
 const FieldMap = lazy(() => import('@/views/components/FieldMap'));
 
@@ -31,6 +32,8 @@ export function FieldScreen() {
       {gpsError && (
         <ErrorText>{t('field.gpsError.' + gpsError)}</ErrorText>
       )}
+
+      <PlaceSearch />
 
       <Suspense fallback={<div className="field-map map-loading">{t('field.mapLoading')}</div>}>
         <FieldMap pin={pin} onPick={pickOnMap} />

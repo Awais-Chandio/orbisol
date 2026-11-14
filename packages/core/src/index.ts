@@ -5,3 +5,4 @@
 export * from './types';
 export * from './stats';
 export * from './season';
+export * from './places';

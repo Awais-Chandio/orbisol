@@ -26,5 +26,6 @@ pip install -r requirements.txt
 | `scripts/ndvi.py` | MODIS + VIIRS NOAA-20 (VJ113A1) via ORNL DAAC TESViS | `data/hyderabad/ndvi.json` |
 | `scripts/smap.py` | SMAP soil moisture | `data/hyderabad/soil_moisture.json` |
 | `scripts/srtm.py` | SRTM elevation -> slope | `data/hyderabad/slope.json` |
+| `scripts/places.py` | GeoNames (CC BY 4.0): PK populated places + world cities >= 15k | `data/places/index.json` + `data/places/idx/*.json` (prefix shards, max 1500 rows) |
 
 Every output record carries `source`, `kind` and `date` (see `../data/README.md`).

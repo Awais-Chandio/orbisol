@@ -11,9 +11,12 @@ All data credited in text only. No NASA or Space Apps logos are used anywhere.
 | SMAP soil moisture | NASA NSIDC | Soil moisture anomaly | Satellite | Pipeline |
 | SRTM elevation | NASA / USGS | Slope -> erosion risk | Satellite (radar) | Pipeline |
 | GIBS VIIRS_NOAA20_CorrectedReflectance_TrueColor | NASA GIBS | Map imagery | Satellite | Live tiles |
+| Coastlines_15m (GIBS reference layer) | NASA GIBS (© OpenStreetMap contributors) | Coastline overlay on the map | Reference | Live tiles |
+| GeoNames gazetteer (CC BY 4.0) | GeoNames | Offline town/village search (PK populated places + world cities >= 15k) | Reference | `data/places/` via `pipeline/scripts/places.py` |
 | GAEZ v4, FAO-56 | FAO | Crop requirements and water needs (cited crop rules) | Reference | Static table |
 
-Not used: Suomi NPP (VNP) products, the deprecated MODIS C6 subsets service, tile.openstreetmap.org, Open-Meteo.
+Not used: Suomi NPP (VNP) products, the deprecated MODIS C6 subsets service, tile.openstreetmap.org, OSM Nominatim, Open-Meteo,
+GIBS Reference_Labels_15m / Reference_Features_15m (no content returned, see limitations.md).
 
 ## Methods (cited)
 

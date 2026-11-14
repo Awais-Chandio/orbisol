@@ -6,7 +6,19 @@
 - SMAP soil moisture is coarse (~9-36 km) and covers only the top few centimetres.
 - The precomputed fallback covers the Hyderabad (Sindh) region only; other pins rely on live NASA POWER.
 - Map imagery is VIIRS NOAA-20 true color (native ~375 m, served to zoom 9 and slightly over-zoomed). It is good for finding the area, not for drawing individual field boundaries; GPS or typed coordinates are more precise.
-- The map has no road or place labels: the GIBS reference label/feature overlays return opaque black tiles where they are empty, so they were removed.
+- The map has no road or place labels. Re-tested on 14 Nov 2026 with the format and tile matrix set from GIBS
+  GetCapabilities (`image/png`, `GoogleMapsCompatible_Level13`):
+  - Without the time segment (`.../{Layer}/default/{TMS}/...`) GIBS returns a mix of HTTP 500s and blank tiles;
+    some of these are palette PNGs with no transparency (opaque black), which hid the imagery in Phase 2.
+  - With the time segment (`.../{Layer}/default/default/{TMS}/...`) tiles are transparent, but
+    `Reference_Labels_15m` and `Reference_Features_15m` returned no content anywhere tested (Hyderabad, Karachi,
+    Lahore, New York, London; zoom 6-11).
+  - `Coastlines_15m` works with the time segment and is now shown as an overlay.
+  - Instead of labels, Orbisol has an offline place search (GeoNames, CC BY 4.0; no OpenStreetMap/Nominatim).
+- Place search covers populated places in Pakistan (about 150,000, including many villages) and cities of 15,000+
+  people elsewhere. Small villages outside Pakistan are not in the index; GPS, map tap or coordinates still work.
+  Village names have many spellings (for example Goth/Got, Muhammad/Mohammad); search matches the start of the
+  name only, not words in the middle.
 - Daily VIIRS imagery can show clouds, haze or gaps for the chosen date (3 days back).
 - NASA POWER (MERRA-2 / GEOS-IT) does not model canal irrigation. Top-soil wetness is drier than irrigated fields,
   and FAO-56 ET0 computed from POWER inputs is likely higher than at a local station in irrigated Sindh (Hyderabad

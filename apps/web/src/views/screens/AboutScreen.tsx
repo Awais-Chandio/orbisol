@@ -11,6 +11,7 @@ const CREDITS: { name: string; use: string; url: string }[] = [
   { name: 'NASA SRTM', use: 'Slope and erosion risk', url: 'https://www.earthdata.nasa.gov/data/instruments/srtm' },
   { name: 'NASA GIBS (VIIRS NOAA-20 true color)', use: 'Map imagery', url: 'https://www.earthdata.nasa.gov/engage/open-data-services-software/earthdata-developer-portal/gibs-api' },
   { name: 'FAO GAEZ v4 and FAO-56', use: 'Crop requirements and water needs', url: 'https://gaez.fao.org/' },
+  { name: 'GeoNames gazetteer (CC BY 4.0)', use: 'Offline town and village search', url: 'https://www.geonames.org/' },
 ];
 
 export function AboutScreen() {

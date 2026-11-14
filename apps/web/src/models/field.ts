@@ -9,7 +9,7 @@ export const LatLonSchema = z.object({
   lon: z.number().finite().min(-180).max(180),
 });
 
-export const PinSourceSchema = z.enum(['gps', 'map', 'manual', 'demo']);
+export const PinSourceSchema = z.enum(['gps', 'map', 'manual', 'demo', 'search']);
 export type PinSource = z.infer<typeof PinSourceSchema>;
 
 export const FieldPinSchema = LatLonSchema.extend({

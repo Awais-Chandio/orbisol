@@ -38,14 +38,24 @@
       "gps": "from GPS",
       "map": "picked on map",
       "manual": "typed in",
-      "demo": "demo field"
+      "demo": "demo field",
+      "search": "found by search"
     },
     "gpsError": {
       "unsupported": "This device has no GPS access. Tap the map instead.",
       "denied": "Location permission was denied. Tap the map or type coordinates.",
       "unavailable": "Could not get your location. Tap the map instead.",
       "timeout": "GPS took too long. Try again outdoors, or tap the map."
-    }
+    },
+    "searchLabel": "Find your town or village",
+    "searchPlaceholder": "e.g. Tando Jam",
+    "searchHint": "Type at least 2 letters.",
+    "searching": "Searching…",
+    "searchMore": "Many places start like this. Type a few more letters.",
+    "searchNone": "No place found. Try another spelling, or tap the map.",
+    "searchError": "Place search is not available right now. Tap the map or use GPS.",
+    "searchResults": "Places found",
+    "kmAway": "{{km}} km from current pin"
   },
   "placeholder": {
     "needPin": "Pin your field first.",

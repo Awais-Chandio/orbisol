@@ -25,12 +25,21 @@ export function buildMapStyle(date: string): StyleSpecification {
         maxzoom: 9,
         attribution: `Imagery: NASA GIBS, VIIRS NOAA-20 true color (${date})`,
       },
-      // GIBS Reference_Features/Labels overlays were dropped: their empty tiles are opaque black PNGs
-      // (no alpha) and hide the imagery. See docs/limitations.md.
+      // Coastlines need the time segment ("default/default"); without it GIBS returns opaque black empty
+      // tiles. Reference_Labels_15m / Reference_Features_15m return no content at all (tested 14 Nov 2026,
+      // also over New York and London), so they are not used; place search replaces labels.
+      coastlines: {
+        type: 'raster',
+        tiles: [`${GIBS}/Coastlines_15m/default/default/GoogleMapsCompatible_Level13/{z}/{y}/{x}.png`],
+        tileSize: 256,
+        maxzoom: 13,
+        attribution: 'Coastlines: NASA GIBS reference layer, © OpenStreetMap contributors',
+      },
     },
     layers: [
       { id: 'bg', type: 'background', paint: { 'background-color': '#07173F' } },
       { id: 'imagery', type: 'raster', source: 'imagery' },
+      { id: 'coastlines', type: 'raster', source: 'coastlines' },
     ],
   };
 }

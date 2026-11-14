@@ -9,3 +9,4 @@ Contract (validated with Zod in `apps/web/src/models`):
 - Every numeric value travels with a `provenance` block:
   `{ source, kind: "satellite" | "ground" | "model" | "reanalysis" | "farmer" | "reference", date, dateFrom?, url? }`.
 - Missing values are `null`, never invented or filled silently.
+- `places/` is the offline place-search index (GeoNames, CC BY 4.0), split into small prefix shards; the app loads only the shard a query needs.
