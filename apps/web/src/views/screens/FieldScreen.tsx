@@ -19,7 +19,8 @@ export function FieldScreen() {
       <h1>{t('field.title')}</h1>
       <p className="lead">{t('field.intro')}</p>
 
-      <div className="btn-row">
+      <div className="field-layout">
+      <div className="btn-row field-actions">
         <button className="btn btn-primary" onClick={() => void locate()} disabled={status === 'locating'}>
           <Crosshair size={24} aria-hidden />
           {status === 'locating' ? t('field.locating') : t('field.useGps')}
@@ -33,12 +34,16 @@ export function FieldScreen() {
         <ErrorText>{t('field.gpsError.' + gpsError)}</ErrorText>
       )}
 
-      <PlaceSearch />
+      <div className="field-search">
+        <PlaceSearch />
+      </div>
 
-      <Suspense fallback={<div className="field-map map-loading">{t('field.mapLoading')}</div>}>
-        <FieldMap pin={pin} onPick={pickOnMap} />
-      </Suspense>
-      <p className="hint">{t('field.tapHint')}</p>
+      <div className="field-map-wrap">
+        <Suspense fallback={<div className="field-map map-loading">{t('field.mapLoading')}</div>}>
+          <FieldMap pin={pin} onPick={pickOnMap} />
+        </Suspense>
+        <p className="hint">{t('field.tapHint')}</p>
+      </div>
 
       <div className="card light pin-card" aria-live="polite">
         {pin ? (
@@ -65,6 +70,7 @@ export function FieldScreen() {
         <summary>{t('field.manualTitle')}</summary>
         <CoordinateForm key={pin ? pin.lat + ',' + pin.lon : 'none'} initial={pin} onSubmit={enterManually} />
       </details>
+      </div>
     </section>
   );
 }

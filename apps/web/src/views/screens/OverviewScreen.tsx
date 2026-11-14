@@ -134,6 +134,7 @@ export function OverviewScreen() {
         </InsightCard>
       </div>
 
+      <div className="overview-lower">
       {ex && (
         <div className="card light overview-timeline">
           <h2>{t('timeline.title')}</h2>
@@ -157,6 +158,7 @@ export function OverviewScreen() {
           </span>
         </Link>
       )}
+      </div>
 
       <p className="overview-judgment">
         <Handshake size={24} aria-hidden /> {t('overview.judgment')}

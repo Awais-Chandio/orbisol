@@ -44,7 +44,7 @@ function CreditList({ items }: { items: Credit[] }) {
 export function AboutScreen() {
   const { t } = useTranslation();
   return (
-    <section className="screen">
+    <section className="screen screen-narrow">
       <h1>{t('about.title')}</h1>
       <p className="lead">{t('about.what')}</p>
       <p className="small">{t('about.event')}</p>

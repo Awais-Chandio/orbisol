@@ -47,7 +47,8 @@ export function FarmScreen() {
       <h1>{t('farm.title')}</h1>
       <p className="lead">{t('farm.intro')}</p>
 
-      <div className="card light">
+      <div className="farm-grid">
+      <div className="card light farm-rotation">
         <h2>{t('farm.rotationTitle')}</h2>
         <p className="small">{t('farm.rotationHint')}</p>
         <ol className="slot-list">
@@ -138,6 +139,7 @@ export function FarmScreen() {
           ))}
         </fieldset>
         <p className="small"><JudgmentFlag reason={t('farm.judgment')} /></p>
+      </div>
       </div>
 
       <div className="btn-row">

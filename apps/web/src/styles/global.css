@@ -366,3 +366,58 @@ html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; } /* no mobile fo
 .tl-legend { list-style: none; padding: 0; margin: var(--space-2) 0 0; display: flex; flex-wrap: wrap; gap: var(--space-1) var(--space-3); font-size: 0.8rem; }
 .tl-legend li { display: inline-flex; align-items: center; gap: var(--space-1); }
 .timeline-compact .tl-legend { font-size: 0.75rem; }
+
+/* ---------- desktop (>= 1024px): use the width; phones keep the single column above ---------- */
+@media (min-width: 1024px) {
+  .container { max-width: 1200px; padding-left: var(--space-8); padding-right: var(--space-8); }
+  .app-main { padding-bottom: var(--space-8); }
+  .screen-narrow { max-width: 760px; margin: 0 auto; }
+
+  /* nav moves into the header bar */
+  .bottom-nav {
+    top: 0; bottom: auto; left: 50%; right: auto; transform: translateX(-50%); z-index: 11;
+    display: flex; background: transparent; border-top: 0; padding-bottom: 0;
+  }
+  .nav-item {
+    flex-direction: row; gap: 6px; align-items: center; min-height: 60px; padding: 0 var(--space-2);
+    font-size: 0.9rem; border-top: 0; border-bottom: 3px solid transparent;
+  }
+  .nav-item.active { border-bottom-color: var(--accent); }
+  .nav-item { white-space: nowrap; }
+  .nav-item svg { width: 20px; height: 20px; flex: none; max-width: none; }
+  .app-header { min-height: 61px; }
+
+  /* Field: map left, controls right */
+  .field-layout {
+    display: grid; grid-template-columns: minmax(0, 3fr) minmax(0, 2fr); column-gap: var(--space-6); align-items: start;
+    grid-template-areas: 'map actions' 'map search' 'map pin' 'map manual' 'map .';
+  }
+  .field-map-wrap { grid-area: map; position: sticky; top: 76px; }
+  .field-map-wrap .field-map { height: calc(100vh - 220px); max-height: 720px; min-height: 420px; }
+  .field-actions { grid-area: actions; margin-top: 0; }
+  .field-search { grid-area: search; }
+  .field-search .place-search { margin-top: 0; }
+  .field-layout .pin-card { grid-area: pin; margin-top: var(--space-2); }
+  .field-layout .manual { grid-area: manual; }
+
+  /* Overview: 2 x 2 insights, timeline beside the confidence card */
+  .insight-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-4); }
+  .overview-lower { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); gap: var(--space-4); align-items: start; }
+  .overview-lower .card { margin: 0; }
+
+  /* Rotations: the three cards side by side */
+  .rotation-list { grid-template-columns: repeat(3, minmax(0, 1fr)); align-items: start; }
+  .weights-card { max-width: 760px; }
+
+  /* Season and Calendar: 2-column card grids */
+  .indicator-list { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-4); }
+  .season-more { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-4); align-items: start; margin-top: var(--space-4); }
+  .season-more > .card { margin: 0; }
+  .calendar-top { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 3fr); gap: var(--space-4); align-items: start; }
+  .calendar-top > .card { margin: var(--space-4) 0 0; }
+  .month-list { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-3); }
+
+  /* My farm: rotation left, the other inputs right */
+  .farm-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: var(--space-4); align-items: start; }
+  .farm-grid .farm-rotation { grid-row: span 3; }
+}

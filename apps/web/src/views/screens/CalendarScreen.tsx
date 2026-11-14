@@ -35,6 +35,7 @@ export function CalendarScreen() {
       {r.isLoading && <p className="card light" role="status">{t('rotations.loading')}</p>}
       {ex && (
         <>
+          <div className="calendar-top">
           <div className="card light">
             <h2>{ex.plan.slots.map((s) => t('crops.' + s.crop)).join(' → ')}</h2>
             {ex.metrics.bare.map((b) => (
@@ -54,6 +55,7 @@ export function CalendarScreen() {
           <div className="card light">
             <h2>{t('timeline.title')}</h2>
             <CropYearTimeline slots={ex.plan.slots} bare={ex.metrics.bare} hazards={r.hazards} ndvi={g.monthly} ndviProvenance={g.provenance} ndviGap={!g.isLoading} />
+          </div>
           </div>
 
           <ol className="month-list">

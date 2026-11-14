@@ -95,6 +95,7 @@ export function SeasonScreen() {
             <GreennessCard days={days} />
           </div>
 
+          <div className="season-more">
           <SeasonOutlook days={days} />
 
           {trend.trend && <TrendCard tr={trend.trend} climate={trend.provenance} />}
@@ -108,6 +109,7 @@ export function SeasonScreen() {
             <p>{t('season.sure4')}</p>
             <p>{t('season.coverage', { pct: Math.round(cmp.currentCoverage * 100) })}</p>
           </details>
+          </div>
         </>
       )}
     </section>
