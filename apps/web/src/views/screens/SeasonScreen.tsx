@@ -14,6 +14,13 @@ import { TrendCard } from '@/views/components/TrendCard';
 import { Heat2050Card } from '@/views/components/Heat2050Card';
 import { useHeat2050 } from '@/controllers/useHeat2050';
 import { useObservedTrend } from '@/controllers/useObservedTrend';
+import { useSeasonOutlook } from '@/controllers/useSeasonOutlook';
+import { PlainLine, Science, ScienceToggle } from '@/views/components/Science';
+import { heatPlain, seasonPlain } from '@/views/plain';
+import { ChartLineUp, ClockCounterClockwise, CloudSun, ThermometerHot } from '@phosphor-icons/react';
+import type { LinearTrend } from '@orbisol/core';
+
+const dir = (f: LinearTrend | null) => (!f || !f.clear ? 'unclear' : f.perDecade > 0 ? 'up' : 'down');
 
 function fmtDate(iso: string) {
   return new Date(iso + 'T00:00:00Z').toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric', timeZone: 'UTC' });
@@ -25,6 +32,7 @@ export function SeasonScreen() {
   const s = useSeasonVsNormal(days);
   const trend = useObservedTrend();
   const heat2050 = useHeat2050();
+  const outlook = useSeasonOutlook(days);
 
   if (!s.pin) {
     return (
@@ -41,6 +49,21 @@ export function SeasonScreen() {
   return (
     <section className="screen">
       <h1>{t('screens.season.title')}</h1>
+      {s.comparison ? (
+        <PlainLine icon={CloudSun}>
+          {seasonPlain(
+            t,
+            s.indicators.find((v) => v.key === 'hotDays')?.tercile ?? null,
+            s.indicators.find((v) => v.key === 'rainTotal')?.tercile ?? null,
+            days,
+          )}
+        </PlainLine>
+      ) : (
+        <p className="lead">{t('plain.seasonLead')}</p>
+      )}
+      <div className="screen-tools">
+        <ScienceToggle />
+      </div>
 
       <div className="segmented" role="group" aria-label={t('season.windowLabel')}>
         {([30, 90] as const).map((d) => (
@@ -62,6 +85,7 @@ export function SeasonScreen() {
 
       {cmp && (
         <>
+          <Science>
           <p className="lead">
             {t('season.window', {
               from: fmtDate(cmp.window.start),
@@ -78,6 +102,7 @@ export function SeasonScreen() {
               {t('season.origin.' + s.origin, { when: s.fetchedAt ? fmtDate(s.fetchedAt.slice(0, 10)) : '' })}
             </p>
           )}
+          </Science>
 
           <div className="indicator-list">
             {s.indicators.map((v) => (
@@ -100,7 +125,29 @@ export function SeasonScreen() {
             <GreennessCard days={days} />
           </div>
 
-          <div className="season-more">
+          <article className="card light ahead-card">
+            <h2>{t('plain.aheadTitle')}</h2>
+            {(() => {
+              const first = outlook?.outlooks.find((x) => x.outlook.informative);
+              return first ? (
+                <PlainLine icon={ClockCounterClockwise}>
+                  {t('outlook.direction.' + first.outlook.direction, { what: t('outlook.what.' + first.key) })}.
+                </PlainLine>
+              ) : null;
+            })()}
+            {trend.trend && (
+              <PlainLine icon={ChartLineUp}>
+                {t('plain.trend', {
+                  from: trend.trend.fromYear,
+                  hot: t('plain.trendHot.' + dir(trend.trend.hotDays)),
+                  nights: t('plain.trendNights.' + dir(trend.trend.warmNights)),
+                })}
+              </PlainLine>
+            )}
+            {heat2050 && heatPlain(t, heat2050) && <PlainLine icon={ThermometerHot}>{heatPlain(t, heat2050)}</PlainLine>}
+          </article>
+
+          <Science className="season-more">
           <SeasonOutlook days={days} />
 
           {trend.trend && <TrendCard tr={trend.trend} climate={trend.provenance} />}
@@ -114,7 +161,7 @@ export function SeasonScreen() {
             <p>{t('season.sure4')}</p>
             <p>{t('season.coverage', { pct: Math.round(cmp.currentCoverage * 100) })}</p>
           </details>
-          </div>
+          </Science>
         </>
       )}
     </section>

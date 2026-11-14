@@ -1,5 +1,5 @@
 /* AI-assisted: drafted with Claude (Anthropic). See docs/ai-usage.md. */
-import { CloudRain, Plant, Snowflake, ThermometerHot, Warning, type Icon } from '@phosphor-icons/react';
+import { CloudRain, Plant, Snowflake, Sun, ThermometerHot, Warning, type Icon } from '@phosphor-icons/react';
 import { doyToMd } from '@orbisol/core';
 import { useTranslation } from 'react-i18next';
 import { useGreennessMonthly } from '@/controllers/useGreenness';
@@ -9,6 +9,7 @@ import { JudgmentFlag } from '@/views/components/JudgmentFlag';
 import { NeedPin } from '@/views/components/NeedPin';
 import { SourceTag } from '@/views/components/SourceTag';
 import { TerrainCard } from '@/views/components/TerrainCard';
+import { PlainLine, Science, ScienceToggle } from '@/views/components/Science';
 import { formatMonthDay, monthName } from '@/views/format';
 
 const HZ: Record<'hot' | 'frost' | 'heavyRain', Icon> = { hot: ThermometerHot, frost: Snowflake, heavyRain: CloudRain };
@@ -31,7 +32,14 @@ export function CalendarScreen() {
   return (
     <section className="screen">
       <h1>{t('calendar.title')}</h1>
-      <p className="lead">{t('calendar.intro')}</p>
+      {ex ? (
+        <PlainLine icon={Sun}>{t('plain.calendar', { total: ex.metrics.bareDays, hot: ex.metrics.bareHotDays })}</PlainLine>
+      ) : (
+        <p className="lead">{t('calendar.intro')}</p>
+      )}
+      <div className="screen-tools">
+        <ScienceToggle />
+      </div>
       {r.isLoading && <p className="card light" role="status">{t('rotations.loading')}</p>}
       {ex && (
         <>
@@ -52,12 +60,14 @@ export function CalendarScreen() {
             <p><SourceTag provenance={farmerProv} /></p>
           </div>
 
-          <div className="card light">
+          <Science className="card light">
             <h2>{t('timeline.title')}</h2>
             <CropYearTimeline slots={ex.plan.slots} bare={ex.metrics.bare} hazards={r.hazards} ndvi={g.monthly} ndviProvenance={g.provenance} ndviGap={!g.isLoading} />
-          </div>
+          </Science>
           </div>
 
+          <p className="small"><JudgmentFlag reason={t('calendar.judgment')} /></p>
+          <Science>
           <details className="disclosure month-details">
           <summary>{t('calendar.monthDetails')}</summary>
           <ol className="month-list">
@@ -100,8 +110,8 @@ export function CalendarScreen() {
           {r.hazards && r.hazards.frost.length === 0 && (
             <p className="small">{t(r.hazards.heavyRain.length === 0 ? 'calendar.noHazards' : 'calendar.noFrost')}</p>
           )}
-          <p className="small"><JudgmentFlag reason={t('calendar.judgment')} /></p>
           <TerrainCard />
+          </Science>
         </>
       )}
     </section>

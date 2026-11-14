@@ -7,6 +7,7 @@ import { JudgmentFlag } from '@/views/components/JudgmentFlag';
 import { NeedPin } from '@/views/components/NeedPin';
 import { PriorityPicker } from '@/views/components/PriorityPicker';
 import { RotationCard } from '@/views/components/RotationCard';
+import { ScienceToggle } from '@/views/components/Science';
 import { ShareButton } from '@/views/components/ShareButton';
 
 export function RotationsScreen() {
@@ -23,6 +24,9 @@ export function RotationsScreen() {
     <section className="screen">
       <h1>{t('rotations.title')}</h1>
       <p className="lead">{t('rotations.intro')}</p>
+      <div className="screen-tools">
+        <ScienceToggle />
+      </div>
 
       {/* Collapsed to one line so the first rotation card shows on the first phone screen. */}
       <details className="card weights-card disclosure">

@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { useGreenness } from '@/controllers/useGreenness';
 import { GlossaryTip } from './GlossaryTip';
 import { IndicatorCard } from './IndicatorCard';
+import { Science } from './Science';
 
 function fmtDate(iso: string) {
   return new Date(iso + 'T00:00:00Z').toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric', timeZone: 'UTC' });
@@ -48,9 +49,11 @@ export function GreennessCard({ days }: { days: number }) {
         </>
       }
     >
-      <p className="small">
-        {t('season.green.window', { from: fmtDate(g.comparison.window.start), to: fmtDate(g.comparison.window.end), n: g.comparison.composites })}
-      </p>
+      <Science>
+        <p className="small">
+          {t('season.green.window', { from: fmtDate(g.comparison.window.start), to: fmtDate(g.comparison.window.end), n: g.comparison.composites })}
+        </p>
+      </Science>
     </IndicatorCard>
   );
 }

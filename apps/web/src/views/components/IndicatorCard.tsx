@@ -1,11 +1,25 @@
 /* AI-assisted: drafted with Claude (Anthropic). See docs/ai-usage.md. */
-import { ArrowDown, ArrowUp, Equals, Question, type Icon } from '@phosphor-icons/react';
+import { ArrowDown, ArrowUp, CloudLightning, CloudRain, Drop, Equals, Leaf, Plant, Question, Scales, Snowflake, Sun, ThermometerHot, type Icon } from '@phosphor-icons/react';
 import type { Tercile } from '@orbisol/core';
 import type { ReactNode } from 'react';
 import { useTranslation } from 'react-i18next';
 import type { IndicatorView } from '@/controllers/useSeasonVsNormal';
 import { GlossaryTip, type GlossaryTerm } from './GlossaryTip';
 import { SourceTag } from './SourceTag';
+import { PlainLine, Science } from './Science';
+import { indicatorPlain } from '@/views/plain';
+
+const ICON: Record<IndicatorView['key'], Icon> = {
+  hotDays: ThermometerHot,
+  rainTotal: CloudRain,
+  heavyRainDays: CloudLightning,
+  frostDays: Snowflake,
+  soilWetness: Drop,
+  et0Total: Sun,
+  waterBalance: Scales,
+  tmaxMean: Plant,
+  greenness: Leaf,
+};
 
 const TERM: Partial<Record<IndicatorView['key'], GlossaryTerm>> = {
   greenness: 'ndvi',
@@ -91,24 +105,25 @@ export function IndicatorCard({ v, children, titleKey, explain }: { v: Indicator
           {t('season.tercile.' + (v.tercile ?? 'none'))}
         </span>
       </header>
-      {v.available ? (
-        <>
-          <p className="indicator-value">{fmt(v.value)}</p>
-          <RangeBar v={v} fmt={fmt} />
-          <p className="small">
-            {t('season.normal', { v: fmt(v.normal) })} · {t('season.range', { lo: fmt(v.p10), hi: fmt(v.p90) })}
-          </p>
-        </>
-      ) : (
-        <p className="indicator-value">–</p>
-      )}
+      <PlainLine icon={ICON[v.key]}>{indicatorPlain(t, v)}</PlainLine>
+      <p className="indicator-value">{v.available ? fmt(v.value) : '–'}</p>
       {children}
-      <SourceTag provenance={v.provenance} />
-      <details className="what-means">
-        <summary>{t('season.whatMeans')}</summary>
-        <p className="small">{t(`season.ind.${v.key}.what`)}</p>
-        {explain}
-      </details>
+      <Science>
+        {v.available && (
+          <>
+            <RangeBar v={v} fmt={fmt} />
+            <p className="small">
+              {t('season.normal', { v: fmt(v.normal) })} · {t('season.range', { lo: fmt(v.p10), hi: fmt(v.p90) })}
+            </p>
+          </>
+        )}
+        <SourceTag provenance={v.provenance} />
+        <details className="what-means">
+          <summary>{t('season.whatMeans')}</summary>
+          <p className="small">{t(`season.ind.${v.key}.what`)}</p>
+          {explain}
+        </details>
+      </Science>
     </article>
   );
 }

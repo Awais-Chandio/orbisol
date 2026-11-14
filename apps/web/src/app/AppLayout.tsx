@@ -4,6 +4,7 @@ import { AppHeader } from '@/views/components/AppHeader';
 import { BottomNav } from '@/views/components/BottomNav';
 import { JudgmentNotice } from '@/views/components/JudgmentNotice';
 import { NextStep } from '@/views/components/NextStep';
+import { ScienceProvider } from '@/views/components/Science';
 import { useFieldStore } from '@/stores/fieldStore';
 import { OfflineBanner } from '@/views/components/OfflineBanner';
 
@@ -12,6 +13,7 @@ export function AppLayout() {
   const { pathname } = useLocation();
   const pinned = useFieldStore((s) => s.pin !== null);
   return (
+    <ScienceProvider>
     <div className="app-shell">
       <AppHeader />
       <OfflineBanner />
@@ -23,5 +25,6 @@ export function AppLayout() {
       <BottomNav />
       <ScrollRestoration />
     </div>
+    </ScienceProvider>
   );
 }

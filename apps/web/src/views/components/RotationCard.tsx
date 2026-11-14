@@ -1,10 +1,12 @@
 /* AI-assisted: drafted with Claude (Anthropic). See docs/ai-usage.md. */
-import { ArrowDown, ArrowRight, ArrowUp, Drop, Equals, Scales, type Icon } from '@phosphor-icons/react';
+import { ArrowDown, ArrowRight, ArrowUp, Drop, Equals, Scales, Sun, type Icon } from '@phosphor-icons/react';
 import { CROPS, SCORED_PRIORITIES, type HazardMonths, type Priority, type Provenance } from '@orbisol/core';
 import { useTranslation } from 'react-i18next';
 import type { StrategyView } from '@/controllers/useRotationComparison';
 import { formatInt } from '@/views/format';
 import { NoteList } from './NoteList';
+import { PlainLine, Science } from './Science';
+import { barePlain, waterPlain } from '@/views/plain';
 import { SourceTag } from './SourceTag';
 import { WaterFitDetail } from './WaterFitDetail';
 import { CropYearTimeline } from './CropYearTimeline';
@@ -77,7 +79,14 @@ export function RotationCard({ s, weights, climate, hazards, peers }: Props) {
         ))}
       </h2>
 
+      {existing ? (
+        <PlainLine icon={Sun}>{barePlain(t, s.metrics.bareHotDays)}</PlainLine>
+      ) : (
+        <PlainLine icon={Drop}>{waterPlain(t, s.waterPct, title.join(' → '))}</PlainLine>
+      )}
       <WaterHeadline s={s} />
+
+      <Science>
       <p className="small">
         {t('rotations.mmEstimate', { mm: formatInt(s.metrics.water.mm), low: formatInt(s.metrics.water.low), high: formatInt(s.metrics.water.high) })}{' '}
         <SourceTag provenance={fao} />
@@ -101,6 +110,7 @@ export function RotationCard({ s, weights, climate, hazards, peers }: Props) {
           </li>
         )}
       </ul>
+      </Science>
 
       {!existing && (
         <p className="tradeoff">
@@ -117,10 +127,20 @@ export function RotationCard({ s, weights, climate, hazards, peers }: Props) {
         </p>
       )}
 
+      <WaterFitDetail fit={s.fit} climate={climate} />
+
+      {s.risks.length > 0 && (
+        <details className="note-section risks">
+          <summary>
+            {t('rotations.risks')} ({s.risks.length})
+          </summary>
+          <NoteList notes={s.risks} climate={climate} />
+        </details>
+      )}
+
+      <Science>
       <h3 className="small-head">{t('rotations.yearStrip')}</h3>
       <CropYearTimeline slots={s.plan.slots} bare={s.metrics.bare} hazards={hazards} compact />
-
-      <WaterFitDetail fit={s.fit} climate={climate} />
 
       <h3 className="small-head">{t('rotations.scoresTitle')}</h3>
       <p className="small">{t('rotations.scoresHint', { n: peers.length })}</p>
@@ -153,11 +173,10 @@ export function RotationCard({ s, weights, climate, hazards, peers }: Props) {
           ['evidence', s.evidence],
           ['benefits', s.benefits],
           ['gaps', s.gaps],
-          ['risks', s.risks],
         ] as const
       ).map(([k, notes]) =>
         notes.length ? (
-          <details key={k} className={'note-section' + (k === 'risks' ? ' risks' : '')} open={k === 'why' || k === 'risks'}>
+          <details key={k} className="note-section" open={k === 'why'}>
             <summary>
               {t('rotations.' + k)} ({notes.length})
             </summary>
@@ -165,6 +184,7 @@ export function RotationCard({ s, weights, climate, hazards, peers }: Props) {
           </details>
         ) : null,
       )}
+      </Science>
       <p className="sr-only">{s.plan.slots.map((x) => CROPS[x.crop].name).join(' then ')}</p>
     </article>
   );

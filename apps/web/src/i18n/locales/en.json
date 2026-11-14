@@ -597,12 +597,16 @@
       "value_one": "{{count}} bare day",
       "value_other": "{{count}} bare days",
       "text": "Your current rotation leaves the field bare in the hottest months ({{months}}). {{total}} bare days a year in all.",
-      "covered": "A crop covers your field through the hottest months ({{months}})."
+      "covered": "A crop covers your field through the hottest months ({{months}}).",
+      "exact_one": "{{count}} bare day in {{months}} · {{total}} bare days a year",
+      "exact_other": "{{count}} bare days in {{months}} · {{total}} bare days a year"
     },
     "best": {
       "label": "Best option for your priorities",
       "text": "{{crops}}, compared with your current rotation.",
-      "existingFirst": "Your current rotation still ranks first for your priorities."
+      "existingFirst": "Your current rotation still ranks first for your priorities.",
+      "exact": "{{crops}}: {{water}} than your current rotation",
+      "science": "Crop water need = FAO-56 crop factor × evaporation demand (NASA POWER, 1991–2020), compared over a full year."
     },
     "season": {
       "label": "This season vs normal (last {{days}} days)",
@@ -619,7 +623,8 @@
         "below": "less rain than normal",
         "none": "rain: not enough data"
       },
-      "text": "Compared with the same days in {{bFrom}}–{{bTo}} (NASA POWER)."
+      "text": "Compared with the same days in {{bFrom}}–{{bTo}} (NASA POWER).",
+      "exact": "Hot days {{hot}} (normal {{hotN}}) · rain {{rain}} mm (normal {{rainN}} mm)"
     },
     "heat": {
       "label": "Hot days around {{from}}–{{to}}",
@@ -683,5 +688,86 @@
     "MS": "moderately sensitive",
     "MT": "moderately tolerant",
     "T": "tolerant"
+  },
+  "science": {
+    "show": "Show the science",
+    "hide": "Hide the science"
+  },
+  "plain": {
+    "bareHot_one": "Your field lies bare for {{count}} day in the hottest months.",
+    "bareHot_other": "Your field lies bare for {{count}} days in the hottest months.",
+    "bareCovered": "A crop covers your field through the hottest months.",
+    "waterLess": "{{crops}} needs about {{pct}}% less water than now.",
+    "waterMore": "{{crops}} needs about {{pct}}% more water than now.",
+    "waterSame": "{{crops}} needs about the same water as now.",
+    "existingFirst": "Your current rotation already fits your priorities best.",
+    "season": "{{period}}: {{hot}}, {{rain}}.",
+    "heat2050": "Around {{year}}, expect {{v}} more days above {{t}} °C every year.",
+    "calendar": "Your field lies bare {{total}} days a year, {{hot}} of them in the hottest months.",
+    "rotationsLead": "Your rotation now and two options, ranked for your priorities.",
+    "seasonLead": "How the last weeks compare with past years at your field.",
+    "aheadTitle": "Looking back and ahead",
+    "trend": "Since {{from}}, {{hot}}, and {{nights}}.",
+    "ind": {
+      "none": "Not enough data to compare.",
+      "hotDays": {
+        "above": "More hot days than usual for this time of year.",
+        "near": "About the usual number of hot days.",
+        "below": "Fewer hot days than usual."
+      },
+      "rainTotal": {
+        "above": "More rain than usual.",
+        "near": "About the usual rain.",
+        "below": "Less rain than usual."
+      },
+      "heavyRainDays": {
+        "above": "More downpours (20 mm or more) than usual.",
+        "near": "About the usual number of downpours.",
+        "below": "Fewer downpours than usual."
+      },
+      "frostDays": {
+        "above": "More frost nights than usual.",
+        "near": "About the usual frost nights.",
+        "below": "Fewer frost nights than usual.",
+        "zero": "No frost nights, as usual."
+      },
+      "soilWetness": {
+        "above": "The topsoil is wetter than usual.",
+        "near": "The topsoil is about as wet as usual.",
+        "below": "The topsoil is drier than usual."
+      },
+      "et0Total": {
+        "above": "The air is thirstier than usual: crops need more water.",
+        "near": "The air is about as thirsty as usual.",
+        "below": "The air is less thirsty than usual: crops need a little less water."
+      },
+      "waterBalance": {
+        "above": "Rain covered more of the crops' water need than usual.",
+        "near": "Rain covered about the usual share of the crops' water need.",
+        "below": "Rain covered less of the crops' water need than usual: canal water matters more."
+      },
+      "tmaxMean": {
+        "above": "Hotter days than usual.",
+        "near": "Usual day temperatures.",
+        "below": "Cooler days than usual."
+      },
+      "greenness": {
+        "above": "Crops around you look greener than usual.",
+        "near": "Crops around you look about as green as usual.",
+        "below": "Crops around you look less green than usual."
+      }
+    },
+    "last3": "Last 3 months",
+    "last1": "Last month",
+    "trendHot": {
+      "up": "hot days have become more common",
+      "down": "hot days have become less common",
+      "unclear": "there is no clear change in hot days"
+    },
+    "trendNights": {
+      "up": "warm nights have become more common",
+      "down": "warm nights have become less common",
+      "unclear": "no clear change in warm nights"
+    }
   }
 }
