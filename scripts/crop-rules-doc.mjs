@@ -21,12 +21,13 @@ const rows = Object.values(CROPS).map((c) => {
     `${c.stages.value.join('/')} ${ref(c.stages)}`,
     `${k.ini} / ${r(k.mid)} / ${r(k.end)} ${ref(c.kc)}`,
     c.rootDepthM ? `${r(c.rootDepthM.value)} m ${ref(c.rootDepthM)}` : '— (gap)',
+    c.depletionP ? `${c.depletionP.value} ${ref(c.depletionP)}` : '— (flooded crop / gap)',
     c.salt ? `${c.salt.value.thresholdECe ?? '—'} dS/m, ${c.salt.value.rating} ${ref(c.salt)}` : '— (gap)',
     `${c.nitrogenFixing.value ? 'yes' : 'no'} ${ref(c.nitrogenFixing)}`,
     c.forage ? `${c.forage.value} ${ref(c.forage)}` : '— (gap)',
   ];
 });
-const head = ['Crop', 'Family', 'Sowing (Hyderabad / South Sindh)', 'Harvest or season', 'FAO-56 stages (ini/dev/mid/late, days)', 'Kc ini / mid / end', 'Root depth', 'Salt threshold ECe, rating', 'N-fixing', 'Forage use'];
+const head = ['Crop', 'Family', 'Sowing (Hyderabad / South Sindh)', 'Harvest or season', 'FAO-56 stages (ini/dev/mid/late, days)', 'Kc ini / mid / end', 'Root depth', 'Depletion p', 'Salt threshold ECe, rating', 'N-fixing', 'Forage use'];
 const md = [
   '# Crop rules',
   '',

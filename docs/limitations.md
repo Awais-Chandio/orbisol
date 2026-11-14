@@ -99,3 +99,17 @@ Full table with sources: `docs/crop-rules.md`.
   High >= 5, medium >= 3, else low.
 - Crop water need is FAO-56 Kc x ET0 (no effective rainfall or irrigation efficiency); ET0 from NASA POWER likely reads
   high in irrigated Sindh, so absolute mm are shown with that caveat and comparisons between rotations matter more.
+
+## Water Fit (canal turn vs safe interval)
+
+- Safe interval = FAO-56 RAW / ETc (Eq. 82-83): soil water from Table 19 (farmer "sandy" read as the Sand row,
+  unknown soil defaults to Loam), root depth and p from Table 22 (smaller depth, as footnote 1 advises for
+  irrigation scheduling), p adjusted for the ETc rate (p + 0.04 (5 - ETc), 0.1-0.8), ETc = Table 12 Kc x NASA POWER ET0.
+- **Canal flow volume per turn is unknown** (flow rate, hours and field size are not measured), so the check assumes
+  each turn refills the root zone. If a turn does not fill the field, the real safe interval is shorter.
+- Rain is not counted (conservative; monsoon months may be easier than shown).
+- Table 22 depths are for a grown crop and FAO-56 gives no root-growth rule there. In months when a crop is mostly
+  in its initial or development stage the safe interval is an upper bound: too-long turns are flagged, fits are shown
+  as "young crop", not confirmed.
+- Rice is a flooded crop (Table 22 p is a fraction of saturation) and is not checked.
+- ET0 from POWER is likely high in irrigated Sindh (see above), which makes safe intervals look shorter.

@@ -4,7 +4,7 @@
  * AI-assisted: drafted with Claude (Anthropic). See docs/ai-usage.md.
  */
 import { useMemo } from 'react';
-import { compareRotations, monthTimeline, PRIORITY_WEIGHTS, type MonthCell, type Priority, type StrategyReport } from '@orbisol/core';
+import { compareRotations, monthTimeline, PRIORITY_WEIGHTS, waterFit, type MonthCell, type Priority, type StrategyReport, type WaterFit } from '@orbisol/core';
 import { useFarmStore } from '@/stores/farmStore';
 import { useClimateEnvironment } from './useClimate';
 
@@ -16,6 +16,8 @@ export interface StrategyView extends StrategyReport {
   legumeDaysDelta: number;
   rank: number;
   months: MonthCell[];
+  /** Canal turn vs safe interval per month (null when the farmer has not given a canal turn). */
+  fit: WaterFit | null;
 }
 
 export function useRotationComparison() {
@@ -39,11 +41,12 @@ export function useRotationComparison() {
       legumeDaysDelta: Math.round((r.metrics.legumeShare - base.metrics.legumeShare) * 365),
       rank: 0,
       months: monthTimeline(r.plan, r.metrics, env.hazards),
+      fit: farm.canal ? waterFit(r.plan, env.et0Clim, farm.canal.intervalDays, farm.soil.texture) : null,
     }));
     // rank by total score among all three (existing included), 1 = best fit for the chosen priorities
     [...views].sort((a, b) => b.total - a.total).forEach((v, i) => (v.rank = i + 1));
     return { strategies: views, calendar: views[0]!.months, hazards: env.hazards, monthly: env.monthly };
-  }, [env, farm.rotation, farm.priorities, farm.soil.salty]);
+  }, [env, farm.rotation, farm.priorities, farm.soil.salty, farm.soil.texture, farm.canal]);
 
   const weights = farm.priorities.map((p, i) => ({ priority: p, weight: PRIORITY_WEIGHTS[i] ?? 1 }));
   const setPriorities = (priorities: Priority[]) => update({ priorities });

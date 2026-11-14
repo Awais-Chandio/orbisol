@@ -12,8 +12,12 @@ export const SOURCES = {
     title: 'FAO-56 (Allen et al. 1998), Table 12: single crop coefficients Kc',
     url: 'https://www.fao.org/4/x0490e/x0490e0b.htm',
   },
+  fao56_t19: {
+    title: 'FAO-56 (Allen et al. 1998), Table 19: typical soil water characteristics for different soil types',
+    url: 'https://www.fao.org/4/x0490e/x0490e0c.htm',
+  },
   fao56_t22: {
-    title: 'FAO-56 (Allen et al. 1998), Table 22: maximum effective rooting depth',
+    title: 'FAO-56 (Allen et al. 1998), Table 22: maximum effective rooting depth and depletion fraction p',
     url: 'https://www.fao.org/4/x0490e/x0490e0e.htm',
   },
   fao56_t23: {

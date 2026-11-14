@@ -433,5 +433,34 @@
     "windTitle": "Wind and bare soil",
     "windy": "Windiest months here: {{months}} (NASA POWER, 1991–2020).",
     "bareWindy": "Your field is bare about {{days}} days in the windiest months: dry bare soil can blow away. Covering it in that window helps."
+  },
+  "waterFit": {
+    "title": "Water fit with your canal turn",
+    "flagged": "{{count}} months too long",
+    "flagged_one": "1 month too long",
+    "allFit": "no month too long",
+    "noCanal": "Add your canal turn (days between turns) in My farm to see if it comes often enough for each crop.",
+    "goFarm": "Add canal turn",
+    "summaryOver": "Your turn every {{days}} days is longer than the crop can safely wait in: {{months}}.",
+    "summaryOk": "Your turn every {{days}} days fits every month we could check.",
+    "intro": "Safe interval = how many days the soil in the root zone can supply the crop before it starts to suffer (FAO-56: readily available water ÷ crop water use per day).",
+    "soilAssumed": "Soil not set: using loam. Set your soil in My farm for a better answer.",
+    "soilUsed": "Soil: {{soil}}.",
+    "month": "Month",
+    "crop": "Crop",
+    "safe": "Safe days",
+    "fit": "Your turn",
+    "status": {
+      "ok": "fits",
+      "over": "too long",
+      "young": "young crop",
+      "none": "–"
+    },
+    "range": "range {{low}}–{{high}}",
+    "flooded": "rice (flooded, not checked)",
+    "youngNote": "Young crop: roots are not yet at full depth, so the real safe interval is shorter than shown. Too-long turns are still flagged; a fit is not confirmed.",
+    "limitVolume": "Limitation: we do not know how much water your canal turn brings (flow and hours vary), so we assume each turn refills the root zone. If a turn does not fill the field, the safe interval is shorter.",
+    "limitRain": "Rain is not counted, so monsoon months may be easier than shown.",
+    "sources": "From FAO-56 Table 19 (soil water), Table 22 (root depth and p, smaller depth as advised for irrigation scheduling, p adjusted for crop water use) and crop water use = FAO-56 Kc × NASA POWER ET0."
   }
 }

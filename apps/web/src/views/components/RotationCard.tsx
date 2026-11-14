@@ -6,6 +6,7 @@ import type { StrategyView } from '@/controllers/useRotationComparison';
 import { formatInt } from '@/views/format';
 import { NoteList } from './NoteList';
 import { SourceTag } from './SourceTag';
+import { WaterFitDetail } from './WaterFitDetail';
 import { YearStrip } from './YearStrip';
 
 interface Props {
@@ -103,6 +104,8 @@ export function RotationCard({ s, weights, climate }: Props) {
       )}
 
       <YearStrip months={s.months} />
+
+      <WaterFitDetail fit={s.fit} climate={climate} />
 
       <h3 className="small-head">{t('rotations.scoresTitle')}</h3>
       <p className="small">{t('rotations.scoresHint')}</p>

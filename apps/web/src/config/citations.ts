@@ -7,6 +7,7 @@ import { SOURCES, type Note, type Provenance, type SourceId } from '@orbisol/cor
 const SHORT: Record<SourceId, { label: string; date: string }> = {
   fao56_t11: { label: 'FAO-56 Table 11', date: '1998' },
   fao56_t12: { label: 'FAO-56 Table 12', date: '1998' },
+  fao56_t19: { label: 'FAO-56 Table 19', date: '1998' },
   fao56_t22: { label: 'FAO-56 Table 22', date: '1998' },
   fao56_t23: { label: 'FAO-56 Table 23 (FAO-29)', date: '1998' },
   sindh_sowing: { label: 'Sindh Agriculture Dept', date: '2026-11-14' },
@@ -31,6 +32,12 @@ export function noteProvenance(source: Note['source'], climate: Provenance | und
   if (source === 'nasa_power') return climate ? { ...climate, dateFrom: '1991-01-01', date: '2020-12-31' } : null;
   if (source === 'computed') return { source: labels.computed, kind: 'model', date: today };
   if (source === 'farmer') return { source: labels.farmer, kind: 'farmer', date: today };
+  const s = SHORT[source];
+  return { source: s.label, kind: 'reference', date: s.date, url: SOURCES[source].url };
+}
+
+/** Provenance for a cited reference source (FAO-56 tables, Feedipedia, ...). */
+export function referenceProvenance(source: SourceId): Provenance {
   const s = SHORT[source];
   return { source: s.label, kind: 'reference', date: s.date, url: SOURCES[source].url };
 }

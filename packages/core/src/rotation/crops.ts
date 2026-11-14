@@ -43,6 +43,8 @@ export interface CropRule {
   stages: Cited<[number, number, number, number]>;
   kc: Cited<{ ini: number; mid: [number, number]; end: [number, number] }>;
   rootDepthM?: Cited<[number, number]>;
+  /** FAO-56 Table 22 soil water depletion fraction for no stress (p), for ETc about 5 mm/day. */
+  depletionP?: Cited<number>;
   salt?: Cited<{ thresholdECe?: number; slopePct?: number; rating: SaltRating }>;
   nitrogenFixing: Cited<boolean>;
   forage?: Cited<ForageUse>;
@@ -61,6 +63,7 @@ export const CROPS: Record<CropId, CropRule> = {
     stages: { value: [30, 50, 60, 55], source: 'fao56_t11', note: 'Mar-May planting; Egypt, Pakistan, California' },
     kc: { value: { ini: 0.35, mid: [1.15, 1.2], end: [0.5, 0.7] }, source: 'fao56_t12' },
     rootDepthM: { value: [1.0, 1.7], source: 'fao56_t22' },
+    depletionP: { value: 0.65, source: 'fao56_t22' },
     salt: { value: { thresholdECe: 7.7, slopePct: 5.2, rating: 'T' }, source: 'fao56_t23' },
     nitrogenFixing: { value: false, source: 'feedipedia_cotton', note: 'Malvaceae, not a legume' },
     forage: { value: 'none', source: 'feedipedia_cotton', note: 'cottonseed meal is a feed by-product, not forage' },
@@ -76,6 +79,7 @@ export const CROPS: Record<CropId, CropRule> = {
     stages: { value: [25, 35, 65, 40], source: 'fao56_t11', note: 'small grains, Oct/Nov planting, Pakistan; arid region' },
     kc: { value: { ini: 0.3, mid: [1.15, 1.15], end: [0.25, 0.4] }, source: 'fao56_t12', note: 'spring wheat; Kc ini from cereals group' },
     rootDepthM: { value: [1.0, 1.5], source: 'fao56_t22', note: 'spring wheat' },
+    depletionP: { value: 0.55, source: 'fao56_t22', note: 'spring wheat' },
     salt: { value: { thresholdECe: 6.0, slopePct: 7.1, rating: 'MT' }, source: 'fao56_t23', note: 'Triticum aestivum' },
     nitrogenFixing: { value: false, source: 'feedipedia_wheat', note: 'Poaceae, not a legume' },
     notes: [],
@@ -105,6 +109,7 @@ export const CROPS: Record<CropId, CropRule> = {
     stages: { value: [35, 60, 190, 120], source: 'fao56_t11', note: 'virgin crop, low latitudes (405 days)' },
     kc: { value: { ini: 0.4, mid: [1.25, 1.25], end: [0.75, 0.75] }, source: 'fao56_t12' },
     rootDepthM: { value: [1.2, 2.0], source: 'fao56_t22' },
+    depletionP: { value: 0.65, source: 'fao56_t22' },
     salt: { value: { thresholdECe: 1.7, slopePct: 5.9, rating: 'MS' }, source: 'fao56_t23' },
     nitrogenFixing: { value: false, source: 'feedipedia_sugarcane', note: 'Poaceae, not a legume' },
     forage: { value: 'residue', source: 'feedipedia_sugarcane', note: 'whole plant and tops used as forage' },
@@ -132,6 +137,7 @@ export const CROPS: Record<CropId, CropRule> = {
     },
     kc: { value: { ini: 0.4, mid: [0.9, 0.9], end: [0.85, 0.85] }, source: 'fao56_t12', note: 'berseem, averaged cutting effects' },
     rootDepthM: { value: [0.6, 0.9], source: 'fao56_t22' },
+    depletionP: { value: 0.5, source: 'fao56_t22', note: 'clover hay, berseem' },
     salt: { value: { thresholdECe: 1.5, slopePct: 5.7, rating: 'MS' }, source: 'fao56_t23', note: 'Feedipedia calls it moderately tolerant; FAO-56 rates it MS' },
     nitrogenFixing: { value: true, source: 'feedipedia_berseem', note: '"Berseem is an N-fixing legume"' },
     forage: { value: 'fodder', source: 'feedipedia_berseem', note: 'high-quality green fodder, cut and carried' },
@@ -151,6 +157,7 @@ export const CROPS: Record<CropId, CropRule> = {
     stages: { value: [20, 30, 30, 20], source: 'fao56_t11', note: 'green gram and cowpeas (Mediterranean)' },
     kc: { value: { ini: 0.4, mid: [1.05, 1.05], end: [0.35, 0.6] }, source: 'fao56_t12', note: 'green gram; Kc ini from legumes group' },
     rootDepthM: { value: [0.6, 1.0], source: 'fao56_t22', note: 'green gram and cowpeas' },
+    depletionP: { value: 0.45, source: 'fao56_t22', note: 'green gram and cowpeas' },
     nitrogenFixing: { value: true, source: 'feedipedia_mung', note: '"a N-fixing legume"' },
     forage: { value: 'residue', source: 'feedipedia_mung_straw', note: 'mung bean straw is used as feed' },
     notes: [{ value: 'Spring crop is sown 15 Feb to 15 Mar.', source: 'dawn_mung_2007' }],
@@ -165,6 +172,7 @@ export const CROPS: Record<CropId, CropRule> = {
     stages: { value: [20, 35, 40, 30], source: 'fao56_t11', note: 'sorghum (scaled to the 80-day fodder season)' },
     kc: { value: { ini: 0.3, mid: [1.0, 1.1], end: [0.55, 0.55] }, source: 'fao56_t12', note: 'sorghum grain; Kc ini from cereals group' },
     rootDepthM: { value: [1.0, 2.0], source: 'fao56_t22' },
+    depletionP: { value: 0.55, source: 'fao56_t22', note: 'sorghum grain' },
     salt: { value: { thresholdECe: 6.8, slopePct: 16.0, rating: 'MT' }, source: 'fao56_t23' },
     nitrogenFixing: { value: false, source: 'feedipedia_sorghum', note: 'Poaceae, not a legume' },
     forage: { value: 'fodder', source: 'feedipedia_sorghum' },
@@ -183,6 +191,7 @@ export const CROPS: Record<CropId, CropRule> = {
     stages: { value: [25, 35, 45, 25], source: 'fao56_t11' },
     kc: { value: { ini: 0.35, mid: [1.0, 1.15], end: [0.35, 0.35] }, source: 'fao56_t12', note: 'Kc ini from oil crops group' },
     rootDepthM: { value: [0.8, 1.5], source: 'fao56_t22' },
+    depletionP: { value: 0.45, source: 'fao56_t22' },
     salt: { value: { rating: 'MS' }, source: 'fao56_t23', note: 'no threshold value given' },
     nitrogenFixing: { value: false, source: 'feedipedia_sunflower', note: 'Asteraceae, not a legume' },
     forage: { value: 'residue', source: 'feedipedia_sunflower_residue' },
@@ -202,6 +211,7 @@ export const CROPS: Record<CropId, CropRule> = {
     },
     kc: { value: { ini: 0.4, mid: [1.0, 1.0], end: [0.35, 0.35] }, source: 'fao56_t12', note: 'chick pea; Kc ini from legumes group' },
     rootDepthM: { value: [0.6, 1.0], source: 'fao56_t22' },
+    depletionP: { value: 0.5, source: 'fao56_t22' },
     nitrogenFixing: { value: true, source: 'feedipedia_chickpea', note: '"N-fixing legume (up to 100 kg N/ha)"' },
     forage: { value: 'residue', source: 'feedipedia_chickpea_straw' },
     notes: [

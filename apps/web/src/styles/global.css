@@ -314,3 +314,14 @@ input, select, textarea, button { max-width: 100%; min-width: 0; }
 img, svg, canvas, video { max-width: 100%; }
 body { overflow-wrap: break-word; }
 html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; } /* no mobile font boosting */
+
+/* Water Fit table (Rotations) */
+.fit-table { width: 100%; border-collapse: collapse; font-size: 0.875rem; margin: var(--space-2) 0; table-layout: fixed; }
+.fit-table th, .fit-table td { text-align: left; padding: 4px 2px; border-bottom: 1px solid rgba(7, 23, 63, 0.15); vertical-align: top; overflow-wrap: anywhere; }
+.fit-table thead th { font-size: 0.75rem; overflow-wrap: normal; }
+.fit-table th:first-child { width: 3.6em; }
+.fit-range { display: block; font-size: 0.7rem; }
+.fit-status { display: inline-flex; align-items: center; gap: 2px; font-weight: 700; }
+.fit-over .fit-status { color: var(--warn-on-light); }
+.fit-over th, .fit-over td { background: rgba(228, 55, 0, 0.08); }
+.fit-sources { display: flex; flex-wrap: wrap; gap: var(--space-1); }

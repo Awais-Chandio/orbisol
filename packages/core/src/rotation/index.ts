@@ -7,3 +7,4 @@ export * from './crops';
 export * from './calendar';
 export * from './water';
 export * from './strategies';
+export * from './waterFit';
