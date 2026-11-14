@@ -4,6 +4,7 @@ import { ArrowRight, CloudSun, Drop, Handshake, Sun, ThermometerHot, type Icon }
 import { Link } from 'react-router-dom';
 import { Trans, useTranslation } from 'react-i18next';
 import { CountUp } from '@/views/components/CountUp';
+import { ListenButton } from '@/views/components/ListenButton';
 import { useGreennessMonthly } from '@/controllers/useGreenness';
 import { useHeat2050State } from '@/controllers/useHeat2050';
 import { useRotationComparison } from '@/controllers/useRotationComparison';
@@ -75,12 +76,20 @@ export function OverviewScreen() {
   const h585 = heat?.range.ssp585?.change ?? null;
   const bestCrops = best ? best.plan.slots.map((x) => t('crops.' + x.crop)).join(' → ') : '';
 
+  // The four farmer-layer sentences, in card order (also read aloud by "Listen").
+  const plainBare = ex ? barePlain(t, ex.metrics.bareHotDays) : null;
+  const plainBest = best && ex ? (ex.rank === 1 ? t('plain.existingFirst') : waterPlain(t, best.waterPct, bestCrops)) : null;
+  const plainSeason = s.comparison ? seasonPlain(t, hot?.tercile ?? null, rain?.tercile ?? null) : null;
+  const plainHeat = heat && h245 ? heatPlain(t, heat) : null;
+  const sentences = [plainBare, plainBest, plainSeason, plainHeat].filter((x): x is string => !!x);
+
   return (
     <section className="screen">
       <h1>{t('overview.title')}</h1>
       <p className="lead">{t('overview.intro')}</p>
       {r.pin.label && <p className="small">{r.pin.label}</p>}
       <div className="screen-tools">
+        <ListenButton sentences={sentences} />
         <ScienceToggle />
       </div>
 
@@ -89,7 +98,7 @@ export function OverviewScreen() {
           to="/calendar"
           icon={Sun}
           label={t('overview.bare.label')}
-          plain={ex ? barePlain(t, ex.metrics.bareHotDays) : loading}
+          plain={plainBare ?? loading}
           exact={ex && <Trans i18nKey="overview.bare.exact" count={ex.metrics.bareHotDays} values={{ months: hotMonths, total: ex.metrics.bareDays }} components={{ n: <CountUp /> }} />}
         />
 
@@ -97,7 +106,7 @@ export function OverviewScreen() {
           to="/rotations"
           icon={Drop}
           label={t('overview.best.label')}
-          plain={best && ex ? (ex.rank === 1 ? t('plain.existingFirst') : waterPlain(t, best.waterPct, bestCrops)) : loading}
+          plain={plainBest ?? loading}
           exact={
             best && (
               <Trans
@@ -114,7 +123,7 @@ export function OverviewScreen() {
           to="/season"
           icon={CloudSun}
           label={t('overview.season.label', { days: SEASON_DAYS })}
-          plain={s.comparison ? seasonPlain(t, hot?.tercile ?? null, rain?.tercile ?? null) : s.isError ? t('season.error') : loading}
+          plain={plainSeason ?? (s.isError ? t('season.error') : loading)}
           exact={
             s.comparison && (
               <Trans
@@ -131,7 +140,7 @@ export function OverviewScreen() {
           to="/season#heat-2050"
           icon={ThermometerHot}
           label={heat ? t('overview.heat.label', { from: heat.future.from, to: heat.future.to }) : t('overview.heat.labelPlain')}
-          plain={heat && h245 ? heatPlain(t, heat) : heatLoading ? loading : t('overview.heat.none')}
+          plain={plainHeat ?? (heatLoading ? loading : t('overview.heat.none'))}
           exact={
             h245 &&
             (Math.round(h245[0]) === Math.round(h245[1]) ? (

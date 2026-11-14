@@ -781,5 +781,11 @@
     },
     "turnsSaved": "{{crops}} saves about 1 in {{n}} canal turns ({{pct}}% less water).",
     "turnsExtra": "{{crops}} needs about 1 extra canal turn for every {{n}} ({{pct}}% more water)."
+  },
+  "listen": {
+    "play": "Listen",
+    "stop": "Stop",
+    "then": "then",
+    "to": "to"
   }
 }

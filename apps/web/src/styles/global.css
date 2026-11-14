@@ -581,3 +581,7 @@ html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; } /* no mobile fo
 @keyframes grow-x { from { transform: scaleX(0); } }
 @keyframes draw-in { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
 @keyframes fade-in { from { opacity: 0; } }
+
+/* Listen (speech) */
+.listen-btn { border-color: var(--accent); }
+.listen-btn[aria-pressed='true'] { background: var(--accent); color: var(--c-deep-blue); border-color: var(--accent); }
