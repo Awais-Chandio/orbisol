@@ -81,12 +81,17 @@ export function SeasonScreen() {
 
           <div className="indicator-list">
             {s.indicators.map((v) => (
-              <IndicatorCard key={v.key} v={v}>
-                {v.key === 'hotDays' && Number.isFinite(cmp.thresholds.hotTmaxC) && (
-                  <p className="small">
-                    {t('season.hotThreshold', { t: cmp.thresholds.hotTmaxC.toFixed(1), bFrom: cmp.baseline.from, bTo: cmp.baseline.to })}
-                  </p>
-                )}
+              <IndicatorCard
+                key={v.key}
+                v={v}
+                explain={
+                  v.key === 'hotDays' && Number.isFinite(cmp.thresholds.hotTmaxC) ? (
+                    <p className="small">
+                      {t('season.hotThreshold', { t: cmp.thresholds.hotTmaxC.toFixed(1), bFrom: cmp.baseline.from, bTo: cmp.baseline.to })}
+                    </p>
+                  ) : undefined
+                }
+              >
                 {v.key === 'frostDays' && <p className="small"><JudgmentFlag reason={t('season.frostFlag')} /></p>}
                 {v.key === 'rainTotal' && <p className="small"><JudgmentFlag reason={t('season.rainFlag')} /></p>}
               </IndicatorCard>

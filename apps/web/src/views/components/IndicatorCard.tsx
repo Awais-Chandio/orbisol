@@ -30,7 +30,40 @@ export function formatIndicator(key: IndicatorView['key'], x: number): string {
   return Math.abs(x) < 10 ? x.toFixed(1) : String(Math.round(x));
 }
 
-export function IndicatorCard({ v, children, titleKey }: { v: IndicatorView; children?: ReactNode; titleKey?: string }) {
+/** Usual range (band), normal (tick) and this season (dot) on one line: three different shapes, never colour alone. */
+function RangeBar({ v, fmt }: { v: IndicatorView; fmt: (x: number) => string }) {
+  const { t } = useTranslation();
+  const xs = [v.p10, v.p90, v.normal, v.value].filter(Number.isFinite);
+  if (xs.length < 4) return null;
+  let lo = Math.min(...xs);
+  let hi = Math.max(...xs);
+  const pad = (hi - lo) * 0.08;
+  lo -= pad;
+  hi += pad;
+  if (hi - lo < 1e-9) hi = lo + Math.max(1, Math.abs(lo) * 0.1);
+  if (lo < 0 && Math.min(...xs) >= 0) lo = 0; // counts and amounts never go below zero
+  const pos = (x: number) => `${(((x - lo) / (hi - lo)) * 100).toFixed(1)}%`;
+  return (
+    <div className="range-bar-wrap">
+      <div
+        className="range-bar"
+        role="img"
+        aria-label={t('season.rangeAria', { value: fmt(v.value), normal: fmt(v.normal), lo: fmt(v.p10), hi: fmt(v.p90) })}
+      >
+        <span className="rb-band" style={{ left: pos(v.p10), width: `calc(${pos(v.p90)} - ${pos(v.p10)})` }} />
+        <span className="rb-normal" style={{ left: pos(v.normal) }} />
+        <span className="rb-dot" style={{ left: pos(v.value) }} />
+      </div>
+      <p className="rb-legend" aria-hidden>
+        <span><i className="rb-key-dot" /> {t('season.legend.now')}</span>
+        <span><i className="rb-key-normal" /> {t('season.legend.normal')}</span>
+        <span><i className="rb-key-band" /> {t('season.legend.range')}</span>
+      </p>
+    </div>
+  );
+}
+
+export function IndicatorCard({ v, children, titleKey, explain }: { v: IndicatorView; children?: ReactNode; titleKey?: string; explain?: ReactNode }) {
   const { t } = useTranslation();
   const fmt = (x: number) => {
     const shown = formatIndicator(v.key, x);
@@ -49,6 +82,7 @@ export function IndicatorCard({ v, children, titleKey }: { v: IndicatorView; chi
       {v.available ? (
         <>
           <p className="indicator-value">{fmt(v.value)}</p>
+          <RangeBar v={v} fmt={fmt} />
           <p className="small">
             {t('season.normal', { v: fmt(v.normal) })} · {t('season.range', { lo: fmt(v.p10), hi: fmt(v.p90) })}
           </p>
@@ -56,9 +90,13 @@ export function IndicatorCard({ v, children, titleKey }: { v: IndicatorView; chi
       ) : (
         <p className="indicator-value">–</p>
       )}
-      <p className="small muted">{t(`season.ind.${v.key}.what`)}</p>
       {children}
       <SourceTag provenance={v.provenance} />
+      <details className="what-means">
+        <summary>{t('season.whatMeans')}</summary>
+        <p className="small">{t(`season.ind.${v.key}.what`)}</p>
+        {explain}
+      </details>
     </article>
   );
 }

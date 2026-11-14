@@ -18,10 +18,9 @@ export function SatelliteRainCards({ days }: { days: number }) {
         <IndicatorCard
           key={k}
           titleKey={`season.imerg.${k}`}
+          explain={note}
           v={{ key: k, available: Number.isFinite(c[k].current), value: c[k].current, normal: c[k].normal, p10: c[k].p10, p90: c[k].p90, tercile: c[k].tercile, nYears: c[k].nYears, provenance: prov }}
-        >
-          {note}
-        </IndicatorCard>
+        />
       ))}
     </>
   );

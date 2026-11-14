@@ -430,3 +430,19 @@ html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; } /* no mobile fo
 
 /* in-page links land below the sticky header */
 [id] { scroll-margin-top: 80px; }
+
+/* Season range bar: band = usual range (p10-p90), tick = normal, dot = this season */
+.range-bar-wrap { margin: var(--space-2) 0 var(--space-2); }
+.range-bar { position: relative; height: 22px; margin: 0 8px; }
+.range-bar::before { content: ''; position: absolute; left: 0; right: 0; top: 10px; height: 2px; background: rgba(7, 23, 63, 0.25); }
+.rb-band { position: absolute; top: 5px; height: 12px; background: rgba(0, 66, 166, 0.22); border: 1.5px solid var(--c-electric-blue); border-radius: 3px; min-width: 3px; }
+.rb-normal { position: absolute; top: 0; width: 3px; height: 22px; margin-left: -1.5px; background: var(--c-deep-blue); }
+.rb-dot { position: absolute; top: 3px; width: 16px; height: 16px; margin-left: -8px; border-radius: 50%; background: var(--c-electric-blue); border: 2.5px solid var(--c-white); box-shadow: 0 0 0 1.5px var(--c-deep-blue); }
+.rb-legend { display: flex; flex-wrap: wrap; gap: var(--space-1) var(--space-3); font-size: 0.75rem; margin: var(--space-1) 0 0; }
+.rb-legend span { display: inline-flex; align-items: center; gap: 4px; }
+.rb-legend i { display: inline-block; }
+.rb-key-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--c-electric-blue); box-shadow: 0 0 0 1.5px var(--c-deep-blue); }
+.rb-key-normal { width: 3px; height: 12px; background: var(--c-deep-blue); }
+.rb-key-band { width: 16px; height: 8px; background: rgba(0, 66, 166, 0.22); border: 1.5px solid var(--c-electric-blue); border-radius: 2px; }
+.what-means { margin-top: var(--space-2); }
+.what-means summary { cursor: pointer; font-weight: 700; font-size: 0.875rem; min-height: 44px; display: flex; align-items: center; color: var(--c-electric-blue); }

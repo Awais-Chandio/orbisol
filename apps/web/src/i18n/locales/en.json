@@ -182,7 +182,14 @@
       "rainTotal": "Rain (satellite)",
       "heavyRainDays": "Extreme rain days (satellite)",
       "note": "Measured from space by NASA GPM IMERG for a 10 km cell; normal = same days {{from}}–{{to}} ({{n}} years). Model rain above and satellite rain here can differ."
-    }
+    },
+    "whatMeans": "What does this mean?",
+    "legend": {
+      "now": "this season",
+      "normal": "normal",
+      "range": "usual range"
+    },
+    "rangeAria": "This season {{value}}; normal {{normal}}; usual range {{lo}} to {{hi}}."
   },
   "crops": {
     "cotton": "Cotton",

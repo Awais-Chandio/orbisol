@@ -38,12 +38,16 @@ export function GreennessCard({ days }: { days: number }) {
         nYears: c.nYears,
         provenance: { ...g.data.series.provenance, dateFrom: g.comparison.window.start, date: g.comparison.window.end },
       }}
+      explain={
+        <>
+          <p className="small">{t('season.green.scale')}</p>
+          <p className="small">{t('season.green.method', { km: g.data.method.windowKm })}</p>
+        </>
+      }
     >
       <p className="small">
         {t('season.green.window', { from: fmtDate(g.comparison.window.start), to: fmtDate(g.comparison.window.end), n: g.comparison.composites })}
       </p>
-      <p className="small">{t('season.green.method', { km: g.data.method.windowKm })}</p>
-      <p className="small">{t('season.green.scale')}</p>
     </IndicatorCard>
   );
 }
