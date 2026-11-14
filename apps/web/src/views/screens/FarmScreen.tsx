@@ -86,7 +86,7 @@ export function FarmScreen() {
         <PriorityPicker value={f.farm.priorities} onChange={(priorities) => f.set({ priorities })} />
       </div>
 
-      <div className="card light">
+      <div className="card light" id="canal">
         <h2>{t('farm.canalTitle')}</h2>
         <div className="canal-row">
           <label className="field">

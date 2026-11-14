@@ -1,5 +1,5 @@
 /* AI-assisted: drafted with Claude (Anthropic). See docs/ai-usage.md. */
-import { Check, Flag, Plant, Minus } from '@phosphor-icons/react';
+import { ArrowRight, Check, Drop, Flag, Plant, Minus } from '@phosphor-icons/react';
 import type { Provenance, WaterFit } from '@orbisol/core';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
@@ -14,11 +14,16 @@ export function WaterFitDetail({ fit, climate }: { fit: WaterFit | null; climate
   const { t } = useTranslation();
   if (!fit)
     return (
-      <details className="note-section water-fit">
-        <summary>{t('waterFit.title')}</summary>
+      <section className="note-section water-fit empty-state" aria-label={t('waterFit.title')}>
+        <h3 className="small-head">{t('waterFit.title')}</h3>
+        <p className="empty-line">
+          <Drop size={24} aria-hidden /> <strong>{t('waterFit.empty')}</strong>
+        </p>
         <p className="small">{t('waterFit.noCanal')}</p>
-        <Link className="btn btn-secondary" to="/farm">{t('waterFit.goFarm')}</Link>
-      </details>
+        <Link className="btn btn-secondary btn-small" to="/farm#canal">
+          {t('waterFit.goFarm')} <ArrowRight size={16} aria-hidden />
+        </Link>
+      </section>
     );
   const n = fit.overMonths.length;
   const overList = fit.overMonths.map((m) => monthName(m, 'long')).join(', ');

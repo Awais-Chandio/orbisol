@@ -448,7 +448,7 @@
     "flagged": "{{count}} months too long",
     "flagged_one": "1 month too long",
     "allFit": "no month too long",
-    "noCanal": "Add your canal turn (days between turns) in My farm to see if it comes often enough for each crop.",
+    "noCanal": "Orbisol then checks, month by month, whether water comes often enough for each crop.",
     "goFarm": "Add canal turn",
     "summaryOver": "Your turn every {{days}} days is longer than the crop can safely wait in: {{months}}.",
     "summaryOk": "Your turn every {{days}} days fits every month we could check.",
@@ -470,7 +470,8 @@
     "youngNote": "Young crop: roots are not yet at full depth, so the real safe interval is shorter than shown. Too-long turns are still flagged; a fit is not confirmed.",
     "limitVolume": "Limitation: we do not know how much water your canal turn brings (flow and hours vary), so we assume each turn refills the root zone. If a turn does not fill the field, the safe interval is shorter.",
     "limitRain": "Rain is not counted, so monsoon months may be easier than shown.",
-    "sources": "From FAO-56 Table 19 (soil water), Table 22 (root depth and p, smaller depth as advised for irrigation scheduling, p adjusted for crop water use) and crop water use = FAO-56 Kc × NASA POWER ET0."
+    "sources": "From FAO-56 Table 19 (soil water), Table 22 (root depth and p, smaller depth as advised for irrigation scheduling, p adjusted for crop water use) and crop water use = FAO-56 Kc × NASA POWER ET0.",
+    "empty": "Add your canal turn in My farm to see this."
   },
   "share": {
     "button": "Share on WhatsApp",

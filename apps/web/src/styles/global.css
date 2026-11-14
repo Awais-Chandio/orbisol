@@ -421,3 +421,12 @@ html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; } /* no mobile fo
   .farm-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: var(--space-4); align-items: start; }
   .farm-grid .farm-rotation { grid-row: span 3; }
 }
+
+/* Empty state (Water fit without a canal turn) */
+.empty-state { padding: var(--space-3); margin: var(--space-2) 0; border: 2px dashed var(--c-electric-blue); border-radius: 8px; }
+.empty-state .small-head { margin-top: 0; }
+.empty-line { display: flex; align-items: flex-start; gap: var(--space-2); }
+.empty-line svg { flex: none; color: var(--c-electric-blue); }
+
+/* in-page links land below the sticky header */
+[id] { scroll-margin-top: 80px; }
