@@ -36,3 +36,11 @@
   Coastlines_15m works and is now an overlay. Labels replaced by offline place search (no OSM/Nominatim).
 - Index: 150k Pakistan places + 34k world cities in 1516 adaptive prefix shards (largest 116 KB, typical query ~25 KB), cached on use.
 - Verified in browser: "tando ja" -> Tando Jam pins at 25.43, 68.53; "goth" asks for more letters; "hyderabad" shows Sindh first with km; coastlines visible near Karachi; no console errors. 30 core tests pass.
+
+## 2026-11-14 15:30 PKT - Phase 4 Core engine - commit 42126d2
+
+- FLOW: daily series -> et0Climatology + monthlyClimate/hazards -> candidatePlans (cited windows) -> evaluatePlan (FAO-56 Kc x ET0, bare spans, legume/forage days, vulnerable stages) -> priorityScores (3/2/1) -> existing + 2 alternatives with why/evidence/benefits/gaps/risks; compareSeason -> seasonTwins -> nextWindowIndicators -> twinOutlook + backtestTwins -> confidenceMeter
+- Crop rules: 9 crops, every value with a source (FAO-56 Tables 11/12/22/23, Sindh Agriculture Dept, Feedipedia, Dawn); gaps left out and listed. docs/crop-rules.md generated from code.
+- Hyderabad result (water + forage priorities): existing cotton -> wheat ~1885 mm, 38 bare days (29 in Apr-Jun); sorghum fodder -> berseem 19% less water; mung -> berseem 25% less water but 57 more bare days (flagged as a risk).
+- Track record example (90-day window, next 60 days Tmax): 81% vs naive 73%. Hot-days outcome in winter is flagged as not informative.
+- 53 core tests pass (incl. integration test on real Hyderabad POWER data).
