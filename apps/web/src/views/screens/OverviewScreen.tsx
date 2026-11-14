@@ -150,7 +150,7 @@ export function OverviewScreen() {
         <Link to="/season#twins-h" className="card light insight-card confidence-card">
           <span className="insight-label">{t('overview.twins.label', { days: OUTLOOK_DAYS })}</span>
           <span className="insight-text">
-            <strong>{t('outlook.outcome.' + tw.key, { days: OUTLOOK_DAYS })}:</strong> {t('outlook.direction.' + tw.outlook.direction)}
+            {t('outlook.direction.' + tw.outlook.direction, { what: t('outlook.what.' + tw.key) })}
           </span>
           <ConfidenceMeter confidence={tw.confidence} factors={false} />
           <span className="insight-more">

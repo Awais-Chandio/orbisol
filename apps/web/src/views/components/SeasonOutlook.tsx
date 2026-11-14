@@ -34,7 +34,7 @@ export function SeasonOutlook({ days }: { days: WindowDays }) {
               <p className="small">{t('outlook.notInformative')}</p>
             ) : (
               <>
-                <p className="outlook-dir">{t('outlook.direction.' + outlook.direction)}</p>
+                <p className="outlook-dir">{t('outlook.direction.' + outlook.direction, { what: t('outlook.what.' + key) })}</p>
                 <p className="small">
                   {t('outlook.values', { values: outlook.values.map((v) => `${v.year}: ${fmt(v.value)}`).join(', '), normal: fmt(outlook.normal) })}
                 </p>

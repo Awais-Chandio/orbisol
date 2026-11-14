@@ -85,7 +85,7 @@
     "what": "Orbisol helps farmers explore crop rotation strategies using NASA Earth observations, local soil information, crop characteristics and their own priorities.",
     "credits": "Data credits",
     "satellite": "Satellite",
-    "model": "Model / reanalysis",
+    "model": "Computer model",
     "ground": "Ground",
     "reference": "Reference",
     "farmer": "Your input",
@@ -159,21 +159,21 @@
       },
       "et0Total": {
         "name": "Evaporation demand (ET0)",
-        "what": "How much water a healthy, well-watered grass field would lose to the air (reference evapotranspiration, FAO-56). Hot, dry, windy, sunny days raise it. Most crops need about this much water or more."
+        "what": "How much water a healthy, well-watered grass field would lose to the air (FAO-56 calls it reference evapotranspiration, ET0). Hot, dry, windy, sunny days raise it. Most crops need about this much water or more."
       }
     },
     "gap": "Data gap: satellite greenness is not loaded yet for this field.",
     "frostFlag": "ground frost can happen even when the air stays just above 0 °C",
     "rainFlag": "canal water is not in these numbers; your canal turn matters more than rain here",
     "howSure": "How sure is this?",
-    "sure1": "Weather numbers come from NASA POWER, a model on a grid of about 50 km. They describe your area, not your exact field, and they do not include canal irrigation.",
+    "sure1": "Weather numbers come from NASA POWER, a model that works in squares about 50 km wide. They describe your area, not your exact field, and they do not include canal irrigation.",
     "sure2": "Normal is the middle value (median) of the same days in {{n}} past years. The usual range covers the middle 80% of those years.",
     "sure3": "Above or below normal means this window was in the top or bottom third of those years.",
     "coverage": "Days with data in this window: {{pct}}%.",
-    "sure4": "Evaporation demand from this model grid may read higher than at a local weather station in canal-irrigated areas, because the model does not see the cooler, more humid air over irrigated fields. Compare it with normal rather than reading it as an exact amount.",
+    "sure4": "Evaporation demand from this model may read higher than at a local weather station in canal-irrigated areas, because the model does not see the cooler, more humid air over irrigated fields. Compare it with normal rather than reading it as an exact amount.",
     "green": {
-      "window": "{{from}} to {{to}} ({{n}} satellite composites) vs the same days in 2001–2020.",
-      "method": "Median of cropland pixels within {{km}} km of your pin (NASA MODIS land cover), good-quality pixels only.",
+      "window": "{{from}} to {{to}} ({{n}} satellite images, one every 16 days) vs the same days in 2001–2020.",
+      "method": "Middle value of farmland pixels (250 m squares) within {{km}} km of your pin (NASA MODIS land cover); cloudy or poor-quality pixels are left out.",
       "gapOutside": "Data gap: satellite greenness is precomputed only for the demo region in this version.",
       "scale": "NDVI runs from about 0 (bare soil, buildings) to about 0.9 (dense green crops)."
     },
@@ -240,15 +240,15 @@
   },
   "notes": {
     "why": {
-      "existing": "This is your current rotation: the baseline the others are compared with.",
+      "existing": "This is your current rotation: the starting point the others are compared with.",
       "betterFor": "Scores better than your current rotation on \"{{priority}}\", one of your priorities.",
       "balanced": "A balanced option for your priorities; it does not beat your current rotation on any single one."
     },
     "evidence": {
-      "waterNeed": "{{crop}} needs about {{mm}} mm of water over its season (range {{low}}–{{high}} mm): FAO-56 crop coefficient × evaporation demand at your field.",
+      "waterNeed": "{{crop}} needs about {{mm}} mm of water over its season (range {{low}}–{{high}} mm): FAO-56 crop factor × evaporation demand at your field.",
       "et0Source": "Evaporation demand (ET0) is the 1991–2020 daily average from NASA POWER weather data at your field.",
       "bareDays": "Field bare about {{days}} days a year, {{hot}} of them in the hottest months.",
-      "legume": "{{crop}} is a nitrogen-fixing legume.",
+      "legume": "{{crop}} is a legume: it adds nitrogen to the soil.",
       "fodder": "{{crop}} is grown as green fodder.",
       "sowWindow": "{{crop}} sowing window used: {{from}} to {{to}}."
     },
@@ -263,21 +263,21 @@
     },
     "gap": {
       "market": "Market prices and demand are not in Orbisol. Check local buyers before switching.",
-      "varieties": "Variety choice and seed availability are not modelled.",
-      "proxyStages": "{{crop}} growth stages borrow a similar crop's FAO-56 values.",
+      "varieties": "Variety choice and seed availability are not included.",
+      "proxyStages": "{{crop}} growth stages borrow FAO-56 values from a similar crop.",
       "salt": "No reliable salt-tolerance value for {{crop}}.",
       "forage": "Fodder value of {{crop}} residues is not counted (no source found).",
       "sowingSource": "{{crop}} sowing dates come from a general source; check with your local agriculture office.",
       "irrigationModel": "Weather data comes from a NASA model that does not see canal irrigation."
     },
     "risk": {
-      "saltSensitive": "{{crop}} is salt-sensitive ({{rating}}; yield starts to fall above ECe {{ece}} dS/m). You said your soil is salty.",
+      "saltSensitive": "{{crop}} is $t(saltRating.{{rating}}) to salt: yield starts to fall when soil salt is above {{ece}} dS/m (ECe, a lab measure of soil salt). You said your soil is salty.",
       "vulnerable": {
         "hot": "{{crop}} is in a sensitive stage during the hottest months ({{months}}).",
         "frost": "{{crop}} is in a sensitive stage in frost-prone months ({{months}}).",
         "heavyRain": "{{crop}} is in a sensitive stage when heavy rain is most frequent ({{months}})."
       },
-      "overlap": "Crops overlap by {{days}} days: the next crop must be sown into the last one (relay sowing) or later than shown.",
+      "overlap": "Crops overlap by {{days}} days: the next crop must be sown into the standing one before its harvest (relay sowing), or later than shown.",
       "moreWater": "Needs about {{pct}}% more water than your current rotation.",
       "moreBare": "Field is bare {{days}} more days a year ({{hot}} bare days in the hottest months): more erosion and weeds.",
       "newCrop": "{{crop}} is new to this rotation: seed, skills, machinery and buyers need checking.",
@@ -339,7 +339,7 @@
     "existing": "Your current rotation",
     "alternative": "Option",
     "rank": "#{{rank}} for your priorities",
-    "baseline": "Baseline",
+    "baseline": "Starting point",
     "lessWater": "{{pct}}% less water",
     "moreWater": "{{pct}}% more water",
     "sameWater": "About the same water",
@@ -349,19 +349,19 @@
     "bareLess": "{{days}} fewer bare days",
     "bareSame": "Same bare days",
     "bareDays": "{{days}} bare days a year",
-    "legumeMore": "{{days}} more legume days",
-    "legumeLess": "{{days}} fewer legume days",
+    "legumeMore": "{{days}} more days with a nitrogen-adding crop (legume)",
+    "legumeLess": "{{days}} fewer days with a nitrogen-adding crop (legume)",
     "tradeoff": "Trade-off: {{gains}}, but {{losses}}.",
     "tradeoffNone": "No trade-off found on these measures.",
     "gains": {
       "water": "less water",
       "bare": "less bare soil",
-      "legume": "more legume time"
+      "legume": "more time with a nitrogen-adding crop"
     },
     "losses": {
       "water": "more water",
       "bare": "{{days}} more bare days",
-      "legume": "less legume time"
+      "legume": "less time with a nitrogen-adding crop"
     },
     "scoresTitle": "How it scores on your priorities",
     "notScored": "not scored",
@@ -395,17 +395,17 @@
     "bareHot": "{{days}} of the bare days fall in the hottest months.",
     "bareMonth": "Bare field ({{days}} days)",
     "sensitive": "{{crop}} sensitive: {{hazard}}",
-    "climateSource": "Hottest months, heavy rain and frost: NASA POWER, 1991–2020 normals at your field.",
+    "climateSource": "Hottest months, heavy rain and frost: NASA POWER, 1991–2020 averages at your field.",
     "noHazards": "No frost or frequent heavy-rain months here.",
     "noFrost": "No frost months here.",
     "judgment": "actual sowing and harvest dates vary year to year",
     "monthDetails": "Month-by-month details"
   },
   "outlook": {
-    "title": "Season Twins",
+    "title": "Season Twins: similar past years",
     "intro": "Past years whose same days looked most like this season, and what happened in the {{days}} days after.",
-    "twinsList": "Twins: {{years}}",
-    "similarity": "difference {{d}}",
+    "twinsList": "Similar past years: {{years}}",
+    "similarity": "difference {{d}} (0 = identical)",
     "outcome": {
       "tmaxMean": "Daytime temperature (next {{days}} days)",
       "rainTotal": "Rain (next {{days}} days)",
@@ -417,11 +417,11 @@
       "greenness": ""
     },
     "direction": {
-      "above": "Twins point to above normal",
-      "below": "Twins point to below normal",
-      "mixed": "Twins disagree"
+      "above": "Similar past years (Season Twins) point to above-normal {{what}}",
+      "below": "Similar past years (Season Twins) point to below-normal {{what}}",
+      "mixed": "Similar past years (Season Twins) disagree on {{what}}"
     },
-    "values": "In twin years: {{values}} (normal {{normal}})",
+    "values": "In those years: {{values}} (normal {{normal}})",
     "notInformative": "Not informative here: this outcome hardly changes from year to year.",
     "confidence": "Confidence",
     "levels": {
@@ -430,16 +430,21 @@
       "low": "Low"
     },
     "track": "Track record: tested on {{n}} past years using only earlier years, right {{hits}} times ({{rate}}%). Always guessing the usual answer: {{base}}%.",
-    "greenNote": "Greenness in twin years arrives with the satellite (MODIS / VIIRS) data."
+    "greenNote": "Greenness in the similar years arrives with the satellite (MODIS / VIIRS) data.",
+    "what": {
+      "greenness": "greenness",
+      "tmaxMean": "daytime temperature",
+      "rainTotal": "rain"
+    }
   },
   "confidence": {
     "noTwins": "No similar past years were found.",
-    "twinsClose": "Twin years are very similar to this season (difference {{d}}).",
-    "twinsFairlyClose": "Twin years are fairly similar (difference {{d}}).",
-    "twinsFar": "Twin years are not very similar (difference {{d}}).",
-    "twinsAgree": "Twins agree ({{pct}}%).",
-    "twinsMostlyAgree": "Twins mostly agree ({{pct}}%).",
-    "twinsDisagree": "Twins disagree ({{pct}}%).",
+    "twinsClose": "The similar past years are very close to this season (difference {{d}}).",
+    "twinsFairlyClose": "The similar past years are fairly close to this season (difference {{d}}).",
+    "twinsFar": "The similar past years are not very close to this season (difference {{d}}).",
+    "twinsAgree": "The similar years agree ({{pct}}%).",
+    "twinsMostlyAgree": "The similar years mostly agree ({{pct}}%).",
+    "twinsDisagree": "The similar years disagree ({{pct}}%).",
     "dataComplete": "Data complete ({{pct}}% of days).",
     "dataGaps": "Some days missing ({{pct}}% complete).",
     "trackGood": "Past tests beat guessing ({{hit}}% vs {{base}}%).",
@@ -465,7 +470,7 @@
     "goFarm": "Add canal turn",
     "summaryOver": "Your turn every {{days}} days is longer than the crop can safely wait in: {{months}}.",
     "summaryOk": "Your turn every {{days}} days fits every month we could check.",
-    "intro": "Safe interval = how many days the soil in the root zone can supply the crop before it starts to suffer (FAO-56: readily available water ÷ crop water use per day).",
+    "intro": "Safe interval = how many days the soil around the roots can keep the crop supplied before it starts to suffer (FAO-56: easily usable soil water ÷ crop water use per day).",
     "soilAssumed": "Soil not set: using loam. Set your soil in My farm for a better answer.",
     "soilUsed": "Soil: {{soil}}.",
     "month": "Month",
@@ -480,8 +485,8 @@
     },
     "range": "range {{low}}–{{high}}",
     "flooded": "rice (flooded, not checked)",
-    "youngNote": "Young crop: roots are not yet at full depth, so the real safe interval is shorter than shown. Too-long turns are still flagged; a fit is not confirmed.",
-    "limitVolume": "Limitation: we do not know how much water your canal turn brings (flow and hours vary), so we assume each turn refills the root zone. If a turn does not fill the field, the safe interval is shorter.",
+    "youngNote": "Young crop: roots are not deep yet, so the real safe interval is shorter than shown. Too-long turns are still flagged; a fit is not confirmed.",
+    "limitVolume": "Limitation: we do not know how much water your canal turn brings (flow and hours vary), so we assume each turn fills the soil around the roots. If a turn does not fill the field, the safe interval is shorter.",
     "limitRain": "Rain is not counted, so monsoon months may be easier than shown.",
     "sources": "From FAO-56 Table 19 (soil water), Table 22 (root depth and p, smaller depth as advised for irrigation scheduling, p adjusted for crop water use) and crop water use = FAO-56 Kc × NASA POWER ET0.",
     "empty": "Add your canal turn in My farm to see this."
@@ -510,7 +515,7 @@
     "notForecast": "Observed trend, not a forecast. It shows how past years changed, not what next year will bring.",
     "perDecade": "{{v}} {{unit}} per decade",
     "daysUnit": "days",
-    "interval": "(95% range {{lo}} to {{hi}})",
+    "interval": "(likely between {{lo}} and {{hi}})",
     "tooShort": "Not enough complete years for a trend.",
     "hotDays": {
       "name": "Hot days per year",
@@ -527,9 +532,9 @@
     "year": "Year",
     "rain": "Rain",
     "balance": "Rain − ET0",
-    "caveat": "from a NASA model grid (about 50 km), not a local station; model trends can shift when the satellite and station data fed into it change, and this has not been checked against a local station",
-    "method": "Complete calendar years only. Change per decade = least-squares straight line × 10 years; the 95% range shows how sure that is. If the range crosses zero, the change is called unclear.",
-    "irrigation": "Irrigated areas can cool daytime extremes (watered fields evaporate and cool the air), and this NASA model grid is about 50 km wide, so it mixes your area with its surroundings.",
+    "caveat": "from a NASA model that averages over squares about 50 km wide, not a local station; model trends can shift when the satellite and station data fed into it change, and this has not been checked against a local station",
+    "method": "Complete calendar years only. Change per decade = best-fit straight line × 10 years; the likely range (95%) shows how sure that is. If the range crosses zero, the change is called unclear.",
+    "irrigation": "Irrigated areas can cool daytime extremes (watered fields evaporate and cool the air), and this NASA model averages over a square about 50 km wide, so it mixes your area with its surroundings.",
     "warmNights": {
       "name": "Warm nights per year",
       "short": "Warm nights",
@@ -564,16 +569,16 @@
   "heat2050": {
     "title": "Hot days around {{from}}–{{to}}",
     "badge": "projection",
-    "notForecast": "Climate model projection, not a forecast. It shows what climate models give for a 20-year period under an emissions path, not the weather in any year.",
-    "what": "Days a year with a maximum above {{t}} °C (the same line as the observed trend), from {{n}} climate models for this 25 km cell. Shown as a range across models.",
-    "ssp245": "Middle emissions path (SSP2-4.5)",
-    "ssp585": "High emissions path (SSP5-8.5)",
+    "notForecast": "Climate model projection, not a forecast. It shows what climate models give for a 20-year period if world greenhouse-gas emissions follow one path, not the weather in any year.",
+    "what": "Days a year with a maximum above {{t}} °C (the same line as the observed trend), from {{n}} climate models for this 25 km square. Shown as a range across models.",
+    "ssp245": "If world emissions follow a middle path (SSP2-4.5)",
+    "ssp585": "If world emissions stay high (SSP5-8.5)",
     "change": "{{v}} hot days a year",
     "counts": "Models give {{base}} hot days a year in {{bFrom}}–{{bTo}} and {{fut}} around 2050.",
     "byModel": "See each model",
     "model": "Model",
     "bias": "these models run cooler than the NASA POWER grid here (about 36 hot days a year observed in 1995–2014), so trust the change more than the counts",
-    "scenarios": "Change = 2041–2060 average minus the same model's 1995–2014 average. SSP2-4.5 and SSP5-8.5 are IPCC emissions paths; the real path is not known."
+    "scenarios": "Change = 2041–2060 average minus the same model's 1995–2014 average. SSP2-4.5 and SSP5-8.5 are the IPCC's names for a middle and a high emissions path; which one the world follows is not known."
   },
   "overview": {
     "title": "Your field at a glance",
@@ -614,12 +619,12 @@
       "label": "Hot days around {{from}}–{{to}}",
       "labelPlain": "Hot days around 2050",
       "value": "+{{v}} hot days a year",
-      "text": "Middle emissions path, range across NASA climate models. A projection, not a forecast.",
-      "high": "High emissions path: +{{v}}.",
+      "text": "If world emissions follow a middle path; range across NASA climate models. A projection, not a forecast.",
+      "high": "If emissions stay high: +{{v}}.",
       "none": "The 2050 heat outlook is precomputed only for the demo region in this version."
     },
     "twins": {
-      "label": "Season Twins: next {{days}} days",
+      "label": "Similar past years (Season Twins): next {{days}} days",
       "why": "Why this confidence"
     },
     "calendarLink": "See it month by month"
@@ -631,7 +636,7 @@
     "bareSpan": "Bare {{from}} to {{to}} ({{days}} days)",
     "hotSummary": "Hottest months: {{months}}",
     "ndviCaption": "What NASA's MODIS satellite sees on your field",
-    "ndviHint": "Greenness (NDVI) in a usual year, 2001–2020: median of cropland within 3 km of your pin. Higher = greener, leafier crops; low = bare soil or harvest.",
+    "ndviHint": "Greenness (NDVI) in a usual year, 2001–2020: the middle value of farmland within 3 km of your pin. Higher = greener, leafier crops; low = bare soil or harvest.",
     "ndviLegend": "Greenness seen by MODIS (usual year)",
     "ndviUsual": "usual, 2001–2020",
     "ndviAria": "Usual greenness by month: {{values}}",
@@ -666,5 +671,11 @@
     "aria": "Next step",
     "label": "Next step: {{screen}}",
     "back": "Back to the overview"
+  },
+  "saltRating": {
+    "S": "sensitive",
+    "MS": "moderately sensitive",
+    "MT": "moderately tolerant",
+    "T": "tolerant"
   }
 }
