@@ -109,7 +109,13 @@
     "stripesCredit": "Warming stripes design: #ShowYourStripes by Ed Hawkins (University of Reading), CC BY 4.0. Orbisol draws them from NASA POWER for your pin."
   },
   "season": {
-    "groups": { "jump": "Jump to a group", "heat": "Heat", "water": "Water", "soil": "Soil & greenness", "frost": "Frost" },
+    "groups": {
+      "jump": "Jump to a group",
+      "heat": "Heat",
+      "water": "Water",
+      "soil": "Soil & greenness",
+      "frost": "Frost"
+    },
     "window": "{{from}} to {{to}} ({{days}} days), compared with the same days in {{bFrom}}–{{bTo}} ({{n}} years).",
     "last30": "Last 30 days",
     "last90": "Last 90 days",
@@ -889,11 +895,24 @@
     "next": "Next",
     "done": "Done",
     "loading": "Loading the demo farm's NASA data…",
-    "s1": { "title": "Your field", "body": "Pin any field on Earth - NASA satellites already watch it." },
-    "s2": { "title": "Your field at a glance" },
-    "s3": { "title": "Your crop year", "body": "Bare soil - NASA's MODIS satellite sees it too." },
-    "s4": { "title": "The best option for you" },
-    "s5": { "title": "Looking ahead to 2050", "body": "Supports, not replaces, the farmer's judgment." }
+    "s1": {
+      "title": "Your field",
+      "body": "Pin any field on Earth - NASA satellites already watch it."
+    },
+    "s2": {
+      "title": "Your field at a glance"
+    },
+    "s3": {
+      "title": "Your crop year",
+      "body": "Bare soil - NASA's MODIS satellite sees it too."
+    },
+    "s4": {
+      "title": "The best option for you"
+    },
+    "s5": {
+      "title": "Looking ahead to 2050",
+      "body": "Supports, not replaces, the farmer's judgment."
+    }
   },
   "stripes": {
     "title": "Your place, {{from}}-{{to}}: each stripe is one year (NASA POWER)",
@@ -902,5 +921,40 @@
     "hint": "Tap or hover a stripe to see the year. 1991-2020 normal: {{normal}} °C average.",
     "legend": "cooler <-> warmer than 1991-2020",
     "creditPrefix": "Stripe design:"
+  },
+  "report": {
+    "title": "Field report",
+    "button": "Field report",
+    "back": "Back",
+    "print": "Print or save as PDF",
+    "s1": "Your field this season",
+    "s2": "Rotations compared",
+    "s3": "What the satellite sees",
+    "s4": "Sources",
+    "bestLess": "{{crops}}: {{pct}}% less water than your current rotation over a full year.",
+    "bestMore": "{{crops}}: {{pct}}% more water than your current rotation over a full year.",
+    "bestSame": "{{crops}}: about the same water as your current rotation over a full year.",
+    "seasonExact": "Hot days {{hot}} (normal {{hotN}}), rain {{rain}} mm (normal {{rainN}} mm); normal = same days {{bFrom}}–{{bTo}}.",
+    "heatExact": "About {{v}} more hot days a year under SSP2-4.5 (high emissions SSP5-8.5: {{hi}}), three CMIP6 models.",
+    "table": {
+      "head": "Measure",
+      "current": "current (baseline)",
+      "less": "{{pct}}% less",
+      "more": "{{pct}}% more",
+      "same": "about the same",
+      "water": "Water vs current",
+      "bare": "Bare days in hottest months ({{months}})",
+      "fit": "Canal-turn fit",
+      "salt": "Salt note",
+      "risk": "Main risk",
+      "noCanal": "No canal turn set in My farm.",
+      "notSalty": "Soil not marked salty.",
+      "saltSens": "May lose yield to salt: {{crops}}",
+      "saltOk": "All crops cope with salt",
+      "noRisk": "No risk flagged."
+    },
+    "tableNote": "Water = FAO-56 crop factor × evaporation demand (NASA POWER 1991–2020). Canal-turn fit uses your turn interval and soil from My farm. Salt ratings from FAO-56 Table 23.",
+    "farmerInputs": "rotation, priorities, soil and canal turn entered in My farm",
+    "footer": "Made with NASA Earth data. Discuss this report with your local extension officer before changing your rotation."
   }
 }

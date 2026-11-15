@@ -10,7 +10,7 @@ interface Credit {
   license?: string;
 }
 
-const NASA: Credit[] = [
+export const NASA_CREDITS: Credit[] = [
   { name: 'NASA POWER (daily, agroclimatology)', use: 'Heat, frost, rain, dew point, wind, sunlight, top-soil wetness; ET0 inputs', url: 'https://power.larc.nasa.gov/' },
   { name: 'NASA GIBS: VIIRS NOAA-20 true color, Coastlines', use: 'Map imagery', url: 'https://www.earthdata.nasa.gov/engage/open-data-services-software/earthdata-developer-portal/gibs-api' },
   { name: 'MODIS Terra MOD13Q1 NDVI and MCD12Q1 land cover (ORNL DAAC)', use: 'Cropland greenness (NDVI) (pipeline)', url: 'https://modis.ornl.gov/' },
@@ -26,7 +26,7 @@ const PLANNED: Credit[] = [
   { name: 'VIIRS NOAA-20 NDVI (VJ113A1)', use: 'Replacement for MODIS Terra greenness when Terra science data ends (expected around February 2027).', url: 'https://www.earthdata.nasa.gov/data/instruments/viirs' },
 ];
 
-const REFERENCE: Credit[] = [
+export const REFERENCE_CREDITS: Credit[] = [
   { name: 'FAO-56 (Allen et al. 1998), Tables 11, 12, 22, 23', use: 'ET0 method, crop stages, crop coefficients, rooting depth, salt tolerance', url: 'https://www.fao.org/4/x0490e/x0490e00.htm' },
   { name: 'Sindh Agriculture, Supply & Prices Department', use: 'Sowing and harvest windows for Hyderabad / South Sindh', url: 'https://agri.sindh.gov.pk/showing-period' },
   { name: 'FAO (2006) Guidelines for soil description, Table 7', use: 'Slope classes', url: 'https://www.fao.org/4/a0541e/a0541e.pdf' },
@@ -74,9 +74,9 @@ export function AboutScreen() {
 
       <h2>{t('about.credits')}</h2>
       <h3>{t('about.nasaData')}</h3>
-      <CreditList items={NASA} />
+      <CreditList items={NASA_CREDITS} />
       <h3>{t('about.references')}</h3>
-      <CreditList items={REFERENCE} />
+      <CreditList items={REFERENCE_CREDITS} />
       <h3>{t('about.planned')}</h3>
       <p className="small">{t('about.plannedHint')}</p>
       <CreditList items={PLANNED} />

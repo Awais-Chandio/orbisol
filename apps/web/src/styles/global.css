@@ -741,3 +741,58 @@ html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; } /* no mobile fo
 .hero-globe-canvas { position: relative; }
 .hero-globe-canvas { display: block; contain: layout paint size; }
 @media (max-width: 420px) { .hero-globe { margin: -24px -8px -24px 0; } }
+
+/* ---------- Field report (/report): black on white, brand colours only for accents; prints to A4 ---------- */
+.report { background: #fff; color: #000; border-radius: var(--radius, 12px); padding: var(--space-3) var(--space-3) var(--space-4); margin: var(--space-2) 0; font-size: 0.95rem; line-height: 1.45; }
+.report a { color: var(--c-electric-blue); }
+.report h1, .report h2 { color: #000; margin: 0 0 var(--space-1); }
+.report h2 { font-size: 1.1rem; border-bottom: 2px solid var(--c-electric-blue); padding-bottom: 2px; margin-top: var(--space-3); }
+.report-tools { display: flex; flex-wrap: wrap; gap: var(--space-2); margin-bottom: var(--space-3); }
+.report-head { border-bottom: 3px solid var(--c-deep-blue); padding-bottom: var(--space-2); }
+.report-brand { margin: 0; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: var(--c-electric-blue); font-size: 0.8rem; }
+.report-meta { display: flex; flex-wrap: wrap; gap: 0 var(--space-3); margin: 0; }
+.report-judgment { margin: 4px 0 0; font-style: italic; }
+.report-findings { padding-left: 1.2em; margin: 0; }
+.report-findings li { margin: 0 0 var(--space-2); }
+.report-exact { color: #333; }
+.report .source-tag { color: #333; border-color: #999; background: transparent; }
+.report .source-tag a { color: var(--c-electric-blue); }
+.report-table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.report-table { border-collapse: collapse; width: 100%; table-layout: fixed; font-size: 0.85rem; overflow-wrap: anywhere; }
+.report-table th, .report-table td { border: 1px solid #bbb; padding: 4px 6px; text-align: left; vertical-align: top; }
+.report-table thead th { background: #eef4fd; color: #000; }
+.report-table tbody th { font-weight: 600; width: 22%; }
+.report-crops, .report-rank { display: block; font-weight: 400; font-size: 0.8rem; }
+.report-rank { color: var(--c-electric-blue); }
+.report-satellite .crop-year, .report-satellite .timeline, .report-satellite figure, .report-satellite .card { color: #000; }
+.report .card.light, .report .stripes-card { background: #fff; color: #000; box-shadow: none; border: 1px solid #ddd; padding: var(--space-2); }
+.report-sources { padding-left: 1.2em; margin: 0; font-size: 0.8rem; }
+.report-sources li { margin-bottom: 4px; }
+.report-url { display: block; color: #555; word-break: break-all; font-size: 0.72rem; }
+.report-foot { margin-top: var(--space-3); border-top: 3px solid var(--c-deep-blue); padding-top: var(--space-2); font-weight: 600; }
+
+@page { size: A4; margin: 12mm; }
+@media print {
+  html, body, .app-shell, .app-main { background: #fff !important; color: #000 !important; }
+  .app-shell > :not(.app-main), .app-main > :not(.report) { display: none !important; }
+  .app-main { max-width: none; padding: 0; margin: 0; }
+  .report { margin: 0; padding: 0; border-radius: 0; font-size: 10pt; line-height: 1.35; }
+  .report-findings li { margin-bottom: 4pt; }
+  .report-tools { display: none !important; }
+  .report h2 { page-break-after: avoid; break-after: avoid; }
+  .report-section, .report-findings li, .report-table tr, .report-stripes { page-break-inside: avoid; break-inside: avoid; }
+  .report-table { font-size: 8.5pt; }
+  .report-table-wrap { overflow: visible; }
+  .report-sources { font-size: 7pt; columns: 2; column-gap: 6mm; }
+  .report h2 { margin-top: 6pt; font-size: 12pt; }
+  .report .card.light, .report .stripes-card { padding: 4pt; margin: 4pt 0; }
+  .report-head { padding-bottom: 4pt; }
+  .report .stripes { height: 14mm; }
+  .report-sources li { break-inside: avoid; }
+  .report-table th, .report-table td { padding: 2pt 4pt; }
+  .report a { text-decoration: none; color: #000; }
+  .report-sources a { color: var(--c-electric-blue); }
+  .report .stripe, .report-table thead th, .report svg * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .report .stripes-credit, .report .stripes-readout, .report .stripes-legend { font-size: 8pt; }
+}
+.report .btn-secondary { color: var(--c-deep-blue); border-color: var(--c-deep-blue); }

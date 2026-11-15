@@ -1,5 +1,6 @@
 /* AI-assisted: drafted with Claude (Anthropic). See docs/ai-usage.md. */
-import { ArrowClockwise } from '@phosphor-icons/react';
+import { ArrowClockwise, Printer } from '@phosphor-icons/react';
+import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useRotationComparison } from '@/controllers/useRotationComparison';
 import { ErrorText } from '@/views/components/ErrorText';
@@ -27,6 +28,7 @@ export function RotationsScreen() {
       <p className="lead">{t('rotations.intro')}</p>
       <div className="screen-tools">
         <ScienceToggle />
+        <Link to="/report" className="btn btn-secondary report-link"><Printer size={20} aria-hidden /> {t('report.button')}</Link>
       </div>
       <CaseStudyNote />
 

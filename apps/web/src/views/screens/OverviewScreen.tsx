@@ -1,6 +1,6 @@
 /* AI-assisted: drafted with Claude (Anthropic). See docs/ai-usage.md. */
 import type { ReactNode } from 'react';
-import { ArrowRight, CloudSun, Drop, Handshake, Sun, ThermometerHot, Warning, type Icon } from '@phosphor-icons/react';
+import { ArrowRight, CloudSun, Drop, Handshake, Printer, Sun, ThermometerHot, Warning, type Icon } from '@phosphor-icons/react';
 import { Link } from 'react-router-dom';
 import { Trans, useTranslation } from 'react-i18next';
 import { ClimateStripes } from '@/views/components/ClimateStripes';
@@ -98,6 +98,7 @@ export function OverviewScreen() {
       <div className="screen-tools">
         <ListenButton sentences={sentences} />
         <ScienceToggle />
+        <Link to="/report" className="btn btn-secondary report-link"><Printer size={20} aria-hidden /> {t('report.button')}</Link>
       </div>
 
       <div className="insight-grid">

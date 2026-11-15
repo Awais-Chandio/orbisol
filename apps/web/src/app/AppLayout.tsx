@@ -21,8 +21,8 @@ export function AppLayout() {
       <OfflineBanner />
       <main className="app-main container">
         <Outlet />
-        {pinned && <NextStep pathname={pathname} />}
-        {pathname !== '/overview' && <JudgmentNotice />}
+        {pinned && pathname !== '/report' && <NextStep pathname={pathname} />}
+        {pathname !== '/overview' && pathname !== '/report' && <JudgmentNotice />}
       </main>
       <BottomNav />
       <ScrollRestoration />

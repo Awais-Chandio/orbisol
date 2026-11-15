@@ -8,6 +8,7 @@ import { FarmScreen } from '@/views/screens/FarmScreen';
 import { RotationsScreen } from '@/views/screens/RotationsScreen';
 import { CalendarScreen } from '@/views/screens/CalendarScreen';
 import { OverviewScreen } from '@/views/screens/OverviewScreen';
+import { ReportScreen } from '@/views/screens/ReportScreen';
 import { useFieldStore } from '@/stores/fieldStore';
 
 /** Landing: the overview once a field is pinned, otherwise the field picker. */
@@ -29,6 +30,7 @@ export const router = createBrowserRouter([
       { path: 'rotations', element: <RotationsScreen /> },
       { path: 'calendar', element: <CalendarScreen /> },
       { path: 'about', element: <AboutScreen /> },
+      { path: 'report', element: <ReportScreen /> },
       { path: '*', element: <Landing /> },
     ],
   },
