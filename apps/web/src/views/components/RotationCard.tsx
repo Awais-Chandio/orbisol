@@ -8,7 +8,7 @@ import { NoteList } from './NoteList';
 import { CitedNotes } from './CitedNotes';
 import { SaltNote } from './SaltNote';
 import { PlainLine, Science } from './Science';
-import { barePlain, waterPlain } from '@/views/plain';
+import { barePlain, tradeoffText, waterPlain } from '@/views/plain';
 import { SourceTag } from './SourceTag';
 import { WaterFitDetail } from './WaterFitDetail';
 import { CropYearTimeline } from './CropYearTimeline';
@@ -56,21 +56,10 @@ export function RotationCard({ s, weights, climate, hazards, peers, salty }: Pro
   const existing = s.plan.kind === 'existing';
   const title = s.plan.slots.map((x) => t('crops.' + x.crop));
 
-  // Trade-off: gains and losses vs the existing rotation (never shown by colour alone)
-  const gains: string[] = [];
-  const losses: string[] = [];
-  if (!existing) {
-    if (s.waterPct <= -3) gains.push(t('rotations.gains.water'));
-    if (s.waterPct >= 3) losses.push(t('rotations.losses.water'));
-    if (s.bareDelta <= -7) gains.push(t('rotations.gains.bare'));
-    if (s.bareDelta >= 7) losses.push(t('rotations.losses.bare', { days: s.bareDelta }));
-    if (s.legumeDaysDelta >= 30) gains.push(t('rotations.gains.legume'));
-    if (s.legumeDaysDelta <= -30) losses.push(t('rotations.losses.legume'));
-  }
   const fao: Provenance = { source: 'FAO-56 Kc × NASA POWER ET0', kind: 'model', date: '1991–2020' };
 
   return (
-    <article className={'card light rotation-card' + (existing ? ' is-existing' : '')}>
+    <article className={'card light rotation-card' + (existing ? ' is-existing' : '')} data-plan={s.plan.id}>
       <header className="rotation-head">
         <span className="tag">{existing ? t('rotations.existing') : t('rotations.alternative')}</span>
         <span className="rank">{t('rotations.rank', { rank: s.rank })}</span>
@@ -119,15 +108,7 @@ export function RotationCard({ s, weights, climate, hazards, peers, salty }: Pro
       {!existing && (
         <p className="tradeoff">
           <Scales size={24} aria-hidden />
-          <span>
-            {gains.length && losses.length
-              ? t('rotations.tradeoff', { gains: gains.join(', '), losses: losses.join(', ') })
-              : gains.length
-                ? gains.join(', ')
-                : losses.length
-                  ? losses.join(', ')
-                  : t('rotations.tradeoffNone')}
-          </span>
+          <span>{tradeoffText(t, s)}</span>
         </p>
       )}
 

@@ -10,7 +10,8 @@
     "season": "Season",
     "rotations": "Rotations",
     "calendar": "Calendar",
-    "about": "About and data credits"
+    "about": "About and data credits",
+    "info": "Info and tour"
   },
   "notice": {
     "judgment": "Orbisol supports, not replaces, your judgment and local expertise.",
@@ -868,5 +869,19 @@
       "loading": "Loading NASA tiles…",
       "stepHint": "Reduced motion is on: each press shows the next month."
     }
+  },
+  "tour": {
+    "start": "Take the 60-second tour",
+    "count": "Step {{n}} of {{total}}",
+    "skip": "Skip tour",
+    "back": "Back",
+    "next": "Next",
+    "done": "Done",
+    "loading": "Loading the demo farm's NASA data…",
+    "s1": { "title": "Your field", "body": "Pin any field on Earth - NASA satellites already watch it." },
+    "s2": { "title": "Your field at a glance" },
+    "s3": { "title": "Your crop year", "body": "Bare soil - NASA's MODIS satellite sees it too." },
+    "s4": { "title": "The best option for you" },
+    "s5": { "title": "Looking ahead to 2050", "body": "Supports, not replaces, the farmer's judgment." }
   }
 }

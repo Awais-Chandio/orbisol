@@ -7,6 +7,7 @@ import { NextStep } from '@/views/components/NextStep';
 import { ScienceProvider } from '@/views/components/Science';
 import { useFieldStore } from '@/stores/fieldStore';
 import { OfflineBanner } from '@/views/components/OfflineBanner';
+import { TourProvider } from '@/views/tour/Tour';
 
 export function AppLayout() {
   // The overview carries its own judgment line, so the shared notice is not repeated there.
@@ -14,6 +15,7 @@ export function AppLayout() {
   const pinned = useFieldStore((s) => s.pin !== null);
   return (
     <ScienceProvider>
+    <TourProvider>
     <div className="app-shell">
       <AppHeader />
       <OfflineBanner />
@@ -25,6 +27,7 @@ export function AppLayout() {
       <BottomNav />
       <ScrollRestoration />
     </div>
+    </TourProvider>
     </ScienceProvider>
   );
 }

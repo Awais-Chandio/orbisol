@@ -7,6 +7,7 @@ import type { TFunction } from 'i18next';
 import type { Tercile } from '@orbisol/core';
 import type { IndicatorView } from '@/controllers/useSeasonVsNormal';
 import type { Heat2050 } from '@/models/heat2050';
+import type { StrategyView } from '@/controllers/useRotationComparison';
 
 const round = (x: number) => String(Math.round(x));
 const lowerFirst = (x: string) => x.charAt(0).toLocaleLowerCase() + x.slice(1);
@@ -47,4 +48,20 @@ export function indicatorPlain(t: TFunction, v: IndicatorView): string {
   if (!v.available || !v.tercile) return t('plain.ind.none');
   if (v.key === 'frostDays' && v.value === 0 && v.normal === 0) return t('plain.ind.frostDays.zero');
   return t(`plain.ind.${v.key}.${v.tercile}`);
+}
+
+/** Trade-off of an option vs the current rotation: gains and losses in words (never by colour alone). */
+export function tradeoffText(t: TFunction, s: StrategyView): string {
+  const gains: string[] = [];
+  const losses: string[] = [];
+  if (s.waterPct <= -3) gains.push(t('rotations.gains.water'));
+  if (s.waterPct >= 3) losses.push(t('rotations.losses.water'));
+  if (s.bareDelta <= -7) gains.push(t('rotations.gains.bare'));
+  if (s.bareDelta >= 7) losses.push(t('rotations.losses.bare', { days: s.bareDelta }));
+  if (s.legumeDaysDelta >= 30) gains.push(t('rotations.gains.legume'));
+  if (s.legumeDaysDelta <= -30) losses.push(t('rotations.losses.legume'));
+  if (gains.length && losses.length) return t('rotations.tradeoff', { gains: gains.join(', '), losses: losses.join(', ') });
+  if (gains.length) return gains.join(', ');
+  if (losses.length) return losses.join(', ');
+  return t('rotations.tradeoffNone');
 }

@@ -257,7 +257,7 @@ export function CropYearTimeline({ slots, bare, hazards, ndvi, ndviProvenance, n
                   const half = textW(annotText, font) / 2 + 2;
                   const tx = Math.min(Math.max(dx, padL + half), W - padR - half);
                   return (
-                    <g className="tl-annot" aria-hidden>
+                    <g className="tl-annot" aria-hidden data-tour="ndvi-dip">
                       <circle className="tl-annot-ring" cx={dx} cy={dy} r={9} />
                       <text x={tx} y={14} textAnchor="middle" fontSize={font}>
                         {annotText}

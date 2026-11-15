@@ -8,7 +8,8 @@ import { latestCompleteYear, midMonthCompositeDate } from '@/config/map';
 import { NdviLegend } from '@/views/components/NdviLegend';
 import { MonthSlider } from '@/views/components/MonthSlider';
 import type { MapLayer } from '@/views/components/FieldMap';
-import { CheckCircle, Crosshair, Farm, Flask, MapPin, Scales } from '@phosphor-icons/react';
+import { CheckCircle, Crosshair, Farm, Flask, MapPin, NavigationArrow, Scales } from '@phosphor-icons/react';
+import { useTour } from '@/views/tour/Tour';
 import { useTranslation } from 'react-i18next';
 import { useFieldPicker } from '@/controllers/useFieldPicker';
 import { CoordinateForm } from '@/views/components/CoordinateForm';
@@ -20,6 +21,7 @@ const FieldMap = lazy(() => import('@/views/components/FieldMap'));
 export function FieldScreen() {
   const { t } = useTranslation();
   const { pin, status, gpsError, locate, pickOnMap, enterManually, useDemoField, useDemoPunjab } = useFieldPicker();
+  const tour = useTour();
   // Map layer and month live in the URL, so other screens can link straight to the greenness map.
   const [params, setParams] = useSearchParams();
   const layer: MapLayer = params.get('layer') === 'ndvi' ? 'ndvi' : 'true';
@@ -73,6 +75,9 @@ export function FieldScreen() {
         <OrbitHero />
       </div>
       <p className="value-line">{t('field.value')}</p>
+      <button type="button" className="btn btn-secondary btn-small tour-start" onClick={tour.start}>
+        <NavigationArrow size={20} aria-hidden /> {t('tour.start')}
+      </button>
       <ol className="steps" aria-label={t('field.stepsLabel')}>
         {[MapPin, Farm, Scales].map((I, i) => (
           <li key={i} className={i === 0 ? 'is-current' : ''} aria-current={i === 0 ? 'step' : undefined}>

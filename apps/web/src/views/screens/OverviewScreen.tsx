@@ -26,10 +26,10 @@ const SEASON_DAYS = 90;
  * Farmer layer: icon + one plain sentence, with the exact number beside it.
  * Science layer (under "Show the science"): how the number was worked out.
  */
-function InsightCard({ to, icon: I, label, plain, exact, science, badge }: { to: string; icon: Icon; label: string; plain: ReactNode; exact?: ReactNode; science?: ReactNode; badge?: ReactNode }) {
+function InsightCard({ to, icon: I, label, plain, exact, science, badge, tour }: { to: string; icon: Icon; label: string; plain: ReactNode; exact?: ReactNode; science?: ReactNode; badge?: ReactNode; tour?: string }) {
   const { t } = useTranslation();
   return (
-    <Link to={to} className="card light insight-card">
+    <Link to={to} className="card light insight-card" data-tour={tour}>
       <span className="insight-label">{label}</span>
       {badge}
       <span className="insight-plain">
@@ -101,6 +101,7 @@ export function OverviewScreen() {
       <div className="insight-grid">
         <InsightCard
           to="/calendar"
+          tour="overview-bare"
           icon={Sun}
           label={t('overview.bare.label')}
           plain={plainBare ?? loading}
