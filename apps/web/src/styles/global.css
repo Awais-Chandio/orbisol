@@ -24,7 +24,6 @@ code, pre, .mono { font-family: var(--font-code); }
 a { color: var(--accent); }
 button { font-family: var(--font-body); font-size: 1rem; }
 :focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
-[dir='rtl'] body { font-family: var(--font-urdu); }
 .sr-only {
   position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
   overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
@@ -585,27 +584,6 @@ html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; } /* no mobile fo
 /* Listen (speech) */
 .listen-btn { border-color: var(--accent); }
 .listen-btn[aria-pressed='true'] { background: var(--accent); color: var(--c-deep-blue); border-color: var(--accent); }
-
-/* ---------- Urdu (RTL, Noto Nastaliq Urdu; draft strings) ---------- */
-.lang-btn {
-  display: inline-flex; align-items: center; gap: var(--space-1); min-height: 44px; padding: 0 var(--space-3); margin-left: auto; margin-right: var(--space-1);
-  border-radius: 999px; border: 1.5px solid rgba(255, 255, 255, 0.6); background: transparent; color: var(--c-white); font-weight: 700; cursor: pointer;
-}
-.lang-btn[lang='ur'] { font-family: var(--font-urdu); font-weight: 400; }
-[dir='rtl'] .lang-btn { margin-left: var(--space-1); margin-right: auto; }
-/* Nastaliq needs room above and below; letter-spacing would break the joined letters. */
-/* Latin font first (English strings that are not translated yet), Urdu letters fall through to Nastaliq. */
-[dir='rtl'] body, [dir='rtl'] button, [dir='rtl'] input, [dir='rtl'] .btn { font-family: 'Overpass', 'Noto Nastaliq Urdu', system-ui, sans-serif; }
-[dir='rtl'] h1, [dir='rtl'] h2, [dir='rtl'] h3 { font-family: 'Fira Sans', 'Noto Nastaliq Urdu', system-ui, sans-serif; }
-/* Each paragraph takes its direction from its first letter, so English left untranslated still reads left to right. */
-[dir='rtl'] :is(p, h1, h2, h3, h4, li, label, legend, summary, figcaption, .insight-label, .insight-plain > span, .insight-exact, .insight-more, .btn) { unicode-bidi: plaintext; text-align: start; }
-[dir='rtl'] .value-line, [dir='rtl'] .steps li, [dir='rtl'] .lead { line-height: 2; }
-[dir='rtl'] body { line-height: 1.9; }
-[dir='rtl'] * { letter-spacing: normal !important; }
-[dir='rtl'] h1 { line-height: 1.6; font-weight: 700; }
-[dir='rtl'] .nav-item { line-height: 1.5; font-size: 0.75rem; }
-[dir='rtl'] .plain-line, [dir='rtl'] .insight-plain { line-height: 1.9; }
-[dir='rtl'] .mono, [dir='rtl'] .source-tag { font-family: var(--font-code); }
 
 /* Cited notes (pests, infiltration, income) */
 .cited-line { display: flex; gap: var(--space-1); align-items: flex-start; }

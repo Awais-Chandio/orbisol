@@ -7,13 +7,12 @@ const supported = () => typeof window !== 'undefined' && 'speechSynthesis' in wi
 
 /** Reads the plain sentences aloud with the browser's own speech (no network, no new dependency). Hidden if unsupported. */
 export function ListenButton({ sentences }: { sentences: string[] }) {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const [speaking, setSpeaking] = useState(false);
   const ok = supported();
   useEffect(() => () => void (ok && window.speechSynthesis.cancel()), [ok]);
   if (!ok) return null;
 
-  const lang = i18n.language === 'ur' ? 'ur-PK' : 'en-US';
   // Symbols that speech engines read badly: arrows between crops and number ranges.
   const spoken = sentences
     .map((s) => s.replace(/\s*→\s*/g, ` ${t('listen.then')} `).replace(/(\d)\s*–\s*(\d)/g, `$1 ${t('listen.to')} $2`))
@@ -27,9 +26,9 @@ export function ListenButton({ sentences }: { sentences: string[] }) {
       return;
     }
     const u = new SpeechSynthesisUtterance(spoken);
-    u.lang = lang;
+    u.lang = 'en-US';
     u.rate = 0.95;
-    const voice = synth.getVoices().find((v) => v.lang.toLowerCase().startsWith(lang.slice(0, 2)));
+    const voice = synth.getVoices().find((v) => v.lang.toLowerCase().startsWith('en'));
     if (voice) u.voice = voice;
     u.onend = () => setSpeaking(false);
     u.onerror = () => setSpeaking(false);

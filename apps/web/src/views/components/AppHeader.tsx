@@ -11,7 +11,6 @@ export function AppHeader() {
         <img src="/favicon.svg" alt="" width={28} height={28} />
         <span className="brand-name">{t('app.name')}</span>
       </Link>
-      {/* Urdu switch hidden for now (draft strings need native review); ur.ts is kept for later. */}
       <Link to="/about" className="icon-btn" aria-label={t('nav.about')} title={t('nav.about')}>
         <Info size={24} />
       </Link>
