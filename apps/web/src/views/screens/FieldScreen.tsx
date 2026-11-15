@@ -26,7 +26,8 @@ export function FieldScreen() {
   const [params, setParams] = useSearchParams();
   const layer: MapLayer = params.get('layer') === 'ndvi' ? 'ndvi' : 'true';
   const monthParam = Number(params.get('month'));
-  const month = monthParam >= 1 && monthParam <= 12 ? monthParam : new Date().getUTCMonth() + 1;
+  // Greenness opens at January (start of the year's story); ?month= still picks a month.
+  const month = monthParam >= 1 && monthParam <= 12 ? monthParam : 1;
   const year = latestCompleteYear();
   const [ndviFailed, setNdviFailed] = useState(false);
   const showNdvi = layer === 'ndvi' && !ndviFailed;
@@ -47,6 +48,8 @@ export function FieldScreen() {
   // Greenness time-lapse: step Jan -> Dec, waiting for each month's tiles, then hold ~1 s; stops after December.
   const reduceMotion = useReducedMotion();
   const [playing, setPlaying] = useState(false);
+  // True only after Pause during a run: Play then resumes there; otherwise Play starts again from January.
+  const [pausedMidRun, setPausedMidRun] = useState(false);
   const [idleDate, setIdleDate] = useState<string | null>(null);
   const tilesIn = idleDate === compositeDate;
   useEffect(() => {
@@ -63,8 +66,13 @@ export function FieldScreen() {
   }, [playing, tilesIn, month, showNdvi, reduceMotion]);
   const onPlayPress = () => {
     if (reduceMotion) return setMonth(month >= 12 ? 1 : month + 1);
-    if (playing) return setPlaying(false);
-    if (month >= 12) setMonth(1);
+    if (playing) {
+      setPlaying(false);
+      setPausedMidRun(month < 12);
+      return;
+    }
+    if (!pausedMidRun || month >= 12) setMonth(1);
+    setPausedMidRun(false);
     setPlaying(true);
   };
 
@@ -128,6 +136,7 @@ export function FieldScreen() {
               compositeDate={compositeDate}
               onChange={(m) => {
                 setPlaying(false);
+                setPausedMidRun(false);
                 setMonth(m);
               }}
             />
