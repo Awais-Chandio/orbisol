@@ -82,6 +82,7 @@ const ur = {
   },
   listen: { play: 'سنیں', stop: 'روکیں', then: 'پھر', to: 'سے' },
   science: { show: 'سائنس دکھائیں', hide: 'سائنس چھپائیں' },
+  season: { groups: { jump: 'گروپ پر جائیں', heat: 'گرمی', water: 'پانی', soil: 'مٹی اور ہریالی', frost: 'پالا' } },
   next: { aria: 'اگلا قدم', label: 'اگلا قدم: {{screen}}', back: 'خلاصے پر واپس' },
 };
 

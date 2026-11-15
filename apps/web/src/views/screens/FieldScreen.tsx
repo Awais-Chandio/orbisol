@@ -1,4 +1,5 @@
 /* AI-assisted: drafted with Claude (Anthropic). See docs/ai-usage.md. */
+import { OrbitHero } from '@/views/components/OrbitHero';
 import { lazy, Suspense, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { latestCompleteYear, midMonthCompositeDate } from '@/config/map';
@@ -41,7 +42,10 @@ export function FieldScreen() {
 
   return (
     <section className="screen">
-      <h1>{t('field.title')}</h1>
+      <div className="field-hero">
+        <h1>{t('field.title')}</h1>
+        <OrbitHero />
+      </div>
       <p className="value-line">{t('field.value')}</p>
       <ol className="steps" aria-label={t('field.stepsLabel')}>
         {[MapPin, Farm, Scales].map((I, i) => (

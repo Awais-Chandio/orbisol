@@ -107,6 +107,7 @@
     "plannedHint": "These NASA datasets were tried or planned but no number in Orbisol comes from them yet."
   },
   "season": {
+    "groups": { "jump": "Jump to a group", "heat": "Heat", "water": "Water", "soil": "Soil & greenness", "frost": "Frost" },
     "window": "{{from}} to {{to}} ({{days}} days), compared with the same days in {{bFrom}}–{{bTo}} ({{n}} years).",
     "last30": "Last 30 days",
     "last90": "Last 90 days",

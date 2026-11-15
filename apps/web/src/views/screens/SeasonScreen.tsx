@@ -19,8 +19,17 @@ import { useSeasonOutlook } from '@/controllers/useSeasonOutlook';
 import { PlainLine, Science, ScienceToggle } from '@/views/components/Science';
 import { CaseStudyNote } from '@/views/components/CaseStudy';
 import { heatPlain, seasonPlain } from '@/views/plain';
-import { ChartLineUp, ClockCounterClockwise, CloudSun, ThermometerHot } from '@phosphor-icons/react';
+import { ChartLineUp, ClockCounterClockwise, CloudSun, Drop, Leaf, Snowflake, ThermometerHot, type Icon } from '@phosphor-icons/react';
+import { TerrainCard } from '@/views/components/TerrainCard';
 import type { LinearTrend } from '@orbisol/core';
+
+/** Season cards grouped by what they are about; each group has an icon, a heading and a colour accent (never colour alone). */
+const GROUPS: { id: 'heat' | 'water' | 'soil' | 'frost'; icon: Icon; keys: readonly string[] }[] = [
+  { id: 'heat', icon: ThermometerHot, keys: ['hotDays', 'tmaxMean'] },
+  { id: 'water', icon: Drop, keys: ['rainTotal', 'heavyRainDays', 'waterBalance', 'et0Total'] },
+  { id: 'soil', icon: Leaf, keys: ['soilWetness', 'greenness'] },
+  { id: 'frost', icon: Snowflake, keys: ['frostDays'] },
+];
 
 const dir = (f: LinearTrend | null) => (!f || !f.clear ? 'unclear' : f.perDecade > 0 ? 'up' : 'down');
 
@@ -107,27 +116,64 @@ export function SeasonScreen() {
           )}
           </Science>
 
-          <div className="indicator-list">
-            {s.indicators.map((v) => (
-              <IndicatorCard
-                key={v.key}
-                v={v}
-                explain={
-                  v.key === 'hotDays' && Number.isFinite(cmp.thresholds.hotTmaxC) ? (
-                    <p className="small">
-                      {t('season.hotThreshold', { t: cmp.thresholds.hotTmaxC.toFixed(1), bFrom: cmp.baseline.from, bTo: cmp.baseline.to })}
-                    </p>
-                  ) : undefined
-                }
-              >
-                {v.key === 'frostDays' && <p className="small"><JudgmentFlag reason={t('season.frostFlag')} /></p>}
-                {v.key === 'rainTotal' && <p className="small"><JudgmentFlag reason={t('season.rainFlag')} /></p>}
-              </IndicatorCard>
+          <nav className="group-chips" aria-label={t('season.groups.jump')}>
+            {GROUPS.map((g) => (
+              <a key={g.id} href={'#grp-' + g.id} className={'group-chip cat-' + g.id}>
+                <g.icon size={16} weight="duotone" aria-hidden />
+                {t('season.groups.' + g.id)}
+              </a>
             ))}
-            <SatelliteRainCards days={days} />
-            <SatelliteRainMonthlyCard />
-            <GreennessCard days={days} />
-          </div>
+          </nav>
+
+          {GROUPS.map((g) => {
+            const cards = s.indicators.filter((v) => g.keys.includes(v.key));
+            return (
+              <section key={g.id} id={'grp-' + g.id} className={'season-group cat-' + g.id} aria-labelledby={'grp-h-' + g.id}>
+                <h2 id={'grp-h-' + g.id} className="group-head">
+                  <span className="cat-chip">
+                    <g.icon size={20} weight="duotone" aria-hidden />
+                  </span>
+                  {t('season.groups.' + g.id)}
+                </h2>
+                <div className="indicator-list">
+                  {cards.map((v) => (
+                    <IndicatorCard
+                      key={v.key}
+                      v={v}
+                      explain={
+                        v.key === 'hotDays' && Number.isFinite(cmp.thresholds.hotTmaxC) ? (
+                          <p className="small">
+                            {t('season.hotThreshold', { t: cmp.thresholds.hotTmaxC.toFixed(1), bFrom: cmp.baseline.from, bTo: cmp.baseline.to })}
+                          </p>
+                        ) : undefined
+                      }
+                    >
+                      {v.key === 'frostDays' && <p className="small"><JudgmentFlag reason={t('season.frostFlag')} /></p>}
+                      {v.key === 'rainTotal' && <p className="small"><JudgmentFlag reason={t('season.rainFlag')} /></p>}
+                    </IndicatorCard>
+                  ))}
+                  {g.id === 'heat' && (
+                    <Science>
+                      {trend.trend && <TrendCard tr={trend.trend} climate={trend.provenance} />}
+                      {heat2050 && <Heat2050Card h={heat2050} />}
+                    </Science>
+                  )}
+                  {g.id === 'water' && (
+                    <>
+                      <SatelliteRainCards days={days} />
+                      <SatelliteRainMonthlyCard />
+                    </>
+                  )}
+                  {g.id === 'soil' && (
+                    <>
+                      <GreennessCard days={days} />
+                      <TerrainCard />
+                    </>
+                  )}
+                </div>
+              </section>
+            );
+          })}
 
           <article className="card light ahead-card">
             <h2>{t('plain.aheadTitle')}</h2>
@@ -153,9 +199,6 @@ export function SeasonScreen() {
 
           <Science className="season-more">
           <SeasonOutlook days={days} />
-
-          {trend.trend && <TrendCard tr={trend.trend} climate={trend.provenance} />}
-          {heat2050 && <Heat2050Card h={heat2050} />}
 
           <details className="card how-sure">
             <summary>{t('season.howSure')}</summary>

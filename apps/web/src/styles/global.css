@@ -653,3 +653,29 @@ html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; } /* no mobile fo
 @media (min-width: 1024px) {
   .ndvi-panel ~ * .field-map, .field-map-wrap:has(.ndvi-panel) .field-map { height: calc(100vh - 470px); min-height: 360px; }
 }
+
+/* Field hero: globe + tilted orbit ring with a satellite (CSS 3D, no library). */
+.field-hero { display: flex; align-items: center; justify-content: space-between; gap: var(--space-4); }
+.field-hero h1 { margin: 0; }
+.orbit-hero { position: relative; flex: 0 0 auto; width: 88px; height: 88px; perspective: 400px; overflow: hidden; }
+.orbit-globe { position: absolute; inset: 20px; width: 48px; height: 48px; }
+.orbit-plane { position: absolute; inset: 6px; transform-style: preserve-3d; transform: rotateX(68deg) rotateZ(-18deg); }
+.orbit-ring { position: absolute; inset: 0; border: 2px solid var(--c-neon-yellow); border-radius: 50%; opacity: .9; animation: orbit-spin 9s linear infinite; }
+.orbit-sat { position: absolute; top: -7px; left: 50%; margin-left: -10px; display: block; transform: rotateX(-68deg); }
+.orbit-sat svg { display: block; }
+@keyframes orbit-spin { to { transform: rotateZ(360deg); } }
+@media (prefers-reduced-motion: reduce) { .orbit-ring { animation: none; } }
+
+/* Season groups: icon heading + per-category accent (always icon + text, never colour alone). */
+.group-chips { display: flex; flex-wrap: wrap; gap: var(--space-2); margin: var(--space-4) 0; }
+.group-chip { display: inline-flex; align-items: center; gap: var(--space-1); min-height: 44px; padding: 0 var(--space-3); border-radius: 999px; border: 2px solid var(--cat, var(--c-blue-yonder)); color: var(--text); text-decoration: none; font-weight: 600; }
+.group-chip:hover, .group-chip:focus-visible { background: var(--c-electric-blue); }
+.season-group { margin-top: var(--space-6); scroll-margin-top: var(--space-6); border-left: 4px solid var(--cat, var(--c-blue-yonder)); padding-left: var(--space-3); }
+.group-head { display: flex; align-items: center; gap: var(--space-2); }
+.cat-chip { display: inline-flex; align-items: center; justify-content: center; width: 36px; height: 36px; border-radius: 10px; background: var(--cat-bg, var(--c-blue-yonder)); color: var(--cat-fg, var(--c-deep-blue)); }
+.cat-heat { --cat: var(--c-rocket-red); --cat-bg: var(--c-rocket-red); --cat-fg: var(--c-white); }
+.cat-water { --cat: var(--c-blue-yonder); --cat-bg: var(--c-blue-yonder); --cat-fg: var(--c-deep-blue); }
+.cat-soil { --cat: var(--c-neon-yellow); --cat-bg: var(--c-deep-blue); --cat-fg: var(--c-neon-yellow); }
+.cat-soil .cat-chip { border: 2px solid var(--c-neon-yellow); }
+.cat-frost { --cat: var(--c-white); --cat-bg: var(--c-white); --cat-fg: var(--c-deep-blue); }
+.indicator-list > .science { display: contents; }

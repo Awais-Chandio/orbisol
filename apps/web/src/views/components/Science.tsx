@@ -5,20 +5,12 @@ import { useTranslation } from 'react-i18next';
 
 /**
  * Two layers: every screen opens with plain sentences (farmer layer); charts, ranges, sources and method text sit
- * under "Show the science". One switch for the whole app, open by default on desktop (>= 1024 px), closed on phones.
+ * under "Show the science". One switch for the whole app, open by default on every screen size so the science is visible first.
  */
 const ScienceCtx = createContext<{ open: boolean; toggle: () => void }>({ open: true, toggle: () => {} });
 
-const desktop = () => {
-  try {
-    return window.matchMedia('(min-width: 1024px)').matches;
-  } catch {
-    return false;
-  }
-};
-
 export function ScienceProvider({ children }: { children: ReactNode }) {
-  const [open, setOpen] = useState(desktop);
+  const [open, setOpen] = useState(true);
   const toggle = useCallback(() => setOpen((o) => !o), []);
   const value = useMemo(() => ({ open, toggle }), [open, toggle]);
   return <ScienceCtx.Provider value={value}>{children}</ScienceCtx.Provider>;
