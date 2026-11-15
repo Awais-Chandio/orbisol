@@ -18,6 +18,8 @@ export interface StrategyView extends StrategyReport {
   months: MonthCell[];
   /** Canal turn vs safe interval per month (null when the farmer has not given a canal turn). */
   fit: WaterFit | null;
+  /** The same Water Fit with another canal turn interval (what-if; never saved). Null when fit is null. */
+  fitWith: ((intervalDays: number) => WaterFit) | null;
 }
 
 export function useRotationComparison() {
@@ -42,6 +44,7 @@ export function useRotationComparison() {
       rank: 0,
       months: monthTimeline(r.plan, r.metrics, env.hazards),
       fit: farm.canal ? waterFit(r.plan, env.et0Clim, farm.canal.intervalDays, farm.soil.texture) : null,
+      fitWith: farm.canal ? (d: number) => waterFit(r.plan, env.et0Clim, d, farm.soil.texture) : null,
     }));
     // rank by total score among all three (existing included), 1 = best fit for the chosen priorities
     [...views].sort((a, b) => b.total - a.total).forEach((v, i) => (v.rank = i + 1));

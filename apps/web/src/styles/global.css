@@ -725,3 +725,11 @@ html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; } /* no mobile fo
 .stripes-key span { width: 16px; height: 12px; }
 .stripes-credit { margin: var(--space-1) 0 0; }
 @media (min-width: 720px) { .stripes { height: 96px; } .stripes-readout { min-height: 1.5em; } }
+
+/* Water Fit what-if canal turn slider */
+.what-if { margin: var(--space-3) 0; padding: var(--space-3); border: 1px solid rgba(7, 23, 63, 0.2); border-radius: var(--radius); }
+.what-if-label { display: block; font-weight: 700; }
+.what-if input[type='range'] { width: 100%; min-height: 44px; accent-color: var(--c-electric-blue); cursor: pointer; margin: 0; }
+.what-if-result { margin: var(--space-1) 0 0; }
+.what-if-actions { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2); margin-top: var(--space-2); }
+.what-if-actions p { margin: 0; flex: 1 1 200px; }

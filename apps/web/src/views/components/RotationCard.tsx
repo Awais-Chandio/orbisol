@@ -114,7 +114,7 @@ export function RotationCard({ s, weights, climate, hazards, peers, salty }: Pro
 
       {salty === true && <SaltNote crops={s.plan.slots.map((x) => x.crop)} />}
 
-      <WaterFitDetail fit={s.fit} climate={climate} />
+      <WaterFitDetail fit={s.fit} fitWith={s.fitWith} climate={climate} />
 
       {s.risks.length > 0 && (
         <details className="note-section risks">

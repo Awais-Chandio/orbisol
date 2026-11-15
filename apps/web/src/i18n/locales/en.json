@@ -507,7 +507,17 @@
     "limitVolume": "Limitation: we do not know how much water your canal turn brings (flow and hours vary), so we assume each turn fills the soil around the roots. If a turn does not fill the field, the safe interval is shorter.",
     "limitRain": "Rain is not counted, so monsoon months may be easier than shown.",
     "sources": "From FAO-56 Table 19 (soil water), Table 22 (root depth and p, smaller depth as advised for irrigation scheduling, p adjusted for crop water use) and crop water use = FAO-56 Kc × NASA POWER ET0.",
-    "empty": "Add your canal turn in My farm to see this."
+    "empty": "Add your canal turn in My farm to see this.",
+    "whatIf": "What if my canal turn were every {{days}} days",
+    "whatIfDays": "{{days}} days",
+    "whatIfOver": "With a turn every {{days}} days, {{count}} months are too long for this rotation: {{months}}.",
+    "whatIfOver_one": "With a turn every {{days}} days, 1 month is too long for this rotation: {{months}}.",
+    "whatIfOk": "With a turn every {{days}} days, no month is too long for this rotation.",
+    "whatIfYoung": "{{count}} months with a young crop are not confirmed.",
+    "whatIfYoung_one": "1 month with a young crop is not confirmed.",
+    "whatIfNotSaved": "Only a what-if: your saved turn stays every {{days}} days until you tap \"Use this turn\".",
+    "useTurn": "Use this turn",
+    "withTurn": "With {{days}} days"
   },
   "share": {
     "button": "Share on WhatsApp",
