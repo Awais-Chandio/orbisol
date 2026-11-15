@@ -20,10 +20,12 @@ interface Props {
   ndviDate?: string;
   /** Called once if greenness tiles fail (offline, server error): the caller falls back to true colour. */
   onNdviError?: () => void;
+  /** Called each time the map settles with all tiles loaded, with the greenness date then on the map (time-lapse). */
+  onIdle?: (ndviDate: string) => void;
 }
 
 /** MapLibre map on NASA GIBS imagery. Tap or drag the pin to choose a field. Lazy-loaded (heavy). */
-export default function FieldMap({ pin, onPick, layer = 'true', ndviDate = '2025-01-01', onNdviError }: Props) {
+export default function FieldMap({ pin, onPick, layer = 'true', ndviDate = '2025-01-01', onNdviError, onIdle }: Props) {
   const { t } = useTranslation();
   const el = useRef<HTMLDivElement>(null);
   const map = useRef<MlMap | null>(null);
@@ -32,6 +34,10 @@ export default function FieldMap({ pin, onPick, layer = 'true', ndviDate = '2025
   onPickRef.current = onPick;
   const onNdviErrorRef = useRef(onNdviError);
   onNdviErrorRef.current = onNdviError;
+  const onIdleRef = useRef(onIdle);
+  onIdleRef.current = onIdle;
+  // Greenness date currently in the map's source (updated when the month changes, below).
+  const shownDate = useRef(ndviDate);
   const [ready, setReady] = useState(false);
   const [failed, setFailed] = useState(false);
 
@@ -60,6 +66,8 @@ export default function FieldMap({ pin, onPick, layer = 'true', ndviDate = '2025
     m.once('load', () => el.current?.querySelector('.maplibregl-ctrl-attrib')?.classList.remove('maplibregl-compact-show'));
     m.on('click', (e) => onPickRef.current(e.lngLat.lat, e.lngLat.lng));
     m.once('load', () => setReady(true));
+    // "idle" = every visible tile loaded and nothing moving: the time-lapse waits for this before the next month.
+    m.on('idle', () => onIdleRef.current?.(shownDate.current));
     // A failing greenness tile (offline, server error) must not break the map: report once, caller shows true colour.
     let ndviFailed = false;
     m.on('error', (e) => {
@@ -100,7 +108,6 @@ export default function FieldMap({ pin, onPick, layer = 'true', ndviDate = '2025
   }, [pin]);
 
   // Month: replace the greenness source (setTiles alone left earlier months' tiles on screen, tested 15 Nov 2026).
-  const shownDate = useRef(ndviDate);
   useEffect(() => {
     const m = map.current;
     if (!m || !ready || shownDate.current === ndviDate) return;

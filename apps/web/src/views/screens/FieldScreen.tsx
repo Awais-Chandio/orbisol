@@ -1,6 +1,8 @@
 /* AI-assisted: drafted with Claude (Anthropic). See docs/ai-usage.md. */
 import { OrbitHero } from '@/views/components/OrbitHero';
-import { lazy, Suspense, useState } from 'react';
+import { lazy, Suspense, useEffect, useState } from 'react';
+import { NdviPlayButton } from '@/views/components/NdviPlayButton';
+import { useReducedMotion } from '@/views/useReducedMotion';
 import { useSearchParams } from 'react-router-dom';
 import { latestCompleteYear, midMonthCompositeDate } from '@/config/map';
 import { NdviLegend } from '@/views/components/NdviLegend';
@@ -31,14 +33,38 @@ export function FieldScreen() {
     const next = new URLSearchParams(params);
     if (l === 'ndvi') next.set('layer', 'ndvi');
     else next.delete('layer');
-    setParams(next, { replace: true });
+    setParams(next, { replace: true, preventScrollReset: true });
   };
   const setMonth = (m: number) => {
     const next = new URLSearchParams(params);
     next.set('month', String(m));
-    setParams(next, { replace: true });
+    setParams(next, { replace: true, preventScrollReset: true });
   };
   const compositeDate = midMonthCompositeDate(year, month);
+
+  // Greenness time-lapse: step Jan -> Dec, waiting for each month's tiles, then hold ~1 s; stops after December.
+  const reduceMotion = useReducedMotion();
+  const [playing, setPlaying] = useState(false);
+  const [idleDate, setIdleDate] = useState<string | null>(null);
+  const tilesIn = idleDate === compositeDate;
+  useEffect(() => {
+    if (!playing) return;
+    if (!showNdvi || reduceMotion) {
+      setPlaying(false);
+      return;
+    }
+    const step = () => (month >= 12 ? setPlaying(false) : setMonth(month + 1));
+    // Tiles in: hold this month for a second. Still loading: wait, but never more than 8 s (slow server).
+    const timer = setTimeout(step, tilesIn ? 1000 : 8000);
+    return () => clearTimeout(timer);
+    // setMonth is rebuilt every render from the current URL; month is the dependency that matters
+  }, [playing, tilesIn, month, showNdvi, reduceMotion]);
+  const onPlayPress = () => {
+    if (reduceMotion) return setMonth(month >= 12 ? 1 : month + 1);
+    if (playing) return setPlaying(false);
+    if (month >= 12) setMonth(1);
+    setPlaying(true);
+  };
 
   return (
     <section className="screen">
@@ -90,13 +116,22 @@ export function FieldScreen() {
         </div>
         {showNdvi && (
           <div className="ndvi-panel">
-            <MonthSlider month={month} year={year} compositeDate={compositeDate} onChange={setMonth} />
+            <NdviPlayButton playing={playing} waiting={!tilesIn} reduceMotion={reduceMotion} onPress={onPlayPress} />
+            <MonthSlider
+              month={month}
+              year={year}
+              compositeDate={compositeDate}
+              onChange={(m) => {
+                setPlaying(false);
+                setMonth(m);
+              }}
+            />
             <NdviLegend />
           </div>
         )}
         {ndviFailed && layer === 'ndvi' && <p className="small form-error" role="status">{t('map.ndviFailed')}</p>}
         <Suspense fallback={<div className="field-map map-loading">{t('field.mapLoading')}</div>}>
-          <FieldMap pin={pin} onPick={pickOnMap} layer={showNdvi ? 'ndvi' : 'true'} ndviDate={compositeDate} onNdviError={() => setNdviFailed(true)} />
+          <FieldMap pin={pin} onPick={pickOnMap} layer={showNdvi ? 'ndvi' : 'true'} ndviDate={compositeDate} onNdviError={() => setNdviFailed(true)} onIdle={setIdleDate} />
         </Suspense>
         <p className="hint">{t('field.tapHint')}</p>
       </div>

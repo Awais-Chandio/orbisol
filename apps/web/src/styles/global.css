@@ -622,6 +622,10 @@ html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; } /* no mobile fo
 /* Greenness month slider */
 .ndvi-panel { background: var(--c-white); color: var(--c-deep-blue); border-radius: var(--radius); padding: var(--space-2) var(--space-3); margin-bottom: var(--space-2); }
 .ndvi-panel .ndvi-legend { padding: var(--space-2) 0 0; margin: 0; border-top: 1px solid rgba(7, 23, 63, 0.15); border-radius: 0; }
+.ndvi-play { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2) var(--space-3); padding-bottom: var(--space-2); margin-bottom: var(--space-2); border-bottom: 1px solid rgba(7, 23, 63, 0.15); }
+.ndvi-play .btn { flex: none; }
+.ndvi-play-caption { margin: 0; flex: 1 1 12rem; min-width: 0; }
+.ndvi-play-caption .block { display: block; }
 .month-slider-label { display: block; font-weight: 700; }
 .month-slider-value { margin: 2px 0 0; }
 .month-slider input[type='range'] { width: 100%; min-height: 44px; accent-color: var(--c-electric-blue); cursor: pointer; margin: 0; }
