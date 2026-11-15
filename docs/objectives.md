@@ -76,7 +76,7 @@ Paths are under `apps/web/src/views/`.
 | Interactive maps and trends over time | Field map (GIBS); trend charts (Season) | Partial: no map layers of trends |
 | Field-level vulnerability zones (erosion, water stress, frost) | Not mapped; point values only | Gap |
 | Timelines, overlays, scenario sliders | Crop-year timeline with plan switch; NDVI curve under the crop bars | Partial: no rainfall or temperature sliders |
-| Easy for farmers with little technical experience | Plain sentence first on every screen and card, "Show the science" layer, farmer units (canal turns), icons, Listen (speech), Urdu draft, 360 px phones | Covered (Urdu strings are a draft needing native review) |
+| Easy for farmers with little technical experience | Plain sentence first on every screen and card, "Show the science" layer, farmer units (canal turns), icons, Listen (speech), 360 px phones | Covered (Urdu draft strings kept in the repo but switched off until a native review) |
 | Farmer inputs: priorities and constraints (water availability, equipment, market) | My farm: priorities, canal turn, soil, salinity, rotation presets | Partial: equipment and market preferences not captured (new-crop risk asks to check machinery) |
 | Reminders that the tool supports, not replaces, expertise | `JudgmentNotice`, Overview line, About | Covered |
 

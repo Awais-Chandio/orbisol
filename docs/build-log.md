@@ -238,3 +238,17 @@
   nothing breaks.
 - Bug found and fixed in testing: MapLibre RasterTileSource.setTiles left earlier months' tiles on screen after the
   slider moved; the greenness source is now removed and re-added per month (April via slider = April loaded directly).
+
+## 2026-11-15 PKT - Final pass (presentation only, no new features) - commits 8e7f924, b25f411 and the screenshot commit
+
+- Science layer open by default on every screen size (toggle kept). Season cards grouped: Heat, Water, Soil &
+  greenness, Frost, each with an icon heading, a colour accent (always with icon and text) and jump chips. Field title
+  has a CSS/SVG orbit animation (~1.3 KB, static under prefers-reduced-motion).
+- Urdu switched off for now (header button removed, English always); draft `ur.ts` kept for a later native review.
+- Screenshots recaptured with the final design (docs/screenshots/): top of screen for all 7 screens at 360x800 (2x)
+  and 1440x900, full-length 2x for Overview, Rotations, Calendar and Season, and the January / April greenness map.
+  Demo farm near Tando Jam, salty = no, canal turn 7 days, priorities Save water then Fodder. Headless Chrome over the
+  DevTools protocol (no new dependencies); no horizontal overflow on any screen. The Season phone page is 22,410 px at
+  2x, past Chrome's single-capture limit, so it was captured in parts and joined. Urdu draft shots removed.
+- README: live link (orbisol.vercel.app), screenshots table, final data credits (IMERG monthly, NEX-GDDP-CMIP6,
+  Khan et al. 2022), AI-use note. data-sources.md gains the NEX-GDDP-CMIP6 row.

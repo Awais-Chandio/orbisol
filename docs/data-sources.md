@@ -14,6 +14,7 @@ All data credited in text only. No NASA or Space Apps logos are used anywhere.
 | MODIS MCD12Q1 LC_Type1 (500 m, yearly) | NASA / ORNL DAAC TESViS | Cropland mask for NDVI (classes 12, 14) | Satellite | Pipeline |
 | VIIRS NOAA-20 VJ113A1 | NASA LP DAAC / AppEEARS | Future replacement for MODIS Terra NDVI (Terra science data expected to end ~Feb 2027); needs Earthdata login | Satellite | Not yet used |
 | SMAP soil moisture | NASA NSIDC | Future work (not used in this build; POWER GWETTOP model value is used instead) | Satellite | Not yet used |
+| NEX-GDDP-CMIP6 daily tasmax (0.25 deg, bias-corrected, downscaled) | NASA, NCCS THREDDS NetCDF Subset Service | 2050 heat outlook: hot days > 42.5 °C, 3 models x SSP2-4.5 / SSP5-8.5, 2041-2060 vs 1995-2014 | Climate model projection | `pipeline/scripts/cmip6_heat.py` -> `data/hyderabad/heat2050.json` |
 | SRTM SRTMGL1 v003 (1 arc-second) | NASA / USGS, LP DAAC | Slope -> FAO slope class, erosion context | Satellite (radar) | `pipeline/scripts/srtm.py` -> `data/hyderabad/slope.json` |
 | GIBS VIIRS_NOAA20_CorrectedReflectance_TrueColor | NASA GIBS | Map imagery | Satellite | Live tiles |
 | GIBS MODIS_Terra_L3_NDVI_16Day | NASA GIBS (WMTS, EPSG:3857, GoogleMapsCompatible_Level9) | Field map greenness layer with a month slider, any pin | Satellite | Live tiles |
