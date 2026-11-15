@@ -105,7 +105,8 @@
     "references": "Crop and method references",
     "osm": "Coastline overlay: NASA GIBS reference layer, © OpenStreetMap contributors.",
     "planned": "Planned, not in this version",
-    "plannedHint": "These NASA datasets were tried or planned but no number in Orbisol comes from them yet."
+    "plannedHint": "These NASA datasets were tried or planned but no number in Orbisol comes from them yet.",
+    "stripesCredit": "Warming stripes design: #ShowYourStripes by Ed Hawkins (University of Reading), CC BY 4.0. Orbisol draws them from NASA POWER for your pin."
   },
   "season": {
     "groups": { "jump": "Jump to a group", "heat": "Heat", "water": "Water", "soil": "Soil & greenness", "frost": "Frost" },
@@ -883,5 +884,13 @@
     "s3": { "title": "Your crop year", "body": "Bare soil - NASA's MODIS satellite sees it too." },
     "s4": { "title": "The best option for you" },
     "s5": { "title": "Looking ahead to 2050", "body": "Supports, not replaces, the farmer's judgment." }
+  },
+  "stripes": {
+    "title": "Your place, {{from}}-{{to}}: each stripe is one year (NASA POWER)",
+    "aria": "Warming stripes, one per year. Use the arrow keys to move between years.",
+    "value": "{{year}}: {{mean}} °C average, {{diff}} °C vs 1991-2020 normal",
+    "hint": "Tap or hover a stripe to see the year. 1991-2020 normal: {{normal}} °C average.",
+    "legend": "cooler <-> warmer than 1991-2020",
+    "creditPrefix": "Stripe design:"
   }
 }

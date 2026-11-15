@@ -86,6 +86,9 @@ export function AboutScreen() {
         <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noreferrer">CC BY 4.0</a>
       </p>
       <p className="small">{t('about.osm')}</p>
+      <p className="small">
+        <a href="https://showyourstripes.info/" target="_blank" rel="noreferrer">#ShowYourStripes</a>: {t('about.stripesCredit')}
+      </p>
       <p className="small">{t('about.noLogos')}</p>
       <p className="small">{t('about.ai')}</p>
     </section>

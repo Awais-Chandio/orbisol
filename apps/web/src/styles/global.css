@@ -709,3 +709,19 @@ html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; } /* no mobile fo
 @media (min-width: 1024px) {
   .tour-card { left: auto; right: var(--space-8); bottom: var(--space-8); margin: 0; width: 440px; }
 }
+
+/* Warming stripes (design: #ShowYourStripes by Ed Hawkins, CC BY 4.0) */
+.stripes-card { margin: var(--space-4) 0; }
+.stripes-card.stripes-wide { width: 100%; }
+.stripes-title { font-family: var(--font-head); font-weight: 600; margin-bottom: var(--space-2); }
+.stripes { display: flex; height: 72px; border-radius: 6px; overflow: hidden; }
+.stripe { flex: 1 1 0; min-width: 0; padding: 0; margin: 0; border: 0; border-radius: 0; cursor: pointer; min-height: 0; }
+.stripe.is-sel { outline: 2px solid var(--c-deep-blue); outline-offset: -2px; box-shadow: inset 0 0 0 3px var(--c-white); }
+.stripe:focus-visible { outline: 3px solid var(--c-deep-blue); outline-offset: -3px; }
+.stripes-axis { display: flex; justify-content: space-between; margin-top: var(--space-1); }
+.stripes-readout { margin: var(--space-2) 0 0; min-height: 3em; font-variant-numeric: tabular-nums; }
+.stripes-legend { display: flex; align-items: center; gap: var(--space-2); flex-wrap: wrap; margin: var(--space-2) 0 0; }
+.stripes-key { display: inline-flex; border: 1px solid rgba(7, 23, 63, 0.3); border-radius: 3px; overflow: hidden; }
+.stripes-key span { width: 16px; height: 12px; }
+.stripes-credit { margin: var(--space-1) 0 0; }
+@media (min-width: 720px) { .stripes { height: 96px; } .stripes-readout { min-height: 1.5em; } }

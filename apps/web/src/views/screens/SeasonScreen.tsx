@@ -12,6 +12,7 @@ import { GreennessCard } from '@/views/components/GreennessCard';
 import { SatelliteRainCards } from '@/views/components/SatelliteRainCards';
 import { SatelliteRainMonthlyCard } from '@/views/components/SatelliteRainMonthlyCard';
 import { TrendCard } from '@/views/components/TrendCard';
+import { ClimateStripes } from '@/views/components/ClimateStripes';
 import { Heat2050Card } from '@/views/components/Heat2050Card';
 import { useHeat2050 } from '@/controllers/useHeat2050';
 import { useObservedTrend } from '@/controllers/useObservedTrend';
@@ -152,6 +153,7 @@ export function SeasonScreen() {
                       {v.key === 'rainTotal' && <p className="small"><JudgmentFlag reason={t('season.rainFlag')} /></p>}
                     </IndicatorCard>
                   ))}
+                  {g.id === 'heat' && <ClimateStripes />}
                   {g.id === 'heat' && (
                     <Science>
                       {trend.trend && <TrendCard tr={trend.trend} climate={trend.provenance} />}

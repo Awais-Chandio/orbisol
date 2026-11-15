@@ -3,6 +3,7 @@ import type { ReactNode } from 'react';
 import { ArrowRight, CloudSun, Drop, Handshake, Sun, ThermometerHot, Warning, type Icon } from '@phosphor-icons/react';
 import { Link } from 'react-router-dom';
 import { Trans, useTranslation } from 'react-i18next';
+import { ClimateStripes } from '@/views/components/ClimateStripes';
 import { CountUp } from '@/views/components/CountUp';
 import { ListenButton } from '@/views/components/ListenButton';
 import { useGreennessMonthly } from '@/controllers/useGreenness';
@@ -91,6 +92,7 @@ export function OverviewScreen() {
   return (
     <section className="screen">
       <h1>{t('overview.title')}</h1>
+      <ClimateStripes className="stripes-wide" />
       <p className="lead">{t('overview.intro')}</p>
       {r.pin.label && <p className="small">{r.pin.label}</p>}
       <div className="screen-tools">
