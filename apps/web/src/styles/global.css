@@ -733,3 +733,11 @@ html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; } /* no mobile fo
 .what-if-result { margin: var(--space-1) 0 0; }
 .what-if-actions { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2); margin-top: var(--space-2); }
 .what-if-actions p { margin: 0; flex: 1 1 200px; }
+
+/* Field hero globe (cobe, WebGL): sits where the SVG orbit does; the SVG stays as fallback / loading state. */
+.hero-globe { position: relative; flex: 0 0 auto; margin: -16px 0; }
+/* Deep-blue sphere behind the dotted land (the canvas itself is transparent). */
+.hero-globe::before { content: ''; position: absolute; inset: 10%; border-radius: 50%; background: radial-gradient(circle at 38% 32%, var(--c-electric-blue), var(--c-deep-blue) 72%); }
+.hero-globe-canvas { position: relative; }
+.hero-globe-canvas { display: block; contain: layout paint size; }
+@media (max-width: 420px) { .hero-globe { margin: -24px -8px -24px 0; } }

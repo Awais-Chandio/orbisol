@@ -1,5 +1,5 @@
 /* AI-assisted: drafted with Claude (Anthropic). See docs/ai-usage.md. */
-import { OrbitHero } from '@/views/components/OrbitHero';
+import { HeroGlobe } from '@/views/components/HeroGlobe';
 import { lazy, Suspense, useEffect, useState } from 'react';
 import { NdviPlayButton } from '@/views/components/NdviPlayButton';
 import { useReducedMotion } from '@/views/useReducedMotion';
@@ -80,7 +80,7 @@ export function FieldScreen() {
     <section className="screen">
       <div className="field-hero">
         <h1>{t('field.title')}</h1>
-        <OrbitHero />
+        <HeroGlobe />
       </div>
       <p className="value-line">{t('field.value')}</p>
       <button type="button" className="btn btn-secondary btn-small tour-start" onClick={tour.start}>
