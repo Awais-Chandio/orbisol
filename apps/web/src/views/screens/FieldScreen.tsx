@@ -3,12 +3,13 @@ import { HeroGlobe } from '@/views/components/HeroGlobe';
 import { lazy, Suspense, useEffect, useState } from 'react';
 import { NdviPlayButton } from '@/views/components/NdviPlayButton';
 import { useReducedMotion } from '@/views/useReducedMotion';
-import { useSearchParams } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { latestCompleteYear, midMonthCompositeDate } from '@/config/map';
 import { NdviLegend } from '@/views/components/NdviLegend';
 import { MonthSlider } from '@/views/components/MonthSlider';
 import type { MapLayer } from '@/views/components/FieldMap';
-import { CheckCircle, Crosshair, Farm, Flask, MapPin, NavigationArrow, Scales } from '@phosphor-icons/react';
+import { CheckCircle, Crosshair, Farm, Flask, GlobeHemisphereWest, MapPin, NavigationArrow, Scales } from '@phosphor-icons/react';
+import { DEMO_REGIONS } from '@/config/env';
 import { useTour } from '@/views/tour/Tour';
 import { useTranslation } from 'react-i18next';
 import { useFieldPicker } from '@/controllers/useFieldPicker';
@@ -20,7 +21,8 @@ const FieldMap = lazy(() => import('@/views/components/FieldMap'));
 
 export function FieldScreen() {
   const { t } = useTranslation();
-  const { pin, status, gpsError, locate, pickOnMap, enterManually, useDemoField, useDemoPunjab } = useFieldPicker();
+  const { pin, status, gpsError, locate, pickOnMap, enterManually, useDemoField, useDemoPunjab, useDemoRegion } = useFieldPicker();
+  const navigate = useNavigate();
   const tour = useTour();
   // Map layer and month live in the URL, so other screens can link straight to the greenness map.
   const [params, setParams] = useSearchParams();
@@ -44,6 +46,10 @@ export function FieldScreen() {
     setParams(next, { replace: true, preventScrollReset: true });
   };
   const compositeDate = midMonthCompositeDate(year, month);
+  const chooseDemoRegion = (id: (typeof DEMO_REGIONS)[number]['id']) => {
+    // A region chip is a complete demo action: save its pin, then show the live NASA POWER overview.
+    if (useDemoRegion(id)) navigate('/overview');
+  };
 
   // Greenness time-lapse: step Jan -> Dec, waiting for each month's tiles, then hold ~1 s; stops after December.
   const reduceMotion = useReducedMotion();
@@ -114,6 +120,24 @@ export function FieldScreen() {
       {gpsError && (
         <ErrorText>{t('field.gpsError.' + gpsError)}</ErrorText>
       )}
+
+      <div className="field-regions">
+        <h2 className="field-regions-title">{t('field.regionsTitle')}</h2>
+        <div className="btn-row" role="group" aria-label={t('field.regionsTitle')}>
+          {DEMO_REGIONS.map((r) => (
+            <button
+              key={r.id}
+              type="button"
+              className="btn btn-secondary btn-small"
+              aria-pressed={!!pin && pin.lat === r.lat && pin.lon === r.lon}
+              onClick={() => chooseDemoRegion(r.id)}
+            >
+              <GlobeHemisphereWest size={20} aria-hidden /> {t('field.regions.' + r.id)}
+            </button>
+          ))}
+        </div>
+        <p className="small field-regions-hint">{t('field.regionsHint')}</p>
+      </div>
 
       <div className="field-search">
         <PlaceSearch />

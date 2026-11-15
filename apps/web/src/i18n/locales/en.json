@@ -63,7 +63,14 @@
       "1": "Tell us how you farm",
       "2": "See your options"
     },
-    "useDemo2": "Demo: Faisalabad, Punjab (live NASA data)"
+    "useDemo2": "Demo: Faisalabad, Punjab (live NASA data)",
+    "regionsTitle": "Try another farm region",
+    "regions": {
+      "nile": "Nile Delta, Egypt",
+      "punjabIndia": "Punjab, India",
+      "centralValley": "Central Valley, USA"
+    },
+    "regionsHint": "Live NASA POWER data only. Sowing windows follow the Sindh calendar, so check local dates."
   },
   "placeholder": {
     "needPin": "Pin your field first.",

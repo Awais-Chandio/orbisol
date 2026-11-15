@@ -389,11 +389,12 @@ html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; } /* no mobile fo
   /* Field: map left, controls right */
   .field-layout {
     display: grid; grid-template-columns: minmax(0, 3fr) minmax(0, 2fr); column-gap: var(--space-6); align-items: start;
-    grid-template-areas: 'map actions' 'map search' 'map pin' 'map manual' 'map .';
+    grid-template-areas: 'map actions' 'map regions' 'map search' 'map pin' 'map manual' 'map .';
   }
   .field-map-wrap { grid-area: map; position: sticky; top: 76px; }
   .field-map-wrap .field-map { height: calc(100vh - 220px); max-height: 720px; min-height: 420px; }
   .field-actions { grid-area: actions; margin-top: 0; }
+  .field-regions { grid-area: regions; }
   .field-search { grid-area: search; }
   .field-search .place-search { margin-top: 0; }
   .field-layout .pin-card { grid-area: pin; margin-top: var(--space-2); }
@@ -608,6 +609,12 @@ html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; } /* no mobile fo
 
 /* Hyderabad case-study layers: badge on cards, one note for other pins */
 .case-badge { display: inline-flex; align-items: center; gap: 4px; width: fit-content; font-size: 0.75rem; font-weight: 700; padding: 1px var(--space-2); border-radius: 999px; border: 1.5px solid var(--c-electric-blue); color: var(--c-electric-blue); background: var(--c-white); margin-bottom: var(--space-2); }
+/* Field: more demo regions */
+.field-regions { margin: var(--space-3) 0; }
+.field-regions-title { font-size: 0.95rem; margin: 0 0 var(--space-1); }
+.field-regions .btn-row { margin: 0; }
+.field-regions .btn-small[aria-pressed='true'] { background: var(--text); color: var(--bg); }
+.field-regions-hint { margin: var(--space-1) 0 0; opacity: 0.85; }
 .case-note { display: flex; gap: var(--space-2); align-items: flex-start; background: var(--c-white); color: var(--c-deep-blue); border-left: 6px solid var(--c-electric-blue); border-radius: var(--radius); padding: var(--space-2) var(--space-3); margin: var(--space-3) 0; font-size: 0.95rem; }
 .case-note svg { flex: none; margin-top: 3px; color: var(--c-electric-blue); }
 
