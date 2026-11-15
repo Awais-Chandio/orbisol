@@ -5,10 +5,10 @@
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 import en from './locales/en.json';
-import ur from './locales/ur';
 
 export const RTL_LANGS = new Set(['ur', 'sd']);
-export const LANGS = ['en', 'ur'] as const;
+/** Urdu (./locales/ur.ts, draft) is switched off for now; add 'ur' back here and to resources to re-enable it. */
+export const LANGS = ['en'] as const;
 const LANG_KEY = 'orbisol.lang';
 
 /** English is the default; a chosen language is remembered on this device when storage allows. */
@@ -31,7 +31,7 @@ export function setLanguage(lng: (typeof LANGS)[number]) {
 }
 
 void i18n.use(initReactI18next).init({
-  resources: { en: { translation: en }, ur: { translation: ur } },
+  resources: { en: { translation: en } },
   lng: savedLang(),
   fallbackLng: 'en',
   interpolation: { escapeValue: false },
